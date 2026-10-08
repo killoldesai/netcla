@@ -10,3 +10,4 @@ tests/api-results.json
 .backups/
 .runtime/
 .runtime-worker.log
+tsconfig.tsbuildinfo

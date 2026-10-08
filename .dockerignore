@@ -20,3 +20,4 @@ test-results
 .next-*
 tests/visual-results
 tests/api-results.json
+tsconfig.tsbuildinfo
