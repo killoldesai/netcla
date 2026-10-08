@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" fill="none">
+  <defs>
+    <linearGradient id="ribbon" x1="144" y1="580" x2="682" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#e8e9ff"/><stop offset=".44" stop-color="#a6baff"/><stop offset=".73" stop-color="#7e78fb"/><stop offset="1" stop-color="#533afd"/></linearGradient>
+    <linearGradient id="fold" x1="670" y1="22" x2="220" y2="555" gradientUnits="userSpaceOnUse"><stop stop-color="#d8e7ff"/><stop offset=".5" stop-color="#c0baff"/><stop offset="1" stop-color="#f8fafd"/></linearGradient>
+    <linearGradient id="screen" x1="125" y1="150" x2="535" y2="460" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#f8fafd"/></linearGradient>
+    <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" stroke="#e5edf5" stroke-width="1"/></pattern>
+  </defs>
+  <path d="M139 84H637V567H139Z" fill="url(#grid)"/>
+  <path d="M688 18C416 6 624 326 338 440C222 486 128 463 72 572C177 618 350 613 464 546C684 416 476 225 705 154Z" fill="url(#ribbon)"/>
+  <path d="M685 19C543 5 537 151 572 264C615 401 425 558 199 580C417 563 578 422 560 303C540 177 568 70 685 19Z" fill="url(#fold)"/>
+  <path d="M690 34C567 63 569 182 586 264M680 47C577 83 580 180 600 261M670 60C588 103 590 184 613 260M660 73C599 123 600 187 626 256" stroke="#ffffff" stroke-opacity=".35" stroke-width="1"/>
+  <path d="M76 364H41V169H126M489 84V43H625" stroke="#a9b9df" stroke-dasharray="4 7"/>
+  <circle cx="41" cy="364" r="5" fill="#fff" stroke="#533afd"/><circle cx="625" cy="43" r="5" fill="#fff" stroke="#533afd"/>
+  <g transform="rotate(-5 343 300)">
+    <rect x="91" y="134" width="492" height="337" rx="4" fill="url(#screen)" stroke="#b9c9e5"/>
+    <path d="M91 174H583" stroke="#e5edf5"/>
+    <circle cx="109" cy="154" r="3" fill="#c5d0e2"/><circle cx="120" cy="154" r="3" fill="#c5d0e2"/><circle cx="131" cy="154" r="3" fill="#c5d0e2"/>
+    <rect x="245" y="145" width="185" height="17" rx="4" fill="#f1f4fa"/>
+    <text x="280" y="157" font-family="Arial,sans-serif" font-size="9" fill="#50617a">workspace / operations</text>
+    <path d="M176 175V471" stroke="#e5edf5"/>
+    <rect x="109" y="195" width="22" height="22" rx="4" fill="#533afd"/>
+    <path d="M114 212V201L125 212V201" stroke="white" stroke-width="1.4"/>
+    <rect x="103" y="240" width="63" height="25" rx="4" fill="#e8e9ff"/>
+    <g font-family="Arial,sans-serif" font-size="8" fill="#64748d"><text x="113" y="256" fill="#533afd">Overview</text><text x="113" y="289">Workflows</text><text x="113" y="322">Integrations</text><text x="113" y="355">Settings</text></g>
+    <text x="198" y="211" font-family="Arial,sans-serif" font-size="18" fill="#061b31">Your operations, connected.</text>
+    <text x="198" y="233" font-family="Arial,sans-serif" font-size="10" fill="#64748d">People, tasks and systems in one workflow.</text>
+    <g font-family="Arial,sans-serif" font-size="10">
+      <rect x="198" y="255" width="105" height="72" rx="4" fill="#fff" stroke="#e5edf5"/><text x="211" y="274" fill="#64748d">INTAKE</text><path d="M211 291H279M211 302H257" stroke="#d5deed" stroke-width="4" stroke-linecap="round"/><circle cx="284" cy="271" r="4" fill="#b9b9f9"/>
+      <rect x="317" y="255" width="105" height="72" rx="4" fill="#e8e9ff" stroke="#d6d3fa"/><text x="330" y="274" fill="#533afd">IN REVIEW</text><path d="M330 291H398M330 302H376" stroke="#b9b9f9" stroke-width="4" stroke-linecap="round"/><circle cx="403" cy="271" r="4" fill="#533afd"/>
+      <rect x="436" y="255" width="125" height="72" rx="4" fill="#fff" stroke="#e5edf5"/><text x="449" y="274" fill="#64748d">READY TO SHIP</text><path d="M449 291H537M449 302H515" stroke="#d5deed" stroke-width="4" stroke-linecap="round"/><circle cx="542" cy="271" r="4" fill="#b9b9f9"/>
+    </g>
+    <rect x="198" y="345" width="363" height="104" rx="4" fill="white" stroke="#e5edf5"/>
+    <text x="212" y="366" font-family="Arial,sans-serif" font-size="11" fill="#061b31">A workflow built around your business</text>
+    <path d="M241 404H517" stroke="#b9b9f9"/>
+    <g fill="#fff" stroke="#533afd"><circle cx="241" cy="404" r="12"/><circle cx="333" cy="404" r="12"/><circle cx="425" cy="404" r="12"/><circle cx="517" cy="404" r="12"/></g>
+    <path d="m237 404 3 3 5-6m-7 3 3 3 5-6M329 401l7 6m-7 0 7-6M421 404h8m-4-4v8M512 404l3 3 6-6" stroke="#533afd" stroke-width="1.2"/>
+    <g font-family="Arial,sans-serif" font-size="8" fill="#64748d" text-anchor="middle"><text x="241" y="435">Capture</text><text x="333" y="435">Connect</text><text x="425" y="435">Review</text><text x="517" y="435">Deliver</text></g>
+  </g>
+  <g transform="rotate(7 586 399)">
+    <rect x="504" y="242" width="160" height="304" rx="22" fill="#fff" stroke="#8299c5" stroke-width="2"/>
+    <rect x="550" y="252" width="68" height="12" rx="6" fill="#e5edf5"/>
+    <text x="519" y="294" font-family="Arial,sans-serif" font-size="9" fill="#64748d">FIELD APPLICATION</text>
+    <text x="519" y="319" font-family="Arial,sans-serif" font-size="20" fill="#061b31">Your workday.</text>
+    <text x="519" y="340" font-family="Arial,sans-serif" font-size="10" fill="#64748d">The tools you need, anywhere.</text>
+    <rect x="517" y="358" width="134" height="67" rx="4" fill="#e8e9ff"/>
+    <rect x="530" y="372" width="23" height="23" rx="4" fill="#533afd"/>
+    <path d="M536 382l4 4 7-8" stroke="white" stroke-width="1.5"/>
+    <text x="560" y="382" font-family="Arial,sans-serif" font-size="10" fill="#061b31">Site visit</text><text x="560" y="399" font-family="Arial,sans-serif" font-size="8" fill="#64748d">Review task details</text>
+    <rect x="517" y="436" width="134" height="45" rx="4" fill="#f8fafd" stroke="#e5edf5"/>
+    <text x="530" y="454" font-family="Arial,sans-serif" font-size="10" fill="#061b31">Work order</text><path d="M530 465H620" stroke="#d5deed" stroke-width="3" stroke-linecap="round"/>
+    <path d="M523 503H645" stroke="#e5edf5"/><g fill="#b9c9e5"><rect x="533" y="515" width="10" height="10" rx="2"/><circle cx="584" cy="520" r="5"/><rect x="625" y="515" width="10" height="10" rx="2"/></g>
+  </g>
+  <g transform="rotate(-5 191 508)">
+    <rect x="45" y="450" width="292" height="110" rx="4" fill="#fff" stroke="#b9c9e5"/>
+    <rect x="61" y="468" width="29" height="29" rx="4" fill="#e8e9ff"/><path d="M69 477h13m-13 6h13m-9-10v15m5-15v15" stroke="#533afd"/>
+    <text x="101" y="479" font-family="Arial,sans-serif" font-size="12" fill="#061b31">Workflow automation</text><text x="101" y="496" font-family="Arial,sans-serif" font-size="9" fill="#64748d">Connect systems. Keep people in control.</text>
+    <path d="M88 530H289" stroke="#b9b9f9"/><g fill="#f8fafd" stroke="#e5edf5"><rect x="61" y="517" width="60" height="26" rx="4"/><rect x="156" y="517" width="69" height="26" rx="4"/><rect x="260" y="517" width="60" height="26" rx="4"/></g>
+    <g font-family="Arial,sans-serif" font-size="9" fill="#533afd" text-anchor="middle"><text x="91" y="534">Input</text><text x="190" y="534">Review</text><text x="290" y="534">Action</text></g>
+  </g>
+  <path d="M374 532H466V580H562" stroke="#8299c5" stroke-dasharray="4 7"/><circle cx="562" cy="580" r="5" fill="#fff" stroke="#533afd"/>
+</svg>

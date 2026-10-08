@@ -1,0 +1,239 @@
+.hub-activity-visual {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 480px;
+  min-height: 360px;
+  padding: 20px;
+  justify-self: end;
+  background: #f8fafd;
+}
+.activity-dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.activity-panel {
+  width: 100%;
+  max-width: 440px;
+  min-height: 320px;
+  padding: 24px;
+  border: 1px solid #e5edf5;
+  border-radius: 4px;
+  background: #ffffff;
+}
+.activity-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid #e5edf5;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.activity-hub-tag {
+  color: #533afd;
+  background: #ffffff;
+  border: 1px solid #e5edf5;
+  border-radius: 9999px;
+  padding: 5px 11px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.activity-window-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.activity-window-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e5edf5;
+}
+.activity-window-dots i:first-child {
+  background: #22c55e;
+}
+.activity-window-dots i:nth-child(2) {
+  background: #f59e0b;
+}
+.activity-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  border-bottom: 1px solid #e5edf5;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.activity-metrics > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 4px;
+}
+.activity-metric-value {
+  display: block;
+  font-size: 26px;
+  font-weight: 300;
+  color: #061b31;
+  letter-spacing: -0.26px;
+  line-height: 1.15;
+}
+.activity-metric-label {
+  font-size: 11px;
+  color: #64748d;
+  line-height: 1.4;
+}
+.service-hub .activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.activity-feed li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.activity-row-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: #f8fafd;
+  border: 1px solid #e5edf5;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.activity-row-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: #533afd;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.activity-row-copy {
+  min-width: 0;
+  flex: 1;
+}
+.activity-row-title {
+  display: block;
+  color: #061b31;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.activity-row-subtitle {
+  display: block;
+  color: #64748d;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.activity-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #64748d;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.activity-status i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.activity-status-review i {
+  background: #f59e0b;
+}
+.activity-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 9px;
+  border-top: 1px solid #e5edf5;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+.service-hub .activity-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.activity-tech-pills li {
+  border-radius: 9999px;
+  background: #f8fafd;
+  border: 1px solid #e5edf5;
+  font-size: 10px;
+  color: #64748d;
+  padding: 3px 10px;
+  line-height: 1.4;
+}
+.service-hub .activity-bottom a {
+  color: #533afd;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.hub-activity-visual figcaption {
+  color: #64748d;
+  font-size: 10px;
+  line-height: 1.4;
+  padding-top: 10px;
+  text-align: center;
+}
+@media (max-width: 1000px) {
+  .hub-activity-visual {
+    justify-self: center;
+  }
+}
+@media (max-width: 560px) {
+  .hub-activity-visual {
+    padding: 14px;
+    min-height: 0;
+  }
+  .activity-panel {
+    padding: 18px;
+  }
+  .activity-metrics {
+    gap: 9px;
+  }
+  .activity-metric-value {
+    font-size: 23px;
+  }
+  .activity-row-title {
+    font-size: 12px;
+  }
+  .activity-feed li {
+    gap: 8px;
+  }
+}
+@media (max-width: 380px) {
+  .hub-activity-visual {
+    padding: 10px;
+  }
+  .activity-panel {
+    padding: 14px;
+  }
+  .activity-metric-value {
+    font-size: 20px;
+  }
+  .activity-metric-label {
+    font-size: 10px;
+  }
+  .activity-feed li {
+    flex-wrap: wrap;
+  }
+  .activity-status {
+    margin-left: 36px;
+  }
+}

@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Site-wide unification layer for inner pages. Loaded last so it wins over the
+   older template stylesheets: flat surfaces, one icon tile style, readable CTA
+   contrast and the same light footer as the homepage.
+   ========================================================================== */
+.v3-site { --u-ink:#0f1420; --u-text:#3d4659; --u-muted:#5b6578; --u-line:#e2e5ea; --u-soft:#f6f7fb; --u-indigo:#4353b3; --u-indigo-soft:#eef0fa; --u-lime:#b5ce20; }
+
+/* 1. No decorative blocks, triangles or offset frames. */
+.v3-site main .v3-section::before,
+.v3-site main .v3-section::after,
+.v3-site main .v3-hero-grid > figure::before,
+.v3-site main .v3-hero-grid > figure::after { content:none !important; display:none !important; }
+.v3-site main .v3-hero-grid > figure:not(.service-art) { background:var(--u-soft) !important; border:1px solid var(--u-line) !important; border-radius:20px !important; padding:24px !important; }
+
+/* 2. One icon tile style everywhere: soft indigo tile, indigo line icon. */
+.v3-site main :is(.v3-icon-tile, .v3-step, .service-paired-icon, .service-reason-icon) {
+  display:inline-grid !important; place-items:center; flex:0 0 auto;
+  width:44px !important; height:44px !important; border-radius:12px !important;
+  background:var(--u-indigo-soft) !important; color:var(--u-indigo) !important; border:0 !important;
+}
+.v3-site main .v3-icon { width:22px !important; height:22px !important; filter:none !important; color:inherit; }
+.v3-site main .v3-on-dark :is(.v3-icon-tile, .v3-step) { background:rgba(255,255,255,.1) !important; color:#fff !important; }
+.v3-site main .service-stack-tool { display:inline-flex !important; align-items:center; gap:8px; }
+.v3-site main .service-stack-tool .service-stack-icon { width:20px !important; height:20px !important; flex:0 0 20px; object-fit:contain; color:var(--u-indigo); margin:0 !important; }
+
+/* 3. Neutral section backgrounds (no lime or tinted panels). */
+.v3-site main.v3-service-page .v3-section--industry-applications,
+.v3-site main .v3-section--industry-applications { background:var(--u-soft) !important; }
+.v3-site main .v3-section--industry-applications article { border:1px solid var(--u-line); }
+
+/* 4. Closing CTA: dark ink band, white primary button, white secondary link. */
+.v3-site main.v3-service-page .v3-section--cta-banner,
+.v3-site main .v3-section--cta-banner { background:var(--u-ink) !important; color:#fff !important; }
+.v3-site main .v3-section--cta-banner :is(h2,p,.v3-intro) { color:#fff !important; }
+.v3-site main .v3-section--cta-banner .v3-intro { color:rgba(255,255,255,.75) !important; }
+.v3-site main .v3-section--cta-banner .v3-button { background:#fff !important; color:var(--u-ink) !important; border:0 !important; }
+.v3-site main .v3-section--cta-banner .v3-button:hover { background:var(--u-lime) !important; }
+.v3-site main .v3-section--cta-banner .v3-link { color:#fff !important; }
+.v3-site main .v3-dark .v3-button, .v3-site main .v3-on-dark .v3-button { background:#fff !important; color:var(--u-ink) !important; border:0 !important; }
+.v3-site .v3-midcta .v3-button { background:var(--u-indigo); color:#fff; border:0; }
+
+/* 5. Footer matches the homepage: light surface, ink text, plain logo. */
+body .stripe-footer { background:#fff !important; color:var(--u-text, #3d4659) !important; border-top:1px solid #e2e5ea !important; padding:56px 0 0 !important; }
+body .stripe-footer .stripe-wordmark { background:transparent !important; padding:0 !important; }
+body .stripe-footer .stripe-wordmark img { width:150px; height:auto; }
+body .stripe-footer h3 { color:#0f1420 !important; font-size:13px !important; text-transform:uppercase; letter-spacing:.04em; }
+body .stripe-footer p { color:#5b6578 !important; }
+body .stripe-footer a { color:#3d4659 !important; }
+body .stripe-footer a:hover { color:#4353b3 !important; }
+body .stripe-footer :is(.stripe-footer-bottom, .footer-bottom) { border-top:1px solid #e2e5ea !important; color:#5b6578 !important; }
+
+/* One hero for every template: same left edge, eyebrow, H1 scale and CTA row.
+   Text-only heroes (company pages, pages without artwork) keep the split
+   hero's alignment instead of a centred, indented column. */
+main[class*="v3-"] .v3-hero-section > .v3-wrap .v3-hero-grid.v3-hero-text { margin-left:0; margin-right:auto; max-width:880px; padding-left:0; padding-right:0; }
+main[class*="v3-"] .v3-hero-section > .v3-wrap .v3-hero-text h1 { max-width:880px; }
+main[class*="v3-"] .v3-hero-section > .v3-wrap .v3-hero-text .v3-intro { max-width:680px; }
+main[class*="v3-"] .v3-hero-section > .v3-wrap .v3-hero-text .v3-actions { margin-top:32px; }

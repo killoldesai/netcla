@@ -1,0 +1,144 @@
+.connected-header {
+  top: 0;
+  margin: 0;
+  max-width: none;
+  height: auto;
+  background: #fffffffa;
+  border-bottom: 1px solid #dfe7ef;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 50;
+}
+.connected-header .nav.wrap {
+  max-width: 1240px;
+  width: calc(100% - 80px);
+  padding: 18px 0;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  height: 82px;
+}
+.connected-header .logo {
+  width: 190px;
+}
+.connected-header #navigation {
+  gap: 5px;
+}
+.connected-header .site-menu-toggle {
+  color: #555971;
+  background: transparent;
+  border-radius: 5px;
+}
+.connected-header .site-menu-toggle:hover {
+  background: #f1f3ff;
+}
+.connected-header .button {
+  background: #4553b2;
+  border-radius: 6px;
+  color: white;
+  padding: 13px 18px;
+  font-size: 12px;
+  box-shadow: none;
+}
+.connected-header .site-menu-panel {
+  border-radius: 8px;
+  border-color: #dfe7ef;
+  background: #fff;
+  box-shadow: 0 15px 45px #55597110;
+}
+.connected-header .site-menu-clusters button.active,
+.connected-header .site-menu-clusters button[aria-pressed="true"] {
+  background: #edeaff;
+  color: #4553b2;
+}
+.connected-header .site-menu-groups a:hover {
+  background: #f1f3ff;
+}
+.connected-header .site-menu-search,
+.connected-header .site-menu-groups h3 {
+  color: #555971;
+}
+.connected-header .site-menu-groups a {
+  color: #656a7b;
+}
+.connected-header .menu {
+  background: #555971;
+  border-radius: 6px;
+}
+.connected-header a:focus-visible,
+.connected-header button:focus-visible,
+.connected-footer a:focus-visible {
+  outline: 3px solid #4553b2;
+  outline-offset: 4px;
+}
+.connected-footer {
+  background: #f8fafd;
+  color: #555971;
+  border-top: 1px solid #dfe7ef;
+}
+.connected-footer h3,
+.connected-footer .footer-brand p {
+  color: #555971;
+}
+.connected-footer a,
+.connected-footer .footer-brand span,
+.connected-footer .footer-bottom {
+  color: #52657a;
+}
+.connected-footer .footer-bottom {
+  border-color: #dfe7ef;
+}
+.connected-footer a:hover {
+  color: #4553b2;
+}
+.connected-footer .footer-logo {
+  width: 190px;
+}
+@media (max-width: 1050px) {
+  .connected-header .nav.wrap {
+    width: calc(100% - 48px);
+  }
+  .connected-header .logo {
+    width: 155px;
+  }
+  .connected-header .site-menu-toggle {
+    padding: 9px 5px;
+    font-size: 11px;
+  }
+  .connected-header .button {
+    padding: 12px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 760px) {
+  .connected-header .nav.wrap {
+    width: calc(100% - 40px);
+    height: 72px;
+    padding: 12px 0;
+  }
+  .connected-header #navigation {
+    top: 72px;
+    border-radius: 0 0 8px 8px;
+    background: #fff;
+    border: 1px solid #dfe7ef;
+  }
+  .connected-header .site-menu-toggle {
+    font-size: 15px;
+    padding: 12px;
+    text-align: left;
+  }
+  .connected-header .button {
+    font-size: 13px;
+  }
+  .connected-header #navigation #site-menu {
+    position: static;
+  }
+  .connected-header .site-menu-panel {
+    border-radius: 5px;
+  }
+  .connected-header .logo {
+    width: 170px;
+  }
+}
+

@@ -1,0 +1,1 @@
+CREATE TABLE revision_reviews(revision_id uuid PRIMARY KEY REFERENCES revisions(id), status text NOT NULL CHECK(status IN ('accepted','rejected')), owner_id uuid REFERENCES owners(id), reviewed_at timestamptz NOT NULL DEFAULT now());

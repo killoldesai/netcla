@@ -1,0 +1,5 @@
+import {validateBlueprint, type PageSpecification, type Blueprint} from './page-spec-schema';
+export function templateBlueprint(spec: PageSpecification): Blueprint {
+  const pick=(id:string): Blueprint[string]['recommended_component'] => id==='hero'?(spec.sections.find(s=>s.id===id)?.hero?'HeroSplit':'HeroFull'):id==='cta-banner'?'DarkCtaBand':/faq/.test(id)?'AccordionFull':/process/.test(id)?'TimelineStrip':/technology|tools-stack/.test(id)?'TechnologyGrid':/deliver/.test(id)?'DeliverableGrid':/services-grid|related/.test(id)?'ServiceDirectory':/mission|overview|editorial/.test(id)?'EditorialSplit':/comparison/.test(id)?'EngagementCards':/industr/.test(id)?'IndustryLinks':'CardGrid3Col';
+  return validateBlueprint(spec,Object.fromEntries(spec.sections.map(s=>[s.id,{recommended_component:pick(s.id),spacing_above:0,background:s.id==='cta-banner'||/process/.test(s.id)?'#061b31':/faq|technology|overview/.test(s.id)?'#f8fafd':'#ffffff',max_width:'1320px',mobile_stack:'Stack content in reading order; component owns responsive layout.'}])));
+}

@@ -1,0 +1,58 @@
+const fs=require('fs');let s=fs.readFileSync('homepage-concept/custom-software.html','utf8');const replacements=[
+['Custom Software Development Services | Netofficials','Mobile Application Development Services | Netofficials'],
+['Discuss custom software for your business workflows, internal tools and integrations with Netofficials.','Discuss your mobile app, platform requirements, user journeys and integrations with Netofficials.'],
+['Custom software development services','Mobile application development services'],
+['Built around<br><span>your business.<br>Your way.</span>','Your next idea.<br><span>In their hands.</span>'],
+['Custom software for the workflows, people and systems that make your business work. Start with the problem you want to solve.','Mobile applications shaped around your users and the moments that matter. Bring your app idea, existing product or business workflow into focus.'],
+['Discuss your software project','Discuss your mobile app'],
+['Editorial illustration of connected software interfaces','Editorial illustration of connected mobile and web experiences'],
+['A new build, a better workflow,<br>or a system ready to evolve.','A new app. A better experience.<br>A clear next release.'],
+['What’s getting<br><span style="color:var(--indigo)">in your way?</span>','An idea to launch.<br><span style="color:var(--indigo)">An experience to improve.</span>'],
+['Software decisions become clearer when the problem comes first.','Start with the people using your app and what they need to accomplish.'],
+['Less manual work.','A new app idea.'],
+['Move a repeated business task out of spreadsheets and into a defined workflow.','Turn a concept into a focused app brief with clear users, features and first-release priorities.'],
+['Better-connected systems.','An existing app.'],
+['Bring the information people need together across existing tools and processes.','Discuss user friction, missing features and what should change in the next version.'],
+['Room for a new idea.','Work on the move.'],
+['Shape a software concept around real users and a clear first-release scope.','Explore a mobile workflow for customers, field teams or employees who need access away from a desk.'],
+['Discuss this challenge','Discuss your app needs'],
+['Software that fits<br><span style="color:var(--indigo)">the work you do.</span>','A useful app starts<br><span style="color:var(--indigo)">with the right decisions.</span>'],
+['Choose a starting point. Define the features and delivery requirements around your actual business.','Define platform needs, user journeys and connected systems before choosing the development approach.'],
+['Business workflow software','iOS & Android requirements'],
+['Define the steps, responsibilities and information behind your everyday operations.','Discuss your audience, target devices and platform needs to frame the right app scope.'],
+['Internal tools & dashboards','Mobile UI & user journeys'],
+['Discuss tools that help your team manage tasks and see the information they need.','Map the key tasks, screens and interactions that help people use your app with confidence.'],
+['System integrations','App features & integrations'],
+['Map the data and actions that need to move between your software and existing systems.','Define the features, data, accounts and existing services your mobile application needs to connect.'],
+['Existing software improvements','Existing app improvements'],
+['Review current friction and decide which changes matter most to your users.','Review the current experience and identify the changes that belong in your next release.'],
+['Not sure what the solution should look like?','Not sure which platforms or features you need?'],
+['Tell us what happens today and what you want to change.','Share the audience and the problem. We can start there.'],
+['Users, business goals, current workflows and the problem to solve.','Intended users, key tasks, usage context and the problem your app should solve.'],
+['Features, integrations, dependencies and the first-release priorities.','Platform needs, user journeys, connected systems and first-release priorities.'],
+['Milestones, review points, acceptance criteria and handover expectations.','Review milestones, device testing requirements, release responsibilities and handover expectations.'],
+['Understand your business','Understand your users'],
+['The problem before the solution','Their needs before the feature list'],
+['Prepare for what follows','Prepare for release'],
+['Acceptance, handover, ongoing needs','Testing, release responsibilities, support'],
+['What the software needs to do, and how many different workflows it supports.','The app’s features, user roles, interactions and the number of platforms or devices in scope.'],
+['Existing systems, data quality, migration requirements and access dependencies.','Backend services, third-party integrations, device capabilities and data dependencies.'],
+['Review cycles, release priorities, handover and support expectations.','Review cycles, device testing, store submission responsibilities and ongoing maintenance needs.'],
+['How much does custom software development cost?','How much does mobile app development cost?'],
+['The estimate depends on scope, complexity, integrations, user roles and delivery requirements.','The estimate depends on platforms, features, interface complexity, backend services and release requirements.'],
+['Can you work with an existing system?','Can you improve an existing mobile app?'],
+['Share what you have, how it is used and what needs to improve. Access, architecture, dependencies and feasibility need review before a scope is agreed.','Share the app, available code, target devices and the changes you need. Technical access and feasibility need review before we agree on a scope.'],
+['What happens after launch?','Can you help plan the app release?'],
+['Discuss handover, maintenance, support and future improvements during scoping. Ongoing work and responsibilities should be agreed explicitly.','Discuss testing, store accounts, submission responsibilities and maintenance during scoping. App-store approval depends on the relevant platform review and cannot be guaranteed.'],
+['Tell us what<br><span>needs to work better.</span>','Tell us about<br><span>your next app.</span>'],
+['Share the problem, who will use the software and the systems it needs to connect. You don’t need a finished specification to start.','Share who the app is for, what it should help them do and any platform or timing requirements. An early idea is enough to start a conversation.'],
+['Discuss my software project','Discuss my mobile app'],
+['What should the software help your business do? Are you building something new or improving an existing system?','Who will use your app, and what should it help them do? Tell us if this is a new app or an existing product.']];
+for(const [a,b] of replacements)s=s.replaceAll(a,b);
+s=s.replace('<option selected>Custom software</option></option>','<option>Custom software</option>').replace('<option>Mobile application development</option>','<option selected>Mobile application development</option>');
+// Keep footer service routing intact; the page CTAs select mobile.
+const split=s.indexOf('<footer>');let main=s.slice(0,split).replaceAll('data-service="Custom software"','data-service="Mobile application development"');s=main+s.slice(split);s=s.replace('</head>','<link rel="stylesheet" href="mobile-development.css"></head>');
+s=s.replace('<label>Budget range (optional)','<label>Target platforms (optional)<select name="platform"><option value="">Not decided yet</option><option>iOS</option><option>Android</option><option>iOS & Android</option><option>Review an existing app</option></select></label><label>Budget range (optional)');
+s=s.replace('Who will use it? What gets in their way? What needs to connect? We start there, then turn the answers into a practical direction.','Who will use your app? Which tasks matter most? Which platforms and systems need to connect? Start there, then define a practical first release.').replace('Focus: users, workflows and business goals','Focus: users, mobile journeys and platform needs').replace('Review acceptance criteria, plan the handover and discuss the support or improvements your project may need after launch.','Review acceptance criteria, device testing and release responsibilities. Plan handover and discuss maintenance needs for future app versions.');
+fs.writeFileSync('homepage-concept/mobile-development.html',s);
+let check=fs.readFileSync('homepage-concept/check-custom-software.cjs','utf8').replaceAll('custom-software','mobile-development').replace("inputValue()!=='Custom software'","inputValue()!=='Mobile application development'").replace('Improve our internal workflow','Plan a customer mobile app');fs.writeFileSync('homepage-concept/check-mobile-development.cjs',check);

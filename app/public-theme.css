@@ -1,0 +1,44 @@
+/* Shared public roles. Page-specific compositions remain in their template styles. */
+body :is(.stripe-home,.service-hub,.csv-site) { --ink:#182138; --action:#4353b3; --line:#dbe0e8; }
+body :is(.stripe-home,.service-hub,.csv-site) h1 { font-weight:600!important; letter-spacing:-.035em!important; line-height:1.12!important; }
+body :is(.stripe-home,.service-hub,.csv-site) h2 { font-weight:600!important; letter-spacing:-.025em!important; line-height:1.25!important; }
+body :is(.stripe-home,.service-hub,.csv-site) h3 { font-weight:600; line-height:1.4!important; letter-spacing:-.015em; }
+body :is(.stripe-home,.service-hub,.csv-site) p { line-height:1.8!important; }
+body :is(.hub-hero,.index-hero,.csv-hero) { background:#fff!important; }
+body :is(.hub-button,.csv-button,.stripe-home .btn-primary,.stripe-home .btn) { border-radius:999px!important; min-height:52px; padding:14px 26px; box-sizing:border-box; box-shadow:none!important; }
+body :is(.service-hub,.csv-site,.stripe-home) a:focus-visible,
+body :is(.service-hub,.csv-site,.stripe-home) summary:focus-visible { outline:3px solid #4353b3; outline-offset:5px; }
+body :is(.hub-directory,.hub-personas,.hub-models,.index-build-grid,.csv-cards) { gap:24px; align-items:start; }
+body :is(.hub-directory,.hub-personas,.hub-models,.index-build-grid,.csv-cards)>article { border-radius:20px!important; box-shadow:none!important; height:auto; }
+body .service-hub .hub-deliverables { display:grid; grid-template-columns:1fr 1fr; gap:0 36px; }
+body .service-hub .hub-deliverables>article { border-radius:0; background:transparent; border:0; border-top:1px solid #dbe0e8; padding:28px 0; }
+body .service-hub .hub-process { gap:24px; }
+body .service-hub .hub-process>li { background:#202e45; border:1px solid #40506a; border-radius:20px; padding:30px; }
+body .service-hub .hub-step { background:#4353b3; border-radius:12px; }
+body :is(.hub-faq,.csv-faqs) details { border:1px solid #dbe0e8!important; border-radius:20px!important; margin-bottom:14px; overflow:hidden; background:#fff; }
+body :is(.hub-faq,.csv-faqs) summary { padding:24px!important; font-weight:600; line-height:1.5; cursor:pointer; }
+body :is(.hub-faq,.csv-faqs) details p { padding:0 24px 24px; margin:0; }
+body .csv-site .csv-section-heading { margin-bottom:36px; }
+body .csv-site .csv-section-mark { display:none; }
+body .csv-site .csv-cards-deliverables { display:flex; flex-direction:column; gap:0; }
+body .csv-site .csv-cards-deliverables>article { width:100%; background:transparent!important; border:0; border-top:1px solid #dbe0e8; border-radius:0!important; padding:28px 0; }
+body .csv-site .csv-closing { background:#182138!important; color:#fff; padding:72px 0; }
+body .csv-site .csv-closing :is(h2,p) { color:#fff!important; }
+body .stripe-home .process-grid article { border-radius:20px; padding:28px; }
+body .stripe-home .process-marker { border-radius:12px; }
+body .stripe-footer { border-top:1px solid #dbe0e8; }
+@media(max-width:760px) {
+  body .service-hub .hub-deliverables { grid-template-columns:1fr; }
+  body :is(.hub-directory,.hub-personas,.hub-models,.index-build-grid) { gap:18px; }
+  body :is(.hub-faq,.csv-faqs) summary { padding:20px!important; }
+  body .csv-site .csv-closing { padding:52px 0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body :is(.stripe-home,.service-hub,.csv-site,.v3-site) *,
+  body :is(.stripe-home,.service-hub,.csv-site,.v3-site) *::before,
+  body :is(.stripe-home,.service-hub,.csv-site,.v3-site) *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}
+/* Hero backgrounds are forced white above, so hero copy must be dark. */
+body .csv-site .csv-hero, body .csv-site .csv-hero :is(h1,h2,p,span,li,small) { color:#182138 !important; }
+body .csv-site .csv-hero .csv-eyebrow, body .csv-site .csv-hero .csv-kicker { color:#4353b3 !important; }
+body .csv-site .csv-hero a:not(.csv-button) { color:#4353b3 !important; }

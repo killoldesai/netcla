@@ -1,0 +1,9 @@
+﻿source,exported_rows,organic_rows,unique_organic_keywords,estimated_organic_traffic_row_sum,earliest_keyword_timestamp,latest_keyword_timestamp,caveat
+hiddenbrains-semrush.csv,2010,1998,1823,338.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+netofficials-semrush.csv,116,116,111,0.0,2026-08-07,2026-10-02,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+pagetraffic-semrush.csv,14400,14290,13001,11529.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+radixweb-semrush.csv,18058,17623,15611,6545.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+rankingbyseo-semrush.csv,5798,5608,5201,3164.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+rishabhsoft-semrush.csv,6642,5844,5435,11118.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+scnsoft.com-semrush.csv,30000,26701,22807,58930.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.
+valuecoders-semrush.csv,5251,5156,4584,1361.0,2026-08-06,2026-10-03,Export subset; US database (user confirmed); traffic row sum is not actual visits; keywords can appear at multiple URLs.

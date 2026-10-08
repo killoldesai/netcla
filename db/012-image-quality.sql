@@ -1,0 +1,2 @@
+ALTER TABLE pipeline_runs ADD COLUMN IF NOT EXISTS image_quality text NOT NULL DEFAULT 'medium' CHECK (image_quality IN ('auto','low','medium','high','xhigh','max'));
+INSERT INTO settings(key,value) VALUES ('generation_defaults','{"imageModel":"openai/gpt-image-2.5-flare","imageQuality":"medium"}'::jsonb) ON CONFLICT(key) DO UPDATE SET value=settings.value || '{"imageModel":"openai/gpt-image-2.5-flare","imageQuality":"medium"}'::jsonb;

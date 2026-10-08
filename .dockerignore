@@ -1,0 +1,22 @@
+node_modules
+.next
+.env*
+!.env.example
+homepage-concept
+research docs
+!research docs/
+research docs/*
+!research docs/Claude/
+research docs/Claude/*
+!research docs/Claude/core-service-sections.csv
+!research docs/Claude/hub-and-static-sections.csv
+!research docs/Claude/master-icon-prompt.txt
+!research docs/Claude/generation-pipeline-prompts.docx
+.data
+test-results
+.git
+.backups
+
+.next-*
+tests/visual-results
+tests/api-results.json

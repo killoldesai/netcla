@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netofficials — Software Development Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, svg { display: block; max-width: 100%; }
+
+/* ── TOKENS ──────────────────────────────────────────────────────────────── */
+:root {
+  --indigo:    #533afd;
+  --indigo-10: #eef2ff;
+  --indigo-20: #ddd6fe;
+  --midnight:  #061b31;
+  --slate:     #334155;
+  --gray:      #64748b;
+  --frost:     #e5edf5;
+  --mist:      #f8fafd;
+  --white:     #ffffff;
+
+  --font: 'Inter Tight', system-ui, sans-serif;
+  --max: 1320px;
+  --gap: 96px;
+  --radius: 4px;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  background: var(--white);
+  color: var(--slate);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--frost);
+}
+.nav-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 48px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  font-size: 17px; font-weight: 600; color: var(--midnight);
+  letter-spacing: -0.3px; text-decoration: none;
+}
+.logo span { color: var(--indigo); }
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  font-size: 14px; color: var(--slate);
+  text-decoration: none; font-weight: 400;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--midnight); }
+.nav-cta {
+  background: var(--midnight); color: var(--white);
+  font-size: 14px; font-weight: 500; font-family: var(--font);
+  padding: 0 20px; height: 38px; border-radius: var(--radius);
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ── SECTION LABEL (dev reference) ──────────────────────────────────────── */
+.sec-ref {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 10px; font-weight: 500; font-family: monospace;
+  background: rgba(83,58,253,.08); color: var(--indigo);
+  padding: 3px 8px; border-radius: 3px; letter-spacing: .5px;
+  pointer-events: none;
+}
+
+/* ── ① HERO ─────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding: 96px 48px 0;
+  overflow: hidden;
+  background: var(--white);
+}
+.hero-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 480px; gap: 64px;
+  align-items: start;
+}
+.hero-label {
+  display: inline-block;
+  font-size: 12px; font-weight: 500; color: var(--indigo);
+  background: var(--indigo-10); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 24px;
+  letter-spacing: .2px;
+}
+.hero-h1 {
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 300; color: var(--midnight);
+  line-height: 1.1; letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  max-width: 580px;
+}
+.hero-h1 em { font-style: normal; color: var(--indigo); }
+.hero-sub {
+  font-size: 18px; font-weight: 400; color: var(--slate);
+  line-height: 1.6; max-width: 480px; margin-bottom: 40px;
+}
+.hero-actions {
+  display: flex; gap: 12px; align-items: center; margin-bottom: 64px;
+}
+.btn-primary {
+  background: var(--indigo); color: var(--white);
+  font-size: 15px; font-weight: 500; font-family: var(--font);
+  padding: 0 28px; height: 48px; border-radius: var(--radius);
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-ghost {
+  background: transparent; color: var(--midnight);
+  font-size: 15px; font-weight: 500; font-family: var(--font);
+  padding: 0 24px; height: 48px; border-radius: var(--radius);
+  border: 1px solid var(--frost); cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color .15s;
+}
+.btn-ghost:hover { border-color: var(--slate); }
+
+/* Stats strip */
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--frost);
+  padding-top: 40px; margin-bottom: 0;
+}
+.stat { padding-right: 32px; }
+.stat + .stat {
+  padding-left: 32px; border-left: 1px solid var(--frost);
+}
+.stat-num {
+  font-size: 32px; font-weight: 300; color: var(--midnight);
+  letter-spacing: -1px; line-height: 1;
+}
+.stat-num span { color: var(--indigo); }
+.stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; }
+
+/* Hero right panel */
+.hero-panel {
+  background: var(--midnight);
+  border-radius: 8px 8px 0 0;
+  padding: 28px; overflow: hidden;
+  min-height: 460px; display: flex; flex-direction: column; gap: 12px;
+  margin-top: 8px;
+}
+.panel-bar {
+  display: flex; gap: 6px; margin-bottom: 8px;
+}
+.panel-bar span {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.panel-bar .r { background: #ff5f57; }
+.panel-bar .y { background: #febc2e; }
+.panel-bar .g { background: #28c840; }
+
+.panel-label {
+  font-size: 10px; font-weight: 500; color: rgba(255,255,255,.35);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.panel-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px; padding: 16px 20px;
+}
+.panel-card-title {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,.5);
+  margin-bottom: 8px;
+}
+.panel-metric {
+  font-size: 28px; font-weight: 300; color: var(--white);
+  letter-spacing: -0.5px; line-height: 1;
+}
+.panel-metric small {
+  font-size: 13px; color: rgba(255,255,255,.4); margin-left: 6px;
+}
+.panel-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.panel-tag {
+  display: inline-block;
+  font-size: 11px; color: var(--indigo); font-weight: 500;
+  background: rgba(83,58,253,.2); padding: 3px 8px; border-radius: 3px;
+  margin-top: 8px;
+}
+.panel-progress {
+  margin-top: 8px;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: rgba(255,255,255,.4); margin-bottom: 6px;
+}
+.progress-bar {
+  height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--indigo); border-radius: 2px;
+  transition: width .3s;
+}
+
+/* ── SHARED SECTION STYLES ────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  padding: var(--gap) 48px;
+}
+.section-inner { max-width: var(--max); margin: 0 auto; }
+.section-head { margin-bottom: 48px; }
+.section-heading {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300; color: var(--midnight);
+  letter-spacing: -0.8px; line-height: 1.15;
+}
+.section-sub {
+  font-size: 16px; color: var(--gray); margin-top: 10px; max-width: 520px;
+}
+
+/* ── ② SERVICES ──────────────────────────────────────────────────────────── */
+.services { background: var(--mist); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--frost); border: 1px solid var(--frost);
+  border-radius: 8px; overflow: hidden;
+}
+.svc-card {
+  background: var(--white); padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: background .15s;
+  text-decoration: none;
+}
+.svc-card:hover { background: var(--indigo-10); }
+.svc-icon {
+  width: 40px; height: 40px;
+  background: var(--indigo-10); border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+}
+.svc-icon svg { color: var(--indigo); }
+.svc-title {
+  font-size: 17px; font-weight: 500; color: var(--midnight);
+  line-height: 1.3;
+}
+.svc-body { font-size: 14px; color: var(--gray); line-height: 1.5; flex: 1; }
+.svc-link {
+  font-size: 13px; font-weight: 500; color: var(--indigo);
+  display: flex; align-items: center; gap: 6px; margin-top: auto;
+}
+
+/* ── ③ FEATURED WORK ─────────────────────────────────────────────────────── */
+.work-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--frost); border: 1px solid var(--frost);
+  border-radius: 8px; overflow: hidden;
+}
+.work-card {
+  background: var(--white); padding: 36px 32px;
+  display: flex; flex-direction: column;
+}
+.work-tag {
+  font-size: 11px; font-weight: 500; color: var(--indigo);
+  background: var(--indigo-10); padding: 3px 10px; border-radius: 20px;
+  display: inline-block; margin-bottom: 20px; align-self: flex-start;
+}
+.work-title {
+  font-size: 18px; font-weight: 400; color: var(--midnight);
+  line-height: 1.4; margin-bottom: 20px; flex: 1;
+}
+.work-metric {
+  font-size: 28px; font-weight: 300; color: var(--midnight);
+  letter-spacing: -0.5px; margin-bottom: 4px;
+}
+.work-metric-label { font-size: 13px; color: var(--gray); }
+.work-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--indigo);
+  margin-top: 24px; text-decoration: none;
+}
+
+/* ── ④ WHY US ────────────────────────────────────────────────────────────── */
+.why-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 96px;
+  align-items: start;
+}
+.why-left .section-heading { font-size: clamp(32px, 4vw, 48px); max-width: 420px; }
+.why-left p {
+  font-size: 16px; color: var(--slate); line-height: 1.7; margin-top: 20px; max-width: 380px;
+}
+.why-items { display: flex; flex-direction: column; gap: 0; }
+.why-item {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--frost);
+  display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+}
+.why-item:first-child { border-top: 1px solid var(--frost); }
+.why-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--indigo); margin-top: 7px; justify-self: center;
+}
+.why-item-title { font-size: 16px; font-weight: 500; color: var(--midnight); margin-bottom: 4px; }
+.why-item-body { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+/* ── ⑤ ENGAGEMENT MODELS ─────────────────────────────────────────────────── */
+.models { background: var(--mist); }
+.models-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.model-card {
+  background: var(--white); border: 1px solid var(--frost);
+  border-radius: 8px; padding: 36px 32px;
+}
+.model-card.featured {
+  border-color: var(--indigo);
+}
+.model-name {
+  font-size: 20px; font-weight: 500; color: var(--midnight);
+  margin-bottom: 8px;
+}
+.model-best {
+  font-size: 12px; font-weight: 500; color: var(--indigo);
+  background: var(--indigo-10); padding: 3px 10px; border-radius: 20px;
+  display: inline-block; margin-bottom: 20px;
+}
+.model-body { font-size: 14px; color: var(--slate); line-height: 1.6; margin-bottom: 24px; }
+.model-details { display: flex; flex-direction: column; gap: 8px; }
+.model-detail {
+  display: flex; gap: 8px; align-items: center;
+  font-size: 13px; color: var(--gray);
+}
+.model-detail-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--frost); flex-shrink: 0; margin-top: 2px;
+}
+
+/* ── ⑥ TESTIMONIALS ──────────────────────────────────────────────────────── */
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--frost); border: 1px solid var(--frost);
+  border-radius: 8px; overflow: hidden;
+}
+.testi-card { background: var(--white); padding: 36px 32px; }
+.testi-quote {
+  font-size: 15px; color: var(--slate); line-height: 1.7;
+  margin-bottom: 28px; font-style: italic;
+}
+.testi-author { display: flex; flex-direction: column; gap: 2px; }
+.testi-name { font-size: 14px; font-weight: 500; color: var(--midnight); }
+.testi-role { font-size: 13px; color: var(--gray); }
+.testi-flag {
+  display: inline-block; font-size: 11px; color: var(--indigo);
+  background: var(--indigo-10); padding: 2px 8px; border-radius: 3px;
+  margin-top: 12px; font-style: normal;
+}
+
+/* ── ⑦ TECH STACK ────────────────────────────────────────────────────────── */
+.tech { background: var(--mist); }
+.tech-groups { display: flex; flex-direction: column; gap: 16px; }
+.tech-row { display: flex; align-items: center; gap: 16px; }
+.tech-group-label {
+  font-size: 12px; font-weight: 500; color: var(--gray);
+  width: 100px; flex-shrink: 0;
+}
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 13px; color: var(--midnight);
+  background: var(--white); border: 1px solid var(--frost);
+  padding: 5px 14px; border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+/* ── ⑧ INDUSTRIES ────────────────────────────────────────────────────────── */
+.industries-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px;
+  background: var(--frost); border: 1px solid var(--frost);
+  border-radius: 8px; overflow: hidden;
+}
+.ind-card {
+  background: var(--white); padding: 32px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-decoration: none; transition: background .15s;
+}
+.ind-card:hover { background: var(--mist); }
+.ind-icon {
+  width: 40px; height: 40px; border-radius: var(--radius);
+  background: var(--indigo-10);
+  display: flex; align-items: center; justify-content: center;
+}
+.ind-icon svg { color: var(--indigo); }
+.ind-name { font-size: 13px; font-weight: 500; color: var(--midnight); text-align: center; }
+
+/* ── ⑨ BLOG ──────────────────────────────────────────────────────────────── */
+.blog { background: var(--mist); }
+.blog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.blog-card {
+  background: var(--white); border: 1px solid var(--frost);
+  border-radius: 8px; padding: 32px;
+  display: flex; flex-direction: column;
+}
+.blog-tag {
+  font-size: 11px; font-weight: 500; color: var(--indigo);
+  margin-bottom: 14px;
+}
+.blog-title {
+  font-size: 17px; font-weight: 400; color: var(--midnight);
+  line-height: 1.4; margin-bottom: 12px; flex: 1;
+}
+.blog-excerpt { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.blog-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--frost);
+}
+.blog-read-time { font-size: 12px; color: var(--gray); }
+.blog-link {
+  font-size: 13px; font-weight: 500; color: var(--indigo);
+  text-decoration: none;
+}
+
+/* ── ⑩ CTA BAND ──────────────────────────────────────────────────────────── */
+.cta-band {
+  background: var(--midnight);
+  padding: 80px 48px; position: relative;
+}
+.cta-band-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 48px;
+}
+.cta-heading {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300; color: var(--white);
+  letter-spacing: -0.8px; line-height: 1.15; max-width: 520px;
+}
+.cta-sub {
+  font-size: 16px; color: rgba(255,255,255,.5);
+  margin-top: 12px; max-width: 420px; line-height: 1.6;
+}
+.cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
+.btn-white {
+  background: var(--white); color: var(--midnight);
+  font-size: 15px; font-weight: 500; font-family: var(--font);
+  padding: 0 28px; height: 48px; border-radius: var(--radius);
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center;
+  transition: opacity .15s;
+}
+.btn-white:hover { opacity: .88; }
+.btn-outline-white {
+  background: transparent; color: rgba(255,255,255,.7);
+  font-size: 15px; font-weight: 500; font-family: var(--font);
+  padding: 0 24px; height: 48px; border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.2); cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center;
+  transition: border-color .15s, color .15s;
+}
+.btn-outline-white:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--midnight); border-top: 1px solid rgba(255,255,255,.08);
+  padding: 48px 48px 32px;
+}
+.footer-inner { max-width: var(--max); margin: 0 auto; }
+.footer-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,.08);
+}
+.footer-logo { font-size: 16px; font-weight: 600; color: var(--white); }
+.footer-logo span { color: var(--indigo); }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+
+/* ── INLINE SVG ICONS ─────────────────────────────────────────────────────── */
+.icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">Net<span>officials</span></a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">AI & Automation</a></li>
+      <li><a href="#">Hire Developers</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#">Start a project</a>
+  </div>
+</nav>
+
+<!-- ① HERO -->
+<section class="section hero" style="padding-top:96px;padding-bottom:0;">
+  <span class="sec-ref">§1 hero</span>
+  <div class="hero-inner">
+    <!-- Left -->
+    <div>
+      <div class="hero-label">Software Development Company · India</div>
+      <h1 class="hero-h1">
+        Software built for<br>
+        <em>global businesses</em><br>
+        by senior engineers
+      </h1>
+      <p class="hero-sub">
+        We design, build and ship custom software, mobile apps, AI systems and cloud infrastructure for US and UK companies — delivered by dedicated senior engineers from India.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#">Start a project</a>
+        <a class="btn-ghost" href="#">
+          View our work
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">150<span>+</span></div>
+          <div class="stat-label">Projects delivered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">8<span>yrs</span></div>
+          <div class="stat-label">In business</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50<span>+</span></div>
+          <div class="stat-label">Senior engineers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">98<span>%</span></div>
+          <div class="stat-label">Client retention</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="hero-panel">
+      <div class="panel-bar">
+        <span class="r"></span><span class="y"></span><span class="g"></span>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-title">Current sprint · AI Automation</div>
+        <div class="panel-metric">94% <small>test coverage</small></div>
+        <div class="panel-tag">In review</div>
+        <div class="panel-progress">
+          <div class="progress-label"><span>Sprint progress</span><span>Sprint 4/6</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        </div>
+      </div>
+
+      <div class="panel-row">
+        <div class="panel-card">
+          <div class="panel-card-title">Mobile app</div>
+          <div class="panel-metric" style="font-size:22px;">Week 6</div>
+          <div class="panel-tag">UAT</div>
+        </div>
+        <div class="panel-card">
+          <div class="panel-card-title">Cloud infra</div>
+          <div class="panel-metric" style="font-size:22px;">Live</div>
+          <div class="panel-tag" style="background:rgba(34,197,94,.15);color:#22c55e;">Deployed</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-title">Team composition</div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <span class="panel-tag">2 × Backend</span>
+          <span class="panel-tag">1 × Frontend</span>
+          <span class="panel-tag">1 × Mobile</span>
+          <span class="panel-tag">1 × DevOps</span>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-card-title">Next milestone</div>
+        <div style="font-size:15px;color:rgba(255,255,255,.7);line-height:1.4;margin-top:4px;">
+          Production deployment · 12 days
+        </div>
+        <div class="panel-progress" style="margin-top:12px;">
+          <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② SERVICES -->
+<section class="section services" style="margin-top:var(--gap);">
+  <span class="sec-ref">§2 services-overview</span>
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-heading">What we build</h2>
+      <p class="section-sub">Four practice areas. Each staffed by specialists, not generalists.</p>
+    </div>
+    <div class="services-grid">
+      <a class="svc-card" href="#">
+        <div class="svc-icon">
+          <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="svc-title">Custom Software Development</div>
+        <div class="svc-body">Web applications, SaaS platforms, APIs, ERP and CRM systems built to specification.</div>
+        <div class="svc-link">Explore <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a class="svc-card" href="#">
+        <div class="svc-icon">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="svc-title">Mobile App Development</div>
+        <div class="svc-body">iOS, Android and cross-platform apps in Flutter and React Native, from MVP to production.</div>
+        <div class="svc-link">Explore <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a class="svc-card" href="#">
+        <div class="svc-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="svc-title">AI & Automation</div>
+        <div class="svc-body">LLM integration, ML pipelines, computer vision, process automation and AI-powered products.</div>
+        <div class="svc-link">Explore <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a class="svc-card" href="#">
+        <div class="svc-icon">
+          <svg class="icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="svc-title">Cloud & DevOps</div>
+        <div class="svc-body">AWS, Azure and GCP infrastructure, Kubernetes, CI/CD pipelines and cloud migration.</div>
+        <div class="svc-link">Explore <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ③ FEATURED WORK -->
+<section class="section" style="background:var(--white);">
+  <span class="sec-ref">§3 featured-work</span>
+  <div class="section-inner">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;">
+      <div>
+        <h2 class="section-heading">Selected work</h2>
+        <p class="section-sub">Projects we're proud to talk about.</p>
+      </div>
+      <a href="#" style="font-size:14px;font-weight:500;color:var(--indigo);text-decoration:none;">All case studies →</a>
+    </div>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-tag">Fintech · UK</div>
+        <div class="work-title">Open banking API platform for a UK challenger bank</div>
+        <div class="work-metric">3×</div>
+        <div class="work-metric-label">Faster deployment cycle post-launch</div>
+        <a class="work-link" href="#">Read case study <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="work-card">
+        <div class="work-tag">Healthcare · US</div>
+        <div class="work-title">Patient management SaaS for a US clinic network</div>
+        <div class="work-metric">40%</div>
+        <div class="work-metric-label">Reduction in admin overhead</div>
+        <a class="work-link" href="#">Read case study <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="work-card">
+        <div class="work-tag">Logistics · Australia</div>
+        <div class="work-title">Real-time fleet tracking and dispatch mobile app</div>
+        <div class="work-metric">8 wks</div>
+        <div class="work-metric-label">From kickoff to App Store launch</div>
+        <a class="work-link" href="#">Read case study <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ WHY NETOFFICIALS -->
+<section class="section" style="background:var(--white);border-top:1px solid var(--frost);">
+  <span class="sec-ref">§4 why-netofficials</span>
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-left">
+        <h2 class="section-heading">Why companies choose<br>Netofficials over a local agency</h2>
+        <p>Senior engineers, direct communication, and commercial discipline — without the overhead of a large agency or the risk of freelancers.</p>
+      </div>
+      <div class="why-items">
+        <div class="why-item">
+          <div class="why-dot"></div>
+          <div>
+            <div class="why-item-title">Senior-only teams</div>
+            <div class="why-item-body">Every engineer assigned to your project has a minimum of 5 years' production experience. No juniors billed at senior rates.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"></div>
+          <div>
+            <div class="why-item-title">Direct access, no account managers</div>
+            <div class="why-item-body">You work directly with the engineers building your product. Daily standups, Slack, and weekly demos — no ticket queue.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"></div>
+          <div>
+            <div class="why-item-title">You own the code from day one</div>
+            <div class="why-item-body">Full IP assignment, NDA on request, and codebase handover at any stage. No lock-in.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"></div>
+          <div>
+            <div class="why-item-title">Commercial-grade engineering</div>
+            <div class="why-item-body">CI/CD from sprint one, test coverage requirements, infrastructure-as-code, and documented architecture — not spaghetti rushed to deadline.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ ENGAGEMENT MODELS -->
+<section class="section models">
+  <span class="sec-ref">§5 engagement-models-strip</span>
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-heading">How to engage</h2>
+      <p class="section-sub">Three models. Pick the one that fits your project and team.</p>
+    </div>
+    <div class="models-grid">
+      <div class="model-card">
+        <div class="model-name">Fixed Price</div>
+        <div class="model-best">Defined scope</div>
+        <div class="model-body">You provide a spec, we provide a fixed quote, timeline and milestone-based delivery. Best when requirements are clear and stable.</div>
+        <div class="model-details">
+          <div class="model-detail"><div class="model-detail-dot"></div> Detailed spec required upfront</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Milestone-based payments</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Change requests quoted separately</div>
+        </div>
+      </div>
+      <div class="model-card featured">
+        <div class="model-name">Dedicated Team</div>
+        <div class="model-best">Ongoing product development</div>
+        <div class="model-body">A full-time team embedded in your product — attending standups, working in your sprints. No retainer risk; scale up or down monthly.</div>
+        <div class="model-details">
+          <div class="model-detail"><div class="model-detail-dot"></div> Monthly rolling engagement</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Fully embedded in your process</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Scale team size each month</div>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-name">Time & Materials</div>
+        <div class="model-best">Evolving requirements</div>
+        <div class="model-body">Pay for what you use. Ideal when scope is exploratory, or when you need to move fast and refine requirements as you build.</div>
+        <div class="model-details">
+          <div class="model-detail"><div class="model-detail-dot"></div> Weekly hours reported</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Full sprint transparency</div>
+          <div class="model-detail"><div class="model-detail-dot"></div> Stop or pause any time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ TESTIMONIALS -->
+<section class="section" style="background:var(--white);">
+  <span class="sec-ref">§6 testimonials</span>
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-heading">What clients say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"We'd been burned by two previous offshore agencies. Netofficials was different — direct, honest about timelines, and the code quality was the best we'd received. We've been working together for three years."</div>
+        <div class="testi-author">
+          <div class="testi-name">James Hartley</div>
+          <div class="testi-role">CTO · PayRoute (Fintech)</div>
+          <span class="testi-flag">🇬🇧 United Kingdom</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"They built our entire patient portal from scratch in 10 weeks. On spec, on budget. The communication was so good that our internal team sometimes forgot they weren't in the same building."</div>
+        <div class="testi-author">
+          <div class="testi-name">Sarah Okonkwo</div>
+          <div class="testi-role">VP Product · ClearChart Health</div>
+          <span class="testi-flag">🇺🇸 United States</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"The AI automation work they did reduced our document processing time by 70%. These aren't junior engineers copying tutorials — they genuinely understood our business problem and engineered a proper solution."</div>
+        <div class="testi-author">
+          <div class="testi-name">Marcus Webb</div>
+          <div class="testi-role">Head of Operations · FreightCo</div>
+          <span class="testi-flag">🇦🇺 Australia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ TECH STACK -->
+<section class="section tech">
+  <span class="sec-ref">§7 tech-stack-strip</span>
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-heading">Technologies we work in</h2>
+    </div>
+    <div class="tech-groups">
+      <div class="tech-row">
+        <div class="tech-group-label">Frontend</div>
+        <div class="tech-chips">
+          <span class="chip">React</span><span class="chip">Next.js</span>
+          <span class="chip">TypeScript</span><span class="chip">Vue.js</span>
+          <span class="chip">Flutter</span>
+        </div>
+      </div>
+      <div class="tech-row">
+        <div class="tech-group-label">Backend</div>
+        <div class="tech-chips">
+          <span class="chip">Node.js</span><span class="chip">Python</span>
+          <span class="chip">Go</span><span class="chip">Java</span>
+          <span class="chip">Laravel</span><span class="chip">Django</span>
+        </div>
+      </div>
+      <div class="tech-row">
+        <div class="tech-group-label">AI / ML</div>
+        <div class="tech-chips">
+          <span class="chip">OpenAI API</span><span class="chip">LangChain</span>
+          <span class="chip">PyTorch</span><span class="chip">TensorFlow</span>
+          <span class="chip">Hugging Face</span>
+        </div>
+      </div>
+      <div class="tech-row">
+        <div class="tech-group-label">Cloud</div>
+        <div class="tech-chips">
+          <span class="chip">AWS</span><span class="chip">Azure</span>
+          <span class="chip">Google Cloud</span><span class="chip">Kubernetes</span>
+          <span class="chip">Docker</span><span class="chip">Terraform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ INDUSTRIES -->
+<section class="section" style="background:var(--white);">
+  <span class="sec-ref">§8 industries</span>
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-heading">Industries we serve</h2>
+    </div>
+    <div class="industries-grid">
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="ind-name">Healthcare</div>
+      </a>
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="ind-name">Fintech</div>
+      </a>
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="ind-name">EdTech</div>
+      </a>
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="ind-name">Logistics</div>
+      </a>
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="ind-name">Real Estate</div>
+      </a>
+      <a class="ind-card" href="#">
+        <div class="ind-icon">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <div class="ind-name">Retail</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ BLOG -->
+<section class="section blog">
+  <span class="sec-ref">§9 blog-preview</span>
+  <div class="section-inner">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;">
+      <div>
+        <h2 class="section-heading">Buyer guides</h2>
+        <p class="section-sub">Research to help you make a better decision.</p>
+      </div>
+      <a href="#" style="font-size:14px;font-weight:500;color:var(--indigo);text-decoration:none;">All articles →</a>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-tag">Software Development</div>
+        <div class="blog-title">Custom software vs off-the-shelf: how to decide in 2025</div>
+        <div class="blog-excerpt">The real question isn't cost — it's where your competitive advantage lives. Here's how to work it out.</div>
+        <div class="blog-footer">
+          <span class="blog-read-time">8 min read</span>
+          <a class="blog-link" href="#">Read →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-tag">Mobile Apps</div>
+        <div class="blog-title">How much does mobile app development actually cost in 2025?</div>
+        <div class="blog-excerpt">A breakdown by platform, complexity and engagement model — with real project data from our delivery team.</div>
+        <div class="blog-footer">
+          <span class="blog-read-time">11 min read</span>
+          <a class="blog-link" href="#">Read →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-tag">Hiring Guide</div>
+        <div class="blog-title">What to ask before hiring a dedicated offshore development team</div>
+        <div class="blog-excerpt">10 questions that separate a reliable partner from a regrettable contract. Based on what went wrong for our clients before us.</div>
+        <div class="blog-footer">
+          <span class="blog-read-time">7 min read</span>
+          <a class="blog-link" href="#">Read →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ CTA BAND -->
+<section class="cta-band" style="position:relative;">
+  <span class="sec-ref" style="color:rgba(255,255,255,.3);background:rgba(255,255,255,.05);">§10 cta-banner</span>
+  <div class="cta-band-inner">
+    <div>
+      <div class="cta-heading">Ready to build your next product?</div>
+      <div class="cta-sub">Free discovery call. NDA on request. We respond within 24 hours.</div>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-white" href="#">Start a project</a>
+      <a class="btn-outline-white" href="#">See how we work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-row">
+      <div class="footer-logo">Net<span>officials</span></div>
+      <div class="footer-copy">© 2025 Netofficials. Software development from India for global businesses.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

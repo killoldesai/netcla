@@ -1,0 +1,33 @@
+# Merge with the existing Coolify web/worker service definitions and environment.
+services:
+  web:
+    volumes:
+      - publishing-data:/data
+    environment:
+      PERSISTENT_ASSET_DIR: /data/assets
+      PRIVATE_CV_DIR: /data/cvs
+      CLAMAV_HOST: clamav
+      CLAMAV_PORT: "3310"
+  worker:
+    volumes:
+      - publishing-data:/data
+    environment:
+      PERSISTENT_ASSET_DIR: /data/assets
+      PRIVATE_CV_DIR: /data/cvs
+      CLAMAV_HOST: clamav
+      CLAMAV_PORT: "3310"
+  clamav:
+    image: clamav/clamav:stable
+    volumes:
+      - clamav-signatures:/var/lib/clamav
+    expose:
+      - "3310"
+    healthcheck:
+      test: ["CMD", "clamdscan", "--ping", "3"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  publishing-data:
+  clamav-signatures:

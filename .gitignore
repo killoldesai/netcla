@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.next-*/
+.env*
+!.env.example
+coverage/
+test-results/
+tests/visual-results/
+tests/api-results.json
+.backups/
+.runtime/
+.runtime-worker.log

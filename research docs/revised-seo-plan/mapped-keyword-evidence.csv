@@ -1,0 +1,52 @@
+﻿page_id,proposed_url,keyword,source,database,volume,kd,competitor_position,competitor_url,estimated_traffic,intent_label,keyword_timestamp,position_type
+P06,/custom-software-development,custom application development services,radixweb-semrush.csv,US (user confirmed),1900,23,2,https://radixweb.com/services/custom-application-development,155,informational,2026-10-01,Organic
+P06,/custom-software-development,custom software development company,radixweb-semrush.csv,US (user confirmed),6600,37,23,https://radixweb.com/services/custom-software-development,9,informational,2026-09-28,Organic
+P06,/custom-software-development,custom software development services,radixweb-semrush.csv,US (user confirmed),5400,36,25,https://radixweb.com/services/custom-software-development,3,commercial,2026-09-28,Organic
+P06,/custom-software-development,custom application development services,radixweb-semrush.csv,US (user confirmed),1900,23,80,https://radixweb.com/services/custom-software-development,0,informational,2026-10-01,Organic
+P06,/custom-software-development,custom software development services,scnsoft.com-semrush.csv,US (user confirmed),5400,36,7,https://www.scnsoft.com/software-development/custom,70,commercial,2026-09-28,Organic
+P06,/custom-software-development,custom application development services,scnsoft.com-semrush.csv,US (user confirmed),1900,23,12,https://www.scnsoft.com/web-development/application/custom,9,informational,2026-10-01,Organic
+P06,/custom-software-development,custom application development services,valuecoders-semrush.csv,US (user confirmed),1900,23,14,https://www.valuecoders.com/application-development,7,informational,2026-10-01,Organic
+P06,/custom-software-development,custom software development company,valuecoders-semrush.csv,US (user confirmed),6600,37,32,https://www.valuecoders.com/custom-software-development-services-company,4,informational,2026-09-28,Organic
+P07,/web-development,web development services,scnsoft.com-semrush.csv,US (user confirmed),12100,47,6,https://www.scnsoft.com/web-development,157,commercial,2026-09-27,Organic
+P09,/seo-services,seo services,pagetraffic-semrush.csv,US (user confirmed),49500,52,81,https://www.pagetraffic.com/seo-services-houston.php,0,commercial,2026-09-30,Organic
+P09,/seo-services,seo company in india,rankingbyseo-semrush.csv,US (user confirmed),1900,35,3,https://www.rankingbyseo.com/,45,commercial,2026-10-02,Organic
+P09,/seo-services,seo services india,rankingbyseo-semrush.csv,US (user confirmed),1300,35,4,https://www.rankingbyseo.com/,45,"commercial, informational",2026-10-02,Organic
+P10,/ppc-services,search engine marketing services india,pagetraffic-semrush.csv,US (user confirmed),170,10,39,https://www.pagetraffic.com/,0,commercial,2026-08-27,Organic
+P10,/ppc-services,search engine marketing services india,rankingbyseo-semrush.csv,US (user confirmed),170,10,7,https://www.rankingbyseo.com/,1,commercial,2026-08-27,Organic
+P11,/website-redesign,website redesign services,scnsoft.com-semrush.csv,US (user confirmed),3600,25,9,https://www.scnsoft.com/web-development/websites/redesign,46,informational,2026-10-02,Organic
+P12,/ecommerce-development,ecommerce website design services,radixweb-semrush.csv,US (user confirmed),1900,27,60,https://radixweb.com/services/ecommerce-website-development,0,informational,2026-09-27,Organic
+P12,/ecommerce-development,ecommerce development solutions,scnsoft.com-semrush.csv,US (user confirmed),720,29,4,https://www.scnsoft.com/ecommerce/services/development,25,,2026-09-25,Organic
+P12,/ecommerce-development,ecommerce website design services,scnsoft.com-semrush.csv,US (user confirmed),1900,27,10,https://www.scnsoft.com/ecommerce/services/development,17,informational,2026-09-27,Organic
+P13,/mvp-development,mvp software development services,radixweb-semrush.csv,US (user confirmed),880,17,50,https://radixweb.com/services/mvp-development,0,"commercial, informational",2026-08-17,Organic
+P13,/mvp-development,mvp software development services,scnsoft.com-semrush.csv,US (user confirmed),880,17,1,https://www.scnsoft.com/software-development/mvp/services,116,"commercial, informational",2026-08-17,Organic
+P13,/mvp-development,mvp software development services,valuecoders-semrush.csv,US (user confirmed),880,17,40,https://www.valuecoders.com/mvp-app-development-company,0,"commercial, informational",2026-08-17,Organic
+P14,/saas-development,saas software development company,radixweb-semrush.csv,US (user confirmed),880,24,11,https://radixweb.com/services/saas-development,6,informational,2026-08-21,Organic
+P14,/saas-development,saas development services,radixweb-semrush.csv,US (user confirmed),2400,29,20,https://radixweb.com/services/saas-development,3,informational,2026-09-25,Organic
+P14,/saas-development,saas software development company,radixweb-semrush.csv,US (user confirmed),880,24,71,https://radixweb.com/blog/top-saas-development-companies,0,informational,2026-08-21,Organic
+P14,/saas-development,saas development services,rishabhsoft-semrush.csv,US (user confirmed),2400,29,4,https://www.rishabhsoft.com/services/saas-development-services,84,informational,2026-09-25,Organic
+P14,/saas-development,saas software development company,scnsoft.com-semrush.csv,US (user confirmed),880,24,2,https://www.scnsoft.com/software-development/saas,72,informational,2026-08-21,Organic
+P14,/saas-development,saas development services,scnsoft.com-semrush.csv,US (user confirmed),2400,29,9,https://www.scnsoft.com/software-development/saas,45,informational,2026-09-25,Organic
+P15,/seo-packages,seo packages india,rankingbyseo-semrush.csv,US (user confirmed),590,3,4,https://www.rankingbyseo.com/affordable-seo-packages/,25,commercial,2026-08-26,Organic
+P15,/seo-packages,seo packages in india,rankingbyseo-semrush.csv,US (user confirmed),260,16,3,https://www.rankingbyseo.com/affordable-seo-packages/,16,"commercial, informational",2026-08-07,Organic
+P16,/technical-seo,technical seo company india,rankingbyseo-semrush.csv,US (user confirmed),70,24,2,https://www.rankingbyseo.com/,5,"commercial, informational",2026-09-30,Organic
+P18,/ppc-management-pricing,ppc services packages,pagetraffic-semrush.csv,US (user confirmed),260,1,16,https://www.pagetraffic.com/ppc-packages.php,0,informational,2026-08-28,Organic
+P18,/ppc-management-pricing,ppc services packages,rankingbyseo-semrush.csv,US (user confirmed),260,1,30,https://www.rankingbyseo.com/ppc-management-packages/,0,informational,2026-08-28,Organic
+P18,/ppc-management-pricing,ppc management pricing packages,rankingbyseo-semrush.csv,US (user confirmed),50,22,17,https://www.rankingbyseo.com/ppc-management-packages/,0,informational,2026-08-20,Organic
+P18,/ppc-management-pricing,ppc management pricing packages,rankingbyseo-semrush.csv,US (user confirmed),50,22,20,https://www.rankingbyseo.com/ppc-management-packages/,0,informational,2026-08-20,Organic
+P18,/ppc-management-pricing,ppc pricing packages,rankingbyseo-semrush.csv,US (user confirmed),170,11,15,https://www.rankingbyseo.com/ppc-management-packages/,0,informational,2026-09-27,Organic
+P21,/react-development,react development services,radixweb-semrush.csv,US (user confirmed),1300,28,14,https://radixweb.com/reactjs-development,5,informational,2026-09-16,Organic
+P21,/react-development,react development services,rishabhsoft-semrush.csv,US (user confirmed),1300,28,21,https://www.rishabhsoft.com/react-development-services,1,informational,2026-09-16,Organic
+P22,/retail-software-development,retail software development services,radixweb-semrush.csv,US (user confirmed),1000,19,32,https://radixweb.com/industries/retail,0,informational,2026-09-06,Organic
+P22,/retail-software-development,retail software development services,rishabhsoft-semrush.csv,US (user confirmed),1000,19,14,https://www.rishabhsoft.com/industry/retail-software-solutions,4,informational,2026-09-06,Organic
+P22,/retail-software-development,retail software development services,scnsoft.com-semrush.csv,US (user confirmed),1000,19,11,https://www.scnsoft.com/retail/software-development,7,informational,2026-09-06,Organic
+P23,/healthcare-software-development,healthcare software development company,scnsoft.com-semrush.csv,US (user confirmed),3600,24,1,https://www.scnsoft.com/healthcare/custom-software-development,475,informational,2026-09-30,Organic
+P23,/healthcare-software-development,healthcare software development company,scnsoft.com-semrush.csv,US (user confirmed),3600,24,74,https://www.scnsoft.com/healthcare/top-healthcare-software-development-companies,0,informational,2026-09-30,Organic
+P24,/blog/custom-software-development-cost,software development cost,radixweb-semrush.csv,US (user confirmed),480,36,13,https://radixweb.com/blog/software-development-cost,1,informational,2026-09-11,Organic
+P24,/blog/custom-software-development-cost,software development cost,scnsoft.com-semrush.csv,US (user confirmed),480,36,1,https://www.scnsoft.com/software-development/costs,63,informational,2026-09-11,Organic
+P27,/blog/software-development-timeline,software development timeline,radixweb-semrush.csv,US (user confirmed),110,17,19,https://radixweb.com/blog/software-development-time-estimation,0,informational,2026-09-07,Organic
+P29,/blog/mvp-vs-prototype,mvp vs prototype,radixweb-semrush.csv,US (user confirmed),140,22,44,https://radixweb.com/blog/prototype-vs-mvp,0,commercial,2026-09-01,Organic
+P29,/blog/mvp-vs-prototype,mvp vs prototype,radixweb-semrush.csv,US (user confirmed),140,22,47,https://radixweb.com/blog/prototype-vs-mvp,0,commercial,2026-09-01,Organic
+P36,/blog/seo-cost-india,seo cost,rankingbyseo-semrush.csv,US (user confirmed),2900,50,79,https://www.rankingbyseo.com/blog/seo-pricing/,0,,2026-10-02,Organic
+P36,/blog/seo-cost-india,seo pricing india,rankingbyseo-semrush.csv,US (user confirmed),110,0,22,https://www.rankingbyseo.com/affordable-seo-packages/,0,transactional,2026-09-23,Organic
+P47,/blog/saas-development-cost,saas development cost,radixweb-semrush.csv,US (user confirmed),210,15,20,https://radixweb.com/blog/cost-to-build-a-saas-application,0,informational,2026-08-24,Organic
+P47,/blog/saas-development-cost,saas development cost,scnsoft.com-semrush.csv,US (user confirmed),210,15,9,https://www.scnsoft.com/software-development/saas/calculator,3,informational,2026-08-24,Organic

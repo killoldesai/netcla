@@ -1,0 +1,19 @@
+{
+  "date_start": "2026-06-30",
+  "date_end": "2026-09-29",
+  "days": 92,
+  "clicks": 8,
+  "impressions": 43882,
+  "ctr_pct": 0.01823070963037236,
+  "weighted_position": 78.9890159974477,
+  "page_rows": 57,
+  "query_rows": 743,
+  "country_rows": 119,
+  "page_impression_sum": 44173,
+  "query_impression_sum": 42781,
+  "usa_impressions": "38251",
+  "india_impressions": "567",
+  "mapped_pages": 47,
+  "exact_evidence_pages": 19,
+  "evidence_rows": 51
+}

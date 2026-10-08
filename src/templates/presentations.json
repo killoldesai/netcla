@@ -1,0 +1,7479 @@
+{
+  "/": {
+    "path": "/",
+    "family": "home",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      }
+    ]
+  },
+  "/about": {
+    "path": "/about",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      }
+    ]
+  },
+  "/services": {
+    "path": "/services",
+    "family": "directory",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      }
+    ]
+  },
+  "/contact": {
+    "path": "/contact",
+    "family": "contact",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      }
+    ]
+  },
+  "/portfolio": {
+    "path": "/portfolio",
+    "family": "work",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      }
+    ]
+  },
+  "/case-studies": {
+    "path": "/case-studies",
+    "family": "work",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      }
+    ]
+  },
+  "/custom-software-development": {
+    "path": "/custom-software-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/web-application-development": {
+    "path": "/web-application-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/web-development": {
+    "path": "/web-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/web-design": {
+    "path": "/web-design",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ui-ux-design": {
+    "path": "/ui-ux-design",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ecommerce-development": {
+    "path": "/ecommerce-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/website-redesign": {
+    "path": "/website-redesign",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/seo-services": {
+    "path": "/seo-services",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ppc-services": {
+    "path": "/ppc-services",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-outsourcing": {
+    "path": "/software-development-outsourcing",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "evidence",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/mobile-app-development": {
+    "path": "/mobile-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-5"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-5"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-5"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-5"
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": "section-5"
+      },
+      {
+        "id": "section-11",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-14",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/android-app-development": {
+    "path": "/android-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ios-app-development": {
+    "path": "/ios-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/iphone-app-development": {
+    "path": "/iphone-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ipad-app-development": {
+    "path": "/ipad-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/flutter-app-development": {
+    "path": "/flutter-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/react-native-app-development": {
+    "path": "/react-native-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hybrid-app-development": {
+    "path": "/hybrid-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/cross-platform-app-development": {
+    "path": "/cross-platform-app-development",
+    "family": "mobile",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ai-development-services": {
+    "path": "/ai-development-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/machine-learning-development": {
+    "path": "/machine-learning-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/natural-language-processing": {
+    "path": "/natural-language-processing",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/computer-vision-development": {
+    "path": "/computer-vision-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ai-chatbot-development": {
+    "path": "/ai-chatbot-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-10",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/generative-ai-development": {
+    "path": "/generative-ai-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/llm-development-services": {
+    "path": "/llm-development-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ai-automation-services": {
+    "path": "/ai-automation-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/predictive-analytics-services": {
+    "path": "/predictive-analytics-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/deep-learning-development": {
+    "path": "/deep-learning-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/data-science-services": {
+    "path": "/data-science-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-4"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-4"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-4"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-4"
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ai-integration-services": {
+    "path": "/ai-integration-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/recommendation-engine-development": {
+    "path": "/recommendation-engine-development",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ai-consulting-services": {
+    "path": "/ai-consulting-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/mlops-services": {
+    "path": "/mlops-services",
+    "family": "ai",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/cloud-services": {
+    "path": "/cloud-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": "section-6"
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/aws-services": {
+    "path": "/aws-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/azure-services": {
+    "path": "/azure-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/google-cloud-services": {
+    "path": "/google-cloud-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/devops-services": {
+    "path": "/devops-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/cloud-migration-services": {
+    "path": "/cloud-migration-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/kubernetes-services": {
+    "path": "/kubernetes-services",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/cloud-consulting": {
+    "path": "/cloud-consulting",
+    "family": "cloud",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/erp-development-services": {
+    "path": "/erp-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-10",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-13",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/crm-development-services": {
+    "path": "/crm-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/saas-development-services": {
+    "path": "/saas-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/api-development-services": {
+    "path": "/api-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/blockchain-development-services": {
+    "path": "/blockchain-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/iot-development-services": {
+    "path": "/iot-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ar-vr-development-services": {
+    "path": "/ar-vr-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/legacy-software-modernisation": {
+    "path": "/legacy-software-modernisation",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-3"
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-developers": {
+    "path": "/hire-developers",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-react-developer": {
+    "path": "/hire-react-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-nodejs-developer": {
+    "path": "/hire-nodejs-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-python-developer": {
+    "path": "/hire-python-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-angular-developer": {
+    "path": "/hire-angular-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-vuejs-developer": {
+    "path": "/hire-vuejs-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-php-developer": {
+    "path": "/hire-php-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-laravel-developer": {
+    "path": "/hire-laravel-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-wordpress-developer": {
+    "path": "/hire-wordpress-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-shopify-developer": {
+    "path": "/hire-shopify-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-woocommerce-developer": {
+    "path": "/hire-woocommerce-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-android-developer": {
+    "path": "/hire-android-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-ios-developer": {
+    "path": "/hire-ios-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-flutter-developer": {
+    "path": "/hire-flutter-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-react-native-developer": {
+    "path": "/hire-react-native-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-full-stack-developer": {
+    "path": "/hire-full-stack-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-frontend-developer": {
+    "path": "/hire-frontend-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-backend-developer": {
+    "path": "/hire-backend-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-java-developer": {
+    "path": "/hire-java-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-dotnet-developer": {
+    "path": "/hire-dotnet-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-django-developer": {
+    "path": "/hire-django-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-magento-developer": {
+    "path": "/hire-magento-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-devops-engineer": {
+    "path": "/hire-devops-engineer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-aws-developer": {
+    "path": "/hire-aws-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-ai-ml-developer": {
+    "path": "/hire-ai-ml-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-blockchain-developer": {
+    "path": "/hire-blockchain-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-ui-ux-designer": {
+    "path": "/hire-ui-ux-designer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-web-designer": {
+    "path": "/hire-web-designer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-data-scientist": {
+    "path": "/hire-data-scientist",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hire-mobile-app-developer": {
+    "path": "/hire-mobile-app-developer",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/dedicated-development-team": {
+    "path": "/dedicated-development-team",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/it-staff-augmentation": {
+    "path": "/it-staff-augmentation",
+    "family": "hire",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/react-development-services": {
+    "path": "/react-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/nodejs-development-services": {
+    "path": "/nodejs-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/python-development-services": {
+    "path": "/python-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/nextjs-development-services": {
+    "path": "/nextjs-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/laravel-development-services": {
+    "path": "/laravel-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/wordpress-development-services": {
+    "path": "/wordpress-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/shopify-development-services": {
+    "path": "/shopify-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/magento-development-services": {
+    "path": "/magento-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/angular-development-services": {
+    "path": "/angular-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/vuejs-development-services": {
+    "path": "/vuejs-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/php-development-services": {
+    "path": "/php-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/java-development-services": {
+    "path": "/java-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/dotnet-development-services": {
+    "path": "/dotnet-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/django-development-services": {
+    "path": "/django-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/kotlin-app-development": {
+    "path": "/kotlin-app-development",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/swift-app-development": {
+    "path": "/swift-app-development",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/graphql-api-development": {
+    "path": "/graphql-api-development",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/mongodb-development-services": {
+    "path": "/mongodb-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/postgresql-development-services": {
+    "path": "/postgresql-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/docker-containerisation-services": {
+    "path": "/docker-containerisation-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/terraform-infrastructure-services": {
+    "path": "/terraform-infrastructure-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/golang-development-services": {
+    "path": "/golang-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/typescript-development-services": {
+    "path": "/typescript-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/woocommerce-development-services": {
+    "path": "/woocommerce-development-services",
+    "family": "technology",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/healthcare-software-development": {
+    "path": "/healthcare-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/fintech-software-development": {
+    "path": "/fintech-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/edtech-software-development": {
+    "path": "/edtech-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/real-estate-software-development": {
+    "path": "/real-estate-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/logistics-software-development": {
+    "path": "/logistics-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/on-demand-app-development": {
+    "path": "/on-demand-app-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "capabilities",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/retail-software-development": {
+    "path": "/retail-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/travel-software-development": {
+    "path": "/travel-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/legaltech-software-development": {
+    "path": "/legaltech-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/hrtech-software-development": {
+    "path": "/hrtech-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "capabilities",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/insurtech-software-development": {
+    "path": "/insurtech-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/manufacturing-software-development": {
+    "path": "/manufacturing-software-development",
+    "family": "industry",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/mvp-development-services": {
+    "path": "/mvp-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/startup-software-development": {
+    "path": "/startup-software-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/enterprise-software-development": {
+    "path": "/enterprise-software-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/digital-transformation-services": {
+    "path": "/digital-transformation-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/product-development-services": {
+    "path": "/product-development-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-outsourcing-services": {
+    "path": "/software-outsourcing-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "evidence",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-consulting-services": {
+    "path": "/software-consulting-services",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "technology",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/proof-of-concept-development": {
+    "path": "/proof-of-concept-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/white-label-software-development": {
+    "path": "/white-label-software-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/offshore-software-development": {
+    "path": "/offshore-software-development",
+    "family": "software",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-usa": {
+    "path": "/software-development-company-usa",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-uk": {
+    "path": "/software-development-company-uk",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-new-york": {
+    "path": "/software-development-company-new-york",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-london": {
+    "path": "/software-development-company-london",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-australia": {
+    "path": "/software-development-company-australia",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-canada": {
+    "path": "/software-development-company-canada",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-dubai": {
+    "path": "/software-development-company-dubai",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/software-development-company-india": {
+    "path": "/software-development-company-india",
+    "family": "location",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "evidence",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/technical-seo-services": {
+    "path": "/technical-seo-services",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "technology",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/local-seo-services": {
+    "path": "/local-seo-services",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/google-ads-management": {
+    "path": "/google-ads-management",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/ecommerce-seo-services": {
+    "path": "/ecommerce-seo-services",
+    "family": "marketing",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-2"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": "section-7"
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": "section-7"
+      },
+      {
+        "id": "section-10",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-12",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/how-we-work": {
+    "path": "/how-we-work",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-8",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/engagement-models": {
+    "path": "/engagement-models",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "evidence",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-8",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/why-choose-netofficials": {
+    "path": "/why-choose-netofficials",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-4",
+        "variant": "technology",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-6",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-7",
+        "variant": "editorial",
+        "parent": "section-1"
+      },
+      {
+        "id": "section-8",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-9",
+        "variant": "comparison",
+        "parent": null
+      },
+      {
+        "id": "section-10",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-11",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  },
+  "/faq": {
+    "path": "/faq",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "technology",
+        "parent": null
+      }
+    ]
+  },
+  "/careers": {
+    "path": "/careers",
+    "family": "company",
+    "ready": true,
+    "sections": [
+      {
+        "id": "section-1",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-2",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-3",
+        "variant": "editorial",
+        "parent": null
+      },
+      {
+        "id": "section-4",
+        "variant": "process",
+        "parent": null
+      },
+      {
+        "id": "section-5",
+        "variant": "capabilities",
+        "parent": null
+      },
+      {
+        "id": "section-6",
+        "variant": "faq",
+        "parent": null
+      }
+    ]
+  }
+}

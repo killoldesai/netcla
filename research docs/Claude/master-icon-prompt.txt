@@ -1,0 +1,28 @@
+MASTER ICON SET PROMPT — NETOFFICIALS SITE-WIDE
+============================================================
+
+OPENROUTER API IMAGE GENERATION PROMPT:
+
+Generate a set of flat SVG icons for a software development company website. Style: geometric line art, 1.5px stroke weight, #533afd indigo stroke on white fill. No gradients. No shadows. 4px rounded corners where shapes appear. Each icon 40x40px canvas. Icons needed: code-brackets, mobile-device, brain-circuit (AI), cloud-upload, settings-gear, layers-stack, shield-check, users-group, rocket-launch, chart-bar, document-text, api-plug, flutter-diamond, react-atom, nodejs-hexagon, python-snake, aws-cloud, kubernetes-wheel, docker-whale, terraform-blocks. Deliver as a single SVG sprite sheet with viewBox 0 0 40 40 per icon.
+
+ICON KEYS REFERENCE (use in section_fields icon_key values):
+  code-brackets           Represents custom software, development, code
+  mobile-device           Represents mobile app development
+  brain-circuit           Represents AI, machine learning, automation
+  cloud-upload            Represents cloud services, DevOps, deployment
+  settings-gear           Represents configuration, process, workflow
+  layers-stack            Represents full-stack, architecture, infrastructure
+  shield-check            Represents security, QA, testing, compliance
+  users-group             Represents teams, hiring, dedicated developers
+  rocket-launch           Represents launches, MVPs, startups, speed
+  chart-bar               Represents analytics, data, dashboards, reporting
+  document-text           Represents documentation, content, CMS
+  api-plug                Represents API integration, connectivity
+  flutter-diamond         Represents Flutter, cross-platform mobile
+  react-atom              Represents React, Next.js, frontend
+  nodejs-hexagon          Represents Node.js, backend
+  python-snake            Represents Python, data science
+  aws-cloud               Represents AWS, cloud infrastructure
+  kubernetes-wheel        Represents Kubernetes, container orchestration
+  docker-whale            Represents Docker, containerisation
+  terraform-blocks        Represents Terraform, Infrastructure as Code

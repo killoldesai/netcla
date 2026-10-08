@@ -1,0 +1,461 @@
+
+/* Admin sign-in */
+.admin-login-shell {
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f5f7fb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.admin-login-shell * {
+  box-sizing: border-box;
+}
+.admin.owner-login {
+  width: 100%;
+  max-width: 420px;
+  margin: 0;
+  padding: 36px !important;
+  border: 1px solid #e0e5ed;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 28px #263b5f06;
+  color: #222936;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+.admin.owner-login .login-brand {
+  display: inline-block;
+}
+.admin.owner-login .owner-login-logo {
+  width: 175px;
+  height: auto;
+  margin: 0;
+  max-width: 100%;
+  display: block;
+}
+.login-heading {
+  margin: 32px 0 26px;
+}
+.login-heading > span {
+  font-size: 11px;
+  color: #7b8492;
+}
+.admin.owner-login .login-heading h1 {
+  font-size: 26px !important;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 8px 0 9px !important;
+  color: #222936;
+}
+.admin.owner-login .login-heading p {
+  font-size: 13px;
+  color: #687386;
+  line-height: 1.6;
+  margin: 0;
+}
+.admin.owner-login .owner-login-form {
+  margin: 0;
+}
+.admin.owner-login .owner-login-form .login-field {
+  margin: 0 0 20px;
+}
+.admin.owner-login .owner-login-form label {
+  display: block;
+  margin: 0;
+  color: #46516a;
+  font-size: 12px;
+  font-weight: 500;
+}
+.admin.owner-login .owner-login-form input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d8dfe9;
+  border-radius: 5px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 14px;
+  color: #283345;
+  font-family: inherit;
+  margin: 8px 0 0;
+  line-height: 1.5;
+  box-shadow: none;
+}
+.admin.owner-login .owner-login-form input::placeholder {
+  color: #9aa3b1;
+  font-size: 13px;
+}
+.admin.owner-login .owner-login-form input:focus {
+  outline: 2px solid #b8c5fa;
+  outline-offset: 1px;
+  border-color: #7e91db;
+}
+.admin.owner-login .owner-login-form input[aria-invalid="true"] {
+  border-color: #ba604e;
+}
+.admin.owner-login .owner-login-form input:disabled {
+  background: #f8f9fc;
+  color: #687386;
+}
+.login-password {
+  position: relative;
+}
+.admin.owner-login .owner-login-form .login-password input {
+  padding-right: 68px;
+}
+.admin.owner-login .owner-login-form .login-password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  padding: 0 10px;
+  margin: 0;
+  background: none;
+  border: 0;
+  border-radius: 3px;
+  color: #596478;
+  font-size: 12px;
+  min-width: 48px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.admin.owner-login .owner-login-form .login-password-toggle:hover {
+  background: #f2f4f9;
+  color: #344fba;
+}
+.admin.owner-login .owner-login-form .login-submit {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  background: #425cbd;
+  color: #fff;
+  border: 1px solid #425cbd;
+  border-radius: 5px;
+  margin: 6px 0 0;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.admin.owner-login .owner-login-form .login-submit:hover {
+  background: #364faa;
+}
+.admin.owner-login .owner-login-form button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.admin.owner-login button:focus-visible,
+.admin.owner-login a:focus-visible {
+  outline: 2px solid #425cbd;
+  outline-offset: 3px;
+}
+.admin.owner-login .login-help {
+  font-size: 11px;
+  color: #8a6432;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+.login-error {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #9c4336;
+  background: #fcf1ee;
+  border: 1px solid #efd7d1;
+  padding: 11px 12px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.login-footer {
+  border-top: 1px solid #edf0f5;
+  padding-top: 19px;
+  margin-top: 26px;
+}
+.admin.owner-login .login-footer p {
+  font-size: 11px;
+  color: #8a93a2;
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+.admin.owner-login .login-footer a {
+  color: #425cbd;
+  font-size: 12px;
+  text-decoration: none;
+}
+.admin.owner-login .login-footer a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 480px) {
+  .admin-login-shell {
+    padding: 24px 16px;
+  }
+  .admin.owner-login {
+    padding: 28px !important;
+    margin: 0;
+  }
+  .login-heading {
+    margin-top: 28px;
+  }
+  .admin.owner-login .login-heading h1 {
+    font-size: 24px !important;
+  }
+}
+
+/* Content authoring */
+.rich-editor {
+  min-width: 0;
+  margin: 14px 0;
+}
+.rich-editor-label {
+  color: #354052;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.rich-editor-frame {
+  border: 1px solid #ccd3dd;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.rich-editor-frame:focus-within {
+  border-color: #426894;
+  box-shadow: 0 0 0 2px #42689418;
+}
+.rich-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-items: center;
+  padding: 6px;
+  border-bottom: 1px solid #e3e7ed;
+  background: #f7f8fa;
+}
+.admin-shell .rich-editor-toolbar button,
+.rich-editor-toolbar button {
+  min-height: 30px;
+  min-width: 30px;
+  padding: 4px 7px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #344155;
+  font-size: 12px;
+  box-shadow: none;
+}
+.rich-editor-toolbar button:hover {
+  background: #e8edf3;
+}
+.rich-editor-toolbar button[aria-pressed="true"] {
+  background: #dfe9f4;
+  border-color: #b4c8df;
+  color: #183d67;
+}
+.rich-editor-toolbar button:disabled {
+  opacity: 0.35;
+}
+.rich-editor-toolbar button:focus-visible {
+  outline: 2px solid #426894;
+  outline-offset: 1px;
+}
+.rich-editor-toolbar button[aria-label="Bold"] {
+  font-weight: 800;
+}
+.rich-editor-toolbar button[aria-label="Italic"] {
+  font-style: italic;
+}
+.rich-editor-toolbar button[aria-label="Underline"] {
+  text-decoration: underline;
+}
+.rich-editor-toolbar select {
+  width: auto;
+  max-width: 130px;
+  padding: 4px;
+  min-height: 30px;
+  margin: 0;
+  font-size: 12px;
+}
+.rich-editor-document {
+  padding: 14px 16px;
+  min-height: 130px;
+  max-height: 560px;
+  overflow: auto;
+  outline: none;
+  color: #283548;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.rich-editor-compact .rich-editor-document {
+  min-height: 48px;
+  padding: 10px 12px;
+}
+.rich-editor-document > :first-child,
+.content-rich > :first-child {
+  margin-top: 0;
+}
+.rich-editor-document > :last-child,
+.content-rich > :last-child {
+  margin-bottom: 0;
+}
+.rich-editor-document p {
+  margin: 0 0 12px;
+}
+.rich-editor-document ul,
+.rich-editor-document ol,
+.content-rich ul,
+.content-rich ol {
+  padding-left: 1.5em;
+}
+.rich-editor-document blockquote,
+.content-rich blockquote {
+  border-left: 3px solid #b6c5d6;
+  margin: 1em 0;
+  padding-left: 1em;
+}
+.rich-editor-document a,
+.content-rich a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rich-editor-document table,
+.content-rich table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+.rich-editor-document th,
+.rich-editor-document td,
+.content-rich th,
+.content-rich td {
+  border: 1px solid #ccd3dd;
+  padding: 8px;
+  min-width: 50px;
+  vertical-align: top;
+  position: relative;
+}
+.rich-editor-document th {
+  background: #f1f4f7;
+}
+.rich-editor-document .selectedCell {
+  background: #e3edf9;
+}
+.rich-editor-document pre,
+.content-rich pre {
+  white-space: pre-wrap;
+  background: #f4f6f8;
+  padding: 12px;
+  border-radius: 4px;
+}
+.rich-editor-panel {
+  padding: 12px;
+  border-bottom: 1px solid #e3e7ed;
+  background: #f7f9fb;
+}
+.rich-editor-panel label {
+  display: block;
+}
+.rich-editor-panel textarea {
+  width: 100%;
+  min-height: 100px;
+  font-family: monospace;
+}
+.rich-editor-panel p {
+  font-size: 12px;
+  color: #526278;
+}
+.rich-editor-panel button {
+  margin-right: 8px;
+}
+.structured-fields {
+  padding-top: 16px;
+}
+.editor-field-group {
+  margin: 20px 0;
+  padding-top: 16px;
+  border-top: 1px solid #e3e7ed;
+}
+.editor-repeatable {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #e3e7ed;
+  border-radius: 6px;
+}
+.content-rich {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.content-rich p {
+  line-height: inherit;
+}
+.content-rich table {
+  display: block;
+  overflow-x: auto;
+}
+.csv-site:not(.csv-foundation) .csv-cards-process article > .content-rich {
+  grid-column: 2;
+}
+.csv-frame .content-rich a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.plan-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.plan-summary span {
+  display: block;
+  color: #687386;
+  font-size: 12px;
+}
+.plan-summary strong {
+  display: block;
+  font-size: 28px;
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.plan-table-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin: 24px 0 14px;
+}
+.plan-table-heading h2 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+.plan-table-heading p {
+  margin: 0;
+  color: #687386;
+  font-size: 12px;
+}
+.plan-workspace .plan-import {
+  margin-top: 24px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e0e5ed;
+  border-radius: 8px;
+}
+.plan-workspace .plan-import summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  .plan-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .plan-table-heading {
+    align-items: flex-start;
+  }
+  .plan-table-heading > a {
+    white-space: nowrap;
+  }
+}
