@@ -46,7 +46,8 @@ test("QA fails invented figures and generic AI phrasing, and passes clean pages"
     faq: { heading: "Questions", ...faq },
   });
   const report = runContentQA(clean, "/flutter-app-development");
-  assert.deepEqual(report.checks.filter((c) => c.status === "fail").map((c) => c.id), []);
+  // The fixture is a short page, so the family word band (which only warns above half the band) is the one expected failure.
+  assert.deepEqual(report.checks.filter((c) => c.status === "fail").map((c) => c.id), ["word-band"]);
   const bad = page({
     hero: { h1: "Flutter apps", subheadline: "We deliver 40% faster launches with cutting-edge, seamless delivery and robust leverage." },
     faq: { heading: "Questions", q1: "Why?", a1: "Because." },
@@ -97,7 +98,8 @@ test("brief parsing drops links outside the allowed list and prompts carry the r
     links,
   );
   assert.equal(brief.searchIntent, "commercial");
-  assert.equal(brief.metaTitle.length, 70);
+  // A title that is not a comma-separated keyword list is rebuilt from the primary keyword plus the brief's entities.
+  assert.equal(brief.metaTitle, "Flutter App Development, Dart | Netofficials");
   assert.deepEqual(brief.internalLinks.map((l) => l.path), ["/mobile-app-development"]);
   const prompt = JSON.parse(buildBriefPrompt({ spec: spec("/flutter-app-development", [section("hero", ["h1"], { hero: true })]), links, facts: [], imageSections: ["hero"] }));
   assert.match(prompt.requirements.join(" "), /metaDescription/);
@@ -118,7 +120,7 @@ test("structured data includes organisation, service, breadcrumbs and FAQ", () =
   const content = page({ hero: { h1: "Flutter" }, faq: { q1: "Q?", a1: "<p>Answer</p>" } });
   const graph = pageGraph({ path: "/flutter-app-development", content, site: "https://example.com" })["@graph"] as any[];
   const types = graph.map((n) => n["@type"]);
-  assert.deepEqual(types, ["Organization", "Service", "BreadcrumbList", "FAQPage"]);
+  assert.deepEqual(types, ["Organization", "Service", "BreadcrumbList", "FAQPage", "WebSite"]);
   assert.deepEqual(graph[2].itemListElement.map((i: any) => i.item), ["https://example.com", "https://example.com/mobile-app-development", "https://example.com/flutter-app-development"]);
   assert.equal(graph[3].mainEntity[0].acceptedAnswer.text, "Answer");
   const article = pageGraph({ path: "/blog/custom-software-development-cost", content, site: "https://example.com" })["@graph"] as any[];

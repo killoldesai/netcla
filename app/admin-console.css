@@ -846,16 +846,34 @@
   max-height: 75vh;
   overflow: auto;
 }
+/* Desktop: the section list stays in view while long fields scroll. */
+@media (min-width: 1101px) {
+  .uc-section-nav {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+}
+/* Each row: section name (truncates) + compact Regenerate checkbox, inside the card. */
 .uc-section-nav > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
   border-bottom: 1px solid #edf0f6;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 .uc-section-nav > div button {
+  flex: 1 1 auto;
+  min-width: 0;
   border: 0;
   background: transparent;
   justify-content: flex-start;
   text-align: left;
-  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 12px;
   padding: 8px;
 }
@@ -864,8 +882,13 @@
   color: #4059bd;
 }
 .uc-section-nav label {
-  font-size: 10px;
-  margin: 8px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  margin: 0 4px 0 0;
 }
 .uc-field-group {
   margin-bottom: 22px !important;
@@ -1444,3 +1467,24 @@
   .uc-collapsed .uc-nav-text, .uc-collapsed .uc-sidebar .uc-nav-label { display:initial; }
   .uc-admin .uc-collapse { display:none; }
 }
+
+/* Status chips: one tidy line, left-aligned under the title on narrow screens. */
+.uc-admin .uc-editor-heading > div:last-child { justify-content:flex-start; align-items:center; }
+.uc-admin .uc-editor-status { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.uc-admin .uc-editor-status .uc-muted { flex-basis:100%; margin:0; }
+.uc-admin .uc-editor-actions small { color:var(--uc-muted); }
+@media (max-width: 900px) {
+  .uc-admin .uc-editor-heading > div:last-child { justify-content:flex-start; max-width:none; }
+}
+
+/* FAQ tab */
+.uc-faq-summary { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+.uc-faq-list { margin:0 0 16px; padding-left:20px; display:grid; gap:12px; }
+.uc-faq-list li p { margin:4px 0 0; font-size:13px; color:#4b5870; line-height:1.5; }
+.uc-faq-list li strong { font-size:14px; }
+
+/* Media bulk selection */
+.uc-admin .uc-media-bulk { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 12px; }
+.uc-admin .uc-media-item { position:relative; display:flex; flex-direction:column; }
+.uc-admin .uc-media-item .uc-media-card { flex:1; }
+.uc-admin .uc-media-check { position:absolute; top:12px; left:12px; z-index:1; width:18px; height:18px; }

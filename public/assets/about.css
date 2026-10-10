@@ -1,0 +1,188 @@
+/* About page: a company profile with a numbered margin column beside each block.
+   Scoped to .v3-about; shares no classes with the commercial skeleton (skeleton.css). Flat surfaces, 1px lines. */
+.v3-about {
+  --ab-ink: #182138;
+  --ab-indigo: #4353b3;
+  --ab-indigo-soft: #e1e5f8;
+  --ab-lime: #b5ce20;
+  --ab-lime-soft: #e7edc5;
+  --ab-paper: #f4f6fa;
+  --ab-line: #dbe0e8;
+  --ab-muted: #55607a;
+  color: var(--ab-ink);
+  font-family: Poppins, system-ui, sans-serif;
+  background: #fff;
+}
+.v3-about * { box-sizing: border-box; }
+:where(.v3-about) :where(h1, h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; padding: 0; }
+:where(.v3-about) :where(ul, ol) { list-style: none; }
+
+.v3-about .ab-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.v3-about .ab-section { padding: 104px 0; scroll-margin-top: 90px; }
+.v3-about .ab-section.is-paper { background: var(--ab-paper); }
+.v3-about .ab-section.is-dark { background: var(--ab-ink); color: #fff; }
+.v3-about .ab-grid { display: grid; grid-template-columns: 188px minmax(0, 1fr); gap: 0 64px; align-items: start; }
+.v3-about .ab-main { min-width: 0; }
+
+/* Margin label */
+.v3-about .ab-label { position: sticky; top: 110px; font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ab-indigo); padding-top: 14px; border-top: 2px solid var(--ab-lime); }
+.v3-about .is-dark .ab-label { color: #d4e67c; }
+
+/* Type */
+.v3-about .ab-h1 { font-size: clamp(2.3rem, 4.2vw, 3.75rem); line-height: 1.04; font-weight: 600; letter-spacing: -.035em; text-wrap: balance; margin-top: 20px; }
+.v3-about .ab-h2 { font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1.12; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; max-width: 22ch; }
+.v3-about .ab-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ab-indigo); }
+.v3-about .ab-tag::before { content: ""; width: 8px; height: 8px; background: var(--ab-lime); }
+.v3-about .ab-intro { margin-top: 20px; max-width: 62ch; font-size: 1.125rem; line-height: 1.7; color: var(--ab-muted); }
+.v3-about .ab-body, .v3-about .ab-prose { font-size: 1.0625rem; line-height: 1.8; color: #424d66; }
+.v3-about .ab-prose p + p, .v3-about .ab-body + .ab-body { margin-top: 18px; }
+.v3-about .ab-prose a { color: var(--ab-indigo); text-decoration: underline; text-underline-offset: 3px; }
+.v3-about .is-dark .ab-body, .v3-about .is-dark .ab-prose { color: #c9d1e3; }
+.v3-about .is-dark .ab-prose a { color: #d4e67c; }
+
+/* Buttons */
+.v3-about .ab-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin-top: 30px; }
+.v3-about .ab-btn { display: inline-flex; align-items: center; gap: 14px; padding: 15px 24px; background: var(--ab-indigo); color: #fff !important; border-radius: 4px; font-weight: 500; text-decoration: none; transition: background .18s; }
+.v3-about .ab-btn:hover { background: #34428f; }
+.v3-about .ab-btn.is-ink { background: var(--ab-ink); }
+.v3-about .ab-btn.is-ink:hover { background: #000; }
+.v3-about .ab-link { color: inherit; font-weight: 500; text-decoration: none; }
+.v3-about .ab-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Hero: statement + lede, banner below */
+.v3-about .ab-hero { background: var(--ab-paper); padding: 28px 0 88px; }
+.v3-about .ab-crumbs ol { display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--ab-muted); padding: 10px 0 18px; border-bottom: 1px solid var(--ab-line); margin-bottom: 64px; }
+.v3-about .ab-crumbs li + li::before { content: "/"; margin-right: 8px; opacity: .5; }
+.v3-about .ab-crumbs a { color: inherit; text-decoration: none; }
+.v3-about .ab-crumbs [aria-current] { color: var(--ab-ink); }
+.v3-about .ab-hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
+.v3-about .ab-hero-lede p { font-size: 1.2rem; line-height: 1.7; color: var(--ab-muted); }
+.v3-about .ab-banner { margin: 64px 0 0; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--ab-line); aspect-ratio: 16 / 7; }
+.v3-about .ab-banner img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* Story + glance */
+.v3-about .ab-pull { margin: 28px 0 44px; max-width: 30ch; font-size: clamp(1.35rem, 2.1vw, 1.8rem); line-height: 1.4; font-weight: 500; color: var(--ab-indigo); padding-left: 22px; border-left: 4px solid var(--ab-lime); }
+.v3-about .ab-story-cols { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.v3-about .ab-glance { border: 1px solid var(--ab-line); border-radius: 12px; padding: 26px; background: #fff; }
+.v3-about .ab-glance h3 { font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ab-indigo); margin-bottom: 8px; }
+.v3-about .ab-glance dl > div { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid var(--ab-line); }
+.v3-about .ab-glance dl > div:first-child { border-top: 0; }
+.v3-about .ab-glance dt { font-size: 14px; color: var(--ab-muted); }
+.v3-about .ab-glance dd { font-size: 15px; font-weight: 600; text-align: right; }
+.v3-about .ab-glance-note { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--ab-line); font-size: 14.5px; line-height: 1.6; color: var(--ab-muted); }
+.v3-about .ab-figure { margin: 22px 0 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--ab-line); background: #fff; }
+.v3-about .ab-figure img { display: block; width: 100%; height: auto; }
+.v3-about .ab-figure.is-card { margin: 0; border: 0; padding: 14px; }
+.v3-about .ab-sticky { position: sticky; top: 110px; margin: 0; }
+
+/* Practice index */
+.v3-about .ab-practices { margin-top: 48px; border-top: 1px solid var(--ab-ink); }
+.v3-about .ab-practices > li { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 24px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--ab-line); }
+.v3-about .ab-practice-body h3 { display: flex; align-items: center; gap: 14px; font-size: 1.5rem; line-height: 1.2; font-weight: 600; letter-spacing: -.015em; }
+.v3-about .ab-practice-body h3 a { color: inherit; text-decoration: none; }
+.v3-about .ab-practice-body h3 a:hover { color: var(--ab-indigo); }
+.v3-about .ab-practice-body > p { margin-top: 12px; max-width: 64ch; font-size: 1.0625rem; line-height: 1.7; color: var(--ab-muted); }
+.v3-about .ab-practice-body ul { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.v3-about .ab-practice-body ul a { display: inline-block; padding: 7px 14px; border: 1px solid var(--ab-line); border-radius: 999px; background: #fff; font-size: 14px; color: var(--ab-ink); text-decoration: none; }
+.v3-about .ab-practice-body ul a:hover { border-color: var(--ab-indigo); color: var(--ab-indigo); }
+.v3-about .ab-practice-go { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--ab-indigo); color: #fff; transition: background .18s, transform .18s; }
+.v3-about .ab-practice-go:hover { background: var(--ab-ink); transform: translateX(3px); }
+.v3-about .ab-practice-go svg { width: 20px; height: 20px; }
+.v3-about .ab-also { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-top: 28px; font-size: 15px; }
+.v3-about .ab-also span { font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ab-muted); }
+.v3-about .ab-also a { color: var(--ab-indigo); text-decoration: none; font-weight: 500; }
+.v3-about .ab-also a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.v3-about .ab-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--ab-indigo-soft); color: var(--ab-indigo); display: grid; place-items: center; flex: none; }
+.v3-about .ab-icon-svg { width: 21px; height: 21px; }
+
+/* Principles */
+.v3-about .ab-principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 48px; }
+.v3-about .ab-principles > li { position: relative; border: 1px solid var(--ab-line); border-radius: 12px; padding: 28px; display: grid; gap: 12px; align-content: start; transition: border-color .18s; }
+.v3-about .ab-principles > li:hover { border-color: var(--ab-indigo); }
+.v3-about .ab-principles h3 { font-size: 1.2rem; font-weight: 600; margin-top: 6px; }
+.v3-about .ab-principles p { font-size: 15.5px; line-height: 1.7; color: var(--ab-muted); }
+
+/* Timeline */
+.v3-about .ab-timeline-wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.v3-about .ab-timeline { margin-top: 44px; position: relative; }
+.v3-about .ab-timeline::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: 22px; border-left: 2px dashed var(--ab-line); }
+.v3-about .ab-timeline li { position: relative; padding: 0 0 34px 68px; }
+.v3-about .ab-timeline li:last-child { padding-bottom: 0; }
+.v3-about .ab-dot { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--ab-lime); color: var(--ab-ink); display: grid; place-items: center; font-weight: 700; }
+.v3-about .ab-timeline h3 { font-size: 1.15rem; font-weight: 600; padding-top: 9px; }
+.v3-about .ab-timeline p { margin-top: 8px; max-width: 52ch; font-size: 15.5px; line-height: 1.7; color: var(--ab-muted); }
+
+/* Where we work */
+.v3-about .ab-working { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+.v3-about .ab-working .ab-h2 { color: #fff; margin-bottom: 24px; }
+.v3-about .ab-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.v3-about .ab-tools li { padding: 8px 16px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; font-size: 14.5px; }
+.v3-about .ab-overlap { margin-top: 22px; padding-left: 18px; border-left: 3px solid var(--ab-lime); font-size: 15.5px; line-height: 1.65; color: #c9d1e3; }
+
+/* Sectors */
+.v3-about .ab-sectors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
+.v3-about .ab-sectors a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; border: 1px solid var(--ab-line); border-radius: 10px; font-weight: 500; color: var(--ab-ink); text-decoration: none; transition: border-color .18s, background .18s; }
+.v3-about .ab-sectors a:hover { border-color: var(--ab-indigo); background: var(--ab-indigo-soft); }
+.v3-about .ab-sectors a span { color: var(--ab-indigo); }
+
+/* India partner: benefit vs what to check */
+.v3-about .ab-tradeoffs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 48px; border-top: 1px solid var(--ab-ink); }
+.v3-about .ab-tradeoffs article { padding: 28px 28px 8px 0; }
+.v3-about .ab-tradeoffs article + article { padding-left: 28px; border-left: 1px solid var(--ab-line); }
+.v3-about .ab-tradeoffs h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.015em; margin-bottom: 18px; }
+.v3-about .ab-tradeoffs p { font-size: 15.5px; line-height: 1.7; color: var(--ab-muted); }
+.v3-about .ab-tradeoffs p + p { margin-top: 16px; }
+.v3-about .ab-tradeoffs strong { display: block; margin-bottom: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ab-indigo); }
+
+/* Proof blocks (shown only when approved evidence fills them) */
+.v3-about .ab-team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 44px; }
+.v3-about .ab-team li { border: 1px solid var(--ab-line); border-radius: 12px; padding: 26px; display: grid; gap: 8px; }
+.v3-about .ab-team h3 { font-size: 1.2rem; font-weight: 600; }
+.v3-about .ab-role { font-size: 13px !important; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ab-indigo) !important; }
+.v3-about .ab-team p { font-size: 15px; line-height: 1.65; color: var(--ab-muted); }
+.v3-about .ab-proof { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 48px; align-items: center; }
+.v3-about .ab-proof-n { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1; font-weight: 600; letter-spacing: -.04em; color: var(--ab-indigo); }
+.v3-about .ab-awards { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.v3-about .ab-awards li { padding: 12px 20px; border: 1px solid var(--ab-line); border-radius: 999px; font-weight: 500; }
+
+/* FAQ */
+.v3-about .ab-faq .ab-h2 { margin-bottom: 36px; }
+.v3-about .ab-accordion { border-top: 1px solid var(--ab-ink); }
+.v3-about .ab-accordion details { border-bottom: 1px solid var(--ab-line); }
+.v3-about .ab-accordion summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 0; cursor: pointer; font-size: 1.125rem; font-weight: 600; line-height: 1.4; list-style: none; }
+.v3-about .ab-accordion summary::-webkit-details-marker { display: none; }
+.v3-about .ab-accordion summary span { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--ab-line); display: grid; place-items: center; color: var(--ab-indigo); transition: transform .18s; }
+.v3-about .ab-accordion details[open] summary span { transform: rotate(45deg); background: var(--ab-lime); border-color: var(--ab-lime); color: var(--ab-ink); }
+.v3-about .ab-accordion details .ab-body, .v3-about .ab-accordion details .ab-prose { padding: 0 56px 26px 0; }
+
+/* Closing band */
+.v3-about .ab-cta { background: var(--ab-lime); color: var(--ab-ink); padding: 84px 0; }
+.v3-about .ab-cta-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.v3-about .ab-cta h2 { font-size: clamp(1.8rem, 3.2vw, 2.8rem); line-height: 1.12; font-weight: 600; letter-spacing: -.025em; max-width: 20ch; }
+.v3-about .ab-cta p { margin-top: 16px; max-width: 56ch; font-size: 1.125rem; line-height: 1.65; }
+.v3-about .ab-cta .ab-actions { margin-top: 0; }
+.v3-about .ab-link.is-ink { color: var(--ab-ink); text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 1020px) {
+  .v3-about .ab-section { padding: 72px 0; }
+  .v3-about .ab-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .v3-about .ab-label { position: static; border-top: 0; padding-top: 0; }
+  .v3-about .ab-hero-grid, .v3-about .ab-story-cols, .v3-about .ab-timeline-wrap, .v3-about .ab-working, .v3-about .ab-cta-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .v3-about .ab-sticky { position: static; }
+  .v3-about .ab-tradeoffs { grid-template-columns: minmax(0, 1fr); }
+  .v3-about .ab-tradeoffs article, .v3-about .ab-tradeoffs article + article { padding: 24px 0; border-left: 0; border-top: 1px solid var(--ab-line); }
+  .v3-about .ab-tradeoffs article:first-child { border-top: 0; }
+  .v3-about .ab-sectors, .v3-about .ab-team { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .v3-about .ab-wrap { padding: 0 20px; }
+  .v3-about .ab-hero { padding-bottom: 56px; }
+  .v3-about .ab-crumbs ol { margin-bottom: 36px; }
+  .v3-about .ab-banner { aspect-ratio: 16 / 9; margin-top: 40px; }
+  .v3-about .ab-principles, .v3-about .ab-sectors, .v3-about .ab-team { grid-template-columns: minmax(0, 1fr); }
+  .v3-about .ab-practices > li { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 24px 0; }
+  .v3-about .ab-practice-go { display: none; }
+  .v3-about .ab-practice-body h3 { font-size: 1.25rem; }
+  .v3-about .ab-proof { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .v3-about .ab-accordion details .ab-body, .v3-about .ab-accordion details .ab-prose { padding-right: 0; }
+}

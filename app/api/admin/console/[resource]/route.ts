@@ -1,6 +1,6 @@
 import { publishPassingDrafts } from "@/admin-publish";
 import { s3Regions, saveStorageSettings, storageSettings, storageSettingsSchema, storageStatus, testStorage } from "@/asset-storage";
-import { effectiveSpec, specForContent } from "@/prompts/templates";
+import { effectiveSpec, requiresFaq, specForContent } from "@/prompts/templates";
 import { requireOwner, assertOrigin } from "@/auth";
 import { query, transaction } from "@/db";
 import {
@@ -13,6 +13,7 @@ import { z } from "zod";
 import { boundedJSON } from "@/request-limits";
 import { reviewPage } from "@/admin-review";
 import { contentSchema, validateContent } from "@/content";
+import { runContentQA } from "@/content-qa";
 import { getDesign } from "@/designs";
 import {
   validateBlueprint,
@@ -101,8 +102,16 @@ export async function GET(request: Request, context: Context) {
         const design = getDesign(
           page.path === "/" ? "software-led" : page.template,
         );
+        // Checks are re-run on the draft so rule fixes show without a re-save;
+        // the quality score stays as it was stored.
+        const liveChecks = page.content
+          ? {
+              ...validateContent(page.content, getDesign(page.template)),
+              qa: page.content.schemaVersion === 3 ? runContentQA(page.content, page.path) : page.validation?.qa,
+            }
+          : page.validation;
         return json({
-          page: { ...page, sections: design.sections },
+          page: { ...page, validation: liveChecks, sections: design.sections, faqRequired: requiresFaq(page.path) },
           spec: spec?.specification ? specForContent(spec.specification, page.content) : undefined,
           history: await query(
             "SELECT id,origin,created_at,validation FROM revisions WHERE page_id=$1 ORDER BY created_at DESC",

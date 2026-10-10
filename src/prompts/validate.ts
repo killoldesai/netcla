@@ -1,3 +1,4 @@
+import { plainDashes } from "./punctuation";
 import { z } from "zod";
 import { iconKeys, internalPath, type SectionSpecification } from "../page-spec-schema";
 import { sanitizeRichHTML } from "../rich-text";
@@ -43,6 +44,7 @@ export function cleanSectionFields(
       value = value.replace(/<[^>]+>/g, "").trim();
       notes.push(`${spec.id}.${key}: removed markup from a plain-text field`);
     }
+    value = plainDashes(value);
     if (/javascript:|data:/i.test(value)) {
       value = "";
       notes.push(`${spec.id}.${key}: removed unsafe content`);
@@ -67,6 +69,26 @@ export function cleanSectionFields(
 }
 
 /** Parse a JSON object out of a model reply that may be wrapped in a code fence. */
+/** Balanced top-level {...} blocks in a reply, so commentary or a second draft around the JSON cannot break parsing. */
+export function jsonObjects(text: string): string[] {
+  const found: string[] = [];
+  let depth = 0, start = -1, inString = false, escaped = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === "\\") escaped = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') inString = true;
+    else if (ch === "{") {
+      if (depth++ === 0) start = i;
+    } else if (ch === "}" && depth > 0 && --depth === 0) found.push(text.slice(start, i + 1));
+  }
+  return found;
+}
+
 export function parseModelJSON(text: string): unknown {
   const trimmed = text.trim().replace(/^```(?:json)?\s*|\s*```$/g, "");
   const start = trimmed.indexOf("{");
@@ -74,7 +96,9 @@ export function parseModelJSON(text: string): unknown {
   const body = start >= 0 && end > start ? trimmed.slice(start, end + 1) : trimmed;
   // Common model slip: unescaped double quotes in HTML attributes inside strings.
   const repaired = body.replace(/(<[a-z][a-z0-9]*\b[^<>]*?\s[a-z-]+=)"([^"\<>]*)"/gi, "$1'$2'");
-  for (const candidate of [trimmed, body, repaired]) {
+  // When the reply holds several objects (a draft, then a corrected one) the last complete one wins.
+  const blocks = jsonObjects(trimmed).reverse();
+  for (const candidate of [trimmed, body, repaired, ...blocks]) {
     try {
       return JSON.parse(candidate);
     } catch {}

@@ -1,3 +1,4 @@
+import { effectiveSpec } from "../src/prompts/templates";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, readdir, mkdtemp, rm } from "node:fs/promises";
@@ -150,7 +151,7 @@ test("isolated database verifies repeat imports, draft CAS, retries and subscrip
       } else if (request.exactSectionIds) {
         assert.equal(body.temperature, 0);
         result = Object.fromEntries(
-          about.sections.map((s) => [
+          effectiveSpec(about).sections.map((s) => [
             s.id,
             {
               recommended_component:
@@ -215,8 +216,8 @@ test("isolated database verifies repeat imports, draft CAS, retries and subscrip
       "UPDATE pipeline_tasks SET status='completed',result=$2 WHERE run_id=$1 AND kind='asset'",
       [run, JSON.stringify({ id: "00000000-0000-4000-8000-000000000001", hash: "a".repeat(64), alt: "About illustration", width: 1200, height: 900, mime: "image/webp" })],
     );
-    // One brief task, then one task per section.
-    for (let i = 0; i < about.sections.length + 1; i++) assert.equal(await runPipelineTask(), true);
+    // One brief task, then one task per generated section (evidence-only proof sections are never queued).
+    for (let i = 0; i < effectiveSpec(about).sections.filter((s) => !/^proof-/.test(s.id)).length + 1; i++) assert.equal(await runPipelineTask(), true);
     const [page] = await query("SELECT * FROM pages WHERE id=$1", [
       about.databaseId,
     ]);
@@ -451,7 +452,8 @@ test("isolated database verifies repeat imports, draft CAS, retries and subscrip
           [mobileRun],
         )
       ).length,
-      1,
+      // Hubs now share the service skeleton: a hero illustration and an overview illustration.
+      2,
     );
     const confirmation = "1".repeat(64),
       unsub = "2".repeat(64);

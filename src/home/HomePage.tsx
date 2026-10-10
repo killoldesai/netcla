@@ -11,7 +11,6 @@ import {
   India,
   Industries,
   Process,
-  Results,
   Services,
   Stack,
   Supporting,
@@ -53,11 +52,10 @@ export function HomePage({
         <main id="main">
           <Hero />
           <Services />
-          <Results />
-          <Supporting />
-          <Process />
           <Stack />
+          <Process />
           <India />
+          <Supporting />
           <Hire />
           <Industries />
           <Work listing={listing} />

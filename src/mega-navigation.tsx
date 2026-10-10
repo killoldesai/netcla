@@ -145,9 +145,6 @@ export function MegaNavigation(props: MegaNavigationProps) {
         : undefined;
   const live = (list: SitePage[]) => list.filter((page) => href(page.path));
   const contact = props.contactHref ?? href("/contact") ?? "/contact";
-  // On-page anchors (the homepage form) can't carry a query string.
-  const contactFor = (service: string) =>
-    contact.startsWith("#") ? contact : `${contact}?service=${encodeURIComponent(service)}`;
 
   const close = () => {
     clearTimeout(timer.current);
@@ -236,7 +233,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
 
   // Panels are called as plain functions, not mounted as components, so the
   // rail buttons keep their DOM nodes (and keyboard focus) across re-renders.
-  function item(page: SitePage, opts: { icon?: ReactNode; blurb?: boolean } = {}) {
+  function item(page: SitePage, opts: { icon?: ReactNode; blurb?: boolean; label?: string } = {}) {
     const link = href(page.path);
     if (!link) return null;
     const here = current === page.path;
@@ -247,34 +244,20 @@ export function MegaNavigation(props: MegaNavigationProps) {
         onClick={close}
         key={page.path}
         aria-current={here ? "page" : undefined}
+        aria-label={opts.label ? page.label : undefined}
       >
         <span className="nm-item-icon" aria-hidden="true">
           {opts.icon ?? lineIcon(page)}
         </span>
         <span>
-          <strong>{page.label}</strong>
+          <strong>{opts.label ?? page.label}</strong>
           {opts.blurb !== false && <small>{page.blurb}</small>}
         </span>
       </a>
     );
   }
 
-  // The same call-to-action card closes every panel.
-  function aside(kicker: string, title: string, text: string, cta: string, service: string, hub: string) {
-    return (
-      <aside className="nm-aside">
-        <p className="nm-kicker">{kicker}</p>
-        <h3>{title}</h3>
-        <p>{text}</p>
-        <a className="nm-aside-cta" href={contactFor(service)} data-track="consultation_click" onClick={() => trackQuote(hub)}>
-          {cta} <span aria-hidden="true">→</span>
-        </a>
-      </aside>
-    );
-  }
-
   function servicesPanel() {
-    const selectedPillar = pillar(rail);
     const index = servicePillars.findIndex((p) => p.id === rail);
     return (
       <>
@@ -295,10 +278,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
               <span className="nm-rail-icon" aria-hidden="true">
                 <SiteIcon name={pillarIcons[p.id] ?? "code"} />
               </span>
-              <span>
-                <strong>{p.label}</strong>
-                <small>{p.blurb}</small>
-              </span>
+              <strong>{p.label}</strong>
             </button>
           ))}
         </div>
@@ -318,7 +298,10 @@ export function MegaNavigation(props: MegaNavigationProps) {
               hidden={p.id !== rail}
             >
               <div className="nm-main-head">
-                <p className="nm-kicker">{p.label}</p>
+                <div>
+                  <h3 className="nm-main-title">{p.label}</h3>
+                  <p className="nm-main-sub">{p.blurb}</p>
+                </div>
                 {hub && (
                   <a href={hub} onClick={close}>
                     {p.label} overview <span aria-hidden="true">→</span>
@@ -326,11 +309,22 @@ export function MegaNavigation(props: MegaNavigationProps) {
                 )}
               </div>
               {groups.length ? (
-                <div className="nm-groups">
-                  {groups.map((g) => (
-                    <section key={g.group}>
-                      <h3>{g.group}</h3>
-                      {g.group === "Technologies" ? (
+                <>
+                  <div className="nm-groups">
+                    {groups
+                      .filter((g) => g.group !== "Technologies")
+                      .map((g) => (
+                        <section key={g.group}>
+                          <h3>{g.group}</h3>
+                          {g.pages.map((page) => item(page, { blurb: false, icon: <TechIcon name={page.label} context={g.group} className="nm-brand" eager /> }))}
+                        </section>
+                      ))}
+                  </div>
+                  {groups
+                    .filter((g) => g.group === "Technologies")
+                    .map((g) => (
+                      <section key={g.group} className="nm-tech">
+                        <h3>{g.group}</h3>
                         <div className="nm-compact">
                           {g.pages.map((page) => (
                             <a key={page.path} href={href(page.path)} onClick={close} aria-current={current === page.path ? "page" : undefined}>
@@ -339,26 +333,15 @@ export function MegaNavigation(props: MegaNavigationProps) {
                             </a>
                           ))}
                         </div>
-                      ) : (
-                        g.pages.map((page) => item(page, { icon: <TechIcon name={page.label} context={g.group} className="nm-brand" eager /> }))
-                      )}
-                    </section>
-                  ))}
-                </div>
+                      </section>
+                    ))}
+                </>
               ) : (
                 <p className="nm-empty">Pages for this area are being prepared. Tell us what you need and we&apos;ll scope it with you.</p>
               )}
             </div>
           );
         })}
-        {aside(
-          "Start a project",
-          "Get a scoped estimate",
-          "Share a short brief. We reply with questions, an initial scope and the team your project needs.",
-          `Discuss ${selectedPillar.label.toLowerCase()}`,
-          selectedPillar.service,
-          `navigation-${selectedPillar.id}`,
-        )}
       </>
     );
   }
@@ -398,26 +381,18 @@ export function MegaNavigation(props: MegaNavigationProps) {
               <section key={g.group}>
                 <h3>{g.group}</h3>
                 {g.pages.map((page) =>
-                  item(page, { blurb: false, icon: <TechIcon name={roleTech(page.label)} context={g.group} className="nm-brand" eager /> }),
+                  item(page, { blurb: false, label: page.label.replace(/\s+developers?$/i, ""), icon: <TechIcon name={roleTech(page.label)} context={g.group} className="nm-brand" eager /> }),
                 )}
               </section>
             ))}
           </div>
         </div>
-        {aside(
-          "Hiring",
-          "Tell us the role",
-          "Describe your stack, team and timeline. We confirm availability and engagement terms during the enquiry.",
-          "Discuss your hiring needs",
-          pillar("hire").service,
-          "navigation-hire",
-        )}
       </>
     );
   }
 
   type Column = { title: string; pages: SitePage[]; cols?: number; compact?: boolean };
-  function listPanel(columns: Column[], side: ReactNode, extra?: ReactNode) {
+  function listPanel(columns: Column[], extra?: ReactNode) {
     const visible = columns.map((c) => ({ ...c, pages: live(c.pages) })).filter((c) => c.pages.length);
     return (
       <>
@@ -438,7 +413,6 @@ export function MegaNavigation(props: MegaNavigationProps) {
             <p className="nm-empty">These pages are being prepared.</p>
           )}
         </div>
-        {side}
       </>
     );
   }
@@ -476,27 +450,11 @@ export function MegaNavigation(props: MegaNavigationProps) {
           {menu === "hire" && hirePanel()}
           {menu === "industries" &&
             listPanel(
-              [{ title: "Industries we build for", pages: industries, cols: 4 }],
-              aside(
-                "Industry projects",
-                "Built around your workflows",
-                "Tell us your sector, systems and compliance needs. We scope integrations and data handling up front.",
-                "Discuss your industry project",
-                pillar("software").service,
-                "navigation-industries",
-              ),
+              [{ title: "Industries we build for", pages: industries, cols: 3 }],
             )}
           {menu === "resources" &&
             listPanel(
               [{ title: "Learn", pages: resources, cols: 1 }],
-              aside(
-                "Planning a project?",
-                "Get a scoped estimate",
-                "Use our guides to frame the brief, then share it with us for an initial scope and team plan.",
-                "Request an estimate",
-                pillar("software").service,
-                "navigation-resources",
-              ),
               guidesColumn(),
             )}
           {menu === "company" &&
@@ -505,14 +463,6 @@ export function MegaNavigation(props: MegaNavigationProps) {
                 { title: "Company", pages: company, cols: 2 },
                 { title: "Where we work", pages: locations, cols: 2, compact: true },
               ],
-              aside(
-                "Talk to us",
-                "Book a 30-minute call",
-                "Meet an engineer, walk through your goals and leave with clear next steps.",
-                "Book a call",
-                pillar("software").service,
-                "navigation-company",
-              ),
             )}
         </div>
         <div className="nm-footer">

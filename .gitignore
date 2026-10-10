@@ -11,3 +11,9 @@ tests/api-results.json
 .runtime/
 .runtime-worker.log
 tsconfig.tsbuildinfo
+
+# Local runtime output (worker logs, screenshots)
+tmp/
+worker.log
+worker.err*
+.runtime-dev.log

@@ -575,19 +575,63 @@ function Inventory({
             body="Try another search or change the filters."
           />
         ) : resource === "media" ? (
-          <div className="uc-media-grid">
-            {data.rows.map((r: any) => (
+          <>
+            <div className="uc-media-bulk">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={
+                    data.rows.length > 0 &&
+                    data.rows.every((r: any) => selected.includes(r.id))
+                  }
+                  onChange={(e) =>
+                    setSelected(e.target.checked ? data.rows.map((r: any) => r.id) : [])
+                  }
+                />{" "}
+                Select all shown ({data.rows.length})
+              </label>
               <button
-                className="uc-media-card"
-                key={r.id}
-                onClick={() => open(r)}
+                className="uc-primary"
+                disabled={!selected.length || busy}
+                onClick={async () => {
+                  if (
+                    await action(
+                      "/api/admin/publishing",
+                      { action: "asset-review-bulk", ids: selected, status: "accepted" },
+                      `${selected.length} image(s) accepted`,
+                    )
+                  )
+                    setSelected([]);
+                }}
               >
-                <img src={"/media/" + r.id} alt={r.alt} loading="lazy" />
-                <span>{r.path ?? r.alt}</span>
-                <Badge value={r.status} />
+                Accept selected {selected.length ? `(${selected.length})` : ""}
               </button>
-            ))}
-          </div>
+            </div>
+            <div className="uc-media-grid">
+              {data.rows.map((r: any) => (
+                <div className="uc-media-item" key={r.id}>
+                  <input
+                    type="checkbox"
+                    className="uc-media-check"
+                    aria-label={"Select " + (r.path ?? r.alt)}
+                    checked={selected.includes(r.id)}
+                    onChange={(e) =>
+                      setSelected(
+                        e.target.checked
+                          ? [...selected, r.id]
+                          : selected.filter((id) => id !== r.id),
+                      )
+                    }
+                  />
+                  <button className="uc-media-card" onClick={() => open(r)}>
+                    <img src={"/media/" + r.id} alt={r.alt} loading="lazy" />
+                    <span>{r.path ?? r.alt}</span>
+                    <Badge value={r.status} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           <div className="uc-table-wrap">
             <table>
@@ -871,6 +915,8 @@ function Inventory({
     </>
   );
 }
+const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
 export function Tabs({
   names,
   active,
@@ -885,11 +931,11 @@ export function Tabs({
       {names.map((n) => (
         <button key={n} aria-pressed={active === n} onClick={() => change(n)}>
           {(
-            { ai: "AI providers", data: "Data & activity", seo: "SEO", qa: "Quality", assets: "Images" } as Record<
+            { ai: "AI providers", data: "Data & activity", seo: "SEO", qa: "Quality", faq: "FAQ", assets: "Images" } as Record<
               string,
               string
             >
-          )[n] ?? n.replaceAll("-", " ")}
+          )[n] ?? capitalise(n.replaceAll("-", " "))}
         </button>
       ))}
     </nav>

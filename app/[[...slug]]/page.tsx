@@ -1,3 +1,4 @@
+import { blogPosts } from "@/blog-posts";
 import { published, publishedPaths, publishedListing } from "@/pages";
 import { getDesign, pagePath } from "@/designs";
 import { DesignPage, Navigation, Footer } from "@/render";
@@ -17,7 +18,9 @@ import { directoryMetadata } from "@/service-directory-data";
 import { V3Page } from "@/v3-page";
 import { newsletterReady } from "@/ses-newsletter";
 import { verifiedV3Content } from "@/v3-evidence";
+import { withAssetNames } from "@/asset-names";
 import { structureRedirects } from "@/site-structure";
+import { homeMeta } from "@/home/copy";
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug?: string[] }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,9 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = await published(pagePath((await params).slug));
   if (!p) return { robots: { index: false, follow: false } };
   const meta =
-    p.path === "/services" && p.content.schemaVersion !== 3
-      ? directoryMetadata
-      : p.content;
+    p.path === "/" && p.content.schemaVersion !== 3
+      ? homeMeta
+      : p.path === "/services" && p.content.schemaVersion !== 3
+        ? directoryMetadata
+        : p.content;
   return {
     title: meta.title,
     description: meta.description,
@@ -88,11 +93,12 @@ export default async function Page({ params }: Props) {
     ).map((fact) => fact.id);
     return (
       <V3Page
-        content={verifiedV3Content(p.content, approved)}
+        content={await withAssetNames(verifiedV3Content(p.content, approved))}
         path={path}
         paths={paths}
         vacancies={vacancies as any}
         newsletterEnabled={path === "/blog" && (await newsletterReady())}
+        posts={path === "/blog" ? await blogPosts() : []}
         published={p.first_published_at}
         modified={p.created_at}
       />

@@ -1,0 +1,109 @@
+/* Guides index: a featured latest guide, then the guides grouped by topic. The list is data, the intro copy is generated.
+   Scoped to .v3-blog. Same tokens and section rhythm as the commercial pages (white hero, tint and white bands, dark
+   closing band). No numbering, no decorative icons, no offset shadows. Flat surfaces, 1px lines. */
+.v3-blog {
+  --bi-ink: #182138;
+  --bi-indigo: #4353b3;
+  --bi-indigo-soft: #e1e5f8;
+  --bi-lime: #b5ce20;
+  --bi-tint: #f1f4f7;
+  --bi-line: #dbe0e8;
+  --bi-muted: #55607a;
+  color: var(--bi-ink);
+  font-family: Poppins, system-ui, sans-serif;
+  background: #fff;
+}
+.v3-blog * { box-sizing: border-box; }
+:where(.v3-blog) :where(h1, h2, h3, p, ul, ol, figure) { margin: 0; padding: 0; }
+:where(.v3-blog) :where(ul, ol) { list-style: none; }
+.v3-blog .bi-wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.v3-blog .bi-section { padding: 80px 0; scroll-margin-top: 130px; }
+.v3-blog .bi-section.is-tint { background: var(--bi-tint); }
+
+/* Type */
+.v3-blog .bi-tag, .v3-blog .bi-eyebrow, .v3-blog .bi-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--bi-indigo); }
+.v3-blog .bi-tag::before, .v3-blog .bi-eyebrow::before, .v3-blog .bi-kicker::before { content: ""; width: 8px; height: 8px; background: var(--bi-lime); }
+.v3-blog .bi-h1 { font-size: clamp(2rem, 3.6vw, 3.25rem); line-height: 1.1; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; margin: 18px 0 22px; max-width: 22ch; }
+.v3-blog .bi-h2 { font-size: clamp(1.6rem, 2.5vw, 2.25rem); line-height: 1.18; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin-top: 10px; max-width: 26ch; }
+.v3-blog .bi-lead { font-size: 1.1875rem; line-height: 1.65; color: var(--bi-muted); max-width: 58ch; }
+.v3-blog .bi-intro { margin-top: 14px; font-size: 1.0625rem; line-height: 1.7; color: var(--bi-muted); max-width: 62ch; }
+.v3-blog .bi-head { margin-bottom: 36px; max-width: 760px; }
+.v3-blog .bi-pill { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--bi-indigo-soft); color: var(--bi-indigo); font-size: 12.5px; font-weight: 500; }
+.v3-blog .bi-meta { display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 13.5px; color: var(--bi-muted); }
+.v3-blog .bi-meta span + span::before { content: ""; display: inline-block; width: 4px; height: 4px; background: var(--bi-lime); margin: 0 12px 2px; }
+.v3-blog .bi-empty { font-size: 1.1rem; color: var(--bi-muted); max-width: 56ch; }
+
+/* Hero */
+.v3-blog .bi-hero { padding: 28px 0 56px; background: #fff; }
+.v3-blog .bi-crumbs ol { display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--bi-muted); padding: 10px 0 18px; border-bottom: 1px solid var(--bi-line); margin-bottom: 48px; }
+.v3-blog .bi-crumbs li + li::before { content: "/"; margin-right: 8px; opacity: .5; }
+.v3-blog .bi-crumbs a { color: inherit; text-decoration: none; }
+.v3-blog .bi-crumbs [aria-current] { color: var(--bi-ink); }
+.v3-blog .bi-topics-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.v3-blog .bi-topics-nav a { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border: 1px solid var(--bi-line); border-radius: 999px; color: var(--bi-ink); font-size: 14.5px; font-weight: 500; text-decoration: none; transition: border-color .15s, background .15s; }
+.v3-blog .bi-topics-nav a:hover { border-color: var(--bi-indigo); background: var(--bi-indigo-soft); }
+.v3-blog .bi-topics-nav a span { font-size: 12.5px; color: var(--bi-muted); }
+
+/* Featured guide */
+.v3-blog .bi-featured-band { padding-top: 24px; padding-bottom: 88px; }
+.v3-blog .bi-featured { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 28px; border: 1px solid var(--bi-line); border-radius: 16px; color: inherit; text-decoration: none; transition: border-color .18s; }
+.v3-blog .bi-featured:hover { border-color: var(--bi-indigo); }
+.v3-blog .bi-featured-copy { display: grid; gap: 14px; justify-items: start; }
+.v3-blog .bi-featured-copy h2 { font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height: 1.2; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; }
+.v3-blog .bi-featured-copy > p:not(.bi-meta) { font-size: 1.0625rem; line-height: 1.7; color: var(--bi-muted); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.v3-blog .bi-read { margin-top: 6px; font-weight: 500; color: var(--bi-indigo); }
+.v3-blog .bi-featured:hover .bi-read { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Thumbnails: the guide's own illustration, never cropped */
+.v3-blog .bi-thumb { margin: 0; background: var(--bi-tint); border: 1px solid var(--bi-line); border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; display: grid; place-items: center; }
+.v3-blog .bi-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.v3-blog .bi-thumb.is-empty { background: var(--bi-tint); }
+.v3-blog .bi-thumb.is-large { border-radius: 12px; }
+
+/* Topic grids */
+.v3-blog .bi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.v3-blog .bi-card { display: flex; flex-direction: column; gap: 16px; height: 100%; padding: 16px 16px 22px; background: #fff; border: 1px solid var(--bi-line); border-radius: 12px; color: inherit; text-decoration: none; transition: border-color .18s; }
+.v3-blog .bi-card:hover { border-color: var(--bi-indigo); }
+.v3-blog .bi-card-copy { display: grid; gap: 10px; justify-items: start; padding: 0 6px; }
+.v3-blog .bi-card h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+.v3-blog .bi-card:hover h3 { color: var(--bi-indigo); }
+.v3-blog .bi-card-copy > p:not(.bi-meta) { font-size: 15px; line-height: 1.65; color: var(--bi-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Newsletter */
+.v3-blog .bi-news { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; padding: 40px; border: 1px solid var(--bi-line); border-radius: 16px; background: var(--bi-tint); }
+.v3-blog .bi-news .bi-h2 { max-width: 20ch; }
+.v3-blog .bi-news-form form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 12px; align-items: end; }
+.v3-blog .bi-news-form label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.v3-blog .bi-news-form input { width: 100%; padding: 13px 14px; border: 1px solid var(--bi-line); border-radius: 8px; background: #fff; font: inherit; font-size: 15.5px; }
+.v3-blog .bi-news-form input:focus { outline: 0; border-color: var(--bi-indigo); box-shadow: 0 0 0 3px var(--bi-indigo-soft); }
+.v3-blog .bi-news-form button { padding: 14px 22px; border: 0; border-radius: 4px; background: var(--bi-indigo); color: #fff; font: inherit; font-weight: 500; cursor: pointer; }
+.v3-blog .bi-news-form button:disabled { opacity: .55; cursor: not-allowed; }
+.v3-blog .bi-news-form form > p { grid-column: 1 / -1; font-size: 13.5px; color: var(--bi-muted); }
+.v3-blog .bi-privacy { margin-top: 10px; font-size: 13.5px; line-height: 1.6; color: var(--bi-muted); }
+
+/* Closing band */
+.v3-blog .bi-cta { background: var(--bi-ink); color: #fff; padding: 80px 0; }
+.v3-blog .bi-cta-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.v3-blog .bi-cta h2 { font-size: clamp(1.6rem, 2.5vw, 2.25rem); line-height: 1.18; font-weight: 600; letter-spacing: -.02em; max-width: 24ch; }
+.v3-blog .bi-cta p { margin-top: 14px; max-width: 56ch; font-size: 1.1875rem; line-height: 1.65; color: #c9d1e3; }
+.v3-blog .bi-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; }
+.v3-blog .bi-btn { display: inline-flex; align-items: center; gap: 14px; padding: 15px 24px; background: var(--bi-lime); color: var(--bi-ink) !important; border-radius: 4px; font-weight: 500; text-decoration: none; transition: background .18s; }
+.v3-blog .bi-btn:hover { background: #fff; }
+.v3-blog .bi-link { color: #fff; font-weight: 500; text-decoration: none; }
+.v3-blog .bi-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 1020px) {
+  .v3-blog .bi-section { padding: 60px 0; }
+  .v3-blog .bi-featured { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 20px; }
+  .v3-blog .bi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v3-blog .bi-news, .v3-blog .bi-cta-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+@media (max-width: 640px) {
+  .v3-blog .bi-wrap { padding: 0 20px; }
+  .v3-blog .bi-hero { padding-bottom: 40px; }
+  .v3-blog .bi-crumbs ol { margin-bottom: 32px; }
+  .v3-blog .bi-grid { grid-template-columns: minmax(0, 1fr); }
+  .v3-blog .bi-news { padding: 24px 20px; }
+  .v3-blog .bi-news-form form { grid-template-columns: minmax(0, 1fr); }
+  .v3-blog .bi-featured-band { padding-bottom: 56px; }
+}

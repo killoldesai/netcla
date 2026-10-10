@@ -1,4 +1,16 @@
 import { z } from "zod";
+import { htmlFieldPattern } from "./prompts/system";
+
+/**
+ * Rich-text body fields may carry the tags the sanitiser allows (paragraphs,
+ * lists, links). Everything else is plain text and must not contain markup.
+ * Script-like content is rejected in every field.
+ */
+export function unsafeMarkup(key: string, value: string) {
+  if (/<\s*(script|iframe|object|embed|style|svg|math)|\son[a-z]+\s*=|javascript:/i.test(value)) return true;
+  if (htmlFieldPattern.test(key)) return false;
+  return /<\/?[a-z][^>]*>/i.test(value);
+}
 import {
   pageBlueprintSchema,
   pageSectionSchema,
@@ -101,6 +113,18 @@ export const contentSchema = z
         entities: z.array(z.string().max(80)).max(20).default([]),
         searchIntent: z.string().max(20).default(""),
         buyerQuestions: z.array(z.string().max(220)).max(10).default([]),
+        // AEO/GEO inputs, written by the page brief and rendered as JSON-LD in code.
+        /** 40-60 word direct answer that can be quoted on its own. */
+        answerSummary: z.string().max(500).default(""),
+        /** 4-6 short factual lines drawn from approved evidence only. */
+        keyFacts: z.array(z.string().max(220)).max(8).default([]),
+        /** Entities the page is about, with a Wikipedia/Wikidata URL where one exists. */
+        schemaAbout: z
+          .array(z.object({ name: z.string().max(80), sameAs: z.string().max(300).default("") }).strict())
+          .max(10)
+          .default([]),
+        serviceType: z.string().max(100).default(""),
+        audience: z.string().max(200).default(""),
       })
       .strict()
       .optional(),
@@ -154,13 +178,7 @@ export function validateContent(content: Content, design: Design): Validation {
       errors.push("Invalid blueprint or section order");
     if (Object.keys(content.pageBlueprint ?? {}).length !== sections.length)
       errors.push("Blueprint section mismatch");
-    if (
-      sections.some((s) =>
-        Object.values(s.fields).some((v) =>
-          /<\/?[a-z][^>]*>|javascript:/i.test(v),
-        ),
-      )
-    )
+    if (sections.some((s) => Object.entries(s.fields).some(([key, v]) => unsafeMarkup(key, v))))
       errors.push("Executable markup is not allowed");
     if (content.description.length < 20)
       errors.push("Write a complete meta description");
@@ -223,7 +241,12 @@ export function validateContent(content: Content, design: Design): Validation {
       ? [JSON.stringify(content.hero), JSON.stringify(content.sections)]
       : []),
   ].join(" ");
-  if (/<\/?[a-z][^>]*>|javascript:/i.test(text))
+  // Older drafts keep their copy in hero/sections JSON, which can't carry
+  // rich-text tags, so those get the script check only.
+  if (
+    Object.entries(content.texts ?? {}).some(([key, v]) => unsafeMarkup(key, v)) ||
+    (content.schemaVersion === 2 && unsafeMarkup("", text))
+  )
     errors.push("Executable markup is not allowed");
   if (text.length < 700)
     warnings.push("Content is short; review depth and usefulness");

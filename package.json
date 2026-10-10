@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "site-plan:build": "tsx scripts/build-site-plan.ts",
+    "shots": "tsx --env-file=.env scripts/shot-draft.tsx",
+    "specs:sync": "tsx --env-file-if-exists=.env scripts/sync-page-specs.ts",
     "page-specs:import": "tsx --env-file-if-exists=.env scripts/import-page-specs.ts",
     "pipeline:pilot": "tsx --env-file-if-exists=.env scripts/generate-pilot.ts",
     "icons:build": "tsx scripts/build-icon-sprite.ts",

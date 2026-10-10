@@ -1,4 +1,4 @@
-import { getDesign } from "./designs";
+import { getDesignSource } from "./designs";
 import { DesignPage } from "./render";
 import type { DesignNode } from "./content";
 
@@ -10,7 +10,7 @@ export function SharedProjectEnquiry({
   service: string;
   preview?: boolean;
 }) {
-  const home = getDesign("software-led");
+  const home = getDesignSource("software-led");
   const find = (nodes: DesignNode[]): DesignNode | undefined => {
     for (const node of nodes) {
       if (node.attrs?.id === "contact") return node;

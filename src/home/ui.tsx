@@ -100,6 +100,8 @@ const buttonStyles = {
   outline:
     "h-12 rounded-full border border-n-ink/15 bg-white px-6 text-n-ink hover:border-n-ink/40 hover:bg-n-paper",
   light: "h-12 rounded-full bg-white px-6 text-n-ink hover:bg-n-indigo-50",
+  lime: "h-12 rounded-full bg-n-lime px-6 text-n-ink hover:bg-white",
+  ghost: "h-12 rounded-full border border-white/40 px-6 text-white hover:bg-white/10",
   text: "text-n-indigo underline decoration-n-indigo/30 underline-offset-[6px] hover:decoration-n-indigo",
 } as const;
 
@@ -238,6 +240,7 @@ export function SectionHead({
   id,
   dark = false,
   center = false,
+  small = false,
 }: {
   section?: string;
   eyebrow: string;
@@ -246,6 +249,8 @@ export function SectionHead({
   id: string;
   dark?: boolean;
   center?: boolean;
+  /** Smaller heading for secondary sections. */
+  small?: boolean;
 }) {
   return (
     <header
@@ -267,7 +272,7 @@ export function SectionHead({
         </p>
         <h2
           id={id}
-          className="mt-5 text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05] font-semibold tracking-[-0.035em]"
+          className={`mt-5 font-semibold tracking-[-0.035em] ${small ? "text-[clamp(1.75rem,3.2vw,2.5rem)] leading-[1.1]" : "text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.05]"}`}
         >
           {title}
         </h2>

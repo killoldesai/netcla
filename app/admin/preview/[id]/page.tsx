@@ -1,3 +1,4 @@
+import { blogPosts } from "@/blog-posts";
 import { requireOwner } from "@/auth";
 import { preview } from "@/pages";
 import { getDesign } from "@/designs";
@@ -51,7 +52,7 @@ export default async function Page({
   linkMap["/"] = "/admin/site";
   linkMap["/design-library"] = "/admin/designs";
   linkMap["/form-states"] = "/admin/form-states";
-  if (p.content.schemaVersion === 3) return <V3Page content={p.content} path={p.path} paths={entries.map(e => e.path)} preview linkMap={linkMap}/>;
+  if (p.content.schemaVersion === 3) return <V3Page content={p.content} path={p.path} paths={entries.map(e => e.path)} preview linkMap={linkMap} posts={p.path === "/blog" ? await blogPosts({ drafts: true }) : []}/>;
   if (p.path === "/services")
     return (
       <>

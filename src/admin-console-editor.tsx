@@ -239,8 +239,8 @@ export function ConsoleEditor({
           )}
           <span className={"uc-loz " + (dirty ? "uc-loz-progress" : "uc-loz-todo")}>{dirty ? "Unsaved changes" : "Saved"}</span>
           {qa && (
-            <span className={"uc-score " + (qa.score >= 80 ? "good" : qa.score >= 60 ? "ok" : "low")} title="Quality score">
-              {qa.score}
+            <span className={"uc-score " + (qa.score >= 80 ? "good" : qa.score >= 60 ? "ok" : "low")} title="Quality score out of 100">
+              Quality {qa.score}
             </span>
           )}
           {version !== 3 && (
@@ -257,7 +257,7 @@ export function ConsoleEditor({
       </div>}
       {production.error && <p role="alert">Generation status unavailable: {production.error}</p>}
       <Tabs
-        names={version === 3 ? ["content", "seo", "qa", "preview", "assets", "history"] : ["content", "seo", "structure", "assets", "preview", "history"]}
+        names={version === 3 ? ["content", "seo", "qa", "faq", "preview", "assets", "history"] : ["content", "seo", "structure", "assets", "preview", "history"]}
         active={tab}
         change={setTab}
       />
@@ -323,7 +323,7 @@ export function ConsoleEditor({
             )}
             {[...groups].map(([group, keys]) => (
               <fieldset className="uc-field-group" key={group}>
-                <legend>{group.replaceAll("_", " ")}</legend>
+                <legend>{groupLabel(group)}</legend>
                 {keys.map((key) =>
                   htmlFieldPattern.test(key) ? (
                     // Rich fields carry their own label; a <label> wrapper would steal clicks.
@@ -440,6 +440,22 @@ export function ConsoleEditor({
             ))
           )}
         </Panel>
+      )}
+      {tab === "faq" && version === 3 && (
+        <FaqPanel
+          content={content}
+          faqRequired={p.faqRequired !== false}
+          disabled={dirty || busy || !data.spec}
+          disabledReason={dirty ? "Save the draft first" : data.spec ? undefined : "Import a page specification first"}
+          generate={() => {
+            setSelected([content.pageSections?.find((s) => /faq/.test(s.id))?.id ?? "faq"]);
+            start("sections");
+          }}
+          edit={(id) => {
+            setActive(id);
+            setTab("content");
+          }}
+        />
       )}
       {tab === "seo" && (
         <SeoPanel content={content} path={p.path} change={setContent} />
@@ -746,6 +762,8 @@ export function ConsoleEditor({
           <small>
             {autosave.error
               ? "Autosave paused: " + autosave.error
+              : qa && qa.checks.some((c: any) => c.status === "fail")
+                ? "Blocked until fixed: " + qa.checks.filter((c: any) => c.status === "fail").map((c: any) => c.label).join(", ")
               : dirty
                 ? version === 3
                   ? "Autosaves every 10 seconds."
@@ -854,8 +872,88 @@ export function ConsoleEditor({
     </div>
   );
 }
+// Field keys are internal; these are the labels editors should see.
+const fieldNames: Record<string, string> = {
+  h1: "Headline",
+  tag_pill: "Tag",
+  subheadline: "Subheadline",
+  body_paragraph: "Body",
+  section_label: "Eyebrow",
+  form_subheadline: "Form intro",
+  cta_primary_label: "Primary button text",
+  cta_primary_url: "Primary button link",
+  cta_secondary_label: "Secondary button text",
+  cta_secondary_url: "Secondary button link",
+};
+const acronyms = new Set(["h1", "h2", "h3", "url", "seo", "faq", "cta", "ai", "ml", "ui", "ux", "api", "id"]);
+/** FAQ tab: generate, review and edit the questions that AI answers and rich results cite. */
+function FaqPanel({
+  content,
+  faqRequired,
+  disabled,
+  disabledReason,
+  generate,
+  edit,
+}: {
+  content: any;
+  faqRequired: boolean;
+  disabled: boolean;
+  disabledReason?: string;
+  generate: () => void;
+  edit: (sectionId: string) => void;
+}) {
+  const section = content.pageSections?.find((s: any) => /faq/.test(s.id));
+  const fields: Record<string, string> = section?.fields ?? {};
+  const pairs = Object.keys(fields)
+    .filter((k) => /^q\d+$/.test(k) && fields[k]?.trim())
+    .sort((x, y) => Number(x.slice(1)) - Number(y.slice(1)))
+    .map((k) => ({ question: fields[k], answer: fields["a" + k.slice(1)] ?? "" }));
+  const enough = pairs.length >= 5;
+  return (
+    <Panel title="Frequently asked questions">
+      <div className="uc-faq-summary">
+        <span className={"uc-loz " + (enough ? "uc-loz-done" : "uc-loz-todo")}>{pairs.length} of 5 minimum</span>
+        {!faqRequired && <span className="uc-muted">This page type doesn't need FAQs, so they won't block publishing.</span>}
+      </div>
+      {pairs.length === 0 ? (
+        <p className="uc-muted">
+          No questions yet. AI answers and search results cite FAQs, so we write them from this page's brief and copy.
+        </p>
+      ) : (
+        <ol className="uc-faq-list">
+          {pairs.map((pair, i) => (
+            <li key={i}>
+              <strong>{pair.question}</strong>
+              <p>{pair.answer.replace(/<[^>]+>/g, "").slice(0, 180)}{pair.answer.length > 180 ? "…" : ""}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+      <div className="uc-row-actions">
+        <button className="uc-primary" disabled={disabled} title={disabledReason} onClick={generate}>
+          {pairs.length ? "Regenerate FAQs" : "Generate FAQs from page content"}
+        </button>
+        {section && (
+          <button onClick={() => edit(section.id)}>
+            Edit answers in Content
+          </button>
+        )}
+      </div>
+      {disabledReason && <p className="uc-muted">{disabledReason}</p>}
+    </Panel>
+  );
+}
+
 function fieldLabel(key: string) {
-  return key.replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  if (fieldNames[key]) return fieldNames[key];
+  return key
+    .split("_")
+    .map((word, i) => (acronyms.has(word) ? word.toUpperCase() : i === 0 ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
+}
+function groupLabel(group: string) {
+  const text = group.replaceAll("_", " ");
+  return text[0].toUpperCase() + text.slice(1);
 }
 function RevisionComparison({
   previous,
@@ -928,6 +1026,11 @@ function SeoPanel({
     entities: [],
     searchIntent: "",
     buyerQuestions: [],
+    answerSummary: "",
+    keyFacts: [],
+    schemaAbout: [],
+    serviceType: "",
+    audience: "",
   };
   const set = (patch: Partial<typeof seo>) => {
     const next = { ...seo, ...patch };

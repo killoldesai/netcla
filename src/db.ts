@@ -2,11 +2,11 @@ import { Pool, type PoolClient } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 let instance: Pool | undefined;
 export function pool() {
-  if (!process.env.DATABASE_URL)
-    throw new Error("DATABASE_URL is not configured");
+  const connectionString = process.env.DATABASE_URL ?? process.env.DIRECT_DATABASE_URL;
+  if (!connectionString) throw new Error("DATABASE_URL is not configured");
   if (instance) return instance;
   instance = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     max: 5,
     connectionTimeoutMillis: 10000,
   });

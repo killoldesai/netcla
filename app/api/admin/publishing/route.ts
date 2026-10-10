@@ -182,6 +182,15 @@ export async function POST(request: Request) {
           ],
         );
         break;
+      case "asset-review-bulk":
+        await query(
+          "UPDATE generated_assets SET review_status=$1 WHERE id=ANY($2::uuid[])",
+          [
+            z.enum(["accepted", "rejected"]).parse(body.status),
+            z.array(z.string().uuid()).min(1).max(500).parse(body.ids),
+          ],
+        );
+        break;
       case "review":
         await transaction(async (c) => {
           const id = z.string().uuid().parse(body.id),

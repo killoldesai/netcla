@@ -5,7 +5,7 @@ import { load } from "cheerio";
 import { ServiceHubPage } from "../src/service-hub-page";
 import { serviceHubs, hubChildren, plannedPage } from "../src/service-hubs";
 import { contentSchema, leadSchema } from "../src/content";
-import { getDesign } from "../src/designs";
+import { getDesignSource } from "../src/designs";
 import { DesignPage } from "../src/render";
 import { readFileSync } from "node:fs";
 import { ServiceDirectoryPage } from "../src/service-directory-page";
@@ -161,7 +161,7 @@ test("All seven parent service hubs have separate inventory-backed directories",
   );
 });
 test("Hub CTA uses the homepage enquiry template and both mobile platforms have vector assets", () => {
-  const home = getDesign("software-led");
+  const home = getDesignSource("software-led");
   const $home = load(
     renderToStaticMarkup(
       <DesignPage

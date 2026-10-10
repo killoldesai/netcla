@@ -90,8 +90,14 @@ export async function testStorage(input: StorageSettings) {
 export async function saveStorageSettings(input: unknown) {
   const next = storageSettingsSchema.parse(input);
   const current = await storageSettings();
+  // Blank fields keep what is stored: the form never shows the secret or the
+  // access key ID again, so an unchanged save must not wipe them.
   const merged: StorageSettings = {
+    ...current,
     ...next,
+    bucket: next.bucket || current.bucket,
+    region: next.region || current.region,
+    accessKeyId: next.accessKeyId || current.accessKeyId,
     secretAccessKey: next.secretAccessKey || current.secretAccessKey,
   };
   if (merged.provider === "s3") await testStorage(merged);

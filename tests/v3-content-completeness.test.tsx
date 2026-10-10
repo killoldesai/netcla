@@ -23,7 +23,7 @@ test('regeneration sends exact fields, the brief and the previous copy',async()=
  const specs=await loadSpecifications();const page=specs.pages.find(p=>p.path==='/flutter-app-development')!;const section=page.sections.find(s=>s.id==='service-overview')!;
  const brief=pageBriefSchema.parse({audience:'Founders',primaryKeyword:'flutter app development services',secondaryKeywords:['flutter developers'],entities:['Dart'],buyerQuestions:['How long does a Flutter app take?'],angle:'One codebase',metaTitle:'Flutter App Development Services',metaDescription:'x'});
  const request=JSON.parse(buildSectionPrompt({spec:page,section,brief,links:[{path:'/contact',label:'Contact',blurb:''}],facts:[],previous:{body_paragraph:'Previous draft'}}));
- assert.deepEqual(request.exactFields,section.fields);assert.equal(request.previousVersion.body_paragraph,'Previous draft');assert.equal(request.strategy.primaryKeyword,'flutter app development services');assert.match(request.fieldRules.join(' '),/40-60 word direct answer/);assert.match(request.regeneration,/substantively/);
+ assert.deepEqual(request.exactFields,section.fields);assert.equal(request.previousVersion.body_paragraph,'Previous draft');assert.equal(request.strategy.primaryKeyword,'flutter app development services');assert.match(request.fieldRules.join(" "),/Paragraph 1 is 40-55 words and is the direct answer/);assert.match(request.regeneration,/substantively/);
 });
 
 test('brief and unchanged copy produces suggestions rather than publication errors', async()=>{

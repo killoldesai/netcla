@@ -53,13 +53,11 @@ test("preview links are mapped and CTAs carry the pillar's service", () => {
   });
   assert.equal($(".nm-cta").attr("href"), "/admin/preview/contact");
   assert.ok($('a[href="/admin/preview/flutter"]').length > 0);
-  assert.equal(
-    $(".nm-aside-cta").first().attr("href"),
-    "/admin/preview/contact?service=" + encodeURIComponent(pillars[0].service),
-  );
+  // Each panel closes with the same "talk to an engineer" bar, mapped to the preview contact page.
+  assert.equal($(".nm-footer a").first().attr("href"), "/admin/preview/contact");
 });
 
 test("on-page contact anchors are not given a query string", () => {
   const $ = render({ paths: ["/"], contactHref: "#contact" });
-  $(".nm-aside-cta").each((_, el) => assert.equal($(el).attr("href"), "#contact"));
+  $(".nm-footer a:first-of-type").each((_, el) => assert.equal($(el).attr("href"), "#contact"));
 });

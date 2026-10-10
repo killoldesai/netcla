@@ -10,6 +10,14 @@ import { FAQList, Comparison, VerifiedEvidence } from "./v3-sections";
 import { sanitizeRichHTML } from "./rich-text";
 import { breadcrumbs, pillarFor, sitePage } from "./site-structure";
 import { pageGraph } from "./structured-data";
+import { SkeletonSections, isSkeletonContent } from "./v3-skeleton";
+import { AboutSections, isAboutContent } from "./about-page";
+import { ContactSections, isContactContent } from "./contact-page";
+import { EngagementSections, isEngagementContent } from "./engagement-page";
+import { HowWorkSections, isHowWorkContent } from "./how-work-page";
+import { WhyChooseSections, isWhyChooseContent } from "./why-choose-page";
+import { BlogIndexSections, isBlogIndexContent } from "./blog-index-page";
+import type { BlogPost } from "./blog-types";
 import {
   NewsletterForm,
   VacancyDirectory,
@@ -31,6 +39,10 @@ type Props = {
     employment_type: string;
   }[];
   newsletterEnabled?: boolean;
+  /** Guides for the /blog index (the route supplies them; the owner preview includes drafts). */
+  posts?: BlogPost[];
+  /** Extra content placed before the closing CTA band, or at the end (e.g. the 404 sitemap). */
+  afterContent?: React.ReactNode;
   published?: string | Date | null;
   modified?: string | Date | null;
 };
@@ -87,11 +99,13 @@ export function V3Page({
   linkMap = {},
   vacancies = [],
   newsletterEnabled = false,
+  posts = [],
+  afterContent,
   published,
   modified,
 }: Props) {
   const destination = (url: string) => (preview ? (linkMap[url] ?? url) : url);
-  const service = hubFor(path)?.service ?? content.title;
+  const service = hubFor(path)?.service ?? (path === "/404" ? "Help defining the scope" : content.title);
   const parentHub = !hubFor(path)
     ? serviceHubs.find((hub) =>
         hubChildren(hub).some((child) => child.url === path),
@@ -119,6 +133,20 @@ export function V3Page({
     "service=" +
     encodeURIComponent(service);
   const sections = content.pageSections ?? [];
+  // Pages generated from the canonical skeleton share one designed layout (see v3-skeleton.tsx).
+  const skeleton = isSkeletonContent(content, path);
+  // The About page is a company profile with its own layout (see about-page.tsx).
+  const aboutPage = isAboutContent(content, path);
+  // The Contact page is a form-first conversion page with its own layout (see contact-page.tsx).
+  const contactPage = isContactContent(content, path);
+  // Engagement Models is a comparison-and-decision page with its own layout (see engagement-page.tsx).
+  const engagePage = isEngagementContent(content, path);
+  // How We Work explains the delivery method with its own layout (see how-work-page.tsx).
+  const howPage = isHowWorkContent(content, path);
+  // Why Choose Netofficials is an honest case with its own layout (see why-choose-page.tsx).
+  const whyPage = isWhyChooseContent(content, path);
+  // The guides index lists the guides from the database with its own layout (see blog-index-page.tsx).
+  const blogPage = isBlogIndexContent(content, path);
   // A low-friction enquiry prompt after the second content section, on pages
   // that sell a service (not the contact page itself).
   const visible = sections.filter((s) => !s.omitted && s.id !== "hero");
@@ -133,7 +161,7 @@ export function V3Page({
     pillarFor(path)?.label ??
     ({ company: "Company", guide: "Guide", pillar: "Services" } as Record<string, string>)[sitePage(path)?.type ?? ""] ??
     "Netofficials";
-  const trail = breadcrumbs(path, sections.find((s) => s.id === "hero")?.fields.h1 || content.title);
+  const trail = breadcrumbs(path, path === "/404" ? "Page not found" : sections.find((s) => s.id === "hero")?.fields.h1 || content.title);
   const faqItems = sections
     .filter((s) => !s.omitted && /faq/.test(s.id))
     .flatMap((s) =>
@@ -615,6 +643,13 @@ export function V3Page({
       <link rel="stylesheet" href="/assets/v3-pages.css" />
       <link rel="stylesheet" href="/assets/service-template.css?v=20261007-unified" />
       <link rel="stylesheet" href="/assets/site-unified.css?v=20261008" />
+      {skeleton && <link rel="stylesheet" href="/assets/skeleton.css?v=20261011" />}
+      {aboutPage && <link rel="stylesheet" href="/assets/about.css?v=20261012" />}
+      {contactPage && <link rel="stylesheet" href="/assets/contact.css?v=20261012" />}
+      {engagePage && <link rel="stylesheet" href="/assets/engagement.css?v=20261013" />}
+      {howPage && <link rel="stylesheet" href="/assets/how-work.css?v=20261014" />}
+      {whyPage && <link rel="stylesheet" href="/assets/why-choose.css?v=20261015" />}
+      {blogPage && <link rel="stylesheet" href="/assets/blog-index.css?v=20261016" />}
       {preview && (
         <div className="preview-banner">
           Private draft preview · forms disabled ·{" "}
@@ -622,14 +657,22 @@ export function V3Page({
         </div>
       )}
       <StripeNavigation paths={paths} preview={preview} linkMap={linkMap} />
-      <main id="main" className={(servicePage ? "v3-service-page" : "") + (!hubFor(path) && content.pageSections?.some(s=>s.id==='service-overview') ? " v3-detail-page" : "") + (path === "/engagement-models" ? " v3-engagement-page" : "") + (path === "/about" ? " v3-about-page" : "") + (path === "/how-we-work" ? " v3-work-page" : "")}>
+      <main id="main" className={blogPage ? "v3-blog" : whyPage ? "v3-why" : howPage ? "v3-how" : engagePage ? "v3-engage" : contactPage ? "v3-contact" : aboutPage ? "v3-about" : skeleton ? "v3-skeleton" : (servicePage ? "v3-service-page" : "") + (!hubFor(path) && content.pageSections?.some(s=>s.id==='service-overview') ? " v3-detail-page" : "") + (path === "/engagement-models" ? " v3-engagement-page" : "") + (path === "/about" ? " v3-about-page" : "") + (path === "/how-we-work" ? " v3-work-page" : "")}>
         {preview && content.unresolved.length > 0 && (
           <aside className="v3-wrap" role="alert">
             <p>Draft notes: {content.unresolved.join("; ")}.</p>
           </aside>
         )}
-        {sections.map((s) => (
+        {skeleton && <SkeletonSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {aboutPage && <AboutSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {contactPage && <ContactSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {engagePage && <EngagementSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {howPage && <HowWorkSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {whyPage && <WhyChooseSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {blogPage && <BlogIndexSections content={content} path={path} paths={paths} posts={posts} preview={preview} linkMap={linkMap} newsletterEnabled={newsletterEnabled} />}
+        {!skeleton && !aboutPage && !contactPage && !engagePage && !howPage && !whyPage && !blogPage && sections.map((s) => (
           <div key={s.id} className="v3-section-group">
+            {s.id === "cta-banner" && !s.omitted && afterContent}
             {s.id === "cta-banner" && fallbackFaq && (
               <section id="faq" className="v3-section v3-section--faq">
                 <div className="v3-wrap">
@@ -681,6 +724,7 @@ export function V3Page({
               )}
           </div>
         ))}
+        {!sections.some((s) => s.id === "cta-banner" && !s.omitted) && afterContent}
       </main>
       <StripeFooter paths={paths} preview={preview} linkMap={linkMap} />
       <script
@@ -701,6 +745,7 @@ export function V3Page({
               site: process.env.SITE_URL ?? "http://localhost:3000",
               published,
               modified,
+              listing: blogPage ? posts : undefined,
             }),
           ).replaceAll("<", "\\u003c"),
         }}

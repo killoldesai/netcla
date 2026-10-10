@@ -27,7 +27,7 @@ test("Homepage renders one h1 and a heading for every section", () => {
   assert.equal(actual("h1").length, 1);
   assert.equal(
     actual("h1").text(),
-    `${d.texts.t1}${d.texts.t2}`,
+    `${d.texts.t1} ${d.texts.t2}`,
   );
   actual("main section[aria-labelledby]").each((_, section) => {
     const id = actual(section).attr("aria-labelledby");

@@ -14,6 +14,8 @@ import { templateBlueprint } from "./page-template";
 import { runContentQA } from "./content-qa";
 import { relatedPaths, sitePage, sitePages } from "./site-structure";
 import { PROMPT_VERSION, strategistSystemPrompt, writerSystemPrompt } from "./prompts/system";
+import { verifySameAs } from "./seo-verify";
+import { buildRepairPrompt, mergeRepair, overLimitFields } from "./prompts/length-repair";
 import { buildBriefPrompt, parseBrief, type LinkOption, type PageBrief } from "./prompts/page-brief";
 import { buildSectionPrompt } from "./prompts/sections";
 import { artDirectionSchema, artDirectorSystemPrompt, buildArtDirectionPrompt, buildImagePrompt } from "./prompts/images";
@@ -63,6 +65,8 @@ export async function queuePages(input: unknown) {
       imageModel: z.string().min(1).max(200),
       imageQuality: z.enum(["auto","low","medium","high","xhigh","max"]).default("medium"),
       scope: z.enum(["page", "sections", "image"]).default("page"),
+      /** Full-page runs normally draw new illustrations; this keeps the ones the current draft already has. */
+      reuseImages: z.boolean().default(false),
       sectionIds: z.array(z.string()).max(50).default([]),
       baseRevisionId: z.string().uuid().optional(),
       instruction: z.string().trim().max(1000).optional(),
@@ -104,10 +108,26 @@ export async function queuePages(input: unknown) {
       if (value.scope !== "page" && base?.schemaVersion !== 3)
         throw new Error("Selective generation requires a version-three draft");
       // Partial runs keep the layout the existing draft was generated with.
-      if (value.scope !== "page")
+      if (value.scope !== "page") {
         specification = specForContent(s.specification as PageSpecification, base);
+        // Asking for a section the stored spec lacks (the synthesized FAQ) uses the effective spec.
+        if (value.sectionIds.some((id) => !specification.sections.some((x) => x.id === id)))
+          specification = effectiveSpec(s.specification as PageSpecification);
+      }
+      // A section added since the draft was made (e.g. an FAQ) has no blueprint entry
+      // yet; take its entry from the template so the run can still be validated.
+      const blueprintForRun =
+        value.scope === "page"
+          ? undefined
+          : (() => {
+              const stored = base.pageBlueprint ?? {};
+              const missing = specification.sections.filter((x) => !stored[x.id]).map((x) => x.id);
+              if (!missing.length) return stored;
+              const full = templateBlueprint(specification) as Record<string, unknown>;
+              return { ...stored, ...Object.fromEntries(missing.map((id) => [id, full[id]])) };
+            })();
       if (value.scope !== "page")
-        validateBlueprint(specification, base.pageBlueprint);
+        validateBlueprint(specification, blueprintForRun);
       if (
         value.scope === "sections" &&
         (!value.sectionIds.length ||
@@ -143,7 +163,7 @@ export async function queuePages(input: unknown) {
         [
           id,
           "completed",
-          JSON.stringify(value.scope === "page" ? templateBlueprint(specification) : base.pageBlueprint),
+          JSON.stringify(value.scope === "page" ? templateBlueprint(specification) : blueprintForRun),
         ],
       );
       // Partial runs reuse the page's latest brief so untouched sections stay consistent.
@@ -163,9 +183,11 @@ export async function queuePages(input: unknown) {
       const baseSection = (sectionId: string) =>
         base?.pageSections?.find((x: any) => x.id === sectionId);
       for (const section of specification.sections) {
+        // Evidence-gated proof sections are never written by the model; the owner fills them from approved facts.
         const regenerate =
-          value.scope === "page" ||
-          (value.scope === "sections" && value.sectionIds.includes(section.id));
+          !/^proof-/.test(section.id) &&
+          (value.scope === "page" ||
+            (value.scope === "sections" && value.sectionIds.includes(section.id)));
         await c.query(
           "INSERT INTO pipeline_tasks(run_id,kind,section_id,status,result) VALUES($1,'section',$2,$3,$4)",
           [
@@ -177,7 +199,8 @@ export async function queuePages(input: unknown) {
         );
         if (images.includes(section.id)) {
           const keep =
-            (value.scope === "sections" ||
+            (value.reuseImages ||
+              value.scope === "sections" ||
               (value.scope === "image" && value.sectionIds.length > 0 && !value.sectionIds.includes(section.id))) &&
             baseSection(section.id)?.asset;
           await c.query(
@@ -192,9 +215,26 @@ export async function queuePages(input: unknown) {
 }
 // Evidence fields are suppressed independently of model obedience. Approved evidence
 // can be inserted during owner review; generation never creates a vacancy or proof.
+/** True when the text is backed by an approved fact: the whole value appears, or most of its words and every number do. */
+function supportedByFacts(value: string, facts: { statement: string }[]) {
+  const text = value.trim().toLowerCase();
+  if (!text) return false;
+  const words = text.split(/[^a-z0-9]+/).filter((w) => w.length > 2 || /\d/.test(w));
+  return facts.some((f) => {
+    const fact = f.statement.toLowerCase();
+    if (fact.includes(text)) return true;
+    const numbers = words.filter((w) => /\d/.test(w));
+    return numbers.every((n) => fact.includes(n)) && words.filter((w) => fact.includes(w)).length >= Math.ceil(words.length * 0.6);
+  });
+}
+
+// Company facts the model may state only when an approved fact supports them.
+const factFields: Record<string, string[]> = { "company-glance": ["founded_year", "base_city", "delivery_window"] };
+
 export function constrainEvidence(
   sectionId: string,
   fields: Record<string, string>,
+  facts: { statement: string }[] = [],
 ) {
   const output = { ...fields };
   for (const key of Object.keys(output)) {
@@ -206,11 +246,13 @@ export function constrainEvidence(
       output[key] = "";
   }
   if (
-    /(?:testimonials|featured-work|case-study-grid|team-highlights|awards-clients|office-details)/.test(
+    /(?:testimonials|featured-work|case-study-grid|team-highlights|awards-clients|office-details|^proof-)/.test(
       sectionId,
     )
   )
     for (const key of Object.keys(output)) output[key] = "";
+  for (const key of factFields[sectionId] ?? [])
+    if (output[key] && !supportedByFacts(output[key], facts)) output[key] = "";
   return output;
 }
 export async function runPipelineTask() {
@@ -261,10 +303,13 @@ export async function runPipelineTask() {
       task.scope !== "page" && task.base_revision_id
         ? (await query("SELECT content FROM revisions WHERE id=$1", [task.base_revision_id]))[0]?.content
         : undefined;
-    const spec =
+    let spec =
       task.scope === "page"
         ? effectiveSpec(task.specification as PageSpecification)
         : specForContent(task.specification as PageSpecification, baseContent);
+    // A section added after the draft was made (the FAQ) only exists in the effective spec.
+    if (!spec.sections.some((x) => x.id === task.section_id))
+      spec = effectiveSpec(task.specification as PageSpecification);
     const paths = (
       await query("SELECT path FROM pages WHERE archived_at IS NULL")
     ).map((p) => p.path as string);
@@ -374,8 +419,26 @@ export async function runPipelineTask() {
       const parsed = parseModelJSON(generated.text);
       if (task.kind === "brief") result = parseBrief(parsed, links);
       else {
-        const cleaned = cleanSectionFields(spec.sections.find((x) => x.id === task.section_id)!, parsed, paths);
-        result = constrainEvidence(task.section_id, cleaned.fields);
+        const sectionSpec = spec.sections.find((x) => x.id === task.section_id)!;
+        let cleaned = cleanSectionFields(sectionSpec, parsed, paths);
+        // Over-long fields get one shorten-only retry; the original stays if the retry is not shorter.
+        const over = overLimitFields(cleaned.fields, task.section_id);
+        if (over.length) {
+          try {
+            const retry = await generate(providerSchema.parse(task.provider), task.model, buildRepairPrompt(task.section_id, cleaned.fields, over), maxTokens, undefined, {
+              temperature: 0.2,
+              systemPrompt: system,
+            });
+            const merged = mergeRepair(cleaned.fields, (parseModelJSON(retry.text) as Record<string, unknown>), over);
+            if (merged.fixed.length) {
+              cleaned = cleanSectionFields(sectionSpec, merged.fields, paths);
+              cleaned.notes.push(`shortened ${merged.fixed.join(", ")} to fit the word limits`);
+            }
+          } catch {
+            cleaned.notes.push(`over word limit: ${over.map((o) => o.key).join(", ")}`);
+          }
+        }
+        result = constrainEvidence(task.section_id, cleaned.fields, facts);
         notes = cleaned.notes;
       }
     }
@@ -421,10 +484,13 @@ export async function assembleReadyRuns() {
         ).rows;
         const brief = tasks.find((t) => t.kind === "brief" && t.status === "completed")?.result as PageBrief | undefined;
         const previousContent = (await c.query("SELECT content FROM revisions WHERE id=$1 AND page_id=$2", [run.base_revision_id, run.page_id])).rows[0]?.content;
-        const spec =
+        let spec =
           run.scope === "page"
             ? effectiveSpec(run.specification as PageSpecification)
             : specForContent(run.specification as PageSpecification, previousContent);
+        // Sections the run selected may only exist in the effective spec (the FAQ).
+        if (run.scope !== "page" && run.selected_sections.some((id: string) => !spec.sections.some((x) => x.id === id)))
+          spec = effectiveSpec(run.specification as PageSpecification);
         const baseContent = run.scope !== "page" ? previousContent : undefined;
         const pageSections = spec.sections.map((s) => ({
           id: s.id,
@@ -479,6 +545,11 @@ export async function assembleReadyRuns() {
                 entities: brief.entities,
                 searchIntent: brief.searchIntent,
                 buyerQuestions: brief.buyerQuestions,
+                answerSummary: brief.answerSummary,
+                keyFacts: brief.keyFacts,
+                schemaAbout: await verifySameAs(brief.schemaAbout),
+                serviceType: brief.serviceType,
+                audience: brief.audience.slice(0, 200),
               }
             : baseContent?.seo,
           texts: {},

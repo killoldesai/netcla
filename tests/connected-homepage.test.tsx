@@ -64,7 +64,7 @@ test("Service hubs preserve priority and only expose published destinations", ()
     $(".hub-card")
       .map((_, el) => $(el).attr("data-hub"))
       .get(),
-    ["software", "mobile", "ai", "cloud", "web", "search"],
+    ["software", "ai", "cloud", "mobile", "web", "search"],
   );
   const paths = $("a[data-published-link]")
     .map((_, el) => $(el).attr("href"))
@@ -93,18 +93,25 @@ test("Service hubs preserve priority and only expose published destinations", ()
   assert.equal($("form .honeypot input[name=company_url]").length, 1);
 });
 
-test("Project starting points are available before hydration with an accessible default", () => {
+test("The four priority practices lead the page and are all visible without a click", () => {
   const $ = render();
-  const list = $("[role=tablist][aria-label='Choose your project starting point']");
-  assert.equal(list.length, 1);
-  assert.equal(list.find("[role=tab][aria-selected=true]").attr("id"), "goal-product");
-  assert.equal($("#panel-product").attr("hidden"), undefined);
-  assert.ok($("#panel-modernize").is("[hidden]"));
-  assert.ok($("#panel-team").is("[hidden]"));
-  assert.equal(
-    $("#panel-team a").attr("data-service"),
-    "Help defining the scope",
+  assert.match($("h1").text(), /software, AI,\s*cloud and mobile app development/i);
+  assert.deepEqual(
+    $("#hero nav[aria-label='Our four practices'] a")
+      .map((_, el) => $(el).attr("href"))
+      .get(),
+    ["#software", "#ai", "#cloud", "#mobile"],
   );
+  assert.deepEqual(
+    $("#services article[data-hub]")
+      .map((_, el) => $(el).attr("id"))
+      .get(),
+    ["software", "ai", "cloud", "mobile"],
+  );
+  assert.equal($("#services [role=tab]").length, 0);
+  assert.equal($("#services [hidden]").length, 0);
+  assert.equal($("#results").length, 0);
+  assert.equal($("main [role=tablist]").length, 0);
 });
 
 test("Published case studies supply proof without exposing draft examples", () => {
@@ -146,18 +153,12 @@ test("Hidden optional sections are removed without decorative service numbering"
   assert.equal($("[style*=gradient], [class*=gradient]").length, 0);
 });
 
-test("Service tabs show one labelled panel by default and the process lists every stage", () => {
-  const $ = render();
-  const list = $("[role=tablist][aria-label='Choose a service area']");
-  assert.equal(list.find("[role=tab]").length, 4);
-  assert.equal(list.find("[role=tab][aria-selected=true]").attr("id"), "hub-tab-software");
-  assert.equal($("#hub-panel-software").attr("hidden"), undefined);
-  for (const id of ["mobile", "ai", "cloud"])
-    assert.ok($(`#hub-panel-${id}`).is("[hidden]"), id);
-  list.find("[role=tab]").each((_, el) => {
-    const panel = $(el).attr("aria-controls");
-    assert.equal($(`#${panel}`).attr("aria-labelledby"), $(el).attr("id"));
-  });
+test("Technology chips link to published pages only, and the process lists every stage", () => {
+  const $ = render(["/aws-services", "/flutter-app-development"]);
+  assert.equal($("#section-1 a[href='/aws-services']").length, 1);
+  assert.equal($("#section-1 a[href='/flutter-app-development']").length, 1);
+  assert.equal($("#section-1 a").length, 2);
+  assert.ok($("#section-1").text().includes("Kubernetes"));
   assert.equal($("#delivery ol > li").length, 4);
-  assert.equal($("#results li").length, 6);
+  assert.equal($("#faq details").length, 6);
 });
