@@ -14,6 +14,19 @@ Configure `PROVIDER_ENCRYPTION_KEY` identically for web and worker. Enter AWS re
 
 `TRUST_PROXY` defaults to false, which uses a shared conservative rate-limit bucket. Enable it only after verifying Coolify's reverse proxy overwrites or appends a reliable rightmost client address and direct access to port 3000 is blocked. Confirm this on staging before enabling public lead capture; a shared bucket intentionally limits total submissions while proxy trust is unconfigured.
 
+### Launch settings
+
+The site stays out of search while `STAGING` is anything other than exactly `false`. When going live, set on the web service:
+
+- `STAGING=false`
+- `SITE_URL=https://netofficials.com` (the https public origin, no trailing slash; the same value drives canonicals, the sitemap, social tags and structured data)
+- `GA4_ID` for analytics
+- Optional: `SITE_SAME_AS` (comma separated extra profile URLs; the LinkedIn company page is built in, see `src/company.ts`) and `SITE_CONTACT_EMAIL` (public sales email for structured data)
+
+At startup the web service logs `[launch-check]` errors if `STAGING=false` with a missing, local or non-https `SITE_URL`, or a missing `GA4_ID`. After deploying, confirm `/robots.txt` allows crawling, `/sitemap.xml` lists the pages, and `/api/health` reports `"indexing":true`.
+
+Redirect `www` and `http` to the single canonical `https://netofficials.com` at the proxy. Retired URLs from the previous site are redirected in `src/legacy-redirects.ts` (review copy in `docs/legacy-redirect-map.csv`); keep them for at least 12 months. Submit the sitemap in Google Search Console after launch.
+
 Optional `GA4_ID` enables production-only anonymous page/conversion events. There are no email notifications in v1.
 
 ## Deploy

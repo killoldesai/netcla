@@ -53,7 +53,7 @@ export const evidencePolicy = [
 
 /** GEO: what makes a page quotable by AI assistants. Applies to the strategy step and every section. */
 export const geoRules = [
-  "Make every page citable by AI assistants: define each entity (technology, standard, platform, role) with its category at first mention, for example 'Flutter, Google's open-source UI toolkit'.",
+  "Make every page citable by AI assistants: define each entity (technology, standard, platform, role) with its category at first mention, for example 'Flutter, Google's open-source UI toolkit'. Always join the name and its definition with a comma, brackets or a colon, never a bare space: write 'Enterprise Resource Planning (ERP), an integrated suite that manages core processes' and never 'ERP an integrated suite'.",
   "One factual claim per sentence. Use lists and tables when options are compared. State limits and when an option is not the right choice.",
   "Never print a statistic without approved evidence; describe the factors that decide the number instead.",
   "Keep names consistent across the page: Netofficials, India-based, and the exact service name used in the title.",
