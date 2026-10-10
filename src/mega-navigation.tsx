@@ -299,7 +299,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
             >
               <div className="nm-main-head">
                 <div>
-                  <h3 className="nm-main-title">{p.label}</h3>
+                  <p className="nm-main-title">{p.label}</p>
                   <p className="nm-main-sub">{p.blurb}</p>
                 </div>
                 {hub && (
@@ -315,7 +315,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
                       .filter((g) => g.group !== "Technologies")
                       .map((g) => (
                         <section key={g.group}>
-                          <h3>{g.group}</h3>
+                          <p className="nm-h">{g.group}</p>
                           {g.pages.map((page) => item(page, { blurb: false, icon: <TechIcon name={page.label} context={g.group} className="nm-brand" eager /> }))}
                         </section>
                       ))}
@@ -324,7 +324,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
                     .filter((g) => g.group === "Technologies")
                     .map((g) => (
                       <section key={g.group} className="nm-tech">
-                        <h3>{g.group}</h3>
+                        <p className="nm-h">{g.group}</p>
                         <div className="nm-compact">
                           {g.pages.map((page) => (
                             <a key={page.path} href={href(page.path)} onClick={close} aria-current={current === page.path ? "page" : undefined}>
@@ -379,7 +379,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
           <div className="nm-groups nm-roles">
             {roles.map((g) => (
               <section key={g.group}>
-                <h3>{g.group}</h3>
+                <p className="nm-h">{g.group}</p>
                 {g.pages.map((page) =>
                   item(page, { blurb: false, label: page.label.replace(/\s+developers?$/i, ""), icon: <TechIcon name={roleTech(page.label)} context={g.group} className="nm-brand" eager /> }),
                 )}
@@ -401,7 +401,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
             <div className="nm-columns">
               {visible.map((column) => (
                 <section key={column.title} style={{ gridColumn: `span ${column.cols ?? 1}` }}>
-                  <h3>{column.title}</h3>
+                  <p className="nm-h">{column.title}</p>
                   <div className="nm-grid" style={{ gridTemplateColumns: `repeat(${column.cols ?? 1}, minmax(0, 1fr))` }}>
                     {column.pages.map((page) => item(page, { blurb: !column.compact }))}
                   </div>
@@ -422,7 +422,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
     if (!guides.length || props.preview) return null;
     return (
       <section className="nm-guides" style={{ gridColumn: "span 3" }}>
-        <h3>Latest guides</h3>
+        <p className="nm-h">Latest guides</p>
         <div className="nm-guide-list">
           {guides.map((path) => (
             <a key={path} className="nm-guide" href={path} onClick={close} aria-current={current === path ? "page" : undefined}>

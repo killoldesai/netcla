@@ -1,4 +1,5 @@
 import { mediaPath } from "./media-path";
+import { company, companyProfiles } from "./company";
 import type { Content, Design, DesignNode } from "./content";
 import { breadcrumbs, pillarFor, pillars, sitePage } from "./site-structure";
 
@@ -97,13 +98,24 @@ export function pageGraph(input: {
     "@id": base + "/#organization",
     name: "Netofficials",
     url: base,
-    logo: base + "/assets/logo.png",
-    address: { "@type": "PostalAddress", addressCountry: "IN", ...(baseCity ? { addressLocality: baseCity } : {}) },
-    ...(foundedYear ? { foundingDate: foundedYear } : {}),
-    knowsAbout: pillars.map((p) => p.label),
-    ...(process.env.SITE_SAME_AS
-      ? { sameAs: process.env.SITE_SAME_AS.split(",").map((s) => s.trim()).filter(Boolean) }
+    logo: { "@type": "ImageObject", url: base + "/assets/logo-square.png", width: 512, height: 512 },
+    image: base + "/assets/og-default.png",
+    ...(process.env.SITE_CONTACT_EMAIL
+      ? {
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "sales",
+            email: process.env.SITE_CONTACT_EMAIL.trim(),
+            availableLanguage: "English",
+            areaServed: ["US", "GB", "AU", "CA"],
+          },
+        }
       : {}),
+    address: { "@type": "PostalAddress", addressCountry: "IN", ...(baseCity ? { addressLocality: baseCity } : {}) },
+    foundingDate: foundedYear || company.foundingYear,
+    founder: { "@id": base + "/#founder" },
+    knowsAbout: pillars.map((p) => p.label),
+    sameAs: companyProfiles(),
   };
   const type = sitePage(path)?.type;
   const isArticle = input.kind === "article" || type === "guide" || path.startsWith("/blog/");
@@ -122,7 +134,13 @@ export function pageGraph(input: {
     inLanguage: "en",
     isPartOf: { "@id": websiteId },
     ...(input.published ? { datePublished: input.published } : {}),
-    ...(input.modified ? { dateModified: input.modified } : {}),
+    ...(input.modified
+      ? {
+          // A page cannot be modified before it was published (the revision can predate the publish click).
+          dateModified:
+            input.published && new Date(input.modified) < new Date(input.published) ? input.published : input.modified,
+        }
+      : {}),
     ...(image
       ? {
           image: {
@@ -176,7 +194,7 @@ export function pageGraph(input: {
   }
   if (isArticle) {
     main.headline = (hero?.fields.h1 || content.title).slice(0, 110);
-    main.author = content.author ? { "@type": "Person", name: content.author } : { "@id": organization["@id"] };
+    main.author = content.author && content.author !== company.founder.name ? { "@type": "Person", name: content.author } : { "@id": base + "/#founder" };
     main.publisher = { "@id": organization["@id"] };
     if (content.seo?.entities.length) main.about = content.seo.entities.slice(0, 8).map((name) => ({ "@type": "Thing", name }));
   }
@@ -248,6 +266,17 @@ export function pageGraph(input: {
   const trail = breadcrumbs(path, hero?.fields.h1 || content.title);
   const graph: Record<string, unknown>[] = [
     organization,
+    {
+      "@type": "Person",
+      "@id": base + "/#founder",
+      name: company.founder.name,
+      url: base + company.founder.path,
+      jobTitle: company.founder.jobTitle,
+      description: company.founder.summary,
+      worksFor: { "@id": organization["@id"] },
+      knowsAbout: company.founder.knowsAbout,
+      sameAs: company.founder.sameAs,
+    },
     main,
     {
       "@type": "BreadcrumbList",

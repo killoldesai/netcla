@@ -1,6 +1,6 @@
 "use client";
 import { MegaNavigation } from "../mega-navigation";
-import { groups } from "../stripe-home-chrome";
+import { groups, footerLocations } from "../stripe-home-chrome";
 import { Cta, container, useDestination, useHome } from "./ui";
 
 const fallback: Record<string, string> = {
@@ -63,7 +63,7 @@ export function HomeFooter() {
   const destination = useDestination();
   const columns = useGroups();
   const privacy = destination("/privacy-policy"),
-    terms = destination("/terms-and-conditions");
+    terms = destination("/terms");
   return (
     <footer className="border-t border-n-ink/[0.06] bg-white">
       <div className={`${container} py-16`}>
@@ -98,7 +98,14 @@ export function HomeFooter() {
             ))}
           </div>
         </div>
-        <div className="mt-16 flex flex-col justify-between gap-3 border-t border-n-line pt-6 font-n-mono text-[12px] text-n-muted sm:flex-row">
+        <nav aria-label="Where we work" className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px] text-n-ink/80">
+          <span className="font-n-mono text-[12px] tracking-[0.08em] text-n-muted uppercase">Where we work</span>
+          {footerLocations.flatMap(([label, path]) => {
+            const href = destination(path);
+            return href ? [<a href={href} key={path} className="transition-colors duration-150 hover:text-n-indigo">{label}</a>] : [];
+          })}
+        </nav>
+        <div className="mt-8 flex flex-col justify-between gap-3 border-t border-n-line pt-6 font-n-mono text-[12px] text-n-muted sm:flex-row">
           <span>© {new Date().getFullYear()} Netofficials · India</span>
           <span className="flex gap-4">
             {privacy && <a href={privacy}>Privacy Policy</a>}

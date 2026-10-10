@@ -42,3 +42,34 @@ body .stripe-footer { border-top:1px solid #dbe0e8; }
 body .csv-site .csv-hero, body .csv-site .csv-hero :is(h1,h2,p,span,li,small) { color:#182138 !important; }
 body .csv-site .csv-hero .csv-eyebrow, body .csv-site .csv-hero .csv-kicker { color:#4353b3 !important; }
 body .csv-site .csv-hero a:not(.csv-button) { color:#4353b3 !important; }
+
+.v3-related-guides { padding: 56px 0 72px; border-top: 1px solid #e5edf5; }
+.v3-related-guides h2 { margin: 0 0 20px; font-size: 24px; letter-spacing: -0.01em; }
+.v3-related-guides ul { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.v3-related-guides li > a { font-weight: 600; text-decoration: none; }
+.v3-related-guides li > a:hover { text-decoration: underline; }
+.v3-related-guides li p { margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: #4a5a6e; }
+
+.v3-related-pages { padding: 48px 0 56px; border-top: 1px solid #e5edf5; }
+.v3-related-pages h2 { margin: 0 0 20px; font-size: 24px; letter-spacing: -0.01em; }
+.v3-related-pages-group + .v3-related-pages-group { margin-top: 20px; }
+.v3-related-pages-title { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #4a5a6e; }
+.v3-related-pages ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px 28px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.v3-related-pages a { text-decoration: none; font-weight: 500; }
+.v3-related-pages a:hover { text-decoration: underline; }
+
+.footer-locations { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 24px 0 8px; font-size: 14px; }
+.footer-locations span { font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; opacity: 0.7; }
+.footer-locations a { text-decoration: none; }
+.footer-locations a:hover { text-decoration: underline; }
+main .v3-related-pages h2, main .v3-related-guides h2 { font-size: 24px !important; line-height: 1.25 !important; letter-spacing: -0.01em; margin: 0 0 20px; }
+main .v3-related-pages a, main .v3-related-guides li > a { font-size: 15px; line-height: 1.5; }
+main .v3-related-pages li, main .v3-related-guides li { margin: 0; }
+
+.author-page .author-crumbs { font-size: 14px; color: #4a5a6e; margin-bottom: 20px; }
+.author-page .author-crumbs a { text-decoration: none; }
+.author-page .author-role { margin: 0 0 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #4a5a6e; }
+.author-page .author-bio { max-width: 68ch; font-size: 17px; line-height: 1.7; }
+.author-page h2 { margin-top: 40px; }
+.author-page .author-list { padding-left: 20px; display: grid; gap: 8px; max-width: 68ch; line-height: 1.5; }
+.author-page .author-more { margin-top: 40px; }

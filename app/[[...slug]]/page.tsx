@@ -1,3 +1,4 @@
+import { siteUrl } from "@/site-url";
 import { blogPosts } from "@/blog-posts";
 import { published, publishedPaths, publishedListing } from "@/pages";
 import { getDesign, pagePath } from "@/designs";
@@ -20,7 +21,9 @@ import { newsletterReady } from "@/ses-newsletter";
 import { verifiedV3Content } from "@/v3-evidence";
 import { withAssetNames } from "@/asset-names";
 import { structureRedirects } from "@/site-structure";
+import { legacyRedirects } from "@/legacy-redirects";
 import { homeMeta } from "@/home/copy";
+import { isIndexable, shareImage } from "@/seo-policy";
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug?: string[] }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -37,19 +40,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : p.path === "/services" && p.content.schemaVersion !== 3
         ? directoryMetadata
         : p.content;
+  const image = shareImage(p.content);
   return {
     title: meta.title,
     description: meta.description,
     alternates: { canonical: p.path },
+    ...(isIndexable(p.path) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: meta.title,
       description: meta.description,
       url: p.path,
+      siteName: "Netofficials",
+      locale: "en_US",
+      type: p.path.startsWith("/blog/") ? "article" : "website",
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+      images: [image.url],
     },
   };
 }
 export default async function Page({ params }: Props) {
   const path = pagePath((await params).slug);
+  if (path === "/404") notFound();
   if (!process.env.DATABASE_URL && path !== "/") notFound();
   if (!process.env.DATABASE_URL)
     return (
@@ -71,6 +87,7 @@ export default async function Page({ params }: Props) {
   const p = await published(path);
   if (!p) {
     if (structureRedirects[path]) permanentRedirect(structureRedirects[path]);
+    if (legacyRedirects[path]) permanentRedirect(legacyRedirects[path]);
     const [r] = await query<{ destination: string }>(
       "SELECT destination FROM redirects WHERE path=$1",
       [path],
@@ -98,7 +115,7 @@ export default async function Page({ params }: Props) {
         paths={paths}
         vacancies={vacancies as any}
         newsletterEnabled={path === "/blog" && (await newsletterReady())}
-        posts={path === "/blog" ? await blogPosts() : []}
+        posts={path === "/blog" || path.startsWith("/blog/") ? await blogPosts() : []}
         published={p.first_published_at}
         modified={p.created_at}
       />
@@ -123,7 +140,7 @@ export default async function Page({ params }: Props) {
   }
   const design = getDesign(p.path === "/" ? "software-led" : p.template),
     paths = (await publishedPaths()).map((p) => p.path);
-  const base = process.env.SITE_URL ?? "http://localhost:3000";
+  const base = siteUrl();
   const homepageContent =
     p.path === "/" ? resolveHomepageContent(design, p.content) : p.content;
   const visible = publicContent(design, homepageContent, paths);

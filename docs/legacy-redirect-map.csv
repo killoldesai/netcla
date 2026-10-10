@@ -1,0 +1,89 @@
+old_url,new_url,confidence,reason
+/ai-development,/ai-development-services,High,Same topic, renamed
+/android-development,/android-app-development,High,Same topic, renamed
+/angular-development,/angular-development-services,High,Same topic, renamed
+/api-development,/api-development-services,High,Same topic, renamed
+/api-first-architecture,/api-development-services,Medium,No dedicated page; API pillar
+/api-integration-services,/api-development-services,Medium,Covered inside API development
+/ar-vr-development,/ar-vr-development-services,High,Same topic, renamed
+/blockchain-development,/blockchain-development-services,High,Same topic, renamed
+/cloud-development,/cloud-services,High,Same topic, cloud hub
+/cloud-native-architecture,/cloud-services,Medium,No dedicated page; cloud hub
+/cms-development,/web-development,Medium,CMS sites sit under web development
+/codeigniter-development,/php-development-services,Medium,PHP framework, PHP page
+/database-development,/postgresql-development-services,Low,No generic database page; closest database page
+/dedicated-development-teams,/dedicated-development-team,High,Plural to singular
+/django-development,/django-development-services,High,Same topic, renamed
+/dotnet-development,/dotnet-development-services,High,Same topic, renamed
+/education-software-development,/edtech-software-development,High,Already redirected in code
+/elasticsearch-development,/postgresql-development-services,Low,No search page; closest database page
+/express-js-development,/nodejs-development-services,Medium,Express is a Node.js framework
+/fastapi-development,/python-development-services,Medium,FastAPI is a Python framework
+/fintech-development,/fintech-software-development,High,Same topic, renamed
+/flutter-development,/flutter-app-development,High,Same topic, renamed
+/gatsby-development,/react-development-services,Medium,Gatsby is a React framework
+/go-development,/golang-development-services,High,Same topic, renamed
+/graphql-development,/graphql-api-development,High,Same topic, renamed
+/hire-ai-developers,/hire-ai-ml-developer,High,Same topic, renamed
+/hire-angular-developers,/hire-angular-developer,High,Plural to singular
+/hire-backend-developers,/hire-backend-developer,High,Plural to singular
+/hire-blockchain-developers,/hire-blockchain-developer,High,Plural to singular
+/hire-devops-engineers,/hire-devops-engineer,High,Plural to singular
+/hire-dotnet-developers,/hire-dotnet-developer,High,Plural to singular
+/hire-frontend-developers,/hire-frontend-developer,High,Plural to singular
+/hire-full-stack-developers,/hire-full-stack-developer,High,Plural to singular
+/hire-java-developers,/hire-java-developer,High,Plural to singular
+/hire-mobile-developers,/hire-mobile-app-developer,High,Same topic, renamed
+/hire-node-js-developers,/hire-nodejs-developer,High,Same topic, renamed
+/hire-php-developers,/hire-php-developer,High,Plural to singular
+/hire-python-developers,/hire-python-developer,High,Plural to singular
+/hire-react-developers,/hire-react-developer,High,Plural to singular
+/hire-ui-ux-designers,/hire-ui-ux-designer,High,Plural to singular
+/hire-vue-developers,/hire-vuejs-developer,High,Same topic, renamed
+/ios-development,/ios-app-development,High,Same topic, renamed
+/iot-development,/iot-development-services,High,Same topic, renamed
+/java-development,/java-development-services,High,Same topic, renamed
+/kotlin-development,/kotlin-app-development,High,Same topic, renamed
+/laravel-development,/laravel-development-services,High,Same topic, renamed
+/leads-demo,/contact,Medium,Demo lead page; contact is the enquiry page
+/maintenance-support,/custom-software-development,Low,No support or maintenance page; consider creating one
+/material-ui-development,/react-development-services,Medium,Material UI is a React library
+/mean-stack-development,/angular-development-services,Medium,MEAN front end is Angular
+/mern-stack-development,/react-development-services,Medium,MERN front end is React
+/microservices-architecture,/enterprise-software-development,Medium,No dedicated page; enterprise systems
+/mongodb-development,/mongodb-development-services,High,Same topic, renamed
+/mvp-development,/mvp-development-services,High,Same topic, renamed
+/mysql-development,/postgresql-development-services,Low,No MySQL page; closest database page
+/nest-js-development,/nodejs-development-services,Medium,NestJS is a Node.js framework
+/nextjs-development,/nextjs-development-services,High,Same topic, renamed
+/node-js-development,/nodejs-development-services,High,Same topic, renamed
+/nuxt-development,/vuejs-development-services,Medium,Nuxt is a Vue framework
+/performance-optimization,/web-development,Low,No performance page; closest web page
+/php-development,/php-development-services,High,Same topic, renamed
+/postgresql-development,/postgresql-development-services,High,Same topic, renamed
+/privacy,/privacy-policy,High,Duplicate privacy URL
+/pwa-development,/web-application-development,Medium,PWAs are web applications
+/python-development,/python-development-services,High,Same topic, renamed
+/qa-testing-services,/custom-software-development,Low,No QA page; consider creating one
+/react-development,/react-development-services,High,Same topic, renamed
+/react-native-development,/react-native-app-development,High,Same topic, renamed
+/redis-development,/postgresql-development-services,Low,No Redis page; closest database page
+/ruby-development,/custom-software-development,Low,No Ruby page on the new site
+/rust-development,/custom-software-development,Low,No Rust page on the new site
+/saas-development,/saas-development-services,High,Same topic, renamed
+/schedule,/contact,Medium,Call booking page; contact is the enquiry page
+/serverless-architecture,/cloud-services,Medium,No dedicated page; cloud hub
+/shopify-development,/shopify-development-services,High,Same topic, renamed
+/spring-boot-development,/java-development-services,Medium,Spring Boot is a Java framework
+/staff-augmentation,/it-staff-augmentation,High,Same topic, renamed
+/startup-development,/startup-software-development,High,Same topic, renamed
+/svelte-development,/web-application-development,Medium,No Svelte page; front-end web apps
+/swift-development,/swift-app-development,High,Same topic, renamed
+/symfony-development,/php-development-services,Medium,PHP framework, PHP page
+/tailwind-css-development,/web-development,Medium,Front-end styling; web development
+/typescript-development,/typescript-development-services,High,Same topic, renamed
+/ui-ux-development,/ui-ux-design,High,Same topic, renamed
+/vue-development,/vuejs-development-services,High,Same topic, renamed
+/web-accessibility-services,/web-development,Low,No accessibility page; closest web page
+/web-security-services,/web-development,Low,No security page; closest web page
+/wordpress-development,/wordpress-development-services,High,Same topic, renamed

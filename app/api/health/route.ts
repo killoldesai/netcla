@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     await query("SELECT 1");
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, indexing: process.env.STAGING === "false" });
   } catch {
     return NextResponse.json({ ok: false }, { status: 503 });
   }

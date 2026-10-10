@@ -12,7 +12,12 @@ export async function mediaResponse(id: string) {
   if (!asset || (!asset.published && !(await owner()))) return new Response(null, { status: 404 });
   if (asset.published) {
     const cdn = await publicAssetUrl(asset);
-    if (cdn) return Response.redirect(cdn, 308);
+    // The CDN key is content-hashed, so the redirect itself can be cached for a year as well.
+    if (cdn)
+      return new Response(null, {
+        status: 308,
+        headers: { Location: cdn, "Cache-Control": "public, max-age=31536000, immutable" },
+      });
   }
   try {
     const name = (asset.seo_name || "netofficials-illustration") + ".webp";

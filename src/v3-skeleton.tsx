@@ -1,4 +1,5 @@
 import { SiteIcon, legacyIcon, iconFor } from "./icon-set";
+import { company, founderPage } from "./company";
 import { TechIcon } from "./brand-icon";
 import { sanitizeRichHTML } from "./rich-text";
 import { TrackedLink } from "./v3-interactions";
@@ -21,7 +22,19 @@ export function isSkeletonContent(content: Content, path: string) {
 
 const isChapter = (id: string) => /^editorial-\d+$/.test(id);
 
-type Props = { content: Content; path: string; paths: string[]; preview?: boolean; linkMap?: Record<string, string> };
+type Props = {
+  content: Content;
+  path: string;
+  paths: string[];
+  preview?: boolean;
+  linkMap?: Record<string, string>;
+  published?: string | Date | null;
+  modified?: string | Date | null;
+};
+
+const shortDate = (value: string | Date) =>
+  new Date(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const DAY = 86_400_000;
 
 const DARK = new Set(["process", "engagement-models", "cta-banner"]);
 const NAV_LABELS: Record<string, string> = {
@@ -72,7 +85,7 @@ function Head({ f, light }: { f: Record<string, string>; light?: boolean }) {
   );
 }
 
-export function SkeletonSections({ content, path, paths, preview = false, linkMap = {} }: Props) {
+export function SkeletonSections({ content, path, paths, preview = false, linkMap = {}, published, modified }: Props) {
   const destination = (url: string) => (preview ? (linkMap[url] ?? url) : url);
   const sections = (content.pageSections ?? []).filter((s) => !s.omitted);
   const pillar = pillarFor(path);
@@ -173,7 +186,22 @@ export function SkeletonSections({ content, path, paths, preview = false, linkMa
                 {(f.tag_pill || pillar?.label) && <span className="sk-tag">{f.tag_pill || pillar?.label}</span>}
                 <h1 className={"sk-h1" + (long ? " is-long" : "")}>{f.h1 || content.title}</h1>
                 <p className="sk-lead">{f.subheadline}</p>
-                {guide && <p className="sk-meta"><span>Guide</span><span>{readMinutes} min read</span><span>Netofficials</span></p>}
+                {guide && (
+                  <p className="sk-meta">
+                    <span>Guide</span>
+                    <span>{readMinutes} min read</span>
+                    <span>
+                      By{" "}
+                      <a href={founderPage} rel="author" className="sk-author">
+                        {company.founder.name}
+                      </a>
+                    </span>
+                    {published && <span><time dateTime={new Date(published).toISOString()}>Published {shortDate(published)}</time></span>}
+                    {modified && published && new Date(modified).getTime() - new Date(published).getTime() > DAY && (
+                      <span><time dateTime={new Date(modified).toISOString()}>Updated {shortDate(modified)}</time></span>
+                    )}
+                  </p>
+                )}
                 <div className="sk-actions">
                   <TrackedLink href={contact} event="consultation_click" service={service} className="sk-btn">
                     {f.cta_primary_label || "Get a scoped estimate"} <span aria-hidden="true">↗</span>

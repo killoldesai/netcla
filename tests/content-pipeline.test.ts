@@ -120,9 +120,9 @@ test("structured data includes organisation, service, breadcrumbs and FAQ", () =
   const content = page({ hero: { h1: "Flutter" }, faq: { q1: "Q?", a1: "<p>Answer</p>" } });
   const graph = pageGraph({ path: "/flutter-app-development", content, site: "https://example.com" })["@graph"] as any[];
   const types = graph.map((n) => n["@type"]);
-  assert.deepEqual(types, ["Organization", "Service", "BreadcrumbList", "FAQPage", "WebSite"]);
-  assert.deepEqual(graph[2].itemListElement.map((i: any) => i.item), ["https://example.com", "https://example.com/mobile-app-development", "https://example.com/flutter-app-development"]);
-  assert.equal(graph[3].mainEntity[0].acceptedAnswer.text, "Answer");
+  assert.deepEqual(types, ["Organization", "Person", "Service", "BreadcrumbList", "FAQPage", "WebSite"]);
+  assert.deepEqual(graph[3].itemListElement.map((i: any) => i.item), ["https://example.com", "https://example.com/mobile-app-development", "https://example.com/flutter-app-development"]);
+  assert.equal(graph[4].mainEntity[0].acceptedAnswer.text, "Answer");
   const article = pageGraph({ path: "/blog/custom-software-development-cost", content, site: "https://example.com" })["@graph"] as any[];
-  assert.equal(article[1]["@type"], "Article");
+  assert.equal(article[2]["@type"], "Article");
 });

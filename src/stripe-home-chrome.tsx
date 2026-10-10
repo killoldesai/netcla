@@ -24,6 +24,15 @@ const footerLinks = (paths: string[]): [string, string][] =>
     const page = sitePage(path);
     return page ? [[page.label, page.path] as [string, string]] : [];
   });
+/** Location pages, linked from every footer so they are reachable without the menu. */
+export const footerLocations: [string, string][] = [
+  ["USA", "/software-development-company-usa"],
+  ["United Kingdom", "/software-development-company-uk"],
+  ["Canada", "/software-development-company-canada"],
+  ["Australia", "/software-development-company-australia"],
+  ["Dubai", "/software-development-company-dubai"],
+  ["India", "/software-development-company-india"],
+];
 export const groups: [string, [string, string][]][] = [
   [
     "Services",
@@ -46,7 +55,7 @@ export const groups: [string, [string, string][]][] = [
 ];
 export function StripeFooter(props: ChromeProps) {
   const privacy = publicDestination("/privacy-policy", props),
-    terms = publicDestination("/terms-and-conditions", props);
+    terms = publicDestination("/terms", props);
   return (
     <footer className="stripe-footer">
       <link rel="stylesheet" href="/assets/site-unified.css?v=20261008" />
@@ -99,6 +108,13 @@ export function StripeFooter(props: ChromeProps) {
             );
           })}
         </div>
+        <nav className="footer-locations" aria-label="Where we work">
+          <span>Where we work</span>
+          {footerLocations.flatMap(([label, path]) => {
+            const href = publicDestination(path, props);
+            return href ? [<a href={href} key={path}>{label}</a>] : [];
+          })}
+        </nav>
         <div className="stripe-footer-bottom">
           <span>© {new Date().getFullYear()} Netofficials. India.</span>
           <div>

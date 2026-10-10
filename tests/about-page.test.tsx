@@ -97,12 +97,12 @@ test("approved evidence fills the glance list, and proof blocks appear once they
   assert.equal($("#proof-clients").length, 0);
 });
 
-test("About JSON-LD is an AboutPage and states a founding date only when the glance field is filled", () => {
+test("About JSON-LD is an AboutPage and defaults to the owner-supplied founding year and lets the glance field override it", () => {
   const graph = (c: ReturnType<typeof content>) => pageGraph({ path: "/about", content: c, site: "https://example.com" })["@graph"] as Record<string, any>[];
   const plain = graph(content());
   assert.equal(plain.find((n) => n["@type"] === "AboutPage")?.mainEntity["@id"], "https://example.com/#organization");
   const org = plain.find((n) => n["@type"] === "Organization")!;
-  assert.equal(org.foundingDate, undefined);
+  assert.equal(org.foundingDate, "2011");
   assert.equal(org.address.addressLocality, undefined);
   const withFacts = graph(content({ "company-glance": { founded_year: "2012", base_city: "Pune" } })).find((n) => n["@type"] === "Organization")!;
   assert.equal(withFacts.foundingDate, "2012");

@@ -1,3 +1,4 @@
+import { siteUrl } from "./site-url";
 import { mediaPath } from "./media-path";
 import { ServiceTechnologyStack } from "./service-technology-stack";
 import { SiteIcon, iconFor, legacyIcon } from "./icon-set";
@@ -18,6 +19,8 @@ import { HowWorkSections, isHowWorkContent } from "./how-work-page";
 import { WhyChooseSections, isWhyChooseContent } from "./why-choose-page";
 import { BlogIndexSections, isBlogIndexContent } from "./blog-index-page";
 import type { BlogPost } from "./blog-types";
+import { RelatedGuides } from "./related-guides";
+import { RelatedPages } from "./related-pages";
 import {
   NewsletterForm,
   VacancyDirectory,
@@ -663,7 +666,7 @@ export function V3Page({
             <p>Draft notes: {content.unresolved.join("; ")}.</p>
           </aside>
         )}
-        {skeleton && <SkeletonSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {skeleton && <SkeletonSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} published={published} modified={modified} />}
         {aboutPage && <AboutSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
         {contactPage && <ContactSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
         {engagePage && <EngagementSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
@@ -725,6 +728,8 @@ export function V3Page({
           </div>
         ))}
         {!sections.some((s) => s.id === "cta-banner" && !s.omitted) && afterContent}
+        <RelatedPages path={path} paths={paths} />
+        {path.startsWith("/blog/") && <RelatedGuides posts={posts} path={path} />}
       </main>
       <StripeFooter paths={paths} preview={preview} linkMap={linkMap} />
       <script
@@ -742,7 +747,7 @@ export function V3Page({
                     ],
                   }
                 : content,
-              site: process.env.SITE_URL ?? "http://localhost:3000",
+              site: siteUrl(),
               published,
               modified,
               listing: blogPage ? posts : undefined,
