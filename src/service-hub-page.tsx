@@ -1,3 +1,4 @@
+import { siteUrl } from "./site-url";
 import type { Content } from "./content";
 import { RichContent } from "./rich-content";
 import { StripeNavigation, StripeFooter } from "./stripe-home-chrome";
@@ -133,10 +134,7 @@ export function ServiceHubPage({
       name: title,
       serviceType: hub.name,
       url:
-        (process.env.SITE_URL ?? "https://www.netofficials.com").replace(
-          /\/$/,
-          "",
-        ) + path,
+        siteUrl("https://www.netofficials.com") + path,
       provider: {
         "@type": "Organization",
         name: "Netofficials",

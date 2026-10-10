@@ -1,3 +1,4 @@
+import { siteUrl } from "./site-url";
 import type { ReactNode } from "react";
 import { StripeNavigation, StripeFooter } from "./stripe-home-chrome";
 import { SharedProjectEnquiry } from "./shared-project-enquiry";
@@ -517,7 +518,7 @@ export function ServiceDirectoryPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             serviceDirectorySchema(
-              process.env.SITE_URL ?? "https://netofficials.com",
+              siteUrl("https://netofficials.com"),
             ),
           ).replaceAll("<", "\\u003c"),
         }}

@@ -1,3 +1,4 @@
+import { siteUrl } from "@/site-url";
 import { publishedPaths } from "@/pages";
 import { pillars, sitePage, sitePages } from "@/site-structure";
 
@@ -5,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 // llms.txt (llmstxt.org): a plain map of the site for AI assistants and crawlers.
 export async function GET() {
-  const base = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const base = siteUrl();
   const live = process.env.DATABASE_URL ? new Set((await publishedPaths()).map((p) => p.path)) : new Set<string>();
   const line = (path: string) => {
     const page = sitePage(path);

@@ -1,3 +1,4 @@
+import { absoluteUrl } from "@/site-url";
 export const dynamic = "force-dynamic";
 export default function robots() {
   const staging = process.env.STAGING !== "false";
@@ -9,6 +10,6 @@ export default function robots() {
     },
     sitemap: staging
       ? undefined
-      : (process.env.SITE_URL ?? "http://localhost:3000") + "/sitemap.xml",
+      : absoluteUrl("/sitemap.xml"),
   };
 }
