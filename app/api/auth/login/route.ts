@@ -45,7 +45,15 @@ export async function POST(req: Request) {
       maxAge: 43200,
     });
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
+    if (e instanceof Error && e.message === "Invalid origin")
+      return NextResponse.json(
+        {
+          error: `Sign in from ${new URL(process.env.SITE_URL ?? "http://localhost:3000").origin}`,
+        },
+        { status: 403 },
+      );
+    console.error("Login failed", e);
     return NextResponse.json({ error: "Login unavailable" }, { status: 503 });
   }
 }
