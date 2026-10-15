@@ -58,19 +58,40 @@ test("evidence-gated facts are blanked unless an approved fact supports them", (
   assert.deepEqual(Object.values(constrainEvidence("proof-team", { heading: "Team", leader_1_name: "A B" })).filter(Boolean), []);
 });
 
-test("About renders its own layout with no skeleton classes and hides empty proof blocks", () => {
+test("About renders its own layout on the redesigned shell and hides empty proof blocks", () => {
   const c = content();
   assert.ok(isAboutContent(c, "/about"));
   assert.ok(!isAboutContent(c, "/contact"));
   const $ = render(c);
   assert.ok($("main.v3-about").length);
-  assert.ok($("link[href^='/assets/about.css']").length);
+  assert.ok($(".nx").length);
+  assert.ok($("link[href^='/assets/nx/pages/about.css']").length);
+  assert.equal($("link[href^='/assets/about.css']").length, 0);
   assert.equal($("link[href^='/assets/skeleton.css']").length, 0);
-  assert.equal($("[class*='sk-']").length, 0);
+  assert.equal($("[class*='ab-']").length, 0, "legacy about-page classes are gone");
   assert.equal($("h1").length, 1);
   for (const id of ["proof-team", "proof-clients", "proof-awards"]) assert.equal($("#" + id).length, 0, id + " must not render without evidence");
+  // Only the founder card (from company.ts) shows in the team section until leaders are approved.
+  assert.equal($("#team .about-team > article").length, 1);
+  assert.equal($("#team .sk-card__title").text().trim(), "Killol Desai");
   // Glance rows with no approved fact are not shown; the computed row is.
-  assert.deepEqual($(".ab-glance dt").map((_, el) => $(el).text()).get(), ["Core practices"]);
+  assert.deepEqual($(".about-glance dt").map((_, el) => $(el).text()).get(), ["Core practices"]);
+  // No illustration in the content, so the hero shows the prototype fallback art.
+  assert.equal($("#hero .about-art svg.il[role='img']").length, 1);
+});
+
+test("sections render in the prototype order, and the on-page nav links only to rendered sections", () => {
+  const $ = render();
+  assert.deepEqual($("main section[id]").map((_, el) => $(el).attr("id")).get(), ["hero", "company-story", "company-glance", "practice-index", "principles", "delivery-timeline", "working-model", "industries-intro", "india-partner", "team", "faq", "cta-banner"]);
+  const targets = $(".subnav a").map((_, el) => $(el).attr("href")!).get();
+  assert.deepEqual(targets, ["#company-story", "#company-glance", "#practice-index", "#principles", "#delivery-timeline", "#working-model", "#industries-intro", "#india-partner", "#team", "#faq"]);
+  for (const href of targets) assert.equal($(href).length, 1, href);
+  // Process steps are a real sequence: five numbered steps in the ordered list.
+  assert.equal($("#delivery-timeline ol.nx-steps.nx-steps--five > li.nx-step").length, 5);
+  // Each FAQ question is a native details element, the first one open.
+  assert.equal($("#faq details").length, 6);
+  assert.ok($("#faq details").first().attr("open") !== undefined);
+  assert.equal($("#faq details").eq(1).attr("open"), undefined);
 });
 
 test("practice rows and sector chips come from the site structure and link to live pages", () => {
@@ -80,9 +101,9 @@ test("practice rows and sector chips come from the site structure and link to li
   }
   for (const [url] of ALSO) assert.ok(sitePage(url), url);
   const $ = render();
-  assert.equal($("#practice-index .ab-practices > li").length, 4);
-  assert.equal($("#practice-index .ab-practices > li").first().find("a[href='/custom-software-development']").length > 0, true);
-  assert.equal($("#industries-intro .ab-sectors li").length, sectorPaths.length);
+  assert.equal($("#practice-index .sk-cards > article").length, 4);
+  assert.equal($("#practice-index .sk-cards > article").first().find("a[href='/custom-software-development']").length > 0, true);
+  assert.equal($("#industries-intro .about-sectors li").length, sectorPaths.length);
 });
 
 test("approved evidence fills the glance list, and proof blocks appear once they have content", () => {
@@ -91,9 +112,12 @@ test("approved evidence fills the glance list, and proof blocks appear once they
     "proof-team": { heading: "The team", leader_1_name: "Asha Rao", leader_1_title: "Head of Engineering", leader_1_bio: "Leads delivery." },
     "proof-awards": { heading: "Recognition", award_1: "Clutch top developer" },
   }));
-  assert.deepEqual($(".ab-glance dt").map((_, el) => $(el).text()).get(), ["Founded", "Based in", "Core practices"]);
-  assert.equal($("#proof-team .ab-team li").length, 1);
-  assert.equal($("#proof-awards .ab-awards li").length, 1);
+  assert.deepEqual($(".about-glance dt").map((_, el) => $(el).text()).get(), ["Founded", "Based in", "Core practices"]);
+  // The approved leader sits beside the founder card in the team section, which now takes the proof-team id.
+  assert.equal($("#proof-team .about-team > article").length, 2);
+  assert.equal($("#proof-team .sk-card__title").last().text().trim(), "Asha Rao");
+  assert.equal($("#team").length, 0);
+  assert.equal($("#proof-awards .about-awards li").length, 1);
   assert.equal($("#proof-clients").length, 0);
 });
 

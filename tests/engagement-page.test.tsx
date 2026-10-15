@@ -60,36 +60,61 @@ test("one comparison matrix with a column per model, plain headers and no model 
   assert.ok(isEngagementContent(c, "/engagement-models"));
   const $ = render(c);
   assert.ok($("main.v3-engage").length);
-  assert.ok($("link[href^='/assets/engagement.css']").length);
-  assert.equal($("[class*='sk-'], [class*='ab-'], [class*='ct-']").length, 0);
+  assert.ok($("link[href^='/assets/nx/pages/engagement.css']").length);
+  assert.ok($(".nx").length, "rendered inside the redesigned shell");
+  assert.equal($("[class*='en-']").length, 0, "no legacy en- classes");
   assert.equal($("h1").length, 1);
-  assert.equal($("table.en-matrix thead th").length, 3);
-  assert.deepEqual($("table.en-matrix thead th strong").map((_, el) => $(el).text()).get(), NAMES);
-  assert.equal($("table.en-matrix tbody tr").length, MATRIX_ROWS.length);
-  assert.equal($("table.en-matrix tbody td").length, MATRIX_ROWS.length * 3);
-  assert.equal($("table.en-matrix tbody td").first().attr("data-label"), NAMES[0]);
+  assert.equal($("table.em-matrix thead th").length, 3);
+  assert.deepEqual($("table.em-matrix thead th strong").map((_, el) => $(el).text()).get(), NAMES);
+  assert.equal($("table.em-matrix tbody tr").length, MATRIX_ROWS.length);
+  assert.equal($("table.em-matrix tbody td").length, MATRIX_ROWS.length * 3);
+  assert.equal($("table.em-matrix tbody td").first().attr("data-label"), NAMES[0]);
+  assert.ok($(".em-table-wrap").length, "matrix sits in a box that scrolls on phones");
   // Numbers only where the order is real: the steps. Models, situations and sections carry none.
   assert.equal($("#models-comparison [class*='-n']").length, 0);
   assert.equal($("#decision-guide [class*='-n']").length, 0);
-  assert.deepEqual($("#process .en-step-n").map((_, el) => $(el).text()).get(), ["1", "2", "3", "4"]);
+  assert.equal($("#models-comparison .nx-step").length, 0);
+  assert.equal($("#process .nx-step").length, 4);
+  // The step numbers come from the list counter, not from text in the markup.
+  assert.equal($("#process .nx-step span").length, 0);
   // No decorative gimmicks: no meter, no icon chips.
-  assert.equal($("main .en-meter, main .en-icon, main svg").length, 0);
+  assert.equal($("main .em-meter, main .en-icon, #models-comparison svg, #pricing-factors svg, #process svg").length, 0);
 });
 
 test("the selector pairs each situation with one recommendation that links to its column", () => {
   const $ = render();
-  const radios = $("#decision-guide input[type='radio']");
+  const radios = $("#decision-guide [role='radio']");
   assert.equal(radios.length, 3);
-  assert.equal($("#decision-guide input:checked").length, 1);
-  assert.equal($("#decision-guide input[checked]").attr("id"), "en-sit-1");
-  for (const id of ["en-sit-1", "en-sit-2", "en-sit-3"]) assert.equal($(`#decision-guide label[for='${id}']`).length, 1, id);
-  assert.equal($("#decision-guide .en-result").length, 3);
-  const hrefs = $("#decision-guide .en-result .en-btn").map((_, el) => $(el).attr("href")).get();
+  assert.equal($("#decision-guide [role='radio'][aria-checked='true']").length, 1);
+  assert.equal($("#decision-guide [role='radio']").first().attr("aria-checked"), "true");
+  const values = radios.map((_, el) => $(el).attr("data-value")).get();
+  assert.equal(new Set(values).size, 3);
+  for (const v of values) assert.equal($(`#decision-guide .model[data-model='${v}']`).length, 1, v);
+  // Only the first recommendation is shown; the segment switches the others on (behaviors.tsx).
+  assert.equal($("#decision-guide .model:not([hidden])").length, 1);
+  assert.equal($("#decision-guide .model").length, 3);
+  const hrefs = $("#decision-guide .model .nx-arrowlink").map((_, el) => $(el).attr("href")).get();
   assert.deepEqual(hrefs, ["#model-1", "#model-2", "#model-3"]);
   for (const href of hrefs) assert.equal($(href).length, 1, `${href} target exists`);
-  assert.equal($("#pricing-factors .en-factors li").length, 4);
-  assert.equal($("#process .en-steps li").length, 4);
+  const ctas = $("#decision-guide .model .nx-btn").map((_, el) => $(el).attr("href")).get();
+  assert.deepEqual(ctas, ["/contact?service=Engagement%20model", "/contact?service=Engagement%20model", "/contact?service=Engagement%20model"]);
+  assert.equal($("#pricing-factors .em-factors .sk-card").length, 4);
+  assert.equal($("#process .nx-steps li").length, 4);
   assert.equal($("#faq details").length, 6);
+  assert.equal($("#faq details[open]").length, 1, "the first answer is open");
+});
+
+test("the hero uses the page image when it has one and the three-ways illustration when it does not", () => {
+  const plain = render();
+  assert.equal(plain("#hero svg.il").length, 1);
+  assert.equal(plain("#hero img").length, 0);
+  const withImage = content();
+  (withImage.pageSections!.find((s) => s.id === "hero") as unknown as Record<string, unknown>).asset = { id: "a".repeat(32), name: "three-ways.png", src: "/media/three-ways.png", alt: "Three ways to work", width: 1200, height: 900 };
+  const $ = render(withImage);
+  assert.equal($("#hero img").length, 1);
+  assert.equal($("#hero img").attr("alt"), "Three ways to work");
+  assert.equal($("#hero img").attr("width"), "1200");
+  assert.equal($("#hero svg.il").length, 0);
 });
 
 test("older accepted content without the new sections keeps the legacy renderer", () => {

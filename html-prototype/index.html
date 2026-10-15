@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software, AI, DevOps, Cloud &amp; Mobile App Development | Netofficials</title>
+<meta name="description" content="Custom software, AI, DevOps, cloud and mobile app development from an India-based team serving businesses in the US, UK and Australia. Tell us what you need built.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/tokens.css?v=11">
+<link rel="stylesheet" href="css/components.css?v=11">
+<link rel="stylesheet" href="css/sections.css?v=11">
+<link rel="stylesheet" href="css/home.css?v=11">
+<style>.s-on { fill: none; stroke: var(--on-indigo); stroke-width: 2; stroke-linecap: round; }</style>
+</head>
+<body>
+<!-- @partial icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+</svg>
+<!-- /@partial icons -->
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- @partial header -->
+<div class="site-header" data-header>
+  <div class="container">
+    <header class="nx-nav" data-nav>
+      <a class="nx-nav__brand" href="index.html" data-path="/"><img class="logo--light" src="assets/logo.png" alt="netofficials" width="156" height="26"><img class="logo--dark" src="assets/logo-dark.png" alt="netofficials" width="156" height="26"></a>
+      <button type="button" class="nx-icon-btn nx-nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu" data-nav-toggle><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <div class="nx-nav__menu" id="nav-menu">
+        <nav aria-label="Primary">
+          <ul class="nx-nav__links">
+            <li><a href="services.html" data-path="/services">Services</a></li>
+            <li><a href="pillar.html" data-path="/hire-developers">Hire developers</a></li>
+            <li><a href="industries-hub.html" data-path="/industries">Industries</a></li>
+            <li><a href="how-we-work.html" data-path="/how-we-work">How we work</a></li>
+            <li><a href="blog.html" data-path="/blog">Guides</a></li>
+          </ul>
+        </nav>
+        <a class="nx-btn nx-btn--primary nx-btn--sm nx-nav__cta-mobile" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </div>
+      <a class="nx-btn nx-btn--primary nx-btn--sm nx-nav__cta-desktop" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </header>
+  </div>
+</div>
+<!-- /@partial header --><main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div>
+      <span class="eyebrow">India-based engineering team · Clients in the US, UK and Australia</span>
+      <h1 data-split>Custom software, AI, DevOps, cloud and mobile apps, <span class="hl">built by one team.</span></h1>
+      <p class="lead">We build custom software, AI features, delivery pipelines, cloud infrastructure and iOS and Android apps for growing businesses. One engineering team, one delivery process, from first brief to production.</p>
+    </div>
+
+    <div class="hero__art">
+      <svg class="il" viewBox="0 0 560 440" role="img" aria-label="A web app, a mobile app, cloud infrastructure, an AI assistant and a release pipeline working together">
+        <path class="s-indigo s-dash dash-move" d="M150 104 C 200 104, 210 120, 228 120"/>
+        <path class="s-indigo s-dash dash-move" d="M470 134 C 470 160, 470 175, 466 190"/>
+        <g class="float-a">
+          <rect class="f-surface" x="90" y="120" width="330" height="230" rx="18"/>
+          <rect class="s-line" x="90" y="120" width="330" height="230" rx="18"/>
+          <circle class="f-line" cx="112" cy="140" r="5"/><circle class="f-line" cx="128" cy="140" r="5"/><circle class="f-lime" cx="144" cy="140" r="5"/>
+          <line class="s-line" x1="90" y1="160" x2="420" y2="160"/>
+          <rect class="f-i50" x="106" y="176" width="70" height="158" rx="10"/>
+          <rect class="f-i100" x="118" y="190" width="46" height="8" rx="4"/><rect class="f-i100" x="118" y="206" width="38" height="8" rx="4"/><rect class="f-indigo" x="118" y="222" width="46" height="8" rx="4"/><rect class="f-i100" x="118" y="238" width="32" height="8" rx="4"/>
+          <rect class="f-i50" x="190" y="176" width="68" height="44" rx="10"/><rect class="f-l50" x="266" y="176" width="68" height="44" rx="10"/><rect class="f-i50" x="342" y="176" width="62" height="44" rx="10"/>
+          <rect class="f-i100" x="200" y="188" width="30" height="6" rx="3"/><rect class="f-indigo" x="200" y="200" width="42" height="9" rx="4.5"/>
+          <rect class="f-i100" x="276" y="188" width="30" height="6" rx="3"/><rect class="f-lime" x="276" y="200" width="36" height="9" rx="4.5"/>
+          <rect class="f-i100" x="352" y="188" width="26" height="6" rx="3"/><rect class="f-indigo" x="352" y="200" width="40" height="9" rx="4.5"/>
+          <rect class="f-surface s-line" x="190" y="230" width="214" height="104" rx="10"/>
+          <rect class="f-i100" x="206" y="292" width="18" height="30" rx="4"/><rect class="f-i100" x="238" y="276" width="18" height="46" rx="4"/><rect class="f-i100" x="270" y="284" width="18" height="38" rx="4"/><rect class="f-i100" x="302" y="260" width="18" height="62" rx="4"/><rect class="f-i100" x="334" y="268" width="18" height="54" rx="4"/><rect class="f-indigo" x="366" y="244" width="18" height="78" rx="4"/>
+        </g>
+        <g class="float-b">
+          <rect class="f-ink" x="400" y="190" width="130" height="236" rx="24"/>
+          <rect class="f-surface" x="408" y="198" width="114" height="220" rx="18"/>
+          <rect class="f-i100" x="420" y="214" width="50" height="7" rx="3.5"/>
+          <rect class="f-ink" x="420" y="228" width="80" height="11" rx="5.5"/>
+          <rect class="f-indigo" x="420" y="252" width="90" height="62" rx="12"/>
+          <circle class="f-lime" cx="440" cy="272" r="8"/>
+          <rect class="f-i100" x="454" y="268" width="44" height="7" rx="3.5" opacity=".7"/>
+          <rect class="f-i100" x="432" y="294" width="64" height="7" rx="3.5" opacity=".7"/>
+          <rect class="f-i50" x="420" y="324" width="90" height="26" rx="8"/><rect class="f-i50" x="420" y="356" width="90" height="26" rx="8"/>
+          <rect class="f-lime" x="420" y="392" width="90" height="18" rx="9"/>
+        </g>
+        <g class="float-c">
+          <path class="f-surface" d="M56 112h96a26 26 0 0 0 0-52 36 36 0 0 0-68-10A28 28 0 0 0 56 112z"/>
+          <path class="s-line" d="M56 112h96a26 26 0 0 0 0-52 36 36 0 0 0-68-10A28 28 0 0 0 56 112z"/>
+          <rect class="f-i50" x="70" y="80" width="64" height="18" rx="9"/>
+          <circle class="f-lime blink" cx="82" cy="89" r="4"/>
+          <rect class="f-i100" x="92" y="86" width="34" height="6" rx="3"/>
+        </g>
+        <g class="float-b">
+          <circle class="f-indigo pulse" cx="470" cy="96" r="34"/>
+          <circle class="f-indigo" cx="470" cy="96" r="34"/>
+          <path class="f-lime" d="M470 74l6 16 16 6-16 6-6 16-6-16-16-6 16-6z"/>
+        </g>
+        <g class="float-a">
+          <rect class="f-surface" x="22" y="330" width="196" height="76" rx="16"/>
+          <rect class="s-line" x="22" y="330" width="196" height="76" rx="16"/>
+          <line class="s-indigo" x1="56" y1="362" x2="184" y2="362"/>
+          <circle class="f-indigo" cx="56" cy="362" r="11"/><circle class="f-indigo" cx="120" cy="362" r="11"/><circle class="f-lime pulse" cx="184" cy="362" r="11"/><circle class="f-lime" cx="184" cy="362" r="11"/>
+          <path class="s-on" d="M51 362l3.5 3.5 6.5-7M115 362l3.5 3.5 6.5-7"/>
+          <text x="56" y="394" text-anchor="middle" font-size="11" class="f-muted">Build</text>
+          <text x="120" y="394" text-anchor="middle" font-size="11" class="f-muted">Test</text>
+          <text x="184" y="394" text-anchor="middle" font-size="11" class="f-muted">Release</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BRIEF -->
+<section class="brief" aria-labelledby="brief-title">
+  <div class="container">
+    <div class="brief__card">
+      <div>
+        <h2 class="brief__title" id="brief-title">What do you need built?</h2>
+        <p class="brief__sub">Pick the closest match. We pre-fill the form so your first conversation starts further along.</p>
+      </div>
+      <div class="brief__opts" role="group" aria-labelledby="brief-title">
+        <button type="button" class="brief-opt" aria-pressed="false" data-chip="Custom software"><svg class="brief-opt__icon" width="28" height="28" aria-hidden="true"><use href="assets/icons.svg#code-brackets"/></svg><span>Software</span></button>
+        <button type="button" class="brief-opt" aria-pressed="false" data-chip="AI &amp; business automation"><svg class="brief-opt__icon" width="28" height="28" aria-hidden="true"><use href="assets/icons.svg#brain-circuit"/></svg><span>AI and automation</span></button>
+        <button type="button" class="brief-opt" aria-pressed="false" data-chip="Cloud &amp; DevOps"><svg class="brief-opt__icon" width="28" height="28" aria-hidden="true"><use href="assets/icons.svg#cloud-upload"/></svg><span>Cloud and DevOps</span></button>
+        <button type="button" class="brief-opt" aria-pressed="false" data-chip="Mobile application development"><svg class="brief-opt__icon" width="28" height="28" aria-hidden="true"><use href="assets/icons.svg#mobile-device"/></svg><span>Mobile app</span></button>
+        <button type="button" class="brief-opt" aria-pressed="false" data-chip="Help defining the scope"><svg class="brief-opt__icon" width="28" height="28" aria-hidden="true"><use href="assets/icons.svg#users-group"/></svg><span>Not sure yet</span></button>
+      </div>
+      <div class="brief__foot">
+        <p class="brief__note">A short brief is enough. We reply with questions, a proposed scope and the team you need.</p>
+        <a class="nx-btn nx-btn--primary nx-btn--lg" href="#contact" data-starter-go><span>Start my brief</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSURANCE -->
+<section class="assure" aria-label="How every project is run">
+  <div class="container assure__grid">
+    <div class="assure__item"><span class="assure__icon"><svg width="18" height="18" aria-hidden="true"><use href="#i-flag"/></svg></span><div><p class="assure__title">Scope agreed first</p><p class="assure__text">A scope summary, open questions and an initial estimate before the build starts.</p></div></div>
+    <div class="assure__item"><span class="assure__icon"><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg></span><div><p class="assure__title">Review milestones</p><p class="assure__text">Staging builds, progress reviews and test results at agreed points.</p></div></div>
+    <div class="assure__item"><span class="assure__icon"><svg width="18" height="18" aria-hidden="true"><use href="#i-clock"/></svg></span><div><p class="assure__title">Your time zone</p><p class="assure__text">Communication window, meetings and update cadence set before work begins.</p></div></div>
+    <div class="assure__item"><span class="assure__icon"><svg width="18" height="18" aria-hidden="true"><use href="#i-file"/></svg></span><div><p class="assure__title">Full handover</p><p class="assure__text">Documentation and deployment access handed over at release.</p></div></div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="strip" aria-label="Technologies we work with">
+  <div class="nx-marquee nx-marquee--pause" style="--nx-speed:50s">
+    <ul class="nx-sr"><li>React</li><li>Next.js</li><li>Node.js</li><li>Python</li><li>TypeScript</li><li>PostgreSQL</li><li>LLM APIs</li><li>TensorFlow</li><li>MongoDB</li><li>AWS</li><li>Azure</li><li>Google Cloud</li><li>Docker</li><li>Kubernetes</li><li>Terraform</li><li>Flutter</li><li>Swift</li><li>Kotlin</li><li>React Native</li></ul>
+    <div class="nx-marquee__track" aria-hidden="true"><span class="nx-marquee__item">React</span><span class="nx-marquee__item">Next.js</span><span class="nx-marquee__item">Node.js</span><span class="nx-marquee__item">Python</span><span class="nx-marquee__item">TypeScript</span><span class="nx-marquee__item">PostgreSQL</span><span class="nx-marquee__item">LLM APIs</span><span class="nx-marquee__item">TensorFlow</span><span class="nx-marquee__item">MongoDB</span><span class="nx-marquee__item">AWS</span><span class="nx-marquee__item">Azure</span><span class="nx-marquee__item">Google Cloud</span><span class="nx-marquee__item">Docker</span><span class="nx-marquee__item">Kubernetes</span><span class="nx-marquee__item">Terraform</span><span class="nx-marquee__item">Flutter</span><span class="nx-marquee__item">Swift</span><span class="nx-marquee__item">Kotlin</span><span class="nx-marquee__item">React Native</span></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head nx-reveal">
+      <div>
+        <span class="eyebrow">What we build</span>
+        <h2 class="h-section">Five practices, one delivery team.</h2>
+      </div>
+      <p class="lead">Start with the practice that matches your project. Each one has its own specialists, technologies and service pages, and they share one delivery process.</p>
+    </div>
+
+    <div class="svc-grid">
+      <!-- Software -->
+      <article class="svc svc--wide nx-reveal">
+        <div class="svc__art">
+          <svg class="il" viewBox="0 0 400 220" aria-hidden="true">
+            <rect class="f-i50" width="400" height="220" rx="20"/>
+            <g class="float-a">
+              <rect class="f-band" x="36" y="30" width="220" height="164" rx="14"/>
+              <circle class="f-i100" cx="54" cy="48" r="4" opacity=".5"/><circle class="f-i100" cx="67" cy="48" r="4" opacity=".5"/><circle class="f-lime" cx="80" cy="48" r="4"/>
+              <rect class="f-lime" x="54" y="70" width="54" height="7" rx="3.5"/><rect class="f-i100" x="114" y="70" width="80" height="7" rx="3.5" opacity=".5"/>
+              <rect class="f-i100" x="68" y="88" width="96" height="7" rx="3.5" opacity=".5"/><rect class="f-indigo" x="170" y="88" width="40" height="7" rx="3.5"/>
+              <rect class="f-i100" x="68" y="106" width="70" height="7" rx="3.5" opacity=".5"/>
+              <rect class="f-i100" x="82" y="124" width="110" height="7" rx="3.5" opacity=".5"/>
+              <rect class="f-lime" x="68" y="142" width="40" height="7" rx="3.5"/><rect class="f-i100" x="114" y="142" width="60" height="7" rx="3.5" opacity=".5"/>
+              <rect class="f-i100" x="54" y="160" width="20" height="7" rx="3.5" opacity=".5"/>
+            </g>
+            <g class="float-b">
+              <rect class="f-surface" x="216" y="88" width="148" height="108" rx="14"/>
+              <rect class="s-line" x="216" y="88" width="148" height="108" rx="14"/>
+              <rect class="f-ink" x="232" y="104" width="64" height="9" rx="4.5"/>
+              <rect class="f-i100" x="232" y="119" width="96" height="6" rx="3"/>
+              <rect class="f-indigo" x="232" y="136" width="36" height="20" rx="10"/><circle class="f-surface" cx="258" cy="146" r="7"/>
+              <rect class="f-i100" x="276" y="143" width="52" height="6" rx="3"/>
+              <rect class="f-lime" x="232" y="166" width="116" height="20" rx="10"/>
+            </g>
+            <g class="float-c">
+              <circle class="f-lime" cx="330" cy="52" r="26"/>
+              <path class="s-ink" d="M321 46l-7 6 7 6M339 46l7 6-7 6"/>
+            </g>
+          </svg>
+        </div>
+        <div class="svc__body">
+          <span class="svc__tag">Custom software</span>
+          <h3 class="svc__title">Software development</h3>
+          <p class="svc__text">Web applications, SaaS platforms, ERP and CRM systems and APIs, built on React, Node.js, Python and .NET. We plan the build around your users, workflows and the systems it has to connect to.</p>
+          <ul class="svc__links"><li><a href="service.html" data-path="/web-application-development">Web apps</a></li><li><a href="service.html" data-path="/saas-development-services">SaaS</a></li><li><a href="service.html" data-path="/mvp-development-services">MVP build</a></li><li><a href="service.html" data-path="/enterprise-software-development">Enterprise</a></li><li><a href="service.html" data-path="/api-development-services">APIs</a></li><li><a href="service.html" data-path="/erp-development-services">ERP and CRM</a></li></ul>
+          <a class="nx-arrowlink svc__cta" href="#contact" data-service="Custom software"><span>Discuss a software project</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </article>
+
+      <!-- AI -->
+      <article class="svc svc--wide nx-reveal" style="--nx-delay:100ms">
+        <div class="svc__art">
+          <svg class="il" viewBox="0 0 400 220" aria-hidden="true">
+            <rect class="f-sky" width="400" height="220" rx="20"/>
+            <g opacity=".7">
+              <path class="s-indigo dash-move" d="M200 110L96 56M200 110L96 164M200 110L304 56M200 110L304 164M200 110L200 196"/>
+            </g>
+            <g class="float-a"><circle class="f-surface" cx="96" cy="56" r="22"/><circle class="s-indigo" cx="96" cy="56" r="22"/><path class="s-ink" d="M88 49h16M88 56h16M88 63h10"/></g>
+            <g class="float-b"><circle class="f-surface" cx="96" cy="164" r="22"/><circle class="s-indigo" cx="96" cy="164" r="22"/><path class="s-ink" d="M86 157h20v12h-12l-5 4v-4h-3z"/></g>
+            <g class="float-c"><circle class="f-surface" cx="304" cy="56" r="22"/><circle class="s-indigo" cx="304" cy="56" r="22"/><ellipse class="s-ink" cx="304" cy="50" rx="9" ry="4"/><path class="s-ink" d="M295 50v12c0 2.2 4 4 9 4s9-1.8 9-4V50"/></g>
+            <g class="float-a"><circle class="f-surface" cx="304" cy="164" r="22"/><circle class="s-indigo" cx="304" cy="164" r="22"/><path class="s-ink" d="M294 158h20v13h-20zM294 158l10 7 10-7"/></g>
+            <g class="float-b"><circle class="f-surface" cx="200" cy="196" r="16"/><circle class="s-indigo" cx="200" cy="196" r="16"/><path class="s-ink" d="M194 196l4 4 8-8"/></g>
+            <circle class="f-indigo pulse" cx="200" cy="110" r="38"/>
+            <circle class="f-indigo" cx="200" cy="110" r="38"/>
+            <path class="f-lime" d="M200 86l7 17 17 7-17 7-7 17-7-17-17-7 17-7z"/>
+          </svg>
+        </div>
+        <div class="svc__body">
+          <span class="svc__tag">AI and automation</span>
+          <h3 class="svc__title">AI development</h3>
+          <p class="svc__text">LLM integrations, chatbots grounded in your own content, document processing and machine learning models. We start with one specific task, check the data you have and decide where a person reviews the output.</p>
+          <ul class="svc__links"><li><a href="service.html" data-path="/generative-ai-development">Generative AI</a></li><li><a href="service.html" data-path="/llm-development-services">LLM apps</a></li><li><a href="service.html" data-path="/ai-chatbot-development">AI chatbots</a></li><li><a href="service.html" data-path="/ai-integration-services">AI integration</a></li><li><a href="service.html" data-path="/ai-automation-services">Automation</a></li><li><a href="service.html" data-path="/machine-learning-development">Machine learning</a></li></ul>
+          <a class="nx-arrowlink svc__cta" href="#contact" data-service="AI &amp; business automation"><span>Discuss an AI project</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </article>
+
+      <!-- DevOps -->
+      <article class="svc nx-reveal">
+        <div class="svc__art">
+          <svg class="il" viewBox="0 0 400 220" aria-hidden="true">
+            <rect class="f-l50" width="400" height="220" rx="20"/>
+            <path class="s-indigo" style="stroke-width:16" d="M200 112 C 230 62, 318 62, 318 112 C 318 162, 230 162, 200 112 C 170 62, 82 62, 82 112 C 82 162, 170 162, 200 112 Z"/>
+            <path class="s-on dash-move" d="M200 112 C 230 62, 318 62, 318 112 C 318 162, 230 162, 200 112 C 170 62, 82 62, 82 112 C 82 162, 170 162, 200 112 Z"/>
+            <circle class="f-lime travel" r="11" style="offset-path: path('M200 112 C 230 62, 318 62, 318 112 C 318 162, 230 162, 200 112 C 170 62, 82 62, 82 112 C 82 162, 170 162, 200 112 Z')"/>
+            <g><rect class="f-surface" x="44" y="22" width="76" height="28" rx="14"/><rect class="s-line" x="44" y="22" width="76" height="28" rx="14"/><text x="82" y="40" text-anchor="middle" font-size="12" font-weight="600" class="f-ink">Build</text></g>
+            <g><rect class="f-surface" x="44" y="172" width="76" height="28" rx="14"/><rect class="s-line" x="44" y="172" width="76" height="28" rx="14"/><text x="82" y="190" text-anchor="middle" font-size="12" font-weight="600" class="f-ink">Test</text></g>
+            <g><rect class="f-surface" x="280" y="22" width="76" height="28" rx="14"/><rect class="s-line" x="280" y="22" width="76" height="28" rx="14"/><text x="318" y="40" text-anchor="middle" font-size="12" font-weight="600" class="f-ink">Deploy</text></g>
+            <g><rect class="f-surface" x="280" y="172" width="76" height="28" rx="14"/><rect class="s-line" x="280" y="172" width="76" height="28" rx="14"/><text x="318" y="190" text-anchor="middle" font-size="12" font-weight="600" class="f-ink">Monitor</text></g>
+          </svg>
+        </div>
+        <div class="svc__body">
+          <span class="svc__tag">DevOps</span>
+          <h3 class="svc__title">DevOps and CI/CD</h3>
+          <p class="svc__text">CI/CD pipelines, containers and Infrastructure as Code with Terraform and Kubernetes, so every release follows the same tested path.</p>
+          <ul class="svc__links"><li><a href="service.html" data-path="/devops-services">DevOps and CI/CD</a></li><li><a href="technology.html" data-path="/kubernetes-services">Kubernetes</a></li><li><a href="technology.html" data-path="/docker-containerisation-services">Docker</a></li><li><a href="technology.html" data-path="/terraform-infrastructure-services">Terraform</a></li></ul>
+          <a class="nx-arrowlink svc__cta" href="#contact" data-service="Cloud &amp; DevOps"><span>Discuss a DevOps project</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </article>
+
+      <!-- Mobile -->
+      <article class="svc nx-reveal" style="--nx-delay:100ms">
+        <div class="svc__art">
+          <svg class="il" viewBox="0 0 400 220" aria-hidden="true">
+            <rect class="f-sand" width="400" height="220" rx="20"/>
+            <g transform="rotate(-10 150 130)">
+              <rect class="f-i100" x="100" y="34" width="100" height="186" rx="18"/>
+              <rect class="f-surface" x="106" y="40" width="88" height="174" rx="14"/>
+              <rect class="f-i100" x="116" y="56" width="46" height="8" rx="4"/><rect class="f-i50" x="116" y="74" width="68" height="44" rx="10"/><rect class="f-i50" x="116" y="126" width="68" height="18" rx="6"/>
+            </g>
+            <g class="float-a">
+              <rect class="f-ink" x="186" y="18" width="110" height="200" rx="20"/>
+              <rect class="f-surface" x="193" y="25" width="96" height="186" rx="15"/>
+              <rect class="f-i100" x="203" y="39" width="40" height="6" rx="3"/>
+              <rect class="f-ink" x="203" y="51" width="62" height="10" rx="5"/>
+              <rect class="f-l50" x="203" y="70" width="76" height="50" rx="10"/><circle class="f-lime" cx="218" cy="86" r="7"/><rect class="f-i100" x="230" y="83" width="38" height="6" rx="3"/><rect class="f-i100" x="213" y="104" width="50" height="6" rx="3"/>
+              <rect class="f-i50" x="203" y="128" width="76" height="18" rx="6"/><rect class="f-i50" x="203" y="152" width="76" height="18" rx="6"/>
+              <circle class="f-indigo" cx="215" cy="192" r="5"/><circle class="f-i100" cx="241" cy="192" r="5"/><circle class="f-i100" cx="267" cy="192" r="5"/>
+            </g>
+            <g class="float-b">
+              <rect class="f-surface" x="262" y="56" width="120" height="46" rx="14"/>
+              <rect class="s-line" x="262" y="56" width="120" height="46" rx="14"/>
+              <circle class="f-indigo" cx="283" cy="79" r="9"/>
+              <rect class="f-ink" x="300" y="71" width="64" height="6" rx="3"/><rect class="f-i100" x="300" y="83" width="46" height="6" rx="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="svc__body">
+          <span class="svc__tag">Mobile applications</span>
+          <h3 class="svc__title">Mobile app development</h3>
+          <p class="svc__text">Native iOS and Android apps, plus cross-platform builds in Flutter and React Native, chosen around your users, device features, release plan and maintenance budget.</p>
+          <ul class="svc__links"><li><a href="service.html" data-path="/ios-app-development">iOS</a></li><li><a href="service.html" data-path="/android-app-development">Android</a></li><li><a href="technology.html" data-path="/flutter-app-development">Flutter</a></li><li><a href="technology.html" data-path="/react-native-app-development">React Native</a></li></ul>
+          <a class="nx-arrowlink svc__cta" href="#contact" data-service="Mobile application development"><span>Discuss a mobile app</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </article>
+
+      <!-- Cloud -->
+      <article class="svc nx-reveal" style="--nx-delay:200ms">
+        <div class="svc__art">
+          <svg class="il" viewBox="0 0 400 220" aria-hidden="true">
+            <rect class="f-i100" width="400" height="220" rx="20"/>
+            <path class="s-indigo dash-move" d="M150 126V146M205 126V146M260 126V146"/>
+            <g class="float-c"><g transform="translate(31 40) scale(0.85)">
+              <path class="f-surface" d="M128 102h150a38 38 0 0 0 2-76 54 54 0 0 0-102-12 42 42 0 0 0-50 88z"/>
+              <path class="s-line" d="M128 102h150a38 38 0 0 0 2-76 54 54 0 0 0-102-12 42 42 0 0 0-50 88z"/>
+              <rect class="f-i50" x="122" y="54" width="52" height="24" rx="12"/><text x="148" y="70" text-anchor="middle" font-size="11" font-weight="600" class="f-ink">AWS</text>
+              <rect class="f-i50" x="180" y="54" width="56" height="24" rx="12"/><text x="208" y="70" text-anchor="middle" font-size="11" font-weight="600" class="f-ink">Azure</text>
+              <rect class="f-i50" x="242" y="54" width="52" height="24" rx="12"/><text x="268" y="70" text-anchor="middle" font-size="11" font-weight="600" class="f-ink">GCP</text>
+            </g></g>
+            <g>
+              <rect class="f-surface" x="126" y="146" width="48" height="20" rx="6"/><rect class="f-surface" x="126" y="170" width="48" height="20" rx="6"/><rect class="f-surface" x="126" y="194" width="48" height="16" rx="6"/>
+              <rect class="f-surface" x="181" y="146" width="48" height="20" rx="6"/><rect class="f-surface" x="181" y="170" width="48" height="20" rx="6"/><rect class="f-surface" x="181" y="194" width="48" height="16" rx="6"/>
+              <rect class="f-surface" x="236" y="146" width="48" height="20" rx="6"/><rect class="f-surface" x="236" y="170" width="48" height="20" rx="6"/><rect class="f-surface" x="236" y="194" width="48" height="16" rx="6"/>
+              <circle class="f-lime blink" cx="136" cy="156" r="3"/><circle class="f-lime" cx="136" cy="180" r="3"/><circle class="f-lime blink" cx="191" cy="180" r="3"/><circle class="f-lime" cx="191" cy="156" r="3"/><circle class="f-lime" cx="246" cy="156" r="3"/><circle class="f-lime blink" cx="246" cy="180" r="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="svc__body">
+          <span class="svc__tag">Cloud</span>
+          <h3 class="svc__title">Cloud services</h3>
+          <p class="svc__text">AWS, Azure and Google Cloud architecture and migration, built around the application you need to run and the team that will operate it.</p>
+          <ul class="svc__links"><li><a href="service.html" data-path="/aws-services">AWS</a></li><li><a href="service.html" data-path="/azure-services">Azure</a></li><li><a href="service.html" data-path="/google-cloud-services">Google Cloud</a></li><li><a href="service.html" data-path="/cloud-migration-services">Migration</a></li></ul>
+          <a class="nx-arrowlink svc__cta" href="#contact" data-service="Cloud &amp; DevOps"><span>Discuss a cloud project</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </article>
+    </div>
+
+    <div class="more nx-reveal">
+      <p class="more__head">Design, web, QA and marketing services when your project needs them</p>
+      <a href="service.html" data-path="/ui-ux-design"><div><strong>UI and UX design</strong><span>Product interfaces, user journeys and prototypes that clarify what needs to be built.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="/software-testing-services"><div><strong>Quality and security planning</strong><span>Testing, access controls and the checks your application needs before release.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="service.html" data-path="/digital-transformation-services"><div><strong>Digital transformation</strong><span>Review manual processes, existing systems and the integrations your next stage requires.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="pillar.html" data-path="/hire-developers"><div><strong>Hire developers</strong><span>Dedicated engineers matched to your stack, responsibilities and way of working.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="service.html" data-path="/ecommerce-development"><div><strong>eCommerce development</strong><span>Storefronts, product catalogs and integrations for your online sales workflow.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="service.html" data-path="/seo-services"><div><strong>SEO and paid search</strong><span>Organic and paid search to support your website's customer acquisition.</span></div><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section band" id="process">
+  <div class="container">
+    <div class="section-head nx-reveal">
+      <div>
+        <span class="eyebrow">How we work</span>
+        <h2 class="h-section">From brief to release, with agreed review milestones.</h2>
+      </div>
+      <p class="lead">You know what you get at each stage before it starts, and you review it before the next one begins.</p>
+    </div>
+    <ol class="nx-steps" data-steps>
+      <li class="nx-step nx-reveal"><h3 class="nx-step__title">Discovery</h3><p class="nx-step__desc">Requirements, users, existing systems and constraints. We agree the initial scope and the questions that need further investigation.</p><p class="deliver-label">You receive</p><ul class="deliver"><li>Scope summary</li><li>Open questions</li><li>Initial estimate</li></ul></li>
+      <li class="nx-step nx-reveal" style="--nx-delay:100ms"><h3 class="nx-step__title">Design and architecture</h3><p class="nx-step__desc">User flows, interfaces, data structures and API requirements, reviewed with you before development begins.</p><p class="deliver-label">You receive</p><ul class="deliver"><li>User flows</li><li>Interface designs</li><li>Architecture notes</li></ul></li>
+      <li class="nx-step nx-reveal" style="--nx-delay:200ms"><h3 class="nx-step__title">Development and review</h3><p class="nx-step__desc">We work through agreed priorities with review milestones, an update cadence and acceptance criteria.</p><p class="deliver-label">You receive</p><ul class="deliver"><li>Staging builds</li><li>Progress reviews</li><li>Test results</li></ul></li>
+      <li class="nx-step nx-reveal" style="--nx-delay:300ms"><h3 class="nx-step__title">Deploy and support</h3><p class="nx-step__desc">Production release, handover and the ongoing support your application needs, agreed in the project scope.</p><p class="deliver-label">You receive</p><ul class="deliver"><li>Production release</li><li>Documentation</li><li>Access handover</li></ul></li>
+    </ol>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" id="why">
+  <div class="container why">
+    <div class="why__art nx-reveal">
+      <svg class="il" viewBox="0 0 480 300" role="img" aria-label="Map showing the engineering team in India working with clients in the USA, UK and Australia">
+        <defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.6" class="f-line"/></pattern></defs>
+        <rect width="480" height="300" rx="16" fill="url(#dots)"/>
+        <path class="s-indigo dash-move" d="M330 160 Q 200 250 90 120"/>
+        <path class="s-indigo dash-move" d="M330 160 Q 280 70 220 86"/>
+        <path class="s-indigo dash-move" d="M330 160 Q 420 170 410 246"/>
+        <circle class="f-indigo" cx="90" cy="120" r="8"/><text x="90" y="146" text-anchor="middle" font-size="13" font-weight="600" class="f-ink">USA</text>
+        <circle class="f-indigo" cx="220" cy="86" r="8"/><text x="220" y="70" text-anchor="middle" font-size="13" font-weight="600" class="f-ink">UK</text>
+        <circle class="f-indigo" cx="410" cy="246" r="8"/><text x="410" y="276" text-anchor="middle" font-size="13" font-weight="600" class="f-ink">Australia</text>
+        <circle class="f-lime pulse" cx="330" cy="160" r="12"/>
+        <circle class="f-lime" cx="330" cy="160" r="12"/>
+        <circle class="f-ink" cx="330" cy="160" r="4"/>
+        <rect class="f-band" x="262" y="186" width="136" height="30" rx="15"/>
+        <text x="330" y="206" text-anchor="middle" font-size="12" font-weight="600" fill="var(--on-band)">India · engineering</text>
+      </svg>
+    </div>
+    <div class="nx-reveal">
+      <span class="eyebrow">Why Netofficials</span>
+      <h2 class="h-section">An India-based team. A project planned around your business.</h2>
+      <p class="lead" style="margin-top:var(--space-4)">Agree delivery scope, communication and collaboration before choosing your development partner.</p>
+      <ul class="why__list">
+        <li><span class="why__label">Scope</span><div><h3>Compare the complete project</h3><p>Review deliverables, responsibilities and ongoing costs when comparing proposals. A useful budget starts with a clear scope.</p></div></li>
+        <li><span class="why__label">Overlap</span><div><h3>Agree your communication window</h3><p>Time zone, meeting schedule and update cadence are set before work begins, so collaboration expectations are clear.</p></div></li>
+        <li><span class="why__label">Team</span><div><h3>Match skills to the work</h3><p>The stack, experience and roles your application requires, and how the team will work with your business.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT + HIRE -->
+<section class="section section--white" id="hire">
+  <div class="container">
+    <div class="engage">
+      <div class="nx-reveal">
+        <span class="eyebrow">Engagement models</span>
+        <h2 class="h-section">Choose how we work together.</h2>
+        <p class="lead" style="margin-top:var(--space-4)">Dedicated engineers who work with your tools, priorities and development process. Availability and engagement terms are confirmed during the enquiry.</p>
+      </div>
+      <div class="nx-reveal">
+        <div class="nx-seg" role="radiogroup" aria-label="Engagement model" data-seg>
+          <span class="nx-seg__thumb" aria-hidden="true"></span>
+          <button type="button" class="nx-seg__opt" role="radio" aria-checked="true" tabindex="0" data-value="project">Project delivery</button>
+          <button type="button" class="nx-seg__opt" role="radio" aria-checked="false" tabindex="-1" data-value="team">Dedicated team</button>
+          <button type="button" class="nx-seg__opt" role="radio" aria-checked="false" tabindex="-1" data-value="ext">Team extension</button>
+        </div>
+        <div class="model" data-model="project" aria-live="polite">
+          <h3>Project delivery</h3>
+          <p>A defined scope, review milestones and handover.</p>
+          <span class="nx-badge nx-badge--lime model__best"><span class="nx-badge__dot"></span>Best for a new product or a clearly bounded build</span>
+          <div class="model__actions"><a class="nx-btn nx-btn--primary" href="#contact" data-service="Help defining the scope"><span>Scope my project</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a><a class="nx-arrowlink" href="engagement-models.html" data-path="/engagement-models"><span>Compare models</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+        <div class="model" data-model="team" hidden>
+          <h3>Dedicated team</h3>
+          <p>A team that works on your roadmap over time.</p>
+          <span class="nx-badge nx-badge--lime model__best"><span class="nx-badge__dot"></span>Best for ongoing product development</span>
+          <div class="model__actions"><a class="nx-btn nx-btn--primary" href="#contact" data-service="Help defining the scope"><span>Plan a team</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a><a class="nx-arrowlink" href="engagement-models.html" data-path="/engagement-models"><span>Compare models</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+        <div class="model" data-model="ext" hidden>
+          <h3>Team extension</h3>
+          <p>Individual developers who join your existing team.</p>
+          <span class="nx-badge nx-badge--lime model__best"><span class="nx-badge__dot"></span>Best when you need specific skills quickly</span>
+          <div class="model__actions"><a class="nx-btn nx-btn--primary" href="#contact" data-service="Help defining the scope"><span>Discuss hiring</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a><a class="nx-arrowlink" href="pillar.html" data-path="/hire-developers"><span>Explore developer roles</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="roles-head nx-reveal">
+      <div>
+        <span class="eyebrow">Hire by role</span>
+        <h3 class="roles-head__title">Find the developer your roadmap needs.</h3>
+      </div>
+      <a class="nx-arrowlink" href="pillar.html" data-path="/hire-developers"><span>See all developer roles</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+    <div class="roles">
+      <article class="rc nx-reveal">
+        <div class="rc__top">
+          <span class="rc__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#react-atom"/></svg></span>
+          <span class="rc__count">3 roles</span>
+        </div>
+        <h4 class="rc__title">Frontend</h4>
+        <p class="rc__sub">Interfaces and client apps</p>
+        <ul class="rc__list">
+          <li><a class="rc__link" href="hire.html" data-path="/hire-react-developer"><span>React developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="/hire-nextjs-developer"><span>Next.js developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-ui-ux-designer"><span>UI/UX designer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </article>
+      <article class="rc nx-reveal">
+        <div class="rc__top">
+          <span class="rc__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#nodejs-hexagon"/></svg></span>
+          <span class="rc__count">4 roles</span>
+        </div>
+        <h4 class="rc__title">Backend</h4>
+        <p class="rc__sub">APIs, services and data</p>
+        <ul class="rc__list">
+          <li><a class="rc__link" href="hire.html" data-path="/hire-nodejs-developer"><span>Node.js developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-python-developer"><span>Python developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-laravel-developer"><span>Laravel developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-full-stack-developer"><span>Full stack developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </article>
+      <article class="rc nx-reveal">
+        <div class="rc__top">
+          <span class="rc__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#flutter-diamond"/></svg></span>
+          <span class="rc__count">3 roles</span>
+        </div>
+        <h4 class="rc__title">Mobile</h4>
+        <p class="rc__sub">iOS, Android and cross-platform</p>
+        <ul class="rc__list">
+          <li><a class="rc__link" href="hire.html" data-path="/hire-flutter-developer"><span>Flutter developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-ios-developer"><span>iOS developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-android-developer"><span>Android developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </article>
+      <article class="rc nx-reveal">
+        <div class="rc__top">
+          <span class="rc__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#kubernetes-wheel"/></svg></span>
+          <span class="rc__count">4 roles</span>
+        </div>
+        <h4 class="rc__title">Cloud, data and AI</h4>
+        <p class="rc__sub">Infrastructure, pipelines and models</p>
+        <ul class="rc__list">
+          <li><a class="rc__link" href="hire.html" data-path="/hire-devops-engineer"><span>DevOps engineer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-aws-developer"><span>AWS developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-ai-ml-developer"><span>AI/ML developer</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+          <li><a class="rc__link" href="hire.html" data-path="/hire-data-scientist"><span>Data scientist</span><svg class="nx-icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
+        </ul>
+      </article>
+    </div>
+    <p class="roles-note nx-reveal">Availability and engagement terms are confirmed during the enquiry.</p>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section" id="industries">
+  <div class="container">
+    <div class="section-head nx-reveal">
+      <div>
+        <span class="eyebrow">Industries</span>
+        <h2 class="h-section">Start with your industry's workflows and constraints.</h2>
+      </div>
+      <p class="lead">The users, data and operating requirements your application needs to support.</p>
+    </div>
+    <div class="ind-grid nx-reveal">
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#shield-check"/></svg></span><div><strong>Healthcare and MedTech</strong><span>Patient and care workflows</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#chart-bar"/></svg></span><div><strong>Fintech and payments</strong><span>Transactions and financial tools</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#brain-circuit"/></svg></span><div><strong>EdTech and eLearning</strong><span>Learning and course platforms</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#layers-stack"/></svg></span><div><strong>Real estate and PropTech</strong><span>Property and sales workflows</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#cloud-upload"/></svg></span><div><strong>Logistics and supply chain</strong><span>Orders, routes and operations</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#mobile-device"/></svg></span><div><strong>On-demand platforms</strong><span>Booking and service delivery</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#api-plug"/></svg></span><div><strong>Retail and eCommerce</strong><span>Catalogs and connected commerce</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#rocket-launch"/></svg></span><div><strong>Travel and hospitality</strong><span>Reservations and guest experiences</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#document-text"/></svg></span><div><strong>LegalTech</strong><span>Documents and matter management</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#users-group"/></svg></span><div><strong>HR Tech and workforce</strong><span>People and workforce tools</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#shield-check"/></svg></span><div><strong>InsurTech</strong><span>Policies and claims workflows</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a class="ind" href="industries-hub.html" data-path="/industries"><div class="ind__main"><span class="ind__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#settings-gear"/></svg></span><div><strong>Manufacturing and IoT</strong><span>Production and connected systems</span></div></div><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--white" id="faq">
+  <div class="container faq">
+    <div class="faq__aside nx-reveal">
+      <span class="eyebrow">Questions</span>
+      <h2 class="h-section">Questions about our software, AI, DevOps, cloud and mobile work.</h2>
+      <a class="nx-btn nx-btn--secondary" href="#contact"><span>Ask us directly</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+    <div class="nx-acc nx-reveal" data-accordion>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q1" aria-expanded="true" aria-controls="a1"><span>How does a software, AI, cloud or mobile project start?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a1" role="region" aria-labelledby="q1" data-open="true"><div class="nx-acc__inner"><div class="nx-acc__content">Send a short brief through the form. We follow up to discuss your users, existing systems and constraints, then agree an initial scope and the questions that need further investigation.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q2" aria-expanded="false" aria-controls="a2"><span>Can you work alongside our existing team?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a2" role="region" aria-labelledby="q2" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">Yes. Dedicated developers can work with your tools, priorities and development process. Roles, availability and engagement terms are confirmed during the enquiry.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q3" aria-expanded="false" aria-controls="a3"><span>How do you handle time zone differences?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a3" role="region" aria-labelledby="q3" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">The team is based in India. Before work begins we agree a communication window, meeting schedule and update cadence that suits your time zone.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q4" aria-expanded="false" aria-controls="a4"><span>What do we receive at handover?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a4" role="region" aria-labelledby="q4" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">Handover is planned in the project scope. It covers documentation, deployment access and the ongoing responsibilities your team needs.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q5" aria-expanded="false" aria-controls="a5"><span>Can you add AI features to software we already run?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a5" role="region" aria-labelledby="q5" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">Yes. We start with one task, such as search over your documents, drafting replies or extracting data from forms, check what data exists and connect the feature to your product through its API. Where the output affects customers, a person reviews it before it is used.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q6" aria-expanded="false" aria-controls="a6"><span>Which cloud platforms and mobile frameworks do you work with?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a6" role="region" aria-labelledby="q6" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">AWS, Azure and Google Cloud for infrastructure, with Docker, Kubernetes and Terraform. For mobile we build native iOS apps in Swift, native Android apps in Kotlin, and cross-platform apps in Flutter or React Native.</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container contact">
+    <div class="nx-reveal">
+      <span class="eyebrow">Project enquiry</span>
+      <h2 class="h-section">Your project. Our next conversation.</h2>
+      <p class="lead" style="margin-top:var(--space-4)">Share your goal, your existing systems and any constraints. A short brief is enough to start the conversation.</p>
+      <ol class="next" aria-label="What happens next">
+        <li>We read your brief and reply to arrange a conversation.</li>
+        <li>We discuss your users, systems and constraints.</li>
+        <li>You receive a proposed scope and next steps.</li>
+      </ol>
+      <p class="contact__alt">Prefer email? Write to <a href="#">[your enquiries email]</a>.</p>
+    </div>
+    <form class="form nx-reveal" data-form novalidate>
+      <div><h3 class="form__title">Tell us about your project.</h3></div>
+      <p class="form__sub">Required: name, email, service and project goal.</p>
+      <div class="form__row">
+        <div class="nx-field"><label for="f-name">Your name</label><input id="f-name" class="nx-field__control" autocomplete="name" required></div>
+        <div class="nx-field"><label for="f-email">Work email</label><input id="f-email" class="nx-field__control" type="email" autocomplete="email" required aria-describedby="f-email-hint"><span id="f-email-hint" class="nx-field__hint">We only use it to reply to you.</span></div>
+      </div>
+      <div class="nx-field"><label for="f-service">What do you need?</label>
+        <select id="f-service" class="nx-field__control" required>
+          <option value="">Choose a service</option>
+          <option>Custom software</option>
+          <option>AI &amp; business automation</option>
+          <option>Cloud &amp; DevOps</option>
+          <option>Mobile application development</option>
+          <option>Web application development</option>
+          <option>Website design &amp; development</option>
+          <option>SEO</option>
+          <option>SEM &amp; PPC</option>
+          <option>Development + marketing</option>
+          <option>Help defining the scope</option>
+        </select>
+      </div>
+      <div class="form__row">
+        <div class="nx-field"><label for="f-country">Country <span class="form__opt">(optional)</span></label><input id="f-country" class="nx-field__control" autocomplete="country-name"></div>
+        <div class="nx-field"><label for="f-time">Timeline <span class="form__opt">(optional)</span></label>
+          <select id="f-time" class="nx-field__control"><option value="">Select a timeline</option><option>As soon as possible</option><option>Within 1 to 3 months</option><option>Exploring options</option></select>
+        </div>
+      </div>
+      <div class="nx-field"><label for="f-goal">Your project or business goal</label><textarea id="f-goal" class="nx-field__control" rows="4" required placeholder="What should the software do, who uses it, and what does it need to connect to?"></textarea></div>
+      <button type="submit" class="nx-btn nx-btn--primary nx-btn--lg"><span>Discuss my project</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      <p class="form__legal">Design preview: this form does not send enquiries.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- @partial footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__cta">
+      <div>
+        <h2>Ready to scope your project? <span>Tell us what you need built.</span></h2>
+        <p>Share a short brief. We reply with questions, a proposed scope and the team your project needs.</p>
+      </div>
+      <div class="footer__cta-actions">
+        <a class="nx-btn nx-btn--lime nx-btn--lg" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        <a class="nx-btn nx-btn--secondary nx-btn--lg" href="services.html" data-path="/services"><span>Explore services</span></a>
+      </div>
+    </div>
+
+    <div class="footer__main">
+      <div class="footer__brand">
+        <a class="footer__brand-name" href="index.html" data-path="/"><img src="assets/logo-dark.png" alt="netofficials" width="170" height="28"></a>
+        <p>India-based software development for business applications, mobile products, AI, DevOps and cloud. Serving clients in the US, UK and Australia.</p>
+        <div class="footer__contact">
+          <a href="#"><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>[your enquiries email]</a>
+          <a href="contact.html" data-path="/contact"><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-pin"/></svg>India · [office city]</a>
+        </div>
+      </div>
+      <nav aria-labelledby="ft-services"><h3 id="ft-services">Services</h3><ul>
+        <li><a href="pillar.html" data-path="/custom-software-development">Software development</a></li>
+        <li><a href="pillar.html" data-path="/ai-development-services">AI development</a></li>
+        <li><a href="service.html" data-path="/devops-services">DevOps and CI/CD</a></li>
+        <li><a href="pillar.html" data-path="/mobile-app-development">Mobile app development</a></li>
+        <li><a href="pillar.html" data-path="/cloud-services">Cloud services</a></li>
+        <li><a href="pillar.html" data-path="/web-development">Web and eCommerce</a></li>
+        <li><a href="pillar.html" data-path="/digital-marketing-services">Digital marketing</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-popular"><h3 id="ft-popular">Popular</h3><ul>
+        <li><a href="service.html" data-path="/mvp-development-services">MVP development</a></li>
+        <li><a href="service.html" data-path="/saas-development-services">SaaS development</a></li>
+        <li><a href="service.html" data-path="/ai-chatbot-development">AI chatbots</a></li>
+        <li><a href="service.html" data-path="/cloud-migration-services">Cloud migration</a></li>
+        <li><a href="technology.html" data-path="/kubernetes-services">Kubernetes</a></li>
+        <li><a href="technology.html" data-path="/flutter-app-development">Flutter apps</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-hire"><h3 id="ft-hire">Hire developers</h3><ul>
+        <li><a href="hire.html" data-path="/hire-react-developer">React developers</a></li>
+        <li><a href="hire.html" data-path="/hire-nodejs-developer">Node.js developers</a></li>
+        <li><a href="hire.html" data-path="/hire-python-developer">Python developers</a></li>
+        <li><a href="hire.html" data-path="/hire-flutter-developer">Flutter developers</a></li>
+        <li><a href="hire.html" data-path="/hire-devops-engineer">DevOps engineers</a></li>
+        <li><a href="hire.html" data-path="/hire-ai-ml-developer">AI/ML developers</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-company"><h3 id="ft-company">Company</h3><ul>
+        <li><a href="about.html" data-path="/about">About</a></li>
+        <li><a href="how-we-work.html" data-path="/how-we-work">How we work</a></li>
+        <li><a href="engagement-models.html" data-path="/engagement-models">Engagement models</a></li>
+        <li><a href="why-choose.html" data-path="/why-choose-netofficials">Why Netofficials</a></li>
+        <li><a href="blog.html" data-path="/blog">Guides</a></li>
+        <li><a href="careers.html" data-path="/careers">Careers</a></li>
+        <li><a href="contact.html" data-path="/contact">Contact</a></li>
+      </ul></nav>
+    </div>
+
+    <nav class="footer__where" aria-labelledby="ft-where">
+      <h3 id="ft-where">Where we work</h3>
+      <a href="location.html" data-path="/software-development-company-usa">USA</a>
+      <a href="location.html" data-path="/software-development-company-new-york">New York</a>
+      <a href="location.html" data-path="/software-development-company-uk">United Kingdom</a>
+      <a href="location.html" data-path="/software-development-company-london">London</a>
+      <a href="location.html" data-path="/software-development-company-canada">Canada</a>
+      <a href="location.html" data-path="/software-development-company-australia">Australia</a>
+      <a href="location.html" data-path="/software-development-company-dubai">Dubai</a>
+      <a href="location.html" data-path="/software-development-company-india">India</a>
+    </nav>
+
+    <div class="footer__bar">
+      <span>© <span data-year>2026</span> Netofficials · India</span>
+      <nav aria-label="Legal">
+        <a href="legal.html" data-path="/privacy-policy">Privacy Policy</a>
+        <a href="legal.html" data-path="/terms">Terms</a>
+        <button type="button" role="switch" aria-checked="false" class="nx-switch" data-theme-toggle><span class="nx-switch__track" aria-hidden="true"><span class="nx-switch__thumb"></span></span><span>Dark theme</span></button>
+        <button type="button" class="to-top" data-to-top><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-up"/></svg>Back to top</button>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /@partial footer -->
+
+<div class="mcta" data-mcta>
+  <a class="nx-btn nx-btn--primary" href="#contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+</div>
+
+<div class="toasts" aria-live="polite" data-toasts></div>
+
+<script src="js/app.js?v=11"></script>
+</body>
+</html>

@@ -1,36 +1,88 @@
 import { sanitizeRichHTML } from "./rich-text";
-export function FAQList({ fields }: { fields: Record<string, string> }) {
-  const pairs = Object.keys(fields).filter(
-    (k) =>
-      /^(?:q\d+|cat_\d+_q\d+)$/.test(k) &&
-      fields[k] &&
-      fields[k.replace(/q(\d+)$/, "a$1")],
-  );
+import { legacyIcon, type SiteIconName } from "./icon-set";
+import { Icon, ProductIcon } from "./site/ui";
+
+/** Body copy: plain text becomes one paragraph; rich HTML is sanitised inside .nx-prose. */
+export function GenProse({ value, paths, className }: { value?: string; paths?: string[]; className?: string }) {
+  if (!value) return null;
+  if (!/<[a-z][\s\S]*>/i.test(value)) return <p className={className}>{value}</p>;
   return (
-    <div className="v3-faq">
-      {pairs.map((key) => (
-        <details key={key} name="service-faq">
-          <summary>
-            {fields[key]}
-            <span aria-hidden="true">+</span>
-          </summary>
-          {/<[a-z][\s\S]*>/i.test(fields[key.replace(/q(\d+)$/, "a$1")]) ? (
-            <div
-              className="v3-prose"
-              dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(fields[key.replace(/q(\d+)$/, "a$1")]) }}
-            />
-          ) : (
-            <p>{fields[key.replace(/q(\d+)$/, "a$1")]}</p>
-          )}
-        </details>
-      ))}
-    </div>
+    <div
+      className={"nx-prose " + (className ?? "")}
+      dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(value, false, paths?.length ? paths : undefined) }}
+    />
   );
 }
+
+/** Product icon for each line-icon name the content uses (iconFor() and legacy icon keys). */
+const PRODUCT_ICON: Partial<Record<SiteIconName, string>> = {
+  code: "code-brackets",
+  mobile: "mobile-device",
+  ai: "brain-circuit",
+  cloud: "cloud-upload",
+  settings: "settings-gear",
+  layers: "layers-stack",
+  shield: "shield-check",
+  users: "users-group",
+  rocket: "rocket-launch",
+  chart: "chart-bar",
+  document: "document-text",
+  api: "api-plug",
+  web: "react-atom",
+  container: "docker-whale",
+};
+
+/** Card or step icon drawn from the product icon set; unknown names fall back to the layers mark. */
+export function GenIcon({ name }: { name: string }) {
+  const site = (legacyIcon[name] ?? name) as SiteIconName;
+  return <ProductIcon name={PRODUCT_ICON[site] ?? "layers-stack"} size={26} />;
+}
+
+const isRich = (value: string) => /<[a-z][\s\S]*>/i.test(value);
+
+/** Questions and answers, grouped by category when the content has categories (cat_N_name, cat_N_qM / cat_N_aM). */
+export function faqGroups(fields: Record<string, string>) {
+  const pairs = Object.keys(fields).filter(
+    (k) => /^(?:q\d+|cat_\d+_q\d+)$/.test(k) && fields[k] && fields[k.replace(/q(\d+)$/, "a$1")],
+  );
+  const groups = new Map<string, { title?: string; keys: string[] }>();
+  for (const key of pairs) {
+    const cat = key.match(/^cat_(\d+)_q\d+$/)?.[1] ?? "";
+    if (!groups.has(cat)) groups.set(cat, { title: cat ? fields[`cat_${cat}_name`] || undefined : undefined, keys: [] });
+    groups.get(cat)!.keys.push(key);
+  }
+  return [...groups.values()];
+}
+
+export function FAQList({ fields }: { fields: Record<string, string> }) {
+  const item = (key: string) => {
+    const answer = fields[key.replace(/q(\d+)$/, "a$1")];
+    return (
+      <details key={key} name="service-faq" className="nx-acc__item">
+        <summary className="nx-acc__trigger">
+          <span>{fields[key]}</span>
+          <span className="nx-acc__icon" aria-hidden="true">
+            <Icon name="plus" size={18} className="" />
+          </span>
+        </summary>
+        <div className="nx-acc__content">
+          {isRich(answer) ? <div className="nx-prose" dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(answer) }} /> : <p>{answer}</p>}
+        </div>
+      </details>
+    );
+  };
+  return faqGroups(fields).map((group, i) => (
+    <div key={group.title ?? i} className={group.title ? "gen-faq-group" : undefined}>
+      {group.title && <h3 className="gen-faq-group__title">{group.title}</h3>}
+      <div className="nx-acc nx-acc--native">{group.keys.map(item)}</div>
+    </div>
+  ));
+}
+
 export function Comparison({ groups }: { groups: Record<string, string>[] }) {
   const isModels = groups.some((g) => g.name);
   return (
-    <div className="v3-table-scroll">
+    <div className="gen-table" data-allow-overflow="true" role="region" tabIndex={0} aria-label="Comparison">
       <table>
         <thead>
           <tr>
@@ -61,6 +113,7 @@ export function Comparison({ groups }: { groups: Record<string, string>[] }) {
     </div>
   );
 }
+
 export function VerifiedEvidence({
   fields,
 }: {
@@ -78,11 +131,11 @@ export function VerifiedEvidence({
   return (
     <>
       {quotes.length > 0 && (
-        <div className="v3-quotes">
+        <div className="gen-quotes">
           {quotes.map((key) => {
             const n = key.split("_")[1];
             return (
-              <figure key={key}>
+              <figure key={key} className="gen-quote">
                 <blockquote>{fields[key]}</blockquote>
                 <figcaption>
                   {[
@@ -99,24 +152,29 @@ export function VerifiedEvidence({
         </div>
       )}
       {awards.length > 0 && (
-        <ul className="v3-outcomes">
+        <ul className="gen-checks">
           {awards.map((key) => (
-            <li key={key}>{fields[key]}</li>
+            <li key={key}>
+              <span className="gen-check" aria-hidden="true">
+                <Icon name="check" size={16} className="" />
+              </span>
+              <span>{fields[key]}</span>
+            </li>
           ))}
         </ul>
       )}
       {offices.length > 0 && (
-        <div className="v3-cards">
+        <div className="sk-cards gen-offices">
           {offices.map((key) => {
             const prefix = key.replace(/city$/, "");
             return (
-              <article key={key}>
-                <h3>{fields[key]}</h3>
-                <p>{fields[prefix + "address"]}</p>
-                <p>{fields[prefix + "timezone"]}</p>
+              <article key={key} className="sk-card">
+                <h3 className="sk-card__title">{fields[key]}</h3>
+                <p className="sk-card__text">{fields[prefix + "address"]}</p>
+                <p className="sk-card__text">{fields[prefix + "timezone"]}</p>
                 {fields[prefix + "email"] && (
-                  <a href={"mailto:" + fields[prefix + "email"]}>
-                    {fields[prefix + "email"]}
+                  <a className="nx-arrowlink" href={"mailto:" + fields[prefix + "email"]}>
+                    <span>{fields[prefix + "email"]}</span>
                   </a>
                 )}
               </article>

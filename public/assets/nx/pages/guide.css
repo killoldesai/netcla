@@ -1,0 +1,119 @@
+/* Guide article page. Shared patterns (hero, draft, gated, more, faq, nx-acc) live in sections.css and components.css. */
+
+/* Breadcrumb items sit inline with their chevrons */
+.nx .page-crumbs li { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+/* Byline and avatar */
+.nx .guide-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6); margin: var(--space-6) 0 0; font: 400 14px/1.5 var(--font-sans); color: var(--muted); }
+.nx .guide-byline { display: inline-flex; align-items: center; gap: var(--space-3); }
+.nx .guide-byline a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.nx .guide-byline a:hover { color: var(--indigo-text); }
+.nx .guide-avatar { display: inline-grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--indigo); color: var(--on-indigo); font: 600 13px/1 var(--font-sans); letter-spacing: 0.02em; }
+.nx .guide-avatar--lg { width: 64px; height: 64px; font-size: 20px; }
+
+/* Two-column article layout: contents rail left, article column about 68ch right */
+.nx .guide-layout { display: grid; grid-template-columns: 220px minmax(0, 700px); justify-content: center; gap: var(--space-16); align-items: start; }
+.nx .guide-rail { position: sticky; top: 96px; min-width: 0; }
+.nx .guide-main { min-width: 0; width: 100%; max-width: 700px; justify-self: center; }
+
+.nx .guide-toc h2 { margin: 0 0 var(--space-4); font: 600 12px/1.4 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.nx .guide-toc ol { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+.nx .guide-toc a { display: block; margin-left: -1px; padding: 8px 0 8px 16px; border-left: 2px solid transparent; color: var(--muted); font: 400 14px/1.45 var(--font-sans); text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast); }
+.nx .guide-toc a:hover { color: var(--ink); }
+.nx .guide-toc a[aria-current="true"] { color: var(--indigo-text); border-left-color: var(--indigo); font-weight: 600; }
+.nx .guide-toc a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Mobile contents: collapsed details above the article */
+.nx .guide-toc-m { display: none; margin: 0 0 var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+.nx .guide-toc-m summary { display: flex; align-items: center; min-height: 44px; padding: 0 var(--space-6); cursor: pointer; font: 600 15px/1.4 var(--font-sans); list-style: none; }
+.nx .guide-toc-m summary::-webkit-details-marker { display: none; }
+.nx .guide-toc-m summary::after { content: "+"; margin-left: auto; font: 400 20px/1 var(--font-sans); color: var(--muted); }
+.nx .guide-toc-m[open] summary::after { content: "-"; }
+.nx .guide-toc-m ol { margin: 0; padding: 0 var(--space-6) var(--space-4); list-style: none; }
+.nx .guide-toc-m a { display: block; padding: 10px 0; border-top: 1px solid var(--line); color: var(--ink); font: 400 15px/1.45 var(--font-sans); text-decoration: none; }
+.nx .guide-toc-m a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Key takeaways */
+.nx .guide-takeaways { padding: var(--space-6) var(--space-8); border-radius: var(--radius-card); background: var(--indigo-50); }
+.nx .guide-takeaways h2 { margin: 0 0 var(--space-3); font: 600 20px/1.3 var(--font-sans); letter-spacing: -0.01em; }
+.nx .guide-takeaways ul { margin: 0; padding-left: 20px; font: 400 16px/1.65 var(--font-sans); color: var(--ink); }
+.nx .guide-takeaways li + li { margin-top: var(--space-2); }
+
+/* Article sections */
+.nx .guide-chapter { margin-top: var(--space-16); scroll-margin-top: 96px; }
+.nx .guide-chapter h2 { margin: 0 0 var(--space-6); font: 600 clamp(26px, 3vw, 34px)/1.15 var(--font-sans); letter-spacing: -0.02em; }
+.nx .guide-chapter > p { margin: 0 0 var(--space-6); font: 400 17px/1.7 var(--font-sans); color: var(--ink); }
+
+.nx .guide-callout { margin: var(--space-8) 0 0; padding: var(--space-6); border-left: 3px solid var(--lime); border-radius: var(--radius-card); background: var(--surface); }
+.nx .guide-callout p { margin: 0; font: 400 16px/1.65 var(--font-sans); color: var(--ink); }
+
+/* Breakdown table, scrolls inside its box on narrow screens */
+.nx .guide-table-wrap { margin: var(--space-8) 0 0; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-card); -webkit-overflow-scrolling: touch; }
+.nx .guide-table { width: 100%; min-width: 560px; border-collapse: collapse; font: 400 15px/1.5 var(--font-sans); color: var(--ink); }
+.nx .guide-table caption { caption-side: top; padding: var(--space-4) var(--space-6); text-align: left; font: 400 14px/1.5 var(--font-sans); color: var(--muted); }
+.nx .guide-table th, .nx .guide-table td { padding: var(--space-4) var(--space-6); border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.nx .guide-table thead th { border-top: 0; background: var(--surface); font-weight: 600; }
+.nx .guide-table tbody th { font-weight: 600; }
+
+/* Inline CTA after section 2 */
+.nx .guide-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-6); margin: var(--space-16) 0 0; padding: var(--space-8); border-radius: var(--radius-card); background: var(--band); color: var(--on-band); }
+.nx .guide-cta h3 { margin: 0 0 var(--space-2); font: 600 22px/1.25 var(--font-sans); color: var(--on-band); }
+.nx .guide-cta p { margin: 0; font: 400 15px/1.55 var(--font-sans); color: var(--on-band-muted); }
+
+/* Inline figure */
+.nx .guide-figure { margin: var(--space-8) 0 var(--space-6); }
+.nx .guide-figure figcaption { margin-top: var(--space-3); font: 400 14px/1.5 var(--font-sans); color: var(--muted); }
+
+/* FAQ inside the article column */
+.nx .guide-faq .nx-acc { margin-top: 0; }
+
+/* Related services and reading list: single column at article width */
+.nx .guide-main .more { grid-template-columns: minmax(0, 1fr); margin-top: var(--space-6); column-gap: 0; }
+.nx .guide-main .more a { padding-right: var(--space-2); }
+
+/* Author box */
+.nx .guide-author-section { padding-top: 0; }
+.nx .guide-author { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-8); align-items: start; max-width: 700px; margin: 0 auto; padding: var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+.nx .guide-author h2 { margin: 0; font: 600 24px/1.25 var(--font-sans); letter-spacing: -0.01em; }
+.nx .guide-author .guide-author__role { margin: 4px 0 var(--space-4); font: 600 14px/1.4 var(--font-sans); color: var(--muted); }
+.nx .guide-author p { margin: 0 0 var(--space-3); font: 400 16px/1.65 var(--font-sans); color: var(--ink); }
+.nx .guide-author .nx-arrowlink { margin-top: var(--space-3); }
+
+/* Keep reading list */
+.nx .guide-keep__inner { max-width: 700px; margin: 0 auto; }
+.nx .guide-keep .h-section { margin-top: 0; font-size: clamp(26px, 3vw, 34px); }
+.nx .guide-more { grid-template-columns: minmax(0, 1fr); column-gap: 0; margin-top: var(--space-6); }
+
+/* Hero illustration keeps its 16:9 frame */
+.nx .guide-hero .hero__art svg { width: 100%; height: auto; }
+
+@media (max-width: 1100px) {
+  .nx .guide-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .nx .guide-rail { display: none; }
+  .nx .guide-toc-m { display: block; }
+}
+
+@media (max-width: 720px) {
+  .nx .guide-takeaways { padding: var(--space-6); }
+  .nx .guide-cta { padding: var(--space-6); }
+  .nx .guide-author { grid-template-columns: minmax(0, 1fr); padding: var(--space-6); gap: var(--space-6); }
+  .nx .guide-chapter { margin-top: var(--space-12); }
+  .nx .guide-table { min-width: 520px; }
+}
+
+/* Skeleton guide article: chapter kicker, figure and prose inside chapters */
+.nx .guide-kicker { margin: 0 0 var(--space-3); }
+.nx .guide-chapter .nx-prose p { margin: 0 0 var(--space-6); font: 400 17px/1.7 var(--font-sans); color: var(--ink); }
+.nx .guide-chapter .nx-prose :last-child { margin-bottom: 0; }
+.nx .guide-chapter .nx-prose ul, .nx .guide-chapter .nx-prose ol { margin: 0 0 var(--space-6); padding-left: 20px; font: 400 17px/1.7 var(--font-sans); color: var(--ink); }
+.nx .guide-chapter .nx-prose li + li { margin-top: var(--space-2); }
+.nx .guide-chapter > p { margin: 0 0 var(--space-6); }
+.nx .guide-figure img { display: block; width: 100%; height: auto; border-radius: var(--radius-card); }
+.nx .guide-article .guide-faq .nx-acc { margin-top: var(--space-6); }
+.nx .guide-cta .nx-btn { flex: none; }
+/* Tables from the article body: bordered like the prototype's guide-table, scrolling inside the column on narrow screens */
+.nx .guide-chapter .nx-prose { overflow-x: auto; }
+.nx .guide-chapter .nx-prose table { width: 100%; min-width: 480px; margin: var(--space-6) 0; border-collapse: collapse; font: 400 15px/1.5 var(--font-sans); color: var(--ink); }
+.nx .guide-chapter .nx-prose th, .nx .guide-chapter .nx-prose td { padding: var(--space-3) var(--space-4); border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.nx .guide-chapter .nx-prose thead th { border-top: 0; background: var(--surface); font-weight: 600; }
+.nx .guide-chapter .nx-prose table + p { margin-top: var(--space-4); }

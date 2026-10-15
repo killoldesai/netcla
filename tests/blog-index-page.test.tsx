@@ -77,39 +77,42 @@ test("the index shows the latest guide once, then every other guide under its to
   assert.ok(!isBlogIndexContent(c, "/about"));
   const $ = render();
   assert.ok($("main.v3-blog").length);
-  assert.ok($("link[href^='/assets/blog-index.css']").length);
-  assert.equal($("[class*='sk-'], [class*='ab-'], [class*='ct-'], [class*='en-'], [class*='hw-'], [class*='wc-']").length, 0);
+  assert.ok($("link[href^='/assets/nx/pages/blog-index.css']").length);
+  assert.ok($(".nx").length, "renders inside the redesigned shell");
+  assert.equal($("[class*='sk-'], [class*='ab-'], [class*='ct-'], [class*='en-'], [class*='hw-'], [class*='wc-'], [class*='bi-']").length, 0);
   assert.equal($("h1").length, 1);
-  assert.equal($("#featured a.bi-featured").attr("href"), "/blog/seo-vs-ppc");
-  // Five guides remain after the featured one: two marketing, two web, one software... grouped by topic.
-  assert.equal($(".bi-card").length, 5);
-  assert.equal($("#topic-marketing .bi-card").length, 1);
-  assert.equal($("#topic-web .bi-card").length, 2);
-  assert.equal($("#topic-software .bi-card").length, 2);
-  assert.equal($("#featured a[href='/blog/seo-vs-ppc']").length + $(".bi-card[href='/blog/seo-vs-ppc']").length, 1, "featured guide is not repeated in a grid");
-  // The topic bar counts every guide, including the featured one.
-  assert.deepEqual($(".bi-topics-nav a").map((_, el) => $(el).text()).get(), ["Search and paid marketing2", "Websites and eCommerce2", "Software development2"]);
-  assert.match($(".bi-meta").first().text(), /^30 \w+ 202611 min read$/);
+  assert.equal($("#featured .gx-featured__title a").attr("href"), "/blog/seo-vs-ppc");
+  // Five guides remain after the featured one: one marketing, two web, two software... grouped by topic.
+  assert.equal($(".gx-card").length, 5);
+  assert.equal($("#topic-marketing .gx-card").length, 1);
+  assert.equal($("#topic-web .gx-card").length, 2);
+  assert.equal($("#topic-software .gx-card").length, 2);
+  assert.equal($("#featured a[href='/blog/seo-vs-ppc']").length + $(".gx-card a[href='/blog/seo-vs-ppc']").length, 1, "featured guide is not repeated in a grid");
+  // The sub-nav counts every guide of a topic, including the featured one.
+  assert.deepEqual($(".subnav__list a").map((_, el) => $(el).text()).get(), ["Featured guide", "Search and paid marketing2", "Websites and eCommerce2", "Software development2", "Newsletter"]);
+  assert.match($(".gx-featured .gx-byline").text(), /30 \w+ 2026 · 11 min read/);
+  assert.doesNotMatch(render().text(), /\[draft/i, "no draft placeholders are published");
 });
 
 test("cards carry the guide's own illustration, title, summary and read time; nothing is numbered or iconised", () => {
   const $ = render();
-  const card = $(".bi-card").first();
+  const card = $(".gx-card").first();
   assert.ok(card.find("img").attr("src")?.startsWith("/media/"));
   assert.match(card.find("img").attr("alt") ?? "", /Illustration of/);
   assert.match(card.find("h3").text(), /^Title of /);
   assert.match(card.text(), /11 min read/);
   assert.equal($("main ol").length, 1, "only the breadcrumb is an ordered list");
-  assert.equal($("main svg").length, 0);
+  assert.equal($(".gx-group svg, .gx-card svg").length, 0, "guide cards carry no icons");
 });
 
 test("an empty topic is not shown, and with no guides the page says so plainly", () => {
   const only = render([post("seo-vs-ppc"), post("ppc-audit-checklist")]);
   assert.equal(only("#topic-web").length, 0);
   assert.equal(only("#topic-software").length, 0);
-  assert.equal(only(".bi-topics-nav").length, 0, "a single topic needs no topic bar");
+  assert.equal(only(".subnav a[href='#topic-web'], .subnav a[href='#topic-software']").length, 0, "a topic with no cards gets no sub-nav link");
+  assert.equal(only("#topic-marketing").length, 1);
   const none = render([]);
-  assert.match(none(".bi-empty").text(), /New guides are being prepared/);
+  assert.match(none(".gx-empty").text(), /New guides are being prepared/);
   assert.equal(none("#featured").length, 0);
 });
 

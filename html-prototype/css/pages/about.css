@@ -1,0 +1,79 @@
+/* About page only. Shared patterns (page-hero, overview, facts, sk-cards, steps, faq, gated) live in css/sections.css. */
+
+/* Statement hero */
+.about-hero { padding-bottom: var(--space-12); }
+.about-hero__text { max-width: 900px; }
+.about-hero h1 { font: 600 clamp(40px, 5.6vw, 72px)/1.02 var(--font-sans); letter-spacing: -0.042em; }
+.about-hero .lead { max-width: 640px; }
+.about-art { margin: var(--space-12) 0 0; padding: var(--space-6); border-radius: var(--radius-xl); background: var(--indigo-50); overflow: hidden; }
+.about-art .il { max-width: 100%; }
+
+/* Who we are */
+.about-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--space-12); align-items: start; }
+.about-pull { margin-top: var(--space-8); padding-left: var(--space-6); border-left: 3px solid var(--lime); font: 600 clamp(22px, 2.6vw, 30px)/1.3 var(--font-sans); letter-spacing: -0.02em; }
+.about-body p { font-size: 17px; line-height: 1.7; color: var(--muted); }
+.about-body p + p { margin-top: var(--space-4); }
+.about-body .nx-arrowlink { margin-top: var(--space-6); }
+.about-story .about-body { padding-top: var(--space-2); }
+
+/* Company at a glance */
+.about-glance { margin: var(--space-6) 0 0; display: grid; }
+.about-glance > div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-4); padding: var(--space-4) 0; }
+.about-glance > div + div { border-top: 1px solid var(--line); }
+.about-glance dt { font: 500 12px/1.6 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.about-glance dd { margin: 0; font: 500 16px/1.5 var(--font-sans); }
+
+/* What we do and How we work: two-up card grid */
+.about-grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.about-grid2 .sk-card__title a { color: inherit; text-decoration: none; transition: color var(--duration-fast); }
+.about-grid2 .sk-card__title a:hover { color: var(--indigo-text); }
+.about-grid2 .sk-card__title a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.about-grid2 .svc__links { margin-top: auto; }
+.about-also { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-6); margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--line); font-size: 15px; }
+.about-also span { font: 500 12px/1.4 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: var(--space-2); }
+.about-also a { color: var(--ink); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.about-also a:hover { color: var(--indigo-text); }
+.about-also a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+/* Where we work */
+.about-where .about-body { margin-top: var(--space-4); }
+.about-tools { display: flex; flex-wrap: wrap; gap: 8px; margin: var(--space-3) 0 0; padding: 0; list-style: none; }
+.about-tools li { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border-radius: var(--radius-pill); border: 1px solid var(--line-strong); font-size: 13px; font-weight: 500; }
+
+/* Industries: larger chips for touch */
+.about-sectors a { min-height: 44px; padding: 0 18px; font-size: 15px; }
+
+/* Why India: three trade-off columns */
+.about-tradeoffs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+.about-tradeoffs article { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-8); border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.about-tradeoffs h3 { font: 600 22px/1.25 var(--font-sans); letter-spacing: -0.02em; }
+.about-tradeoffs p { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.about-tradeoffs p strong { display: block; margin-bottom: 6px; font: 500 12px/1.4 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo-text); }
+.about-tradeoffs .about-watch strong { color: var(--muted); }
+
+/* Team: founder card and gated leaders */
+.about-team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+.about-team .sk-card__title a { color: inherit; text-decoration: none; }
+.about-team .sk-card__title a:hover { color: var(--indigo-text); }
+.about-team .sk-card__title a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.about-team .nx-arrowlink { margin-top: auto; align-self: flex-start; }
+.about-team + .gated, .section .gated { margin-top: var(--space-8); }
+.gated p { margin-top: var(--space-3); font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+/* FAQ and CTA reuse homepage pattern */
+
+@media (max-width: 1100px) {
+  .about-story { grid-template-columns: 1fr; gap: var(--space-8); }
+  .about-tradeoffs { grid-template-columns: 1fr; }
+  .about-team { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .about-grid2 { grid-template-columns: minmax(0, 1fr); }
+  .about-team { grid-template-columns: minmax(0, 1fr); }
+  .about-tradeoffs article { padding: var(--space-6); }
+  .about-art { padding: var(--space-3); }
+  .about-art .about-sub { display: none; }
+  .about-pull { padding-left: var(--space-4); }
+  .about-glance > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}

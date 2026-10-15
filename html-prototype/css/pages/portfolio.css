@@ -1,0 +1,60 @@
+/* Portfolio page only. Shared patterns (page-hero, tabs, badges, gated, sk-cards) live in css/sections.css and css/components.css. */
+
+/* Filter bar: the pill tabs sit on their own row and scroll sideways on small screens */
+.pf-tabs { max-width: 100%; }
+.pf-tabs .nx-tabs__list { max-width: 100%; }
+.pf-tabs .nx-tab { white-space: nowrap; }
+
+/* Gated banner above the grid */
+.pf-gated { margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); }
+.pf-gated p { font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 680px; }
+
+/* Project grid: 3 across, 2 on tablet, 1 on phone */
+.pf-grid { margin-top: var(--space-8); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+.pf-panel { min-width: 0; }
+
+/* Project card */
+.pf-card { display: flex; flex-direction: column; min-width: 0; border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--line); overflow: hidden; transition: transform var(--duration-base) var(--ease-emphasized), box-shadow var(--duration-base), border-color var(--duration-base); }
+.pf-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); border-color: var(--line-strong); }
+.pf-card__body { display: flex; flex-direction: column; gap: var(--space-3); flex: 1; padding: var(--space-6); }
+.pf-card__badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf-card__title { font: 600 20px/1.25 var(--font-sans); letter-spacing: -0.02em; }
+.pf-card__title a { color: inherit; text-decoration: none; }
+.pf-card__title a:hover { color: var(--indigo-text); }
+.pf-card__title a:focus-visible, .pf-card .nx-arrowlink:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.pf-card__text { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.pf-card__foot { margin-top: auto; padding-top: var(--space-2); }
+.pf-card .nx-arrowlink { min-height: 44px; }
+
+/* Mock screen: a token-only illustration, varied per practice through the accent and wash */
+.pf-mock { aspect-ratio: 4 / 3; padding: var(--space-6); background: var(--pf-wash); border-bottom: 1px solid var(--line); }
+.pf-mock svg { display: block; width: 100%; height: 100%; }
+.pf-mock--software { --pf-wash: var(--indigo-50); --pf-accent: var(--indigo); --pf-soft: var(--indigo-100); }
+.pf-mock--mobile { --pf-wash: var(--sky-50); --pf-accent: var(--sky); --pf-soft: var(--line); }
+.pf-mock--ai { --pf-wash: var(--lime-50); --pf-accent: var(--lime); --pf-soft: var(--line); }
+.pf-mock--cloud { --pf-wash: var(--indigo-100); --pf-accent: var(--indigo-strong); --pf-soft: var(--indigo-50); }
+.pf-mock--web { --pf-wash: var(--sand-50); --pf-accent: var(--ink); --pf-soft: var(--line); }
+
+.pf-frame { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.5; }
+.pf-surface { fill: var(--surface); }
+.pf-soft { fill: var(--pf-soft); }
+.pf-line { fill: var(--line); }
+.pf-accent { fill: var(--pf-accent); }
+.pf-stroke { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
+.pf-link { fill: none; stroke: var(--pf-accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 4 6; }
+
+/* Want to see work relevant to you? */
+.pf-ask { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); align-items: center; padding: var(--space-12); border-radius: var(--radius-xl); background: var(--paper); border: 1px solid var(--line); }
+.pf-ask .h-section { margin-top: var(--space-3); }
+.pf-ask .lead { margin-top: var(--space-4); }
+.pf-ask__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6); }
+
+/* Breakpoints match css/sections.css: 1100px and 720px */
+@media (max-width: 1100px) {
+  .pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .pf-grid { grid-template-columns: minmax(0, 1fr); }
+  .pf-ask { grid-template-columns: minmax(0, 1fr); padding: var(--space-6); gap: var(--space-6); }
+  .pf-card:hover { transform: none; }
+}

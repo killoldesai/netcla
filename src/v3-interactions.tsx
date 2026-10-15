@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Icon } from "./site/ui";
 export function TrackedLink({
   href,
   event,
@@ -92,25 +93,43 @@ export function VacancyDirectory({
   }[];
   preview: boolean;
 }) {
+  if (!vacancies.length)
+    return (
+      <div className="v3-vacancies role-empty">
+        <p className="role-empty__text">There are no open positions listed at the moment.</p>
+      </div>
+    );
   return (
-    <div className="v3-vacancies">
-      {vacancies.length ? (
-        vacancies.map((v) => (
-          <article key={v.id}>
-            <div>
-              <h3>{v.title}</h3>
-              <p>
-                {v.department} · {v.location} · {v.employment_type}
-              </p>
+    <ul className="v3-vacancies role-list">
+      {vacancies.map((v) => {
+        const href = preview ? "#open-roles" : "/careers/" + v.slug;
+        return (
+          <li key={v.id} className="role-row">
+            <div className="role-row__main">
+              <h3 className="role-row__title">{v.title}</h3>
+              <p className="role-row__team">{v.department}</p>
+              <div className="role-row__badges">
+                {v.location && (
+                  <span className="nx-badge">
+                    <span className="nx-badge__dot" aria-hidden="true" />
+                    {v.location}
+                  </span>
+                )}
+                {v.employment_type && (
+                  <span className="nx-badge nx-badge--lime">
+                    <span className="nx-badge__dot" aria-hidden="true" />
+                    {v.employment_type}
+                  </span>
+                )}
+              </div>
             </div>
-            <a href={preview ? "#open-roles" : "/careers/" + v.slug}>
-              View role ↗
+            <a className="nx-arrowlink role-row__link" href={href}>
+              <span>View role</span>
+              <Icon name="arrow-right" size={18} />
             </a>
-          </article>
-        ))
-      ) : (
-        <p>There are no open positions listed at the moment.</p>
-      )}
-    </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

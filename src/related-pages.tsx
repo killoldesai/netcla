@@ -1,5 +1,6 @@
 import { pillar, pillarGroups, sitePage, sitePages, pillars } from "./site-structure";
 import { company } from "./company";
+import { Icon } from "./site/ui";
 
 type Link = { path: string; text: string; blurb?: string };
 type Block = { heading: string; sections: { title?: string; links: Link[] }[] };
@@ -130,16 +131,20 @@ export function RelatedPages({ path, paths }: { path: string; paths: string[] })
   const block = relatedPages(path, paths);
   if (!block) return null;
   return (
-    <section className="v3-related-pages" aria-labelledby="related-pages-title">
-      <div className="v3-wrap">
-        <h2 id="related-pages-title">{block.heading}</h2>
+    <section className="v3-related-pages gen-related" aria-labelledby="related-pages-title">
+      <link rel="stylesheet" href="/assets/nx/related.css?v=20261015" />
+      <div className="v3-wrap container">
+        <h2 id="related-pages-title" className="related__title">{block.heading}</h2>
         {block.sections.map((s, i) => (
-          <div key={s.title ?? i} className="v3-related-pages-group">
-            {s.title && <p className="v3-related-pages-title">{s.title}</p>}
-            <ul>
+          <div key={s.title ?? i} className="v3-related-pages-group related__group">
+            {s.title && <p className="v3-related-pages-title related__label">{s.title}</p>}
+            <ul className="more related__list">
               {s.links.map((l) => (
                 <li key={l.path}>
-                  <a href={l.path}>{l.text}</a>
+                  <a href={l.path}>
+                    <strong>{l.text}</strong>
+                    <Icon name="arrow-right" size={16} />
+                  </a>
                 </li>
               ))}
             </ul>

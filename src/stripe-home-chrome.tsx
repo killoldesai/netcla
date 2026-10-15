@@ -1,58 +1,13 @@
 "use client";
 import { MegaNavigation } from "./mega-navigation";
-import { pillars, sitePage } from "./site-structure";
+import { publicDestination, groups, footerLocations, type ChromeProps } from "./site/footer-data";
 
-type ChromeProps = {
-  paths: string[];
-  preview?: boolean;
-  linkMap?: Record<string, string>;
-  homeHref?: string;
-  contactHref?: string;
-};
-export function publicDestination(
-  path: string,
-  { paths, preview, linkMap = {} }: ChromeProps,
-) {
-  return preview ? linkMap[path] : paths.includes(path) ? path : undefined;
-}
+// Footer data now lives in ./site/footer-data (shared with server components); re-exported for existing imports.
+export { publicDestination, footerLocations, groups } from "./site/footer-data";
+
 export function StripeNavigation(props: ChromeProps) {
   return <MegaNavigation {...props} />;
 }
-// Footer columns come from site-structure so they match the mega menu.
-const footerLinks = (paths: string[]): [string, string][] =>
-  paths.flatMap((path) => {
-    const page = sitePage(path);
-    return page ? [[page.label, page.path] as [string, string]] : [];
-  });
-/** Location pages, linked from every footer so they are reachable without the menu. */
-export const footerLocations: [string, string][] = [
-  ["USA", "/software-development-company-usa"],
-  ["United Kingdom", "/software-development-company-uk"],
-  ["Canada", "/software-development-company-canada"],
-  ["Australia", "/software-development-company-australia"],
-  ["Dubai", "/software-development-company-dubai"],
-  ["India", "/software-development-company-india"],
-];
-export const groups: [string, [string, string][]][] = [
-  [
-    "Services",
-    pillars
-      .filter((p) => p.inServicesMenu)
-      .map((p) => [p.label, p.hub] as [string, string]),
-  ],
-  [
-    "Hire Developers",
-    footerLinks(["/hire-developers", "/dedicated-development-team", "/hire-react-developer", "/hire-nodejs-developer", "/hire-flutter-developer", "/hire-ai-ml-developer"]),
-  ],
-  [
-    "Industries",
-    footerLinks(["/industries", "/healthcare-software-development", "/fintech-software-development", "/edtech-software-development", "/logistics-software-development", "/retail-software-development"]),
-  ],
-  [
-    "Company",
-    footerLinks(["/about", "/how-we-work", "/engagement-models", "/case-studies", "/blog", "/careers", "/contact"]),
-  ],
-];
 export function StripeFooter(props: ChromeProps) {
   const privacy = publicDestination("/privacy-policy", props),
     terms = publicDestination("/terms", props);

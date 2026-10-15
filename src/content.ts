@@ -62,7 +62,13 @@ export const safeURL = z
   .string()
   .url()
   .refine(
-    (v) => ["http:", "https:"].includes(new URL(v).protocol),
+    (v) => {
+      try {
+        return ["http:", "https:"].includes(new URL(v).protocol);
+      } catch {
+        return false;
+      }
+    },
     "Use an HTTP or HTTPS URL",
   );
 export const contentSchema = z

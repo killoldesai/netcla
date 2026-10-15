@@ -52,15 +52,18 @@ test("the stages are the only numbered list on the page, and the deliverable is 
   assert.ok(isHowWorkContent(c, "/how-we-work"));
   const $ = render(c);
   assert.ok($("main.v3-how").length);
-  assert.ok($("link[href^='/assets/how-work.css']").length);
-  assert.equal($("[class*='sk-'], [class*='ab-'], [class*='ct-'], [class*='en-']").length, 0);
+  assert.ok($("link[href^='/assets/nx/pages/how-work.css']").length);
+  assert.equal($("[class*='v3-section'], [class*='v3-wrap']").length, 0, "no legacy section classes");
   assert.equal($("h1").length, 1);
-  assert.equal($("#stages .hw-stage-n").length, 5);
-  assert.deepEqual($("#stages .hw-stage-n").map((_, el) => $(el).text()).get(), ["1", "2", "3", "4", "5"]);
-  assert.equal($("#stages .hw-stage-receives").length, 5);
+  // Numbers come from the nx-steps counter; the stages are the only ordered list outside the breadcrumb.
+  assert.equal($("main ol").not(".nx-crumbs ol").length, 1);
+  assert.equal($("#stages ol.nx-steps > li.nx-step").length, 5);
+  assert.equal($("#stages .nx-step__title").length, 5);
+  assert.equal($("#stages .deliver-label").length, 5);
+  assert.equal($("#stages .hw-receives").length, 5);
   assert.equal($("#communication .hw-cadence tbody tr").length, 4);
   assert.equal($("#tools .hw-tools > div").length, 4);
-  assert.equal($("#commitments .hw-commits > li").length, 4);
+  assert.equal($("#commitments .hw-commits > article").length, 4);
   assert.equal($("#faq details").length, 5);
 });
 
@@ -68,7 +71,28 @@ test("the tools list is a definition list and the hero signals are plain items",
   const $ = render();
   assert.deepEqual($("#tools dt").map((_, el) => $(el).text()).get(), TOOLS);
   assert.equal($(".hw-signals li").length, 3);
-  assert.equal($("main svg").length, 0, "no decorative icons");
+  assert.equal($("#hero svg.il").length, 1, "the delivery-loop illustration is the only hero art when no image is generated");
+  assert.equal($("main img").length, 0);
+});
+
+test("a generated hero image replaces the illustration and keeps its dimensions", () => {
+  const asset = { id: "a".repeat(32), name: "hero.png", src: "/media/hero.png", alt: "Delivery team", width: 1200, height: 900 };
+  const c = content();
+  c.pageSections = c.pageSections!.map((s) => (s.id === "hero" ? { ...s, asset } : s)) as typeof c.pageSections;
+  const $ = load(renderToStaticMarkup(<V3Page content={c} path="/how-we-work" paths={paths} />));
+  const img = $("#hero .hero__art img");
+  assert.equal(img.length, 1);
+  assert.equal(img.attr("width"), "1200");
+  assert.equal(img.attr("height"), "900");
+  assert.equal($("#hero svg.il").length, 0);
+});
+
+test("the sub-nav links only to the sections that are on the page", () => {
+  const $ = render();
+  assert.deepEqual(
+    $("[data-subnav] a").map((_, el) => $(el).attr("href")).get(),
+    ["#approach", "#stages", "#communication", "#tools", "#commitments", "#faq"],
+  );
 });
 
 test("older accepted content without the stages section keeps the legacy renderer", () => {

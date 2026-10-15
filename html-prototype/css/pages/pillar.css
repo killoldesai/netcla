@@ -1,0 +1,50 @@
+/* Pillar hub: page-only rules. The family skeleton styles live in sections.css. */
+
+/* Hub hero reads larger than a service page */
+.hub-hero { padding-bottom: var(--space-24); }
+.hub-hero h1 { font: 600 clamp(40px, 5.2vw, 72px)/1.02 var(--font-sans); letter-spacing: -0.042em; }
+
+/* Child services grid, grouped by pillar group */
+.hub-groups { display: grid; gap: var(--space-16); }
+.hub-group__title { font: 600 22px/1.25 var(--font-sans); letter-spacing: -0.02em; margin-bottom: var(--space-6); }
+.hub-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-6); }
+.hub-card { text-decoration: none; color: var(--ink); padding: var(--space-6); gap: var(--space-2); }
+.hub-card .sk-card__icon { margin-bottom: var(--space-2); }
+.hub-card .sk-card__title { font-size: 18px; }
+.hub-card .sk-card__text { font-size: 14px; }
+.hub-card:hover .sk-card__title { color: var(--indigo-text); }
+.hub-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Why cards: four across, with a fill that works on paper sections */
+.why-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-6); }
+
+/* Cards on paper sections need a surface fill to stand off the ground */
+.section:not(.section--white) .sk-card { background: var(--surface); }
+.section--white .sk-stack__group { background: var(--paper); }
+
+/* Six industry links in a 3 by 2 grid */
+.hub-ind { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 1100px) {
+  .hub-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub-ind { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .hub-groups { gap: var(--space-12); }
+  .hub-cards, .why-grid { grid-template-columns: minmax(0, 1fr); }
+  .hub-ind { grid-template-columns: minmax(0, 1fr); }
+  .hub-card { padding: var(--space-6); }
+  .hub-card:hover { transform: none; }
+}
+
+/* Groups with three or five cards fill their row */
+.hub-cards--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hub-cards--five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+  .hub-cards--three, .hub-cards--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .hub-cards--three, .hub-cards--five { grid-template-columns: minmax(0, 1fr); }
+}

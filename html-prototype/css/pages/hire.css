@@ -1,0 +1,2 @@
+/* Hire page: page-only rules. The family skeleton styles live in sections.css. */
+.svc__links span { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--indigo-50); color: var(--ink); font-size: 13px; font-weight: 500; }

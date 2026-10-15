@@ -4,69 +4,24 @@ import { V3Page } from "@/v3-page";
 import { verifiedV3Content } from "@/v3-evidence";
 import { withAssetNames } from "@/asset-names";
 import { SectionSitemap } from "@/section-sitemap";
+import { pillars } from "@/site-structure";
+import { NxShell } from "@/site/shell";
+import { ArrowLink, Button, HeroArt, ProductIcon } from "@/site/ui";
+import { NxSitemap } from "@/site/sitemap";
+import { NotFoundArt } from "@/site/art/not-found-art";
 
-const layout = (recommended_component: string, background: string) => ({
-  max_width: "1320px",
-  background,
-  mobile_stack: "Stack content in reading order; component owns responsive layout.",
-  spacing_above: 0,
-  recommended_component,
-});
+// The built-in 404 is redesigned from html-prototype/404.html (styles: public/assets/nx/pages/not-found.css).
+// A published /404 page from the admin still renders through V3Page, unchanged.
 
-// Built-in 404, made of the same sections every page uses. Shown until a /404 page
-// is published from the admin.
-const fallbackContent = {
-  schemaVersion: 3,
-  title: "Page not found | Netofficials",
-  description: "The page you requested is unavailable.",
-  texts: {},
-  claims: [],
-  sources: [],
-  unresolved: [],
-  pageBlueprint: {
-    hero: layout("HeroSplit", "#ffffff"),
-    "cta-banner": layout("DarkCtaBand", "#061b31"),
-  },
-  pageSections: [
-    {
-      id: "hero",
-      order: 1,
-      omitted: false,
-      evidenceIds: [],
-      asset: {
-        id: "not-found",
-        src: "/assets/not-found-illustration.svg",
-        alt: "",
-        width: 560,
-        height: 420,
-      },
-      fields: {
-        tag_pill: "Error 404",
-        h1: "This page took a different route",
-        subheadline:
-          "The link may be out of date, or the page has moved. Every live page is listed below by section, or tell us what you were looking for and we will point you to it.",
-        cta_primary_label: "Tell us what you need",
-        cta_secondary_label: "Back to the homepage",
-        cta_secondary_url: "/",
-      },
-    },
-    {
-      id: "cta-banner",
-      order: 2,
-      omitted: false,
-      evidenceIds: [],
-      fields: {
-        heading: "Still can't find it?",
-        subheadline:
-          "Describe the service or page you were after and a Netofficials team member will reply with the right link, or the questions needed to scope your project.",
-        cta_primary_label: "Contact us",
-        cta_primary_url: "/contact",
-        cta_secondary_label: "Browse all services",
-        cta_secondary_url: "/services",
-      },
-    },
-  ],
-} as unknown as Parameters<typeof V3Page>[0]["content"];
+/** Hub cards on the built-in 404, with the prototype's product icon for each pillar. */
+const popularHubs: Record<string, string> = {
+  software: "code-brackets",
+  mobile: "mobile-device",
+  ai: "brain-circuit",
+  cloud: "aws-cloud",
+  hire: "users-group",
+  industries: "layers-stack",
+};
 
 async function load() {
   if (!process.env.DATABASE_URL) return { listing: [], page: null };
@@ -78,12 +33,11 @@ async function load() {
   }
 }
 
-// The 404 copy is the published /404 page from the admin, else the built-in sections above.
-// The sitemap always reflects what is published now and sits before the closing CTA band.
+// The 404 copy is the published /404 page from the admin, else the built-in page below.
+// The sitemap always reflects what is published now.
 export default async function NotFound() {
   const { listing, page } = await load();
   const paths = listing.length ? listing.map((l) => l.path) : ["/"];
-  const sitemap = <SectionSitemap listing={listing} />;
   if (page?.content.schemaVersion === 3) {
     const approved = (await query("SELECT id FROM facts WHERE approved=true")).map((f) => f.id);
     return (
@@ -91,11 +45,79 @@ export default async function NotFound() {
         content={await withAssetNames(verifiedV3Content(page.content, approved))}
         path="/404"
         paths={paths}
-        afterContent={sitemap}
+        afterContent={<SectionSitemap listing={listing} />}
         published={page.first_published_at}
         modified={page.created_at}
       />
     );
   }
-  return <V3Page content={fallbackContent} path="/404" paths={paths} afterContent={sitemap} />;
+  const hubs = pillars.filter((p) => popularHubs[p.id]);
+  return (
+    <NxShell page="not-found" paths={paths}>
+      <section className="page-hero nf-hero">
+        <div className="container">
+          <div className="hero__grid">
+            <div>
+              <span className="tag-pill">Error 404</span>
+              <h1>This page took a different route</h1>
+              <p className="lead">
+                The link may be out of date, or the page has moved. Every live page is listed below by section, or tell us what you were looking for and we will point you to it.
+              </p>
+              <div className="hero__actions">
+                <Button href="/" size="lg">Back to the homepage</Button>
+                <ArrowLink href="/contact">Tell us what you need</ArrowLink>
+              </div>
+            </div>
+            <HeroArt fallback={<NotFoundArt />} priority />
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--white" aria-labelledby="popular-title">
+        <div className="container">
+          <div className="section-head nx-reveal">
+            <div>
+              <h2 className="h-section" id="popular-title">Popular pages</h2>
+            </div>
+          </div>
+          <div className="sk-cards nf-cards nx-reveal">
+            {hubs.map((hub) => (
+              <a key={hub.id} className="sk-card nf-card" href={hub.hub}>
+                <span className="sk-card__icon" aria-hidden="true">
+                  <ProductIcon name={popularHubs[hub.id]} size={26} />
+                </span>
+                <span className="sk-card__title">{hub.label}</span>
+                <span className="sk-card__text">{hub.blurb}</span>
+              </a>
+            ))}
+          </div>
+          <div className="nf-links">
+            <ArrowLink href="/services">Services</ArrowLink>
+            <ArrowLink href="/blog">Guides</ArrowLink>
+          </div>
+        </div>
+      </section>
+
+      <NxSitemap listing={listing} />
+
+      <section className="section band" aria-labelledby="nf-cta-title">
+        <div className="container">
+          <div className="footer__cta">
+            <div>
+              <h2 id="nf-cta-title">
+                Still can&apos;t find it? <span>Tell us what you need built.</span>
+              </h2>
+              <p>
+                Describe the service or page you were after and a Netofficials team member will reply with the right link, or the questions needed to scope your project.
+              </p>
+            </div>
+            <div className="footer__cta-actions">
+              <Button href="/contact" variant="lime" size="lg">Contact us</Button>
+              <Button href="/services" variant="secondary" size="lg">Browse all services</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </NxShell>
+  );
 }

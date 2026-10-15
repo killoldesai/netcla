@@ -116,11 +116,11 @@ test("V3 hubs preserve complete directories, real logos and one shared bottom CT
   );
   assert.equal($("h1").length, 1);
   // Without a generated hero image every template falls back to the same text hero.
-  assert.equal($(".v3-hero-grid.v3-hero-text").length, 1);
-  assert.equal($(".v3-hero-grid figcaption").length, 0);
+  assert.equal($(".hero__grid.gen-hero--text").length, 1);
+  assert.equal($(".hero__grid figcaption").length, 0);
   assert.equal($(".service-art img").length, 0);
-  assert.equal($(".v3-section--services-grid").length, 1);
-  assert.ok($(".v3-directory a").length > 6);
+  assert.equal($("#services-grid").length, 1);
+  assert.ok($(".gen-directory a").length > 6);
   assert.equal($("#cta-banner").length, 1);
   assert.equal($("main form").length, 0);
   const logos = $('main img[src^="/brand/"]').map((_, el) => $(el).attr("src")).get();
@@ -129,9 +129,9 @@ test("V3 hubs preserve complete directories, real logos and one shared bottom CT
   const schema = JSON.parse($('script[type="application/ld+json"]').text())["@graph"].find((n: any) => n["@type"] === "FAQPage");
   assert.equal(
     schema.mainEntity[0].name,
-    $(".v3-faq summary").text().replace("+", ""),
+    $(".nx-acc__trigger").text().replace("+", ""),
   );
-  assert.equal(schema.mainEntity[0].acceptedAnswer.text, $(".v3-faq p").text());
+  assert.equal(schema.mainEntity[0].acceptedAnswer.text, $(".nx-acc__content p").text());
 });
 test("private V3 preview resolves private destinations and disables sending", () => {
   const $ = load(
@@ -149,7 +149,7 @@ test("private V3 preview resolves private destinations and disables sending", ()
     ),
   );
   assert.equal(
-    $("#services-grid .v3-cards a").attr("href"),
+    $("#services-grid .sk-cards a").attr("href"),
     "/admin/preview/flutter",
   );
   assert.match(
@@ -161,11 +161,11 @@ test("private V3 preview resolves private destinations and disables sending", ()
 test("inner service breadcrumb is separate from the hero label", () => {
   const child = contentSchema.parse({...content,pageSections:content.pageSections?.map(section=>section.id==='hero'?{...section,fields:{...section.fields,tag_pill:'Flutter app development services'}}:section)});
   const $ = load(renderToStaticMarkup(<V3Page content={child} path="/flutter-app-development" paths={[]} />));
-  assert.equal($('.v3-hero-breadcrumb a').last().attr('href'),'/mobile-app-development');
-  assert.equal($('.v3-hero-breadcrumb [aria-current=page]').text(),'Flutter');
-  assert.equal($('.v3-hero-grid .v3-hero-breadcrumb').length,0);
-  assert.equal($('.v3-hero-grid .v3-tag').text(),'Flutter app development services');
-  assert.equal($('.v3-hero-grid figcaption').length,0);
+  assert.equal($('.nx-crumbs a').last().attr('href'),'/mobile-app-development');
+  assert.equal($('.nx-crumbs [aria-current=page]').text(),'Flutter');
+  assert.equal($('.hero__grid .nx-crumbs').length,0);
+  assert.equal($('.hero__grid .tag-pill').text(),'Flutter app development services');
+  assert.equal($('.hero__grid figcaption').length,0);
 });
 test("hub supplies its configured stack and paired services use descriptive links", () => {
  const revised=contentSchema.parse({...content,pageBlueprint:{...content.pageBlueprint,'why-netofficials':{...content.pageBlueprint!['services-grid']},'related-hubs':{...content.pageBlueprint!['services-grid']}},pageSections:[...content.pageSections!.filter(s=>s.id!=='technology-stack'),{id:'why-netofficials',order:6,fields:{heading:'Why Netofficials',adv_1:'Plan around your requirements.'}},{id:'related-hubs',order:7,fields:{heading:'Paired services',hub_1_name:'API development',hub_1_body:'Connect your application.',hub_1_url:'/api-development-services'}}]});
@@ -174,7 +174,7 @@ test("hub supplies its configured stack and paired services use descriptive link
  assert.ok($('.service-stack-tool img').length>5);
  assert.equal($('.service-paired-link').attr('href'),'/api-development-services');
  assert.match($('.service-paired-link').text(),/Explore API development/);
- assert.equal($('.service-reason-icon').length,1);
+ assert.equal($('.gen-check--icon').length,1);
 });
 test("hub FAQ fallback matches schema and uses native exclusive accordions",()=>{
  const withoutFaq=contentSchema.parse({...content,pageSections:content.pageSections!.filter(s=>s.id!=='faq')});

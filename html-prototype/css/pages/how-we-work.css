@@ -1,0 +1,48 @@
+/* How we work: page-only rules. Family and process styles live in sections.css and components.css. */
+
+/* Hero signals: three assurance points under the lead */
+.hw-signals { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
+.hw-signals li { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 15px/1.4 var(--font-sans); color: var(--ink); }
+.hw-signals .nx-icon, .hw-signals svg { color: var(--indigo-text); flex: none; }
+
+/* Section heads */
+.hw-head { max-width: 720px; margin-bottom: var(--space-12); }
+.hw-head .lead { margin-top: var(--space-4); }
+
+/* Stages: dark band, heading sticks left, vertical timeline right */
+.hw-stages-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--space-16); align-items: start; }
+.hw-stages-head { position: sticky; top: 120px; }
+.hw-stages-head .lead { margin-top: var(--space-6); }
+.hw-timeline { gap: 0; }
+.hw-timeline .nx-step { border-left-color: var(--band-line); padding-bottom: var(--space-12); }
+.hw-timeline .nx-step:last-child { padding-bottom: 0; border-left-color: transparent; }
+.hw-timeline .nx-step::after { background: var(--lime); }
+.hw-timeline .nx-step__title { font: 600 22px/1.25 var(--font-sans); letter-spacing: -0.02em; color: var(--on-band); }
+.hw-timeline .nx-step__desc { margin-top: var(--space-3); max-width: 560px; }
+.hw-timeline .deliver-label { margin-top: var(--space-4); }
+.hw-timeline .nx-step::before { margin-bottom: var(--space-3); }
+
+/* Communication table: scrolls inside its own box on narrow screens */
+.hw-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-xl); border: 1px solid var(--line); background: var(--paper); }
+.hw-table-wrap:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.hw-cadence { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 15px; line-height: 1.55; }
+.hw-cadence th, .hw-cadence td { padding: var(--space-6) var(--space-6); text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.hw-cadence thead th { font: 500 12px/1.4 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--surface); }
+.hw-cadence tbody tr:last-child th, .hw-cadence tbody tr:last-child td { border-bottom: 0; }
+.hw-cadence tbody th { font: 600 15px/1.4 var(--font-sans); color: var(--ink); }
+.hw-cadence td { color: var(--muted); }
+
+/* Commitments: 2 by 2 cards */
+.hw-commits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+.hw-commits .sk-card__title { font-size: 22px; }
+
+@media (max-width: 1100px) {
+  .hw-stages-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-12); }
+  .hw-stages-head { position: static; }
+}
+
+@media (max-width: 720px) {
+  .hw-commits { grid-template-columns: minmax(0, 1fr); }
+  .hw-cadence th, .hw-cadence td { padding: var(--space-4); }
+  .hw-timeline .nx-step__title { font-size: 20px; }
+}

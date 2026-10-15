@@ -1,0 +1,25 @@
+/* FAQ page only. Shared patterns (page-hero, subnav, faq, nx-acc, svc__links, draft) live in css/sections.css. */
+
+/* Text hero: no illustration, so the copy holds the width */
+.faq-hero { padding-bottom: var(--space-8); }
+.faq-hero__text { max-width: 760px; }
+.faq-hero h1 { font: 600 clamp(36px, 4.6vw, 60px)/1.04 var(--font-sans); letter-spacing: -0.04em; }
+.faq-hero .lead { max-width: 620px; }
+.faq-jump { margin: var(--space-8) 0 0; }
+
+/* Category groups reuse the homepage .faq grid (heading left, accordion right) */
+.faq-group { padding: var(--space-16) 0; }
+.faq-group .faq { gap: var(--space-8) var(--space-12); }
+.faq-group__title { font: 600 clamp(26px, 3vw, 36px)/1.15 var(--font-sans); letter-spacing: -0.03em; }
+.faq-group .nx-acc { min-width: 0; }
+
+/* Still have a question? */
+.faq-still { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-6) var(--space-8); padding: var(--space-12); border-radius: var(--radius-xl); background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+.faq-still__title { font: 600 clamp(26px, 3vw, 36px)/1.15 var(--font-sans); letter-spacing: -0.03em; }
+.faq-still__text { margin-top: var(--space-3); font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 560px; }
+
+@media (max-width: 720px) {
+  .faq-group { padding: var(--space-12) 0; }
+  .faq-still { padding: var(--space-6); }
+  .faq-still .nx-btn { width: 100%; justify-content: center; }
+}

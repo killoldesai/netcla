@@ -47,8 +47,8 @@ test("Contact renders its own layout; the form fields all exist in the lead sche
   assert.ok(!isContactContent(c, "/about"));
   const $ = render(c);
   assert.ok($("main.v3-contact").length);
-  assert.ok($("link[href^='/assets/contact.css']").length);
-  assert.equal($("[class*='sk-'], [class*='ab-']").length, 0);
+  assert.ok($("link[href^='/assets/nx/pages/contact.css']").length);
+  assert.equal($("[class*='ab-'], [class*='v3-skeleton']").length, 0);
   assert.equal($("h1").length, 1);
   const names = new Set($("#contact-form [name]").map((_, el) => $(el).attr("name")).get());
   const allowed = new Set(Object.keys(leadSchema.shape));

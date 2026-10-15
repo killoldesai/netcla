@@ -135,6 +135,14 @@ export function MegaNavigation(props: MegaNavigationProps) {
   // The page being viewed, so its link (and the menu holding it) is marked.
   const [current, setCurrent] = useState("");
   useEffect(() => setCurrent(window.location.pathname.replace(/\/$/, "") || "/"), []);
+  // The pill header gets a solid ground once the page scrolls.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Planned pages stay out of navigation until they are published.
   const href = (path: string): string | undefined =>
@@ -486,7 +494,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
         Skip to content
       </a>
       <header
-        className={"nm-header" + (mobile ? " nm-mobile-open" : "") + (active ? " nm-has-open" : "")}
+        className={"nm-header" + (mobile ? " nm-mobile-open" : "") + (active ? " nm-has-open" : "") + (scrolled ? " nx-scrolled" : "")}
         ref={root}
         role={mobile ? "dialog" : undefined}
         aria-modal={mobile ? true : undefined}
@@ -497,6 +505,7 @@ export function MegaNavigation(props: MegaNavigationProps) {
         }}
       >
         <link rel="stylesheet" href="/assets/mega-navigation.css" />
+        <link rel="stylesheet" href="/assets/nx/header.css?v=20261015" />
         <div className="nm-bar">
           <a className="nm-logo" href={props.homeHref ?? href("/") ?? "/"} aria-label="Netofficials home">
             <img src="/assets/logo.png" alt="Netofficials" width={168} height={28} />

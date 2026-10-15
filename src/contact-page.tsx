@@ -1,13 +1,15 @@
-import { SiteIcon, legacyIcon } from "./icon-set";
+import type { CSSProperties } from "react";
 import { LeadForm } from "./render";
 import { TrackedLink } from "./v3-interactions";
 import { breadcrumbs, pillars } from "./site-structure";
 import { sanitizeRichHTML } from "./rich-text";
+import { FaqList, Icon, ProductIcon, SectionHead, Breadcrumbs } from "./site/ui";
 import type { Content } from "./content";
 import type { PageSection } from "./page-spec-schema";
 
-// The Contact page is a conversion page: intro and form side by side above the fold, then reassurance.
-// Own layout and stylesheet (/assets/contact.css). The form posts through LeadForm to /api/leads, unchanged.
+// The Contact page is a conversion page: intro and enquiry form side by side above the fold, then reassurance.
+// Markup follows html-prototype/contact.html; styles in public/assets/nx/pages/contact.css.
+// The form posts through LeadForm to /api/leads, unchanged.
 
 /** True for Contact content generated from the contact spec; older accepted content keeps the legacy renderer. */
 export function isContactContent(content: Content, path: string) {
@@ -20,8 +22,14 @@ type Props = { content: Content; path: string; paths: string[]; preview?: boolea
 export const SERVICE_SUGGESTIONS = [...new Set([...pillars.map((p) => p.service), "Hire developers", "Digital marketing", "Something else"])];
 export const TIMELINES = ["As soon as possible", "Within 3 months", "3 to 6 months", "Just exploring"];
 
+/** Prototype icons for the assurance cards, in content order (handover, named contact, change control). */
+const ASSURANCE_ICONS = ["document-text", "users-group", "shield-check"];
+/** Prototype icons for the other-ways cards, by destination. */
+const ROUTE_ICONS: Record<string, string> = { "/how-we-work": "settings-gear", "/engagement-models": "layers-stack", "/hire-developers": "code-brackets", "/services": "rocket-launch" };
+
 const clean = (html: string, paths: string[]) => sanitizeRichHTML(html, false, paths.length ? paths : undefined);
 const hasHtml = (value: string) => /<[a-z][\s\S]*>/i.test(value);
+const delay = (i: number) => ({ "--nx-delay": `${i * 100}ms` }) as CSSProperties;
 
 function rows(fields: Record<string, string>, prefix: string, keys: string[], max: number) {
   const out: Record<string, string>[] = [];
@@ -35,7 +43,7 @@ function rows(fields: Record<string, string>, prefix: string, keys: string[], ma
 function Prose({ value, paths, className }: { value?: string; paths: string[]; className?: string }) {
   if (!value?.trim()) return null;
   if (!hasHtml(value)) return <p className={className}>{value}</p>;
-  return <div className={"ct-prose " + (className ?? "")} dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
+  return <div className={"nx-prose " + (className ?? "")} dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
 }
 
 export function ContactSections({ content, path, paths, preview = false, linkMap = {} }: Props) {
@@ -47,94 +55,79 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
   const form = f("contact-form");
   const trail = breadcrumbs(path, hero.h1 || content.title);
   const trust = [hero.trust_1, hero.trust_2, hero.trust_3].map((t) => t?.trim()).filter(Boolean);
-  const steps = rows(f("next-steps"), "step", ["title", "body"], 3);
+  const next = f("next-steps");
+  const steps = rows(next, "step", ["title", "body"], 3);
   const prepare = f("prepare");
   const items = rows(prepare, "item", ["title", "body"], 4);
-  const assurances = rows(f("assurances"), "item", ["title", "body"], 3);
-  const routes = rows(f("other-routes"), "route", ["name", "url", "body"], 3).filter((r) => !r.url || live(r.url));
+  const assurance = f("assurances");
+  const assurances = rows(assurance, "item", ["title", "body"], 3);
+  const other = f("other-routes");
+  const routes = rows(other, "route", ["name", "url", "body"], 3).filter((r) => !r.url || live(r.url));
   const offices = f("proof-offices");
   const places = rows(offices, "office", ["city", "address", "timezone"], 2).filter((r) => r.city);
   const direct = [offices.direct_email?.trim() && { href: "mailto:" + offices.direct_email.trim(), label: offices.direct_email.trim(), kind: "Email" }, offices.direct_phone?.trim() && { href: "tel:" + offices.direct_phone.replace(/[^+\d]/g, ""), label: offices.direct_phone.trim(), kind: "Phone" }].filter(Boolean) as { href: string; label: string; kind: string }[];
+  const showOffices = direct.length > 0 || places.length > 0;
   const faq = f("faq");
   const faqPairs = Object.keys(faq).filter((k) => /^q\d+$/.test(k) && faq[k] && faq[k.replace("q", "a")]);
-  const Icon = ({ name }: { name: string }) => (
-    <span className="ct-icon" aria-hidden="true">
-      <SiteIcon name={legacyIcon[name] ?? name} className="ct-icon-svg" />
-    </span>
-  );
+  // Sections after the dark band alternate white and paper; omitted sections drop out of the rhythm.
+  const after = [items.length > 0 && "prepare", assurances.length > 0 && "assurances", routes.length > 0 && "other-routes", showOffices && "proof-offices", faqPairs.length > 0 && "faq"].filter(Boolean) as string[];
+  const tone = (id: string) => "section" + (after.indexOf(id) % 2 === 0 ? " section--white" : "");
 
   return (
     <>
-      <section id="hero" className="ct-top">
-        <div className="ct-wrap">
-          <nav className="ct-crumbs" aria-label="Breadcrumb">
-            <ol>
-              {trail.map((c, i) =>
-                i === trail.length - 1 ? <li key={c.path} aria-current="page">{c.label}</li> : <li key={c.path}><a href={go(c.path)}>{c.label}</a></li>,
-              )}
-            </ol>
-          </nav>
-          <div className="ct-top-grid">
+      <section id="hero" className="page-hero ct-hero">
+        <div className="container">
+          <Breadcrumbs items={trail.map((c, i) => ({ label: c.label, href: i === trail.length - 1 ? undefined : go(c.path) }))} />
+          <div className="contact ct-grid">
             <div className="ct-intro">
-              <span className="ct-tag">{hero.tag_pill || "Contact us"}</span>
-              <h1 className="ct-h1">{hero.h1 || content.title}</h1>
-              <p className="ct-lead">{hero.subheadline}</p>
+              <span className="tag-pill">{hero.tag_pill || "Contact us"}</span>
+              <h1>{hero.h1 || content.title}</h1>
+              {hero.subheadline && <p className="lead">{hero.subheadline}</p>}
               {trust.length > 0 && (
                 <ul className="ct-trust">
                   {trust.map((t) => (
                     <li key={t}>
-                      <span aria-hidden="true">✓</span>
+                      <Icon name="check" size={18} className="nx-icon" />
                       {t}
                     </li>
                   ))}
                 </ul>
               )}
-              {(direct.length > 0 || places.length > 0) && (
-                <div id="proof-offices" className="ct-direct">
-                  {offices.heading && <h2>{offices.heading}</h2>}
-                  {direct.map((d) => (
-                    <p key={d.kind}>
-                      <span>{d.kind}</span>
-                      <a href={d.href}>{d.label}</a>
-                    </p>
-                  ))}
-                  {places.map((o) => (
-                    <p key={o.city} className="ct-office">
-                      <span>{o.city}</span>
-                      {[o.address, o.timezone].filter(Boolean).join(" · ")}
-                    </p>
-                  ))}
-                </div>
-              )}
             </div>
 
             <div id="contact-form" className="ct-form-card">
-              <h2>{form.form_heading || "Tell us about your project"}</h2>
-              {form.form_subheadline && <p className="ct-form-sub">{form.form_subheadline}</p>}
               <LeadForm preview={preview}>
                 <div className="ct-fields">
-                  <label>
-                    <span className="ct-label">Name</span>
-                    <input name="name" required maxLength={120} autoComplete="name" />
-                  </label>
-                  <label>
-                    <span className="ct-label">Work email</span>
-                    <input name="email" type="email" required autoComplete="email" />
-                  </label>
-                  <label className="is-wide">
-                    <span className="ct-label">What do you need?</span>
-                    <input name="service" required maxLength={120} list="ct-services" data-service-context="true" defaultValue="" placeholder="e.g. Mobile app development" />
+                  <div>
+                    <h2 className="form__title">{form.form_heading || "Tell us about your project"}</h2>
+                    {form.form_subheadline && <p className="form__sub">{form.form_subheadline}</p>}
+                  </div>
+                  <div className="form__row">
+                    <div className="nx-field">
+                      <label htmlFor="contact-name">Name</label>
+                      <input id="contact-name" className="nx-field__control" name="name" required maxLength={120} autoComplete="name" />
+                    </div>
+                    <div className="nx-field">
+                      <label htmlFor="contact-email">Work email</label>
+                      <input id="contact-email" className="nx-field__control" name="email" type="email" required autoComplete="email" />
+                    </div>
+                  </div>
+                  <div className="nx-field">
+                    <label htmlFor="contact-service">What do you need?</label>
+                    <input id="contact-service" className="nx-field__control" name="service" required maxLength={120} list="ct-services" data-service-context="true" defaultValue="" placeholder="e.g. Mobile app development" />
                     <datalist id="ct-services">
                       {SERVICE_SUGGESTIONS.map((s) => <option key={s} value={s} />)}
                     </datalist>
-                  </label>
-                  <label className="is-wide">
-                    <span className="ct-label">Project goal</span>
-                    <textarea name="goal" required minLength={10} maxLength={5000} rows={5} />
-                    {form.goal_hint && <span className="ct-hint">{form.goal_hint}</span>}
-                  </label>
-                  <fieldset className="is-wide">
-                    <legend className="ct-label">Timeline <em>(optional)</em></legend>
+                  </div>
+                  <div className="nx-field">
+                    <label htmlFor="contact-goal">Project goal</label>
+                    <textarea id="contact-goal" className="nx-field__control" name="goal" required minLength={10} maxLength={5000} rows={5} aria-describedby={form.goal_hint ? "contact-goal-hint" : undefined} />
+                    {form.goal_hint && <span id="contact-goal-hint" className="nx-field__hint">{form.goal_hint}</span>}
+                  </div>
+                  <fieldset className="ct-choice">
+                    <legend>
+                      Timeline <span className="form__opt">(optional)</span>
+                    </legend>
                     <div className="ct-chips">
                       {TIMELINES.map((t) => (
                         <label key={t} className="ct-chip">
@@ -144,47 +137,46 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
                       ))}
                     </div>
                   </fieldset>
-                  <label>
-                    <span className="ct-label">Country <em>(optional)</em></span>
-                    <input name="country" autoComplete="country-name" maxLength={100} />
-                  </label>
-                  <label>
-                    <span className="ct-label">Budget <em>(optional)</em></span>
-                    <input name="budget" maxLength={200} placeholder="A range, or still to be decided" />
-                  </label>
-                  <label>
-                    <span className="ct-label">Website <em>(optional)</em></span>
-                    <input name="website" type="url" inputMode="url" placeholder="https://" />
-                  </label>
+                  <div className="form__row">
+                    <div className="nx-field">
+                      <label htmlFor="contact-country">Country <span className="form__opt">(optional)</span></label>
+                      <input id="contact-country" className="nx-field__control" name="country" autoComplete="country-name" maxLength={100} />
+                    </div>
+                    <div className="nx-field">
+                      <label htmlFor="contact-budget">Budget <span className="form__opt">(optional)</span></label>
+                      <input id="contact-budget" className="nx-field__control" name="budget" maxLength={200} placeholder="A range, or still to be decided" />
+                    </div>
+                  </div>
+                  <div className="nx-field">
+                    <label htmlFor="contact-website">Website <span className="form__opt">(optional)</span></label>
+                    <input id="contact-website" className="nx-field__control" name="website" type="url" inputMode="url" placeholder="https://" />
+                  </div>
                   {/* Honeypot: people never see it; the API rejects submissions that fill it. */}
                   <label className="ct-trap" aria-hidden="true">
                     Company URL
                     <input name="company_url" tabIndex={-1} autoComplete="off" />
                   </label>
+                  <button className="nx-btn nx-btn--primary nx-btn--lg ct-submit" type="submit">
+                    <span>{form.submit_label || "Send enquiry"}</span>
+                    <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+                  </button>
+                  {form.privacy_note && <p className="form__legal">{form.privacy_note}</p>}
                 </div>
-                <button className="ct-submit" type="submit">
-                  {form.submit_label || "Send enquiry"} <span aria-hidden="true">↗</span>
-                </button>
               </LeadForm>
-              {form.privacy_note && <p className="ct-privacy">{form.privacy_note}</p>}
             </div>
           </div>
         </div>
       </section>
 
       {steps.length > 0 && (
-        <section id="next-steps" className="ct-section is-dark">
-          <div className="ct-wrap">
-            <header className="ct-head">
-              {f("next-steps").section_label && <p className="ct-eyebrow">{f("next-steps").section_label}</p>}
-              <h2 className="ct-h2">{f("next-steps").heading}</h2>
-            </header>
-            <ol className="ct-steps">
+        <section id="next-steps" className="section band">
+          <div className="container">
+            <SectionHead eyebrow={next.section_label} title={next.heading} />
+            <ol className="nx-steps">
               {steps.map((r, i) => (
-                <li key={r.title}>
-                  <span className="ct-step-n">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{r.title}</h3>
-                  <p>{r.body}</p>
+                <li className="nx-step nx-reveal" key={r.title} style={delay(i)}>
+                  <h3 className="nx-step__title">{r.title}</h3>
+                  <p className="nx-step__desc">{r.body}</p>
                 </li>
               ))}
             </ol>
@@ -193,17 +185,17 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
       )}
 
       {items.length > 0 && (
-        <section id="prepare" className="ct-section">
-          <div className="ct-wrap ct-split">
-            <header className="ct-head">
-              {prepare.section_label && <p className="ct-eyebrow">{prepare.section_label}</p>}
-              <h2 className="ct-h2">{prepare.heading}</h2>
-              {prepare.intro && <p className="ct-lead">{prepare.intro}</p>}
-            </header>
+        <section id="prepare" className={tone("prepare")}>
+          <div className="container ct-split">
+            <div className="nx-reveal">
+              {prepare.section_label && <span className="eyebrow">{prepare.section_label}</span>}
+              <h2 className="h-section">{prepare.heading}</h2>
+              {prepare.intro && <p className="lead">{prepare.intro}</p>}
+            </div>
             <ul className="ct-checklist">
-              {items.map((r) => (
-                <li key={r.title}>
-                  <span aria-hidden="true">✓</span>
+              {items.map((r, i) => (
+                <li className="nx-reveal" key={r.title} style={delay(i)}>
+                  <Icon name="check" size={20} className="nx-icon" />
                   <div>
                     <h3>{r.title}</h3>
                     <p>{r.body}</p>
@@ -216,18 +208,17 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
       )}
 
       {assurances.length > 0 && (
-        <section id="assurances" className="ct-section is-paper">
-          <div className="ct-wrap">
-            <header className="ct-head">
-              {f("assurances").section_label && <p className="ct-eyebrow">{f("assurances").section_label}</p>}
-              <h2 className="ct-h2">{f("assurances").heading}</h2>
-            </header>
-            <div className="ct-assure">
+        <section id="assurances" className={tone("assurances")}>
+          <div className="container">
+            <SectionHead eyebrow={assurance.section_label} title={assurance.heading} />
+            <div className="sk-cards">
               {assurances.map((r, i) => (
-                <article key={r.title}>
-                  <Icon name={["lock", "chat", "puzzle"][i] ?? "shield"} />
-                  <h3>{r.title}</h3>
-                  <Prose value={r.body} paths={paths} />
+                <article className="sk-card nx-reveal" key={r.title} style={delay(i)}>
+                  <span className="sk-card__icon" aria-hidden="true">
+                    <ProductIcon name={ASSURANCE_ICONS[i] ?? "shield-check"} size={26} />
+                  </span>
+                  <h3 className="sk-card__title">{r.title}</h3>
+                  <Prose value={r.body} paths={paths} className="sk-card__text" />
                 </article>
               ))}
             </div>
@@ -236,18 +227,20 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
       )}
 
       {routes.length > 0 && (
-        <section id="other-routes" className="ct-section">
-          <div className="ct-wrap">
-            <header className="ct-head">
-              {f("other-routes").section_label && <p className="ct-eyebrow">{f("other-routes").section_label}</p>}
-              <h2 className="ct-h2">{f("other-routes").heading}</h2>
-            </header>
-            <div className="ct-routes">
-              {routes.map((r) => (
-                <a key={r.name} href={go(r.url || "/services")}>
-                  <h3>{r.name}</h3>
-                  <p>{r.body}</p>
-                  <span aria-hidden="true">→</span>
+        <section id="other-routes" className={tone("other-routes")}>
+          <div className="container">
+            <SectionHead eyebrow={other.section_label} title={other.heading} />
+            <div className="sk-cards ct-routes">
+              {routes.map((r, i) => (
+                <a className="sk-card nx-reveal" key={r.name} href={go(r.url || "/services")} style={delay(i)}>
+                  <span className="sk-card__icon" aria-hidden="true">
+                    <ProductIcon name={ROUTE_ICONS[r.url] ?? "document-text"} size={26} />
+                  </span>
+                  <h3 className="sk-card__title">{r.name}</h3>
+                  <p className="sk-card__text">{r.body}</p>
+                  <span className="ct-route-arrow" aria-hidden="true">
+                    <Icon name="arrow-right" size={20} className="nx-icon" />
+                  </span>
                 </a>
               ))}
             </div>
@@ -255,26 +248,51 @@ export function ContactSections({ content, path, paths, preview = false, linkMap
         </section>
       )}
 
-      {faqPairs.length > 0 && (
-        <section id="faq" className="ct-section is-paper">
-          <div className="ct-wrap ct-split">
-            <header className="ct-head">
-              {faq.section_label && <p className="ct-eyebrow">{faq.section_label}</p>}
-              <h2 className="ct-h2">{faq.heading}</h2>
-              <TrackedLink href={go("/contact") + "#contact-form"} event="consultation_click" service="Contact" className="ct-link">
-                Back to the form →
-              </TrackedLink>
-            </header>
-            <div className="ct-accordion">
-              {faqPairs.map((k, i) => (
-                <details key={k} name="ct-faq" open={i === 0}>
-                  <summary>
-                    {faq[k]}
-                    <span aria-hidden="true">+</span>
-                  </summary>
-                  <Prose value={faq[k.replace("q", "a")]} paths={paths} />
-                </details>
+      {showOffices && (
+        <section id="proof-offices" className={tone("proof-offices")}>
+          <div className="container">
+            {(offices.heading || offices.section_label) && (
+              <div className="section-head nx-reveal">
+                <div>
+                  {offices.section_label && <span className="eyebrow">{offices.section_label}</span>}
+                  {offices.heading && <h2 className="h-section">{offices.heading}</h2>}
+                </div>
+              </div>
+            )}
+            <div className="ct-direct nx-reveal">
+              {direct.map((d) => (
+                <p key={d.kind}>
+                  <span>{d.kind}</span>
+                  <a href={d.href}>{d.label}</a>
+                </p>
               ))}
+              {places.map((o) => (
+                <p key={o.city} className="ct-office">
+                  <span>{o.city}</span>
+                  {[o.address, o.timezone].filter(Boolean).join(" · ")}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {faqPairs.length > 0 && (
+        <section id="faq" className={tone("faq")}>
+          <div className="container faq">
+            <div className="faq__aside nx-reveal">
+              {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+              <h2 className="h-section">{faq.heading}</h2>
+              <TrackedLink href={go("/contact") + "#contact-form"} event="consultation_click" service="Contact" className="nx-btn nx-btn--secondary">
+                <span>Back to the form</span>
+                <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+              </TrackedLink>
+            </div>
+            <div className="nx-reveal">
+              <FaqList
+                name="ct-faq"
+                items={faqPairs.map((k) => ({ q: faq[k], a: <Prose value={faq[k.replace("q", "a")]} paths={paths} /> }))}
+              />
             </div>
           </div>
         </section>

@@ -1,13 +1,13 @@
 import { siteUrl } from "./site-url";
 import { mediaPath } from "./media-path";
 import { ServiceTechnologyStack } from "./service-technology-stack";
-import { SiteIcon, iconFor, legacyIcon } from "./icon-set";
+import { iconFor } from "./icon-set";
 import type { Content } from "./content";
 import type { PageSection } from "./page-spec-schema";
 import { StripeNavigation, StripeFooter } from "./stripe-home-chrome";
 import { LeadForm } from "./render";
 import { hubFor, hubChildren, serviceHubs } from "./service-hubs";
-import { FAQList, Comparison, VerifiedEvidence } from "./v3-sections";
+import { FAQList, Comparison, VerifiedEvidence, GenProse, GenIcon } from "./v3-sections";
 import { sanitizeRichHTML } from "./rich-text";
 import { breadcrumbs, pillarFor, sitePage } from "./site-structure";
 import { pageGraph } from "./structured-data";
@@ -21,6 +21,11 @@ import { BlogIndexSections, isBlogIndexContent } from "./blog-index-page";
 import type { BlogPost } from "./blog-types";
 import { RelatedGuides } from "./related-guides";
 import { RelatedPages } from "./related-pages";
+import { SiteStyles, IconSprite, Button, ArrowLink, Breadcrumbs, HeroArt, Icon as NxIcon } from "./site/ui";
+import { SiteFooter } from "./site/footer";
+import { SiteBehaviors } from "./site/behaviors";
+import { PORTED, type Renderer } from "./site/ported";
+import { ServicesDirectorySections, isServicesDirectoryPath } from "./services-directory-v3";
 import {
   NewsletterForm,
   VacancyDirectory,
@@ -150,6 +155,10 @@ export function V3Page({
   const whyPage = isWhyChooseContent(content, path);
   // The guides index lists the guides from the database with its own layout (see blog-index-page.tsx).
   const blogPage = isBlogIndexContent(content, path);
+  // Renderers move to the redesigned shell one at a time (src/site/ported.ts).
+  const renderer: Renderer = skeleton ? (path.startsWith("/blog/") ? "guide" : "skeleton") : aboutPage ? "about" : contactPage ? "contact" : engagePage ? "engagement" : howPage ? "how-work" : whyPage ? "why-choose" : blogPage ? "blog-index" : isServicesDirectoryPath(path) && PORTED.services !== null ? "services" : "generic";
+  const nxCss = PORTED[renderer];
+  const nx = nxCss !== null;
   // A low-friction enquiry prompt after the second content section, on pages
   // that sell a service (not the contact page itself).
   const visible = sections.filter((s) => !s.omitted && s.id !== "hero");
@@ -193,17 +202,30 @@ export function V3Page({
         acceptedAnswer: { "@type": "Answer", text: answer },
       });
     }
-  // Every icon comes from the shared line set; legacy sprite keys are mapped onto it.
-  function Icon({ name }: { name?: string }) {
-    return name ? <SiteIcon name={legacyIcon[name] ?? name} className="v3-icon" /> : null;
-  }
-  function Section({ section: s }: { section: PageSection }) {
-    if (s.omitted) return null;
-    const layout = content.pageBlueprint?.[s.id];
-    if (!layout) return null;
-    const f = s.fields,
-      cards = sectionGroups(f),
-      heading = (f.heading || f.mission_statement || f.form_heading || (path === "/how-we-work" && s.id === "faq" ? "Questions about working together." : "")).replace(path === "/react-development-services" ? /React and Flutter App/gi : /$^/, "React Web Application");
+  // Generic sections. The frame (section, container, heading row) is shared; the body follows the section's layout
+  // (see content.pageBlueprint). Every field read here is shown or omitted when empty; nothing is invented.
+  const legalPage = /^\/(?:privacy-policy|terms)(?:\/|$)/.test(path);
+  const legalDocIds = legalPage
+    ? sections.filter((s) => !s.omitted && (/^editorial-/.test(s.id) || /faq/.test(s.id))).map((s) => s.id)
+    : [];
+  type Facts = {
+    f: Record<string, string>;
+    cards: Record<string, string>[];
+    heading: string;
+    main?: string;
+    stats: string[];
+    scalar: [string, string][];
+    /** Array-valued copy (industry lists), never printed as text. */
+    list: unknown[];
+    /** Category names from the filter bar (category_N). */
+    categories: string[];
+  };
+  // Stored copy that is a stringified object ("[object Object],...") is garbage: it is omitted rather than printed.
+  const copy = (v: unknown) =>
+    typeof v === "string" && v.trim() && !/\[object Object\]/.test(v) ? v : undefined;
+  function facts(s: PageSection): Facts {
+    const f = s.fields;
+    const cards = sectionGroups(f);
     if (f.tech_names) cards.push({ name: "Technologies", items: f.tech_names });
     const priorities = [
       "/custom-software-development",
@@ -217,430 +239,544 @@ export function V3Page({
           (priorities.includes(a.url) ? priorities.indexOf(a.url) : 100) -
           (priorities.includes(b.url) ? priorities.indexOf(b.url) : 100),
       );
-    const main =
-      f.body_paragraph ||
-      f.subheadline ||
-      f.mission_body ||
-      f.culture_paragraph ||
-      f.form_subheadline;
-    const stats = Object.keys(f).filter(
-      (k) => /^stat_\d+_number$/.test(k) && f[k],
-    );
-    const scalar = Object.entries(f).filter(
-      ([k, v]) => v && /^(outcome|adv|culture|value|signal|trust)_\d+$/.test(k),
-    );
-    const isHero =
-      s.id === "hero" ||
-      layout.recommended_component === "HeroSplit" ||
-      layout.recommended_component === "HeroFull";
-    const isCta = s.id === "cta-banner";
-    const surface = isCta
-      ? "#182138"
-      : servicePage
-        ? /^(process|engagement-models)$/.test(s.id)
-          ? "#182138"
-          : s.id === "industry-applications"
-            ? "#e7edc5"
-            : /^(services-grid|service-overview|technology-stack|who-its-for|related-hubs|related-services|faq|faqs)$/.test(
-                  s.id,
-                )
-              ? "#f1f4f7"
-              : "#ffffff"
-        : (({ "#061b31": "#182138", "#533afd": "#4353b3", "#f8fafd": "#f1f4f7" } as Record<string, string>)[
-            layout.background
-          ] ?? layout.background);
-    const onDark = ["#182138", "#4353b3"].includes(surface);
-    // Proof blocks lose their items when evidence is unverified; a lone
-    // heading left behind reads as a broken section, so drop it.
+    const raw =
+      f.heading ||
+      f.mission_statement ||
+      f.form_heading ||
+      (path === "/how-we-work" && s.id === "faq" ? "Questions about working together." : "");
+    return {
+      f,
+      cards,
+      heading: path === "/react-development-services" ? raw.replace(/React and Flutter App/gi, "React Web Application") : raw,
+      main:
+        copy(f.body_paragraph) || copy(f.subheadline) || copy(f.mission_body) || copy(f.culture_paragraph) || copy(f.form_subheadline),
+      stats: Object.keys(f).filter((k) => /^stat_\d+_number$/.test(k) && f[k]),
+      scalar: Object.entries(f).filter(([k, v]) => v && /^(outcome|adv|culture|value|signal|trust)_\d+$/.test(k)),
+      list: ([f.industries, f.body_paragraph, f.subheadline] as unknown[]).find((v) => Array.isArray(v)) as unknown[] ?? [],
+      categories: Object.keys(f)
+        .filter((k) => /^category_\d+$/.test(k) && f[k])
+        .map((k) => f[k]),
+    };
+  }
+  function isHeroSection(s: PageSection) {
+    const layout = content.pageBlueprint?.[s.id];
+    return s.id === "hero" || layout?.recommended_component === "HeroSplit" || layout?.recommended_component === "HeroFull";
+  }
+  function hasContentOf(s: PageSection) {
+    const fx = facts(s);
+    const { f, cards, heading, main, stats, scalar } = fx;
+    // Proof blocks lose their items when evidence is unverified; a lone heading left behind reads as a broken section.
     const proofSection = /^(stats|testimonial|proof|case-stud|client|trust|logo)/.test(s.id);
-    const hasContent =
-      isHero ||
-      (heading && !proofSection) ||
-      main ||
-      cards.length ||
-      stats.length ||
-      scalar.length ||
-      Object.keys(f).some((k) => /^(?:q\d+|cat_\d+)$/.test(k) && f[k]);
-    if (!hasContent && !["open-roles", "newsletter-cta"].includes(s.id))
-      return null;
-    return (
-      <section
-        id={s.id}
-        className={
-          "v3-section v3-" +
-          layout.recommended_component +
-          (onDark ? " v3-on-dark" : "") +
-          (isCta ? " v3-dark" : "") +
-          (isHero ? " v3-hero-section" : "") +
-          " v3-section--" +
-          s.id
-        }
-        style={{
-          backgroundColor: surface,
-          marginTop: servicePage ? 0 : layout.spacing_above,
-          color: onDark ? "#ffffff" : "#182138",
-        }}
-      >
-        <div
-          className="v3-wrap"
-          style={{
-            maxWidth:
-              isHero || layout.max_width === "100pct"
-                ? 1320
-                : Number.parseInt(layout.max_width),
-          }}
-        >
-          {isHero ? (
-            <>
-              {trail.length > 1 && (
-                <nav className="v3-hero-breadcrumb" aria-label="Breadcrumb">
-                  <ol>
-                    {trail.map((crumb, i) =>
-                      i === trail.length - 1 ? (
-                        <li key={crumb.path} aria-current="page">{crumb.label}</li>
-                      ) : (
-                        <li key={crumb.path}>
-                          <a href={destination(crumb.path)}>{crumb.label}</a>
-                        </li>
-                      ),
-                    )}
-                  </ol>
-                </nav>
-              )}
-              <div
-                className={
-                  "v3-hero-grid" +
-                  (!s.asset ? " v3-hero-text" : "")
-                }
-              >
-                <div>
-                  {(f.tag_pill || heroEyebrow) && <span className="v3-tag">{f.tag_pill || heroEyebrow}</span>}
-                  <h1>{f.h1 || content.title}</h1>
-                  <p className="v3-intro">{main}</p>
-                  {(
+    return Boolean(
+      isHeroSection(s) ||
+        (heading && !proofSection) ||
+        main ||
+        cards.length ||
+        stats.length ||
+        scalar.length ||
+        fx.list.length ||
+        fx.categories.length ||
+        Object.keys(f).some((k) => /^(?:q\d+|cat_\d+)$/.test(k) && f[k]),
+    );
+  }
+  /** Legal documents render as one contents rail plus numbered parts, drawn by the first part that has content. */
+  const legalParts = legalDocIds.length
+    ? sections.filter((s) => !s.omitted && legalDocIds.includes(s.id) && content.pageBlueprint?.[s.id] && hasContentOf(s))
+    : [];
+  const partTitle = (p: PageSection) => facts(p).heading || facts(p).f.section_label || "";
+  const isShortText = (value?: string) => Boolean(value && !/<[a-z][\s\S]*>/i.test(value) && value.length <= 280);
 
-                    <div className="v3-actions">
-                      <TrackedLink
-                        href={contact}
-                        event="consultation_click"
-                        service={service}
-                        className="v3-button"
-                      >
-                        {f.cta_primary_label || "Talk to an engineer"}
-                        <span aria-hidden="true">↗</span>
-                      </TrackedLink>
-                      {f.cta_secondary_label && f.cta_secondary_url && (
-                        <a
-                          className="v3-link"
-                          href={destination(f.cta_secondary_url)}
-                        >
-                          {f.cta_secondary_label} →
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-                {s.asset ? (
-                  <figure>
-                    <img
-                      src={mediaPath(s.asset)}
-                      alt={s.asset.alt}
-                      title={s.asset.caption || undefined}
-                      width={s.asset.width}
-                      height={s.asset.height}
-                      fetchPriority="high"
-                    />
-                  </figure>
-                ) : null}
+  function Extras({ s, fx }: { s: PageSection; fx: Facts }) {
+    const { f, stats, scalar, list, categories } = fx;
+    const industries: unknown = f.industries;
+    const isLink = (v: unknown) => typeof v === "string" && /^(\/|https?:)/.test(v);
+    const chips = list.flatMap((item) => {
+      if (typeof item === "string") return copy(item) ? [{ label: item.trim(), href: undefined as string | undefined }] : [];
+      if (!item || typeof item !== "object") return [];
+      const o = item as Record<string, unknown>;
+      const label = ([o.name, o.label, o.title, o.industry].find((v) => copy(v)) as string | undefined) ??
+        (Object.values(o).find((v) => copy(v) && !isLink(v)) as string | undefined);
+      const url = [o.url, o.href].find((v) => isLink(v)) as string | undefined;
+      return label ? [{ label: label.trim(), href: url ? destination(url) : undefined }] : [];
+    });
+    return (
+      <>
+        {stats.length > 0 && (
+          <dl className="gen-stats">
+            {stats.map((k) => (
+              <div key={k}>
+                <dt>{f[k.replace("number", "label")]}</dt>
+                <dd>{f[k]}</dd>
               </div>
-            </>
-          ) : (
-            <>
-              {f.section_label && (
-                <p className="v3-eyebrow">{f.section_label}</p>
-              )}
-              {heading && <h2>{heading}</h2>}
-              {main && <Prose value={main} paths={paths} />}
-              {s.asset && (
-                <figure className="v3-figure">
-                  <img
-                    src={mediaPath(s.asset)}
-                    alt={s.asset.alt}
-                    title={s.asset.caption || undefined}
-                    width={s.asset.width}
-                    height={s.asset.height}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {s.asset.caption && <figcaption>{s.asset.caption}</figcaption>}
-                </figure>
-              )}
-              {isCta && (
-                <div className="v3-actions">
-                  <TrackedLink
-                    href={contact}
-                    event="consultation_click"
-                    service={service}
-                    className="v3-button"
-                  >
-                    {f.cta_primary_label || "Discuss your project"}
-                    <span aria-hidden="true">↗</span>
-                  </TrackedLink>
-                  <a
-                    className="v3-link"
-                    href={destination(f.cta_secondary_url || "/how-we-work")}
-                  >
-                    {f.cta_secondary_label || "How we work"} →
-                  </a>
-                </div>
-              )}
-            </>
-          )}
-          {stats.length > 0 && (
-            <dl className="v3-stats">
-              {stats.map((k) => (
-                <div key={k}>
-                  <dt>{f[k.replace("number", "label")]}</dt>
-                  <dd>{f[k]}</dd>
-                </div>
-              ))}
-            </dl>
-          )}
-          {scalar.length > 0 && (
-            <ul className="v3-outcomes">
-              {scalar.map(([key, value]) => (
-                <li key={key}>
-                  {["why-netofficials", "service-overview"].includes(s.id) ? (
-                    <span className="service-reason-icon">
-                      <Icon
-                        name={
-                          iconFor(value)
-                        }
-                      />
-                    </span>
-                  ) : (
-                    <span aria-hidden="true">✓</span>
-                  )}
-                  <span className="service-reason-copy">{value}</span>
+            ))}
+          </dl>
+        )}
+        {scalar.length > 0 && (
+          <ul className="gen-checks">
+            {scalar.map(([key, value]) => (
+              <li key={key}>
+                {["why-netofficials", "service-overview"].includes(s.id) ? (
+                  <span className="gen-check gen-check--icon">
+                    <GenIcon name={iconFor(value)} />
+                  </span>
+                ) : (
+                  <span className="gen-check" aria-hidden="true">
+                    <NxIcon name="check" size={16} className="" />
+                  </span>
+                )}
+                <span>{value}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {categories.length > 0 && (
+          <div className="gen-categories">
+            {f.filter_label && <p className="gen-meta">{f.filter_label}</p>}
+            <ul className="svc__links gen-industries">
+              {categories.map((c, i) => (
+                <li key={i}>
+                  <span>{c}</span>
                 </li>
               ))}
             </ul>
-          )}
-          {f.industries && <p className="v3-intro">{f.industries}</p>}
-          {f.privacy_note && <p className="v3-caption">{f.privacy_note}</p>}
-          <VerifiedEvidence fields={f} />
-          {s.id === "contact-form" ? (
-            <LeadForm preview={preview}>
-              <label>
-                Name
-                <input
-                  name="name"
-                  required
-                  maxLength={120}
-                  autoComplete="name"
-                />
-              </label>
-              <label>
-                Email
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                />
-              </label>
-              <label>
-                Service
-                <input
-                  name="service"
-                  required
-                  data-service-context="true"
-                  defaultValue=""
-                />
-              </label>
-              <label>
-                Project goal
-                <textarea
-                  name="goal"
-                  required
-                  minLength={10}
-                  maxLength={5000}
-                />
-              </label>
-              <label>
-                Country <span>(optional)</span>
-                <input name="country" autoComplete="country-name" />
-              </label>
-              <label>
-                Timeline <span>(optional)</span>
-                <input name="timeline" />
-              </label>
-              <button className="v3-button" type="submit">
-                {f.submit_label || "Send project enquiry"}
-              </button>
-            </LeadForm>
-          ) : s.id === "newsletter-cta" ? (
-            <NewsletterForm enabled={newsletterEnabled && !preview} />
-          ) : s.id === "open-roles" ? (
-            <VacancyDirectory vacancies={vacancies} preview={preview} />
-          ) : /comparison/.test(s.id) && cards.some((g) => g.attribute) ? (
-            <Comparison groups={cards} />
-          ) : /faq/.test(s.id) ? (
-            <FAQList fields={f} />
-          ) : /related-hubs|related-services/.test(s.id) ? (
-            <div className="service-paired">
-              {cards.map((g, i) => (
-                <article key={g.url || i}>
-                  <span className="service-paired-icon">
-                    <Icon
-                      name={iconFor(g.name || g.title || "", g.reason || g.body || "")}
+          </div>
+        )}
+        {chips.length > 0 && (
+          <ul className="svc__links gen-industries">
+            {chips.map((c, i) => (
+              <li key={i}>{c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}</li>
+            ))}
+          </ul>
+        )}
+        {copy(industries) && (
+          <GenProse className="lead" value={copy(industries)} paths={paths} />
+        )}
+        {f.privacy_note && <p className="gen-note">{f.privacy_note}</p>}
+        <VerifiedEvidence fields={f} />
+      </>
+    );
+  }
+
+  /** Clause list used by editorial parts: each card is one clause with a title and text. */
+  function Clauses({ cards }: { cards: Record<string, string>[] }) {
+    if (!cards.length) return null;
+    return (
+      <div className="gen-clauses">
+        {cards.map((g, i) => {
+          const text = g.body || g.bio || g.description || g.reason || g.usecase || g.excerpt || g.outcome;
+          return (
+            <article key={i} className="gen-clause">
+              <h3>{g.title || g.name || g.heading || g.label}</h3>
+              {text && <p>{text}</p>}
+            </article>
+          );
+        })}
+      </div>
+    );
+  }
+
+  /** The section's own content: forms, listings, comparison, cards, steps. */
+  function Body({ s, fx }: { s: PageSection; fx: Facts }) {
+    const { f, cards } = fx;
+    const layout = content.pageBlueprint?.[s.id];
+    if (s.id === "contact-form")
+      return (
+        <div className="gen-form">
+          <LeadForm preview={preview}>
+            <label>
+              Name
+              <input name="name" required maxLength={120} autoComplete="name" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required autoComplete="email" />
+            </label>
+            <label>
+              Service
+              <input name="service" required data-service-context="true" defaultValue="" />
+            </label>
+            <label>
+              Project goal
+              <textarea name="goal" required minLength={10} maxLength={5000} />
+            </label>
+            <label>
+              Country <span>(optional)</span>
+              <input name="country" autoComplete="country-name" />
+            </label>
+            <label>
+              Timeline <span>(optional)</span>
+              <input name="timeline" />
+            </label>
+            <button className="nx-btn nx-btn--primary" type="submit">
+              <span>{f.submit_label || "Send project enquiry"}</span>
+            </button>
+          </LeadForm>
+        </div>
+      );
+    if (s.id === "newsletter-cta")
+      return (
+        <div className="gen-newsletter">
+          <NewsletterForm enabled={newsletterEnabled && !preview} />
+        </div>
+      );
+    if (s.id === "open-roles") return <VacancyDirectory vacancies={vacancies} preview={preview} />;
+    if (/comparison/.test(s.id) && cards.some((g) => g.attribute)) return <Comparison groups={cards} />;
+    if (/related-hubs|related-services/.test(s.id))
+      return (
+        <div className="sk-cards gen-paired">
+          {cards.map((g, i) => (
+            <article key={g.url || i} className="sk-card nx-reveal">
+              <span className="sk-card__icon" aria-hidden="true">
+                <GenIcon name={iconFor(g.name || g.title || "", g.reason || g.body || "")} />
+              </span>
+              <h3 className="sk-card__title">{g.name || g.title}</h3>
+              <p className="sk-card__text">{g.body || g.description || g.reason || g.outcome}</p>
+              {g.url && (
+                <TrackedLink href={destination(g.url)} event="hub_click" service={service} className="nx-arrowlink service-paired-link">
+                  <span>Explore {g.name || g.title}</span>
+                  <NxIcon name="arrow-right" size={18} />
+                </TrackedLink>
+              )}
+            </article>
+          ))}
+        </div>
+      );
+    if (path === "/engagement-models" && s.id === "models-comparison")
+      return (
+        <div className="sk-cards engagement-models">
+          {cards.map((g, i) => (
+            <article className="sk-card nx-reveal engagement-model" key={g.name || i}>
+              <span className="sk-card__icon" aria-hidden="true">
+                <GenIcon name={iconFor(g.name || g.title || "", g.body || "")} />
+              </span>
+              <h3 className="sk-card__title">{g.name || g.title}</h3>
+              {g.best_for && (
+                <p className="sk-card__text">
+                  <strong>Best suited to:</strong> {g.best_for}
+                </p>
+              )}
+              <p className="sk-card__text">{g.body || g.description}</p>
+              {(g.timeline || g.pricing) && (
+                <dl className="gen-meta-list">
+                  {g.timeline && (
+                    <div>
+                      <dt>Delivery approach</dt>
+                      <dd>{g.timeline}</dd>
+                    </div>
+                  )}
+                  {g.pricing && (
+                    <div>
+                      <dt>Commercial model</dt>
+                      <dd>{g.pricing}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
+            </article>
+          ))}
+        </div>
+      );
+    if (/technolog|tech-stack|tools-stack/.test(s.id) || layout?.recommended_component === "TechnologyGrid")
+      return (
+        <div className="gen-stack">
+          <ServiceTechnologyStack
+            groups={cards.map((g) => ({
+              name: g.name || g.title || "Technology",
+              items: (g.items || g.body || "")
+                .split(/[,|;]/)
+                .map((name) => name.trim())
+                .filter(Boolean),
+            }))}
+          />
+        </div>
+      );
+    const process = /process/.test(s.id);
+    const editorial = /^editorial-/.test(s.id);
+    return (
+      <>
+        {cards.length > 0 && editorial && <Clauses cards={cards} />}
+        {cards.length > 0 && !editorial && process && (
+          <ol className="nx-steps">
+            {cards.map((g, i) => {
+              const text = g.body || g.bio || g.description || g.reason || g.usecase || g.excerpt || g.outcome;
+              return (
+                <li key={i} className="nx-step nx-reveal">
+                  <h3 className="nx-step__title">{g.title || g.name || g.heading || g.label}</h3>
+                  {text && <p className="nx-step__desc">{text}</p>}
+                  {g.timeline && <p className="gen-meta">Timeline: {g.timeline}</p>}
+                  {g.pricing && <p className="gen-meta">Pricing approach: {g.pricing}</p>}
+                </li>
+              );
+            })}
+          </ol>
+        )}
+        {cards.length > 0 && !editorial && !process && (
+          <div className="sk-cards">
+            {cards.map((g, i) => {
+              const text = g.body || g.bio || g.description || g.reason || g.usecase || g.excerpt || g.outcome;
+              return (
+                <article key={i} className="sk-card nx-reveal">
+                  <span className="sk-card__icon" aria-hidden="true">
+                    <GenIcon
+                      name={iconFor(
+                        g.title || g.name || g.heading || g.label || "",
+                        [g.body, g.usecase, g.description, g.problem].filter(Boolean).join(" "),
+                      )}
                     />
                   </span>
-                  <div>
-                    <h3>{g.name || g.title}</h3>
-                    <p>{g.body || g.description || g.reason || g.outcome}</p>
-                  </div>
+                  <h3 className="sk-card__title">{g.bio ? g.name : g.title || g.name || g.heading || g.label}</h3>
+                  {g.bio && <p className="gen-meta">{g.title}</p>}
+                  {g.problem && <p className="sk-card__text">{g.problem}</p>}
+                  {text && <p className="sk-card__text">{text}</p>}
+                  {g.timeline && (
+                    <p className="gen-meta">
+                      <strong>Timeline:</strong> {g.timeline}
+                    </p>
+                  )}
+                  {g.pricing && (
+                    <p className="gen-meta">
+                      <strong>Pricing approach:</strong> {g.pricing}
+                    </p>
+                  )}
+                  {g.expertise && <p className="gen-meta">{g.expertise}</p>}
+                  {g.industry && <p className="gen-meta">{g.industry}</p>}
+                  {g.tech && <p className="gen-meta">{g.tech}</p>}
+                  {g.tag && <p className="gen-meta">{g.tag}</p>}
+                  {g.best_for && <p className="gen-meta">Best for: {g.best_for}</p>}
                   {g.url && (
-                    <TrackedLink
-                      className="service-paired-link"
-                      href={destination(g.url)}
-                      event="hub_click"
-                      service={service}
-                    >
-                      <span className="service-paired-link-label">
-                        Explore {g.name || g.title}
-                      </span>
-                      <span aria-hidden="true">↗</span>
+                    <TrackedLink href={destination(g.url)} event="hub_click" service={service} className="nx-arrowlink">
+                      <span>{g.cta || "Explore " + (g.title || g.name || g.label)}</span>
+                      <NxIcon name="arrow-right" size={18} />
                     </TrackedLink>
                   )}
                 </article>
-              ))}
-            </div>
-          ) : path === "/engagement-models" && s.id === "models-comparison" ? (
-            <div className="engagement-models">
-              {cards.map((g, i) => <article className="engagement-model" key={g.name || i}>
-                <div className="engagement-model-heading">
-                  <span className="engagement-model-icon"><Icon name={iconFor(g.name || g.title || "", g.body || "")} /></span>
-                  <h3>{g.name || g.title}</h3>
-                  {g.best_for && <p><strong>Best suited to</strong>{g.best_for}</p>}
-                </div>
-                <div className="engagement-model-content">
-                  <p>{g.body || g.description}</p>
-                  <dl>{g.timeline && <div><dt>Delivery approach</dt><dd>{g.timeline}</dd></div>}{g.pricing && <div><dt>Commercial model</dt><dd>{g.pricing}</dd></div>}</dl>
-                </div>
-              </article>)}
-            </div>
-          ) : /technolog|tech-stack|tools-stack/.test(s.id) ||
-            layout.recommended_component === "TechnologyGrid" ? (
-            <ServiceTechnologyStack
-              groups={cards.map((g) => ({
-                name: g.name || g.title || "Technology",
-                items: (g.items || g.body || "")
-                  .split(/[,|;]/)
-                  .map((name) => name.trim())
-                  .filter(Boolean),
-              }))}
-            />
-          ) : (
-            cards.length > 0 && (
-              <div
-                className={
-                  "v3-cards" + (/process/.test(s.id) ? " v3-process" : "")
-                }
-              >
-                {cards.map((g, i) => (
-                  <article key={i}>
-                    {/process/.test(s.id) ? (
-                      <span className="v3-step">
-                        <Icon
-                          name={iconFor(g.title || g.name || "", g.body || "")}
-                        />
-                      </span>
-                    ) : (
-                      <span className="v3-icon-tile">
-                        <Icon
-                          name={
-                            iconFor(
-                              g.title || g.name || g.heading || g.label || "",
-                              [g.body, g.usecase, g.description, g.problem].filter(Boolean).join(" "),
-                            )
-                          }
-                        />
-                      </span>
-                    )}
-                    <h3>
-                      {g.bio
-                        ? g.name
-                        : g.title || g.name || g.heading || g.label}
-                    </h3>
-                    {g.bio && <p className="v3-caption">{g.title}</p>}
-                    {g.problem && <p>{g.problem}</p>}
-                    <p>
-                      {g.body ||
-                        g.bio ||
-                        g.description ||
-                        g.reason ||
-                        g.usecase ||
-                        g.excerpt ||
-                        g.outcome}
-                    </p>
-                    {g.timeline && (
-                      <p className="v3-caption">
-                        <strong>Timeline:</strong> {g.timeline}
-                      </p>
-                    )}
-                    {g.pricing && (
-                      <p className="v3-caption">
-                        <strong>Pricing approach:</strong> {g.pricing}
-                      </p>
-                    )}
-                    {g.expertise && <p className="v3-caption">{g.expertise}</p>}
-                    {g.industry && <p className="v3-caption">{g.industry}</p>}
-                    {g.tech && <p className="v3-caption">{g.tech}</p>}
-                    {g.tag && <p className="v3-caption">{g.tag}</p>}
-                    {g.best_for && (
-                      <p className="v3-caption">Best for: {g.best_for}</p>
-                    )}
-                    {g.url && (
-                      <TrackedLink
-                        href={destination(g.url)}
-                        event="hub_click"
-                        service={service}
-                        className="v3-link"
-                      >
-                        {g.cta || "Explore " + (g.title || g.name || g.label)}{" "}
-                        <span aria-hidden="true">↗</span>
-                      </TrackedLink>
-                    )}
-                  </article>
-                ))}
-              </div>
-            )
-          )}
-          {s.id === "services-grid" && hubFor(path) && (
-            <div className="v3-directory">
-              <h3>All {hubFor(path)?.name.toLowerCase()} services</h3>
+              );
+            })}
+          </div>
+        )}
+        {s.id === "services-grid" && hubFor(path) && (
+          <div className="more gen-directory">
+            <p className="more__head">All {hubFor(path)?.name.toLowerCase()} services</p>
+            {hubChildren(hubFor(path)!).map((child) => (
+              <TrackedLink event="hub_click" service={service} href={destination(child.url)} key={child.url}>
+                <strong>{child.title.replace(/\s*[|–].*$/g, "")}</strong>
+                <NxIcon name="arrow-right" size={18} />
+              </TrackedLink>
+            ))}
+          </div>
+        )}
+      </>
+    );
+  }
+
+  function Section({ section: s }: { section: PageSection }) {
+    if (s.omitted) return null;
+    const layout = content.pageBlueprint?.[s.id];
+    if (!layout) return null;
+    if (legalPage && legalDocIds.includes(s.id) && s.id !== legalParts[0]?.id) return null;
+    if (!hasContentOf(s) && !["open-roles", "newsletter-cta"].includes(s.id)) return null;
+    const fx = facts(s);
+    const { f, heading, main } = fx;
+    const hero = isHeroSection(s);
+
+    if (hero)
+      return (
+        <section id={s.id} className="page-hero">
+          <div className="container">
+            {trail.length > 1 && (
+              <Breadcrumbs
+                items={trail.map((crumb, i) => ({
+                  label: crumb.label,
+                  href: i === trail.length - 1 ? undefined : destination(crumb.path),
+                }))}
+              />
+            )}
+            <div className={"hero__grid" + (s.asset ? "" : " gen-hero--text")}>
               <div>
-                {hubChildren(hubFor(path)!).map((child) => (
-                  <TrackedLink
-                    event="hub_click"
-                    service={service}
-                    href={destination(child.url)}
-                    key={child.url}
-                  >
-                    {child.title.replace(/\s*[|–].*$/g, "")}{" "}
-                    <span aria-hidden="true">↗</span>
+                {(f.tag_pill || heroEyebrow) && <span className="tag-pill">{f.tag_pill || heroEyebrow}</span>}
+                <h1>{f.h1 || content.title}</h1>
+                <GenProse className="lead" value={main} paths={paths} />
+                <div className="hero__actions">
+                  <TrackedLink href={contact} event="consultation_click" service={service} className="nx-btn nx-btn--primary nx-btn--lg">
+                    <span>{f.cta_primary_label || "Talk to an engineer"}</span>
+                    <NxIcon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
                   </TrackedLink>
-                ))}
+                  {f.cta_secondary_label && f.cta_secondary_url && (
+                    <ArrowLink href={destination(f.cta_secondary_url)}>{f.cta_secondary_label}</ArrowLink>
+                  )}
+                </div>
+                <Extras s={s} fx={fx} />
+              </div>
+              <HeroArt asset={s.asset} priority />
+            </div>
+          </div>
+        </section>
+      );
+
+    if (legalPage && legalDocIds.includes(s.id))
+      return (
+        <section className="section gen-legal-section">
+          <div className="container">
+            <div className="gen-legal">
+              <nav className="gen-toc" aria-label="On this page">
+                <p className="gen-toc__title">On this page</p>
+                <ol className="gen-toc__list">
+                  {legalParts.map((p) => (
+                    <li key={p.id}>
+                      <a href={"#" + p.id}>{partTitle(p) || p.id}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+              <div className="gen-doc">
+                {legalParts.map((p, i) => {
+                  const px = facts(p);
+                  return (
+                    <section key={p.id} id={p.id} className="gen-part">
+                      <h2>
+                        <span className="gen-part__num" aria-hidden="true">
+                          {i + 1}
+                        </span>
+                        {partTitle(p) || p.id}
+                      </h2>
+                      <GenProse className="gen-part__body" value={px.main} paths={paths} />
+                      <Extras s={p} fx={px} />
+                      {/faq/.test(p.id) ? <FAQList fields={px.f} /> : <Body s={p} fx={px} />}
+                    </section>
+                  );
+                })}
               </div>
             </div>
+          </div>
+        </section>
+      );
+
+    if (s.id === "cta-banner")
+      return (
+        <section id={s.id} className="section band">
+          <div className="container">
+            <div className="gen-cta nx-reveal">
+              <div>
+                {f.section_label && <span className="eyebrow">{f.section_label}</span>}
+                {heading && <h2 className="h-section">{heading}</h2>}
+                <GenProse className="lead" value={main} paths={paths} />
+              </div>
+              <div className="gen-cta__actions">
+                <TrackedLink href={contact} event="consultation_click" service={service} className="nx-btn nx-btn--lime nx-btn--lg">
+                  <span>{f.cta_primary_label || "Discuss your project"}</span>
+                  <NxIcon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+                </TrackedLink>
+                <ArrowLink href={destination(f.cta_secondary_url || "/how-we-work")}>
+                  {f.cta_secondary_label || "How we work"}
+                </ArrowLink>
+              </div>
+            </div>
+            <Extras s={s} fx={fx} />
+          </div>
+        </section>
+      );
+
+    const dark = /^(process|engagement-models)$/.test(s.id);
+    const soft = /^(services-grid|service-overview|technology-stack|who-its-for|related-hubs|related-services|faq|faqs)$/.test(s.id);
+    const frame = "section" + (dark ? " band" : soft ? " section--white" : "");
+    const shortMain = isShortText(main);
+    const eyebrow = f.section_label ? <span className="eyebrow">{f.section_label}</span> : null;
+    const title = heading ? <h2 className="h-section">{heading}</h2> : null;
+
+    if (/faq/.test(s.id))
+      return (
+        <section id={s.id} className={frame}>
+          <div className="container">
+            <div className={"faq gen-faq" + (eyebrow || title || main ? "" : " gen-faq--solo")}>
+              {(eyebrow || title || main) && (
+                <div className="faq__aside nx-reveal">
+                  {eyebrow}
+                  {title}
+                  <GenProse className="lead" value={main} paths={paths} />
+                </div>
+              )}
+              <div className="gen-faq__body">
+                <FAQList fields={f} />
+              </div>
+            </div>
+            <Extras s={s} fx={fx} />
+          </div>
+        </section>
+      );
+
+    if (/^editorial-/.test(s.id))
+      return (
+        <section id={s.id} className={frame}>
+          <div className="container">
+            <div className="gen-split">
+              <div className="gen-split__head nx-reveal">
+                {eyebrow}
+                {title}
+              </div>
+              <div className="gen-split__body">
+                <GenProse className="gen-body" value={main} paths={paths} />
+                {s.asset && (
+                  <figure className="gen-figure nx-art--image">
+                    <img
+                      src={mediaPath(s.asset)}
+                      alt={s.asset.alt}
+                      width={s.asset.width}
+                      height={s.asset.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {s.asset.caption && <figcaption>{s.asset.caption}</figcaption>}
+                  </figure>
+                )}
+                <Extras s={s} fx={fx} />
+                <Body s={s} fx={fx} />
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    return (
+      <section id={s.id} className={frame}>
+        <div className="container">
+          {(eyebrow || title || shortMain) && (
+            <div className="section-head nx-reveal">
+              <div>
+                {eyebrow}
+                {title}
+              </div>
+              {shortMain && <p className="lead">{main}</p>}
+            </div>
           )}
+          {main && !shortMain && <GenProse className="gen-body" value={main} paths={paths} />}
+          {s.asset && (
+            <figure className="gen-figure nx-art--image">
+              <img
+                src={mediaPath(s.asset)}
+                alt={s.asset.alt}
+                width={s.asset.width}
+                height={s.asset.height}
+                loading="lazy"
+                decoding="async"
+              />
+              {s.asset.caption && <figcaption>{s.asset.caption}</figcaption>}
+            </figure>
+          )}
+          <Extras s={s} fx={fx} />
+          <Body s={s} fx={fx} />
         </div>
       </section>
     );
   }
   return (
-    <div className="v3-site">
+    <div className={nx ? "nx v3-site" : "v3-site"}>
+      {nx && (
+        <>
+          <SiteStyles page={nxCss ?? undefined} />
+          <IconSprite />
+        </>
+      )}
+      {!nx && (<>
       <link rel="stylesheet" href="/assets/stripe-home.css" />
       <link rel="stylesheet" href="/assets/brand-home.css" />
       <link rel="stylesheet" href="/assets/v3-pages.css" />
@@ -650,9 +786,10 @@ export function V3Page({
       {aboutPage && <link rel="stylesheet" href="/assets/about.css?v=20261012" />}
       {contactPage && <link rel="stylesheet" href="/assets/contact.css?v=20261012" />}
       {engagePage && <link rel="stylesheet" href="/assets/engagement.css?v=20261013" />}
-      {howPage && <link rel="stylesheet" href="/assets/how-work.css?v=20261014" />}
+      {howPage && <link rel="stylesheet" href="/assets/how-work.css?v=20261015" />}
       {whyPage && <link rel="stylesheet" href="/assets/why-choose.css?v=20261015" />}
       {blogPage && <link rel="stylesheet" href="/assets/blog-index.css?v=20261016" />}
+      </>)}
       {preview && (
         <div className="preview-banner">
           Private draft preview · forms disabled ·{" "}
@@ -673,28 +810,36 @@ export function V3Page({
         {howPage && <HowWorkSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
         {whyPage && <WhyChooseSections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
         {blogPage && <BlogIndexSections content={content} path={path} paths={paths} posts={posts} preview={preview} linkMap={linkMap} newsletterEnabled={newsletterEnabled} />}
-        {!skeleton && !aboutPage && !contactPage && !engagePage && !howPage && !whyPage && !blogPage && sections.map((s) => (
+        {renderer === "services" && <ServicesDirectorySections content={content} path={path} paths={paths} preview={preview} linkMap={linkMap} />}
+        {!skeleton && !aboutPage && !contactPage && !engagePage && !howPage && !whyPage && !blogPage && renderer !== "services" && sections.map((s) => (
           <div key={s.id} className="v3-section-group">
             {s.id === "cta-banner" && !s.omitted && afterContent}
             {s.id === "cta-banner" && fallbackFaq && (
-              <section id="faq" className="v3-section v3-section--faq">
-                <div className="v3-wrap">
-                  <p className="v3-eyebrow">Questions, answered</p>
-                  <h2>Before you start.</h2>
-                  <FAQList fields={fallbackFaqFields} />
+              <section id="faq" className="section">
+                <div className="container">
+                  <div className="faq gen-faq">
+                    <div className="faq__aside nx-reveal">
+                      <span className="eyebrow">Questions, answered</span>
+                      <h2 className="h-section">Before you start.</h2>
+                    </div>
+                    <div className="gen-faq__body">
+                      <FAQList fields={fallbackFaqFields} />
+                    </div>
+                  </div>
                 </div>
               </section>
             )}
             <Section section={s} />
             {s.id === midCtaAfter && (
-              <aside className="v3-midcta" aria-label="Start a project">
-                <div className="v3-wrap">
+              <aside className="gen-midcta" aria-label="Start a project">
+                <div className="container gen-panel">
                   <p>
                     <strong>Planning a {(sitePage(path)?.label ?? "software").toLowerCase()} project?</strong>{" "}
                     Share a short brief and get questions, an initial scope and the team it needs.
                   </p>
-                  <TrackedLink href={ctaHref} event="consultation_click" service={ctaService} className="v3-button">
-                    Get a scoped estimate <span aria-hidden="true">→</span>
+                  <TrackedLink href={ctaHref} event="consultation_click" service={ctaService} className="nx-btn nx-btn--primary">
+                    <span>Get a scoped estimate</span>
+                    <NxIcon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
                   </TrackedLink>
                 </div>
               </aside>
@@ -706,22 +851,25 @@ export function V3Page({
                   !section.omitted &&
                   /technolog|tech-stack|tools-stack/.test(section.id),
               ) && (
-                <section
-                  id="technology-stack"
-                  className="v3-section v3-section--technology-stack"
-                >
-                  <div className="v3-wrap">
-                    <p className="v3-eyebrow">Technology stack</p>
-                    <h2>The stack behind your application.</h2>
-                    <p className="v3-intro">
-                      We choose the tools around your platform, existing systems
-                      and release requirements.
-                    </p>
+                <section id="technology-stack" className="section section--white">
+                  <div className="container">
+                    <div className="section-head nx-reveal">
+                      <div>
+                        <span className="eyebrow">Technology stack</span>
+                        <h2 className="h-section">The stack behind your application.</h2>
+                      </div>
+                      <p className="lead">
+                        We choose the tools around your platform, existing systems
+                        and release requirements.
+                      </p>
+                    </div>
+                    <div className="gen-stack">
                     <ServiceTechnologyStack
                       groups={hubFor(path)!.technologies.map(
                         ([name, , items]) => ({ name, items }),
                       )}
                     />
+                    </div>
                   </div>
                 </section>
               )}
@@ -731,7 +879,17 @@ export function V3Page({
         <RelatedPages path={path} paths={paths} />
         {path.startsWith("/blog/") && <RelatedGuides posts={posts} path={path} />}
       </main>
-      <StripeFooter paths={paths} preview={preview} linkMap={linkMap} />
+      {nx ? (
+        <>
+          <SiteFooter paths={paths} preview={preview} linkMap={linkMap} />
+          <div className="mcta" data-mcta>
+            <Button href={ctaHref} data-track="consultation_click">Start a project</Button>
+          </div>
+          <SiteBehaviors />
+        </>
+      ) : (
+        <StripeFooter paths={paths} preview={preview} linkMap={linkMap} />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -1,10 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import type React from "react";
 import type { Content } from "../content";
-import { HomeFooter, HomeHeader } from "./Chrome";
-import { Contact, CtaBand } from "./Contact";
+import { NxShell } from "../site/shell";
+import { Contact } from "./Contact";
 import { homeSections } from "./copy";
 import {
+  Assurance,
+  Brief,
   Faq,
   Hero,
   Hire,
@@ -17,7 +19,6 @@ import {
   Work,
 } from "./Sections";
 import { HomeContext } from "./ui";
-import { useReveal } from "./useReveal";
 
 type Listing = {
   path: string;
@@ -28,6 +29,7 @@ type Listing = {
 
 const order = homeSections.map((section) => section.id);
 
+// The homepage, rendered inside the shared site shell (header, footer, styles and behaviours).
 export function HomePage({
   content,
   paths = [],
@@ -43,29 +45,31 @@ export function HomePage({
   linkMap?: Record<string, string>;
   children?: React.ReactNode;
 }) {
-  const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
   return (
     <HomeContext.Provider value={{ content, paths, preview, linkMap, order }}>
-      <div ref={root} className="n-home">
-        <HomeHeader />
-        <main id="main">
-          <Hero />
-          <Services />
-          <Stack />
-          <Process />
-          <India />
-          <Supporting />
-          <Hire />
-          <Industries />
-          <Work listing={listing} />
-          <Faq />
-          <CtaBand />
-          <Contact />
-          {children}
-        </main>
-        <HomeFooter />
-      </div>
+      <NxShell
+        page="home"
+        paths={paths}
+        preview={preview}
+        linkMap={linkMap}
+        contactHref="#contact"
+        ctaHref="#contact"
+      >
+        <Hero />
+        <Brief />
+        <Assurance />
+        <Stack />
+        <Services />
+        <Supporting />
+        <Process />
+        <India />
+        <Hire />
+        <Industries />
+        <Work listing={listing} />
+        <Faq />
+        <Contact />
+        {children}
+      </NxShell>
     </HomeContext.Provider>
   );
 }

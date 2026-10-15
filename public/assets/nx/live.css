@@ -1,0 +1,49 @@
+/* Live-site additions to the generated design CSS (hand-written, not generated).
+   Scoped to .nx like the rest. */
+
+/* Native <details> FAQ accordion (src/site/ui.tsx FaqList) styled like the prototype's nx-acc */
+.nx .nx-acc--native .nx-acc__item { border-bottom: 1px solid var(--line); }
+.nx .nx-acc--native .nx-acc__trigger { list-style: none; cursor: pointer; }
+.nx .nx-acc--native .nx-acc__trigger::-webkit-details-marker { display: none; }
+.nx .nx-acc--native .nx-acc__trigger::marker { content: ""; }
+.nx .nx-acc--native details[open] > .nx-acc__trigger .nx-acc__icon { transform: rotate(45deg); background: var(--indigo); color: var(--on-indigo); border-color: var(--indigo); }
+.nx .nx-acc--native .nx-acc__content { padding: 0 52px var(--space-6) 0; font: 400 15px/1.65 var(--font-sans); color: var(--muted); animation: nx-fade-up var(--duration-base) var(--ease-emphasized); }
+.nx .nx-acc--native .nx-acc__content p { margin: 0 0 var(--space-3); }
+.nx .nx-acc--native .nx-acc__trigger:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+
+/* Generated page images inside illustration frames */
+.nx .nx-art--image { margin: 0; overflow: hidden; }
+.nx .nx-art--image img { display: block; width: 100%; height: auto; border-radius: var(--radius-card); }
+.nx .hero__art.nx-art--image { padding: 0; background: none; }
+
+/* Rich text from the CMS inside sections */
+.nx .nx-prose p { margin: 0 0 var(--space-4); }
+.nx .nx-prose ul, .nx .nx-prose ol { margin: 0 0 var(--space-4); padding-left: 1.25em; }
+.nx .nx-prose li { margin-bottom: 6px; }
+.nx .nx-prose a { color: var(--indigo-text); text-decoration: underline; text-underline-offset: 2px; }
+.nx .nx-prose :last-child { margin-bottom: 0; }
+
+/* The page wrapper paints the paper ground and the base type */
+.nx { min-height: 100vh; font-family: var(--font-sans); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+.nx main { min-height: 0; }
+
+/* Lead form anti-spam field: never visible */
+.nx .honeypot { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+
+/* Text-heavy card grids become open rows (title left, text right, divider between) instead of boxes.
+   Link-card grids (hub cards, contact routes, offices) keep their cards. */
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) { display: block; }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card {
+  display: grid; grid-template-columns: minmax(200px, 4fr) minmax(0, 8fr); column-gap: var(--space-12, 56px); row-gap: 0; align-content: start;
+  padding: var(--space-8, 32px) 0; margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; --nx-y: 28px;
+}
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card:last-child { border-bottom: 1px solid var(--line); }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card > .sk-card__icon { grid-column: 1; grid-row: 1 / span 12; align-self: start; margin: 0; }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card > :is(h2, h3, h4) { grid-column: 1; grid-row: 1 / span 12; align-self: start; margin: 0; }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card > .sk-card__icon + :is(h2, h3, h4) { margin-top: 68px; }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card > :not(.sk-card__icon):not(h2):not(h3):not(h4) { grid-column: 2; max-width: 68ch; margin: 0 0 var(--space-3); }
+.nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card:hover .sk-card__icon { background: var(--indigo); color: #fff; }
+@media (max-width: 800px) {
+  .nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card { grid-template-columns: minmax(0, 1fr); }
+  .nx .sk-cards:not(.ct-routes):not(.gen-offices):not(:has(.hub-card)):not(:has(a.sk-card)) > .sk-card > * { grid-column: 1 !important; grid-row: auto !important; }
+}

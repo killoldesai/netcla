@@ -1,4 +1,5 @@
 import type { BlogPost } from "./blog-types";
+import { ArrowLink } from "./site/ui";
 
 const stop = new Set(["the", "and", "for", "how", "what", "your", "with", "vs", "a", "to", "of", "in", "on", "guide", "checklist", "cost"]);
 const words = (t: string) => new Set(t.toLowerCase().match(/[a-z0-9.+#]{3,}/g)?.filter((w) => !stop.has(w)) ?? []);
@@ -28,19 +29,22 @@ export function RelatedGuides({ posts, path }: { posts: BlogPost[]; path: string
   const items = relatedGuides(posts, path);
   if (!items.length) return null;
   return (
-    <section className="v3-related-guides" aria-labelledby="related-guides-title">
-      <div className="v3-wrap">
-        <h2 id="related-guides-title">Keep reading</h2>
-        <ul>
+    <section className="v3-related-guides gen-guides" aria-labelledby="related-guides-title">
+      <link rel="stylesheet" href="/assets/nx/related.css?v=20261015" />
+      <div className="v3-wrap container">
+        <h2 id="related-guides-title" className="related__title">Keep reading</h2>
+        <ul className="related__cards">
           {items.map((p) => (
             <li key={p.path}>
-              <a href={p.path}>{p.title}</a>
-              {p.description && <p>{p.description}</p>}
+              <a className="related__card" href={p.path}>
+                <strong>{p.title}</strong>
+                {p.description && <span>{p.description}</span>}
+              </a>
             </li>
           ))}
         </ul>
-        <p>
-          <a href="/blog">All Netofficials guides</a>
+        <p className="related__more">
+          <ArrowLink href="/blog">All Netofficials guides</ArrowLink>
         </p>
       </div>
     </section>

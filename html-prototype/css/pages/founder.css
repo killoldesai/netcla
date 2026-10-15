@@ -1,0 +1,36 @@
+/* Founder (author) page: page-only rules. Family and card styles live in sections.css. */
+
+/* Profile hero: role line above the H1 */
+.founder-role { font: 500 15px/1.4 var(--font-sans); color: var(--indigo-text); margin: var(--space-4) 0 var(--space-2); }
+.founder-role + h1 { margin-top: 0; }
+
+/* Facts row under the summary */
+.founder-facts { list-style: none; margin: var(--space-8) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+.founder-facts li { display: flex; align-items: center; gap: var(--space-3); font: 500 16px/1.4 var(--font-sans); color: var(--ink); }
+.founder-facts .nx-icon { flex: 0 0 auto; color: var(--indigo-text); }
+
+/* Monogram illustration keeps its proportions at phone width */
+.founder-art .il { width: 100%; height: auto; }
+
+/* Biography copy: comfortable measure, reads as prose */
+.founder-bio { max-width: 68ch; }
+.founder-bio p { font: 400 18px/1.65 var(--font-sans); color: var(--ink); margin: 0 0 var(--space-6); }
+.founder-bio p:last-child { margin-bottom: 0; }
+
+/* Expertise chips, same look as the service link chips */
+.founder-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.founder-chips li { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-pill); background: var(--indigo-50); color: var(--ink); font: 500 15px/1.2 var(--font-sans); }
+
+/* Guide cards: the title is the link, so keep it readable and show focus */
+.founder-guide { color: var(--ink); text-decoration: none; }
+.founder-guide:hover { color: var(--indigo-text); }
+.founder-guide:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.sk-card .nx-badge { align-self: flex-start; }
+.sk-card .sk-card__label { margin-top: auto; }
+
+.founder-more { margin-top: var(--space-8); }
+
+@media (max-width: 720px) {
+  .founder-bio p { font-size: 17px; }
+  .founder-chips li { min-height: 44px; }
+}

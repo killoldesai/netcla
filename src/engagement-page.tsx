@@ -1,12 +1,15 @@
+import type { CSSProperties } from "react";
 import { TrackedLink } from "./v3-interactions";
 import { breadcrumbs } from "./site-structure";
 import { sanitizeRichHTML } from "./rich-text";
-import { mediaPath } from "./media-path";
+import { ArrowLink, Breadcrumbs, FaqList, HeroArt, Icon, SectionHead } from "./site/ui";
+import { EngagementArt } from "./site/art/engagement-art";
 import type { Content } from "./content";
 import type { PageSection } from "./page-spec-schema";
 
 // Engagement Models is a comparison-and-decision page: one comparison matrix, a situation selector, what drives
-// the price, and how an engagement starts. Own layout and stylesheet (/assets/engagement.css).
+// the price, and how an engagement starts. Markup follows html-prototype/engagement-models.html; styles live in
+// public/assets/nx/pages/engagement.css (shared model panels, nx-seg, steps and FAQ in public/assets/nx/site.css).
 // Numbers appear only where the order is real (the steps of an engagement), never on the models or sections.
 
 /** True for content generated from the engagement spec; older accepted content keeps the legacy renderer. */
@@ -29,6 +32,7 @@ export const MATRIX_ROWS = [
 
 const clean = (html: string, paths: string[]) => sanitizeRichHTML(html, false, paths.length ? paths : undefined);
 const hasHtml = (value: string) => /<[a-z][\s\S]*>/i.test(value);
+const delay = (i: number) => ({ ["--nx-delay" as string]: `${(i % 3) * 100}ms` }) as CSSProperties;
 
 function rows(fields: Record<string, string>, prefix: string, keys: string[], max: number) {
   const out: Record<string, string>[] = [];
@@ -42,7 +46,7 @@ function rows(fields: Record<string, string>, prefix: string, keys: string[], ma
 function Prose({ value, paths }: { value?: string; paths: string[] }) {
   if (!value?.trim()) return null;
   if (!hasHtml(value)) return <p>{value}</p>;
-  return <div className="en-prose" dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
+  return <div className="nx-prose" dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
 }
 
 export function EngagementSections({ content, path, paths, preview = false, linkMap = {} }: Props) {
@@ -76,57 +80,68 @@ export function EngagementSections({ content, path, paths, preview = false, link
   const faqPairs = Object.keys(faq).filter((k) => /^q\d+$/.test(k) && faq[k] && faq[k.replace("q", "a")]);
   const cta = f("cta-banner");
 
+  // Sub-nav lists only the sections that render on this page.
+  const subnav = [
+    models.length > 0 && ["models-comparison", "The three models"],
+    situations.length > 0 && ["decision-guide", "Which model fits"],
+    factors.length > 0 && ["pricing-factors", "Price"],
+    steps.length > 0 && ["process", "How it starts"],
+    faqPairs.length > 0 && ["faq", "FAQ"],
+  ].filter(Boolean) as [string, string][];
+
   return (
     <>
       {hero && (
-        <section id="hero" className="en-hero">
-          <div className="en-wrap">
-            <nav className="en-crumbs" aria-label="Breadcrumb">
-              <ol>
-                {trail.map((c, i) =>
-                  i === trail.length - 1 ? <li key={c.path} aria-current="page">{c.label}</li> : <li key={c.path}><a href={go(c.path)}>{c.label}</a></li>,
-                )}
-              </ol>
-            </nav>
-            <div className={"en-hero-grid" + (hero.asset ? " has-art" : "")}>
+        <section id="hero" className="page-hero">
+          <div className="container">
+            <Breadcrumbs items={trail.map((c, i) => ({ label: c.label, href: i === trail.length - 1 ? undefined : go(c.path) }))} />
+            <div className="hero__grid">
               <div>
-                <span className="en-tag">{h.tag_pill || "Engagement models"}</span>
-                <h1 className="en-h1">{h.h1 || content.title}</h1>
-                <p className="en-lead">{h.subheadline}</p>
-                <div className="en-actions">
-                  <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="en-btn">
-                    {h.cta_primary_label || "Discuss which model fits"} <span aria-hidden="true">↗</span>
+                <span className="tag-pill">{h.tag_pill || "Engagement models"}</span>
+                <h1>{h.h1 || content.title}</h1>
+                {h.subheadline && <p className="lead">{h.subheadline}</p>}
+                <div className="hero__actions">
+                  <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="nx-btn nx-btn--primary nx-btn--lg">
+                    <span>{h.cta_primary_label || "Discuss which model fits"}</span>
+                    <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
                   </TrackedLink>
-                  {h.cta_secondary_label && <a className="en-link" href={go(h.cta_secondary_url || "/how-we-work")}>{h.cta_secondary_label} →</a>}
+                  {h.cta_secondary_label && <ArrowLink href={go(h.cta_secondary_url || "/how-we-work")}>{h.cta_secondary_label}</ArrowLink>}
                 </div>
               </div>
-              {hero.asset && (
-                <figure className="en-art">
-                  <img src={mediaPath(hero.asset)} alt={hero.asset.alt} width={hero.asset.width} height={hero.asset.height} fetchPriority="high" />
-                </figure>
-              )}
+              <HeroArt asset={hero.asset} fallback={<EngagementArt />} priority />
             </div>
           </div>
         </section>
       )}
 
+      {subnav.length > 0 && (
+        <nav className="subnav" aria-label="On this page" data-subnav>
+          <div className="container">
+            <ul className="subnav__list">
+              {subnav.map(([id, label]) => (
+                <li key={id}>
+                  <a href={`#${id}`}>{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      )}
+
       {models.length > 0 && (
-        <section id="models-comparison" className="en-section is-tint">
-          <div className="en-wrap">
-            <header className="en-head">
-              {comparison.section_label && <p className="en-eyebrow">{comparison.section_label}</p>}
-              <h2 className="en-h2">{comparison.heading}</h2>
-            </header>
-            <div className="en-table-wrap">
-              <table className="en-matrix">
-                <caption className="en-sr">Fixed-price project, dedicated development team and staff augmentation compared</caption>
+        <section id="models-comparison" className="section">
+          <div className="container">
+            <SectionHead eyebrow={comparison.section_label || undefined} title={comparison.heading} />
+            <div className="em-table-wrap nx-reveal">
+              <table className="em-matrix">
+                <caption className="nx-sr">Fixed-price project, dedicated development team and staff augmentation compared</caption>
                 <thead>
                   <tr>
                     <td aria-hidden="true" />
                     {models.map((m) => (
                       <th key={m.n} id={`model-${m.n}`} scope="col">
                         <strong>{m.name}</strong>
-                        <span>{m.tagline}</span>
+                        {m.tagline && <span>{m.tagline}</span>}
                       </th>
                     ))}
                   </tr>
@@ -152,37 +167,48 @@ export function EngagementSections({ content, path, paths, preview = false, link
       )}
 
       {situations.length > 0 && (
-        <section id="decision-guide" className="en-section">
-          <div className="en-wrap">
-            <header className="en-head">
-              {guide.section_label && <p className="en-eyebrow">{guide.section_label}</p>}
-              <h2 className="en-h2">{guide.heading}</h2>
-            </header>
-            {/* Pure CSS selector: the checked situation decides which recommendation shows. */}
-            <div className="en-finder">
-              <fieldset className="en-finder-q">
-                <legend>Pick the situation closest to yours</legend>
-                {situations.map((r, i) => (
-                  <span key={r.scenario}>
-                    <input type="radio" name="en-situation" id={`en-sit-${i + 1}`} defaultChecked={i === 0} />
-                    <label htmlFor={`en-sit-${i + 1}`}>{r.scenario}</label>
-                  </span>
-                ))}
-              </fieldset>
-              <div className="en-finder-a" aria-live="polite">
-                {situations.map((r, i) => (
-                  <div key={r.scenario} className="en-result" data-for={i + 1}>
-                    <span className="en-result-label">Our recommendation</span>
-                    <h3>{r.choice}</h3>
-                    <p>{r.recommendation}</p>
-                    <div className="en-actions">
-                      <a className="en-btn" href={modelAnchor(r.choice)}>See it in the comparison</a>
-                      <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="en-link">
-                        Discuss this model →
-                      </TrackedLink>
+        <section id="decision-guide" className="section section--white">
+          <div className="container">
+            <div className="engage">
+              <div className="nx-reveal">
+                {guide.section_label && <span className="eyebrow">{guide.section_label}</span>}
+                <h2 className="h-section">{guide.heading}</h2>
+              </div>
+              <div className="nx-reveal">
+                {/* The segment picks the situation; its .model panel shows the recommendation (behaviors.tsx). */}
+                <div className="nx-seg" role="radiogroup" aria-label="Pick the situation closest to yours" data-seg>
+                  <span className="nx-seg__thumb" aria-hidden="true" />
+                  {situations.map((r, i) => (
+                    <button
+                      type="button"
+                      key={i}
+                      className="nx-seg__opt"
+                      role="radio"
+                      aria-checked={i === 0}
+                      tabIndex={i === 0 ? 0 : -1}
+                      data-value={`situation-${i + 1}`}
+                    >
+                      {r.choice}
+                    </button>
+                  ))}
+                </div>
+                <div aria-live="polite">
+                  {situations.map((r, i) => (
+                    <div key={i} className="model" data-model={`situation-${i + 1}`} hidden={i !== 0}>
+                      <p className="em-scenario">{r.scenario}</p>
+                      <p className="quick__label">Our recommendation</p>
+                      <h3>{r.choice}</h3>
+                      <p>{r.recommendation}</p>
+                      <div className="model__actions">
+                        <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="nx-btn nx-btn--primary">
+                          <span>Discuss this model</span>
+                          <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+                        </TrackedLink>
+                        <ArrowLink href={modelAnchor(r.choice)}>See it in the comparison</ArrowLink>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -190,38 +216,34 @@ export function EngagementSections({ content, path, paths, preview = false, link
       )}
 
       {factors.length > 0 && (
-        <section id="pricing-factors" className="en-section is-tint">
-          <div className="en-wrap en-split">
-            <header className="en-head">
-              {pricing.section_label && <p className="en-eyebrow">{pricing.section_label}</p>}
-              <h2 className="en-h2">{pricing.heading}</h2>
-              {pricing.intro && <p className="en-lead">{pricing.intro}</p>}
-            </header>
-            <ul className="en-factors">
-              {factors.map((r) => (
-                <li key={r.title}>
-                  <h3>{r.title}</h3>
-                  <p>{r.body}</p>
-                </li>
+        <section id="pricing-factors" className="section">
+          <div className="container em-price">
+            <div className="nx-reveal">
+              {pricing.section_label && <span className="eyebrow">{pricing.section_label}</span>}
+              <h2 className="h-section">{pricing.heading}</h2>
+              {pricing.intro && <p className="lead">{pricing.intro}</p>}
+            </div>
+            <div className="em-factors">
+              {factors.map((r, i) => (
+                <article key={r.title} className="sk-card nx-reveal" style={delay(i)}>
+                  <h3 className="sk-card__title">{r.title}</h3>
+                  <p className="sk-card__text">{r.body}</p>
+                </article>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
       )}
 
       {steps.length > 0 && (
-        <section id="process" className="en-section is-dark">
-          <div className="en-wrap">
-            <header className="en-head">
-              {process.section_label && <p className="en-eyebrow">{process.section_label}</p>}
-              <h2 className="en-h2">{process.heading}</h2>
-            </header>
-            <ol className="en-steps">
+        <section id="process" className="section band">
+          <div className="container">
+            <SectionHead eyebrow={process.section_label || undefined} title={process.heading} />
+            <ol className="nx-steps" data-steps>
               {steps.map((r, i) => (
-                <li key={r.title}>
-                  <span className="en-step-n" aria-hidden="true">{i + 1}</span>
-                  <h3>{r.title}</h3>
-                  <p>{r.body}</p>
+                <li key={r.title} className="nx-step nx-reveal" style={delay(i)}>
+                  <h3 className="nx-step__title">{r.title}</h3>
+                  <p className="nx-step__desc">{r.body}</p>
                 </li>
               ))}
             </ol>
@@ -230,39 +252,35 @@ export function EngagementSections({ content, path, paths, preview = false, link
       )}
 
       {faqPairs.length > 0 && (
-        <section id="faq" className="en-section">
-          <div className="en-wrap en-faq">
-            <header className="en-head">
-              {faq.section_label && <p className="en-eyebrow">{faq.section_label}</p>}
-              <h2 className="en-h2">{faq.heading}</h2>
-            </header>
-            <div className="en-accordion">
-              {faqPairs.map((k, i) => (
-                <details key={k} name="en-faq" open={i === 0}>
-                  <summary>
-                    {faq[k]}
-                    <span aria-hidden="true">+</span>
-                  </summary>
-                  <Prose value={faq[k.replace("q", "a")]} paths={paths} />
-                </details>
-              ))}
+        <section id="faq" className="section section--white">
+          <div className="container faq">
+            <div className="faq__aside nx-reveal">
+              {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+              <h2 className="h-section">{faq.heading}</h2>
             </div>
+            <FaqList
+              name="engagement-faq"
+              items={faqPairs.map((k) => ({ q: faq[k], a: <Prose value={faq[k.replace("q", "a")]} paths={paths} /> }))}
+            />
           </div>
         </section>
       )}
 
       {by("cta-banner") && (
-        <section id="cta-banner" className="en-cta">
-          <div className="en-wrap en-cta-grid">
-            <div>
-              <h2>{cta.heading}</h2>
-              <p>{cta.subheadline}</p>
-            </div>
-            <div className="en-actions">
-              <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="en-btn is-lime">
-                {cta.cta_primary_label || "Discuss which model fits"} <span aria-hidden="true">↗</span>
-              </TrackedLink>
-              {cta.cta_secondary_label && <a className="en-link is-light" href={go(cta.cta_secondary_url || "/why-choose-netofficials")}>{cta.cta_secondary_label} →</a>}
+        <section id="cta-banner" className="section">
+          <div className="container">
+            <div className="nx-cta nx-cta--indigo nx-reveal">
+              <div>
+                <h2 className="nx-cta__title">{cta.heading}</h2>
+                <p className="nx-cta__desc">{cta.subheadline}</p>
+              </div>
+              <div className="em-cta-actions">
+                <TrackedLink href={contact} event="consultation_click" service="Engagement model" className="nx-btn nx-btn--lime nx-btn--lg">
+                  <span>{cta.cta_primary_label || "Discuss which model fits"}</span>
+                  <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+                </TrackedLink>
+                {cta.cta_secondary_label && <ArrowLink href={go(cta.cta_secondary_url || "/why-choose-netofficials")}>{cta.cta_secondary_label}</ArrowLink>}
+              </div>
             </div>
           </div>
         </section>

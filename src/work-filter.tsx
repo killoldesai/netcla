@@ -11,7 +11,7 @@ export function WorkFilter({
   return (
     <>
       <div
-        className="csv-wrap work-filters"
+        className="csv-wrap work-filters gen-filters"
         role="group"
         aria-label="Filter work by service"
       >
@@ -19,6 +19,7 @@ export function WorkFilter({
           <button
             key={s.id}
             type="button"
+            className="gen-filter"
             aria-pressed={active === s.id}
             onClick={() => setActive(s.id)}
           >

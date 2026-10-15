@@ -1,0 +1,78 @@
+/* Netofficials design tokens. Mirrors the design system's tokens.json. */
+:root, [data-theme="light"] {
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --ink: #0f1420;
+  --muted: #5a6272;
+  --line: #e3e6f0;
+  --line-strong: #cdd2e3;
+  --band: #0f1420;
+  --band-2: #1b2130;
+  --band-line: #2c3342;
+  --on-band: #ffffff;
+  --on-band-muted: #b8bdc9;
+  --indigo: #4353b3;
+  --indigo-strong: #34428f;
+  --indigo-text: #4353b3;
+  --on-indigo: #ffffff;
+  --indigo-50: #f1f3fc;
+  --indigo-100: #e1e5f8;
+  --lime: #b5ce20;
+  --on-lime: #0f1420;
+  --lime-text: #5b6a00;
+  --lime-50: #f6f9e4;
+  --sky: #1f5f86;
+  --sky-50: #ecf5fb;
+  --sand-50: #f6f7fc;
+  --success: #1d7a46;
+  --warning: #8a5a00;
+  --danger: #b42318;
+  --focus: #4353b3;
+  --shadow-card: 0 1px 2px rgba(15, 20, 32, 0.06);
+  --shadow-float: 0 1px 2px rgba(15, 20, 32, 0.06), 0 8px 24px -8px rgba(15, 20, 32, 0.16);
+}
+[data-theme="dark"] {
+  --paper: #0b0f19;
+  --surface: #151a27;
+  --ink: #f3f2ee;
+  --muted: #a3a9b8;
+  --line: #2c3342;
+  --line-strong: #3c4458;
+  --band: #070a12;
+  --band-2: #151a27;
+  --on-band: #f3f2ee;
+  --indigo-strong: #5a69cc;
+  --indigo-text: #9aa6ee;
+  --indigo-50: #1a2040;
+  --indigo-100: #252d57;
+  --lime-text: #c8dd4a;
+  --lime-50: #20250d;
+  --sky: #6fb2dc;
+  --sky-50: #11212e;
+  --sand-50: #29231a;
+  --success: #5cc78b;
+  --warning: #e0b34e;
+  --danger: #f07a6f;
+  --focus: #9aa6ee;
+}
+:root {
+  --font-sans: Poppins, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-card: 20px; --radius-xl: 28px; --radius-2xl: 32px; --radius-pill: 9999px;
+  --duration-fast: 150ms; --duration-base: 250ms; --duration-slow: 450ms; --duration-reveal: 700ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark theme uses the logo's green-yellow instead of indigo */
+[data-theme="dark"] {
+  --indigo: #b5ce20;
+  --indigo-strong: #c9dd4f;
+  --on-indigo: #0f1420;
+  --indigo-text: #c8dd4a;
+  --indigo-50: #1d2611;
+  --indigo-100: #2d3b16;
+  --focus: #c8dd4a;
+}

@@ -61,10 +61,10 @@ test("Service hubs preserve priority and only expose published destinations", ()
   ];
   const $ = render(allowed);
   assert.deepEqual(
-    $(".hub-card")
+    $("#services article[data-hub]")
       .map((_, el) => $(el).attr("data-hub"))
       .get(),
-    ["software", "ai", "cloud", "mobile", "web", "search"],
+    ["software", "ai", "devops", "mobile", "cloud"],
   );
   const paths = $("a[data-published-link]")
     .map((_, el) => $(el).attr("href"))
@@ -74,13 +74,19 @@ test("Service hubs preserve priority and only expose published destinations", ()
   assert.equal($("a[href='/saas-development-services']").length, 0);
   assert.ok($(".planned-topic").text().includes("SaaS Development"));
   assert.equal($(".planned-topic a").length, 0);
-  assert.equal($(".hub-card h3").first().text(), "Custom Software Development");
+  assert.equal(
+    $("#services article h3").first().text(),
+    "Software development",
+  );
   assert.equal($("a[data-service='AI & business automation']").length, 1);
   const options = $("select[name=service] option")
     .map((_, el) => $(el).text())
     .get();
   assert.ok(options.includes("AI & business automation"));
   assert.ok(options.includes("Cloud & DevOps"));
+  assert.equal($("#brief .brief-opt").length, 5);
+  assert.equal($("#brief .brief-opt[aria-pressed=true]").length, 0);
+  assert.equal($("#brief a[href='#contact']").length, 1);
   for (const name of [
     "name",
     "email",
@@ -93,20 +99,18 @@ test("Service hubs preserve priority and only expose published destinations", ()
   assert.equal($("form .honeypot input[name=company_url]").length, 1);
 });
 
-test("The four priority practices lead the page and are all visible without a click", () => {
+test("The five practices lead the page and are all visible without a click", () => {
   const $ = render();
-  assert.match($("h1").text(), /software, AI,\s*cloud and mobile app development/i);
-  assert.deepEqual(
-    $("#hero nav[aria-label='Our four practices'] a")
-      .map((_, el) => $(el).attr("href"))
-      .get(),
-    ["#software", "#ai", "#cloud", "#mobile"],
+  assert.match(
+    $("h1").text(),
+    /custom software, AI, DevOps, cloud and mobile apps/i,
   );
+  assert.equal($("#hero nav").length, 0);
   assert.deepEqual(
     $("#services article[data-hub]")
       .map((_, el) => $(el).attr("id"))
       .get(),
-    ["software", "ai", "cloud", "mobile"],
+    ["software", "ai", "devops", "mobile", "cloud"],
   );
   assert.equal($("#services [role=tab]").length, 0);
   assert.equal($("#services [hidden]").length, 0);
@@ -138,10 +142,10 @@ test("Published case studies supply proof without exposing draft examples", () =
 test("Developer roles link to published pages and use an enquiry fallback for unavailable pages", () => {
   const allowed = ["/hire-react-developer", "/hire-developers"];
   const $ = render(allowed);
-  assert.equal($(".role-grid a[href='/hire-react-developer']").length, 1);
-  assert.equal($(".role-grid a[href='/hire-developers']").length, 14);
-  assert.equal($(".role-grid a[href='/hire-nodejs-developer']").length, 0);
-  assert.equal(render()(".role-grid a[href='#contact']").length, 15);
+  assert.equal($(".roles a[href='/hire-react-developer']").length, 1);
+  assert.equal($(".roles a[href='/hire-developers']").length, 14);
+  assert.equal($(".roles a[href='/hire-nodejs-developer']").length, 0);
+  assert.equal(render()(".roles a[href='#contact']").length, 15);
 });
 
 test("Hidden optional sections are removed without decorative service numbering", () => {

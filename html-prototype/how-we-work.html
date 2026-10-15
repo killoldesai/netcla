@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How We Work | Our Development Process | Netofficials</title>
+<meta name="description" content="Discovery, delivery and review milestones">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/pages/how-we-work.css">
+</head>
+<body>
+<!-- @partial icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+</svg>
+<!-- /@partial icons -->
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- @partial header -->
+<div class="site-header" data-header>
+  <div class="container">
+    <header class="nx-nav" data-nav>
+      <a class="nx-nav__brand" href="index.html" data-path="/"><img class="logo--light" src="assets/logo.png" alt="netofficials" width="156" height="26"><img class="logo--dark" src="assets/logo-dark.png" alt="netofficials" width="156" height="26"></a>
+      <button type="button" class="nx-icon-btn nx-nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu" data-nav-toggle><svg class="nx-icon" width="20" height="20" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <div class="nx-nav__menu" id="nav-menu">
+        <nav aria-label="Primary">
+          <ul class="nx-nav__links">
+            <li><a href="services.html" data-path="/services">Services</a></li>
+            <li><a href="pillar.html" data-path="/hire-developers">Hire developers</a></li>
+            <li><a href="industries-hub.html" data-path="/industries">Industries</a></li>
+            <li><a href="how-we-work.html" data-path="/how-we-work">How we work</a></li>
+            <li><a href="blog.html" data-path="/blog">Guides</a></li>
+          </ul>
+        </nav>
+        <a class="nx-btn nx-btn--primary nx-btn--sm nx-nav__cta-mobile" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </div>
+      <a class="nx-btn nx-btn--primary nx-btn--sm nx-nav__cta-desktop" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </header>
+  </div>
+</div>
+<!-- /@partial header -->
+
+<main id="main">
+<!-- @main -->
+<!-- HERO: paper ground, breadcrumb, tag pill, H1, lead, signals, actions, one token-based SVG illustration -->
+<section class="page-hero">
+  <div class="container">
+    <nav class="nx-crumbs page-crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li style="display:inline-flex;align-items:center;gap:8px"><a href="index.html" data-path="/">Home</a><svg width="14" height="14" aria-hidden="true"><use href="#i-chevron-right"/></svg></li>
+        <li><span aria-current="page">How we work</span></li>
+      </ol>
+    </nav>
+    <div class="hero__grid">
+      <div>
+        <span class="tag-pill">Process</span>
+        <h1 data-split>How we work</h1>
+        <p class="lead">Discovery, delivery and review milestones. <span class="draft">[draft: one sentence on what the client holds at each milestone]</span></p>
+        <ul class="hw-signals">
+          <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Scope agreed first</li>
+          <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Review milestones</li>
+          <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>Your time zone</li>
+        </ul>
+        <div class="hero__actions">
+          <a class="nx-btn nx-btn--primary nx-btn--lg" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <a class="nx-arrowlink" href="engagement-models.html" data-path="/engagement-models"><span>Engagement models</span><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <svg class="il" viewBox="0 0 560 420" role="img" aria-label="A delivery loop from brief to release: discovery, design, development and review, then deployment and support, with a release node closing the loop">
+          <rect class="f-i50" width="560" height="420" rx="20"/>
+          <ellipse class="s-indigo dash-move" cx="280" cy="210" rx="200" ry="130"/>
+          <rect class="f-surface s-line float-a" x="196" y="140" width="168" height="130" rx="14"/>
+          <rect class="f-i100" x="196" y="140" width="168" height="26" rx="14"/>
+          <rect class="f-line" x="214" y="184" width="84" height="8" rx="4"/>
+          <rect class="f-line" x="214" y="200" width="122" height="8" rx="4"/>
+          <rect class="f-line" x="214" y="216" width="100" height="8" rx="4"/>
+          <rect class="f-indigo" x="214" y="236" width="52" height="16" rx="8"/>
+          <g class="float-b">
+            <circle class="f-surface s-indigo" cx="280" cy="80" r="26"/>
+            <path class="s-indigo" d="M272 80l6 6 10-11" fill="none"/>
+          </g>
+          <g class="float-c">
+            <circle class="f-surface s-indigo" cx="480" cy="210" r="26"/>
+            <rect class="f-indigo" x="470" y="202" width="20" height="16" rx="3"/>
+          </g>
+          <g class="float-a">
+            <circle class="f-surface s-indigo" cx="280" cy="340" r="26"/>
+            <path class="s-indigo" d="M268 340h24M280 328v24" fill="none"/>
+          </g>
+          <g class="float-b">
+            <circle class="f-surface s-indigo" cx="80" cy="210" r="26"/>
+            <rect class="f-muted" x="70" y="204" width="20" height="12" rx="2"/>
+          </g>
+          <circle class="f-lime pulse" cx="480" cy="210" r="8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="On this page" data-subnav>
+  <div class="container">
+    <ul class="subnav__list">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#stages">Stages</a></li>
+      <li><a href="#communication">Communication</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#commitments">Commitments</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- APPROACH: editorial split, heading left, body right -->
+<section class="section" id="approach">
+  <div class="container engage">
+    <div class="nx-reveal">
+      <span class="eyebrow">Process</span>
+      <h2 class="h-section">From brief to release, with agreed review milestones.</h2>
+    </div>
+    <div class="nx-reveal">
+      <p class="lead"><span class="draft">[draft: two short paragraphs on why one process runs every project, how scope is agreed before the build starts, and who the client works with day to day]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES: dark band, vertical timeline, real sequence numbered by nx-steps -->
+<section class="section band" id="stages">
+  <div class="container hw-stages-grid">
+    <div class="hw-stages-head nx-reveal">
+      <span class="eyebrow">Process</span>
+      <h2 class="h-section">From brief to handover</h2>
+      <p class="lead">You know what you get at each stage before it starts, and you review it before the next one begins.</p>
+    </div>
+    <ol class="nx-steps nx-steps--vertical hw-timeline" data-steps>
+      <li class="nx-step nx-reveal">
+        <h3 class="nx-step__title">Discovery</h3>
+        <p class="nx-step__desc">Requirements, users, existing systems and constraints. We agree the initial scope and the questions that need further investigation.</p>
+        <p class="deliver-label">You receive</p>
+        <ul class="deliver"><li>Scope summary</li><li>Open questions</li><li>Initial estimate</li></ul>
+      </li>
+      <li class="nx-step nx-reveal" style="--nx-delay:100ms">
+        <h3 class="nx-step__title">Design and architecture</h3>
+        <p class="nx-step__desc">User flows, interfaces, data structures and API requirements, reviewed with you before development begins.</p>
+        <p class="deliver-label">You receive</p>
+        <ul class="deliver"><li>User flows</li><li>Interface designs</li><li>Architecture notes</li></ul>
+      </li>
+      <li class="nx-step nx-reveal" style="--nx-delay:200ms">
+        <h3 class="nx-step__title">Development and review</h3>
+        <p class="nx-step__desc">Work through agreed priorities with review milestones, an update cadence and acceptance criteria.</p>
+        <p class="deliver-label">You receive</p>
+        <ul class="deliver"><li>Staging builds</li><li>Progress reviews</li><li>Test results</li></ul>
+      </li>
+      <li class="nx-step nx-reveal" style="--nx-delay:300ms">
+        <h3 class="nx-step__title">Deploy and support</h3>
+        <p class="nx-step__desc">Production release, handover and the ongoing support your application needs, agreed in the project scope.</p>
+        <p class="deliver-label">You receive</p>
+        <ul class="deliver"><li>Production release</li><li>Documentation</li><li>Access handover</li></ul>
+      </li>
+      <li class="nx-step nx-reveal" style="--nx-delay:400ms">
+        <h3 class="nx-step__title"><span class="draft">[draft: fifth stage title, after release, e.g. Improve and extend]</span></h3>
+        <p class="nx-step__desc"><span class="draft">[draft: two sentences on how changes after release are scoped, reviewed and priced]</span></p>
+        <p class="deliver-label">You receive</p>
+        <ul class="deliver"><li><span class="draft">[draft: deliverable]</span></li><li><span class="draft">[draft: deliverable]</span></li><li><span class="draft">[draft: deliverable]</span></li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- COMMUNICATION: intro with real copy, cadence table in a scrollable box on mobile -->
+<section class="section section--white" id="communication">
+  <div class="container">
+    <header class="hw-head nx-reveal">
+      <span class="eyebrow">Overlap</span>
+      <h2 class="h-section">How we communicate</h2>
+      <p class="lead">Time zone, meeting schedule and update cadence are set before work begins, so collaboration expectations are clear.</p>
+    </header>
+    <div class="hw-table-wrap" data-allow-overflow tabindex="0" role="region" aria-label="Communication cadence table">
+      <table class="hw-cadence">
+        <thead>
+          <tr>
+            <th scope="col">Meeting or update</th>
+            <th scope="col">When</th>
+            <th scope="col">Who attends</th>
+            <th scope="col">What it settles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="draft">[draft: kickoff]</span></th>
+            <td><span class="draft">[draft: once, before work starts]</span></td>
+            <td><span class="draft">[draft: client lead, project lead]</span></td>
+            <td><span class="draft">[draft: scope, priorities and access]</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="draft">[draft: progress update]</span></th>
+            <td><span class="draft">[draft: weekly, in the agreed window]</span></td>
+            <td><span class="draft">[draft: product owner, team lead]</span></td>
+            <td><span class="draft">[draft: progress against priorities]</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="draft">[draft: review milestone]</span></th>
+            <td><span class="draft">[draft: at each agreed milestone]</span></td>
+            <td><span class="draft">[draft: client reviewers, delivery team]</span></td>
+            <td><span class="draft">[draft: staging build accepted or changed]</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="draft">[draft: release and handover]</span></th>
+            <td><span class="draft">[draft: at production release]</span></td>
+            <td><span class="draft">[draft: client technical contact]</span></td>
+            <td><span class="draft">[draft: documentation and access handed over]</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS: four categories, drafted, no vendor names stated as fact -->
+<section class="section" id="tools">
+  <div class="container">
+    <header class="hw-head nx-reveal">
+      <h2 class="h-section">Tools behind the work</h2>
+    </header>
+    <div class="sk-stack nx-reveal">
+      <div class="sk-stack__group">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#code-brackets"/></svg></span>
+        <h3 class="sk-stack__name"><span class="draft">[draft: tool category, e.g. Source control and reviews]</span></h3>
+        <p class="sk-card__text"><span class="draft">[draft: one sentence on what the team uses it for and what the client can see]</span></p>
+      </div>
+      <div class="sk-stack__group">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#cloud-upload"/></svg></span>
+        <h3 class="sk-stack__name"><span class="draft">[draft: tool category, e.g. Build and release]</span></h3>
+        <p class="sk-card__text"><span class="draft">[draft: one sentence on staging builds and production releases]</span></p>
+      </div>
+      <div class="sk-stack__group">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#shield-check"/></svg></span>
+        <h3 class="sk-stack__name"><span class="draft">[draft: tool category, e.g. Testing and quality]</span></h3>
+        <p class="sk-card__text"><span class="draft">[draft: one sentence on test results shared at each milestone]</span></p>
+      </div>
+      <div class="sk-stack__group">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="26" height="26"><use href="assets/icons.svg#chart-bar"/></svg></span>
+        <h3 class="sk-stack__name"><span class="draft">[draft: tool category, e.g. Tracking and reporting]</span></h3>
+        <p class="sk-card__text"><span class="draft">[draft: one sentence on the progress view the client receives]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENTS: real assurance copy from the homepage -->
+<section class="section section--white" id="commitments">
+  <div class="container">
+    <header class="hw-head nx-reveal">
+      <h2 class="h-section">What we commit to</h2>
+    </header>
+    <div class="hw-commits nx-reveal">
+      <article class="sk-card">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="20" height="20"><use href="#i-flag"/></svg></span>
+        <h3 class="sk-card__title">Scope agreed first</h3>
+        <p class="sk-card__text">A scope summary, open questions and an initial estimate before the build starts.</p>
+      </article>
+      <article class="sk-card">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="20" height="20"><use href="#i-check"/></svg></span>
+        <h3 class="sk-card__title">Review milestones</h3>
+        <p class="sk-card__text">Staging builds, progress reviews and test results at agreed points.</p>
+      </article>
+      <article class="sk-card">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="20" height="20"><use href="#i-clock"/></svg></span>
+        <h3 class="sk-card__title">Your time zone</h3>
+        <p class="sk-card__text">Communication window, meetings and update cadence set before work begins.</p>
+      </article>
+      <article class="sk-card">
+        <span class="sk-card__icon" aria-hidden="true"><svg width="20" height="20"><use href="#i-file"/></svg></span>
+        <h3 class="sk-card__title">Full handover</h3>
+        <p class="sk-card__text">Documentation and deployment access handed over at release.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ: homepage pattern, real copy -->
+<section class="section" id="faq">
+  <div class="container faq">
+    <div class="faq__aside nx-reveal">
+      <span class="eyebrow">Questions</span>
+      <h2 class="h-section">Questions about our software, AI, DevOps, cloud and mobile work.</h2>
+      <a class="nx-btn nx-btn--secondary" href="contact.html" data-path="/contact"><span>Ask us directly</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+    <div class="nx-acc nx-reveal" data-accordion>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q1" aria-expanded="true" aria-controls="a1"><span>How does a software, AI, cloud or mobile project start?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a1" role="region" aria-labelledby="q1" data-open="true"><div class="nx-acc__inner"><div class="nx-acc__content">Send a short brief through the form. We follow up to discuss your users, existing systems and constraints, then agree an initial scope and the questions that need further investigation.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q2" aria-expanded="false" aria-controls="a2"><span>Can you work alongside our existing team?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a2" role="region" aria-labelledby="q2" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">Yes. Dedicated developers can work with your tools, priorities and development process. Roles, availability and engagement terms are confirmed during the enquiry.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q3" aria-expanded="false" aria-controls="a3"><span>How do you handle time zone differences?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a3" role="region" aria-labelledby="q3" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">The team is based in India. Before work begins we agree a communication window, meeting schedule and update cadence that suits your time zone.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q4" aria-expanded="false" aria-controls="a4"><span>What do we receive at handover?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a4" role="region" aria-labelledby="q4" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">Handover is planned in the project scope. It covers documentation, deployment access and the ongoing responsibilities your team needs.</div></div></div></div>
+      <div class="nx-acc__item"><h3 class="nx-acc__h"><button type="button" class="nx-acc__trigger" id="q5" aria-expanded="false" aria-controls="a5"><span>Which cloud platforms and mobile frameworks do you work with?</span><span class="nx-acc__icon" aria-hidden="true"><svg width="18" height="18"><use href="#i-plus"/></svg></span></button></h3><div class="nx-acc__panel" id="a5" role="region" aria-labelledby="q5" data-open="false"><div class="nx-acc__inner" inert><div class="nx-acc__content">AWS, Azure and Google Cloud for infrastructure, with Docker, Kubernetes and Terraform. For mobile we build native iOS apps in Swift, native Android apps in Kotlin, and cross-platform apps in Flutter or React Native.</div></div></div></div>
+    </div>
+  </div>
+</section>
+<!-- /@main -->
+</main>
+
+<!-- @partial footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__cta">
+      <div>
+        <h2>Ready to scope your project? <span>Tell us what you need built.</span></h2>
+        <p>Share a short brief. We reply with questions, a proposed scope and the team your project needs.</p>
+      </div>
+      <div class="footer__cta-actions">
+        <a class="nx-btn nx-btn--lime nx-btn--lg" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        <a class="nx-btn nx-btn--secondary nx-btn--lg" href="services.html" data-path="/services"><span>Explore services</span></a>
+      </div>
+    </div>
+
+    <div class="footer__main">
+      <div class="footer__brand">
+        <a class="footer__brand-name" href="index.html" data-path="/"><img src="assets/logo-dark.png" alt="netofficials" width="170" height="28"></a>
+        <p>India-based software development for business applications, mobile products, AI, DevOps and cloud. Serving clients in the US, UK and Australia.</p>
+        <div class="footer__contact">
+          <a href="#"><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>[your enquiries email]</a>
+          <a href="contact.html" data-path="/contact"><svg class="nx-icon" width="18" height="18" aria-hidden="true"><use href="#i-pin"/></svg>India · [office city]</a>
+        </div>
+      </div>
+      <nav aria-labelledby="ft-services"><h3 id="ft-services">Services</h3><ul>
+        <li><a href="pillar.html" data-path="/custom-software-development">Software development</a></li>
+        <li><a href="pillar.html" data-path="/ai-development-services">AI development</a></li>
+        <li><a href="service.html" data-path="/devops-services">DevOps and CI/CD</a></li>
+        <li><a href="pillar.html" data-path="/mobile-app-development">Mobile app development</a></li>
+        <li><a href="pillar.html" data-path="/cloud-services">Cloud services</a></li>
+        <li><a href="pillar.html" data-path="/web-development">Web and eCommerce</a></li>
+        <li><a href="pillar.html" data-path="/digital-marketing-services">Digital marketing</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-popular"><h3 id="ft-popular">Popular</h3><ul>
+        <li><a href="service.html" data-path="/mvp-development-services">MVP development</a></li>
+        <li><a href="service.html" data-path="/saas-development-services">SaaS development</a></li>
+        <li><a href="service.html" data-path="/ai-chatbot-development">AI chatbots</a></li>
+        <li><a href="service.html" data-path="/cloud-migration-services">Cloud migration</a></li>
+        <li><a href="technology.html" data-path="/kubernetes-services">Kubernetes</a></li>
+        <li><a href="technology.html" data-path="/flutter-app-development">Flutter apps</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-hire"><h3 id="ft-hire">Hire developers</h3><ul>
+        <li><a href="hire.html" data-path="/hire-react-developer">React developers</a></li>
+        <li><a href="hire.html" data-path="/hire-nodejs-developer">Node.js developers</a></li>
+        <li><a href="hire.html" data-path="/hire-python-developer">Python developers</a></li>
+        <li><a href="hire.html" data-path="/hire-flutter-developer">Flutter developers</a></li>
+        <li><a href="hire.html" data-path="/hire-devops-engineer">DevOps engineers</a></li>
+        <li><a href="hire.html" data-path="/hire-ai-ml-developer">AI/ML developers</a></li>
+      </ul></nav>
+      <nav aria-labelledby="ft-company"><h3 id="ft-company">Company</h3><ul>
+        <li><a href="about.html" data-path="/about">About</a></li>
+        <li><a href="how-we-work.html" data-path="/how-we-work">How we work</a></li>
+        <li><a href="engagement-models.html" data-path="/engagement-models">Engagement models</a></li>
+        <li><a href="why-choose.html" data-path="/why-choose-netofficials">Why Netofficials</a></li>
+        <li><a href="blog.html" data-path="/blog">Guides</a></li>
+        <li><a href="careers.html" data-path="/careers">Careers</a></li>
+        <li><a href="contact.html" data-path="/contact">Contact</a></li>
+      </ul></nav>
+    </div>
+
+    <nav class="footer__where" aria-labelledby="ft-where">
+      <h3 id="ft-where">Where we work</h3>
+      <a href="location.html" data-path="/software-development-company-usa">USA</a>
+      <a href="location.html" data-path="/software-development-company-new-york">New York</a>
+      <a href="location.html" data-path="/software-development-company-uk">United Kingdom</a>
+      <a href="location.html" data-path="/software-development-company-london">London</a>
+      <a href="location.html" data-path="/software-development-company-canada">Canada</a>
+      <a href="location.html" data-path="/software-development-company-australia">Australia</a>
+      <a href="location.html" data-path="/software-development-company-dubai">Dubai</a>
+      <a href="location.html" data-path="/software-development-company-india">India</a>
+    </nav>
+
+    <div class="footer__bar">
+      <span>© <span data-year>2026</span> Netofficials · India</span>
+      <nav aria-label="Legal">
+        <a href="legal.html" data-path="/privacy-policy">Privacy Policy</a>
+        <a href="legal.html" data-path="/terms">Terms</a>
+        <button type="button" role="switch" aria-checked="false" class="nx-switch" data-theme-toggle><span class="nx-switch__track" aria-hidden="true"><span class="nx-switch__thumb"></span></span><span>Dark theme</span></button>
+        <button type="button" class="to-top" data-to-top><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-up"/></svg>Back to top</button>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /@partial footer -->
+
+<div class="mcta" data-mcta>
+  <a class="nx-btn nx-btn--primary" href="contact.html" data-path="/contact"><span>Start a project</span><svg class="nx-icon nx-btn__arrow" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+</div>
+<div class="toasts" aria-live="polite" data-toasts></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

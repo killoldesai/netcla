@@ -1,6 +1,16 @@
 "use client";
+import { useState, type CSSProperties } from "react";
+import { Button, FaqList, HeroArt, Icon, SectionHead } from "../site/ui";
+import { HomeHeroArt } from "../site/art/home-hero-art";
 import {
-  engagements,
+  CloudArt,
+  AiArt,
+  DevOpsArt,
+  MobileArt,
+  SoftwareArt,
+} from "../site/art/home-service-art";
+import { HomeWhyArt } from "../site/art/home-why-art";
+import {
   faqs,
   hubs,
   indiaPoints,
@@ -11,542 +21,370 @@ import {
   steps,
   supporting,
 } from "./copy";
-import { TechIcon } from "../brand-icon";
-import { Icon } from "./icons";
 import {
-  Arrow,
   Block,
-  ButtonLink,
-  Cta,
+  DiscussLink,
   PageLink,
   Section,
-  SectionHead,
   T,
-  container,
   selectService,
   useDestination,
-  useHome,
   useText,
+  useTrack,
 } from "./ui";
 
-const mono = "font-n-mono text-[12px] uppercase tracking-[0.08em] text-n-muted";
-const card = "rounded-n-card border border-n-ink/[0.07] bg-white shadow-n-card";
-const lift =
-  "transition-all duration-300 hover:-translate-y-1 hover:shadow-n-float";
+const hubById = (id: string) => hubs.find((hub) => hub.id === id)!;
 
-// Flat, geometric artwork behind the hero: brand colours only, no gradients.
-function HeroArt() {
-  return (
-    <>
-      {/* Small screens: a corner motif only, so the artwork never sits under text. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-0 lg:hidden"
-      >
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          viewBox="0 0 160 160"
-          className="size-[132px]"
-        >
-          <circle
-            cx="160"
-            cy="0"
-            r="120"
-            fill="none"
-            stroke="#ffffff"
-            strokeOpacity="0.2"
-            strokeWidth="2"
-          />
-          <circle cx="160" cy="0" r="80" fill="#b5ce20" />
-        </svg>
-      </div>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden lg:block"
-      >
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          viewBox="0 0 1440 860"
-          preserveAspectRatio="xMaxYMid slice"
-          className="h-full w-full"
-        >
-          <defs>
-            <pattern
-              id="hero-dots"
-              width="26"
-              height="26"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="2" cy="2" r="2" fill="#ffffff" fillOpacity="0.28" />
-            </pattern>
-          </defs>
-          {/* large panels, partly off-canvas */}
-          <rect
-            x="980"
-            y="-170"
-            width="420"
-            height="420"
-            rx="56"
-            fill="#34428f"
-            transform="rotate(18 1190 40)"
-          />
-          <rect
-            x="1180"
-            y="430"
-            width="360"
-            height="360"
-            rx="48"
-            fill="#34428f"
-            transform="rotate(-14 1360 610)"
-          />
-          {/* concentric rings around the lime disc */}
-          <circle
-            cx="1240"
-            cy="700"
-            r="430"
-            fill="none"
-            stroke="#ffffff"
-            strokeOpacity="0.16"
-            strokeWidth="2"
-          />
-          <circle
-            cx="1240"
-            cy="700"
-            r="330"
-            fill="none"
-            stroke="#ffffff"
-            strokeOpacity="0.22"
-            strokeWidth="2"
-          />
-          <circle cx="1240" cy="700" r="230" fill="#b5ce20" />
-          {/* ink half circle and sky triangle */}
-          <path d="M1010 330a90 90 0 0 1 180 0z" fill="#0f1420" />
-          <path d="M1300 150l86 150h-172z" fill="#ecf5fb" />
-          {/* dot grids */}
-          <rect
-            x="760"
-            y="640"
-            width="260"
-            height="170"
-            fill="url(#hero-dots)"
-          />
-          {/* plus marks */}
-          <g stroke="#b5ce20" strokeWidth="5" strokeLinecap="round">
-            <path d="M1010 90v44M988 112h44" />
-            <path d="M1380 430v30M1365 445h30" />
-          </g>
-          <circle cx="1000" cy="560" r="14" fill="#b5ce20" />
-          <circle cx="560" cy="780" r="9" fill="#ffffff" fillOpacity="0.5" />
-        </svg>
-      </div>
-    </>
-  );
-}
+// The five practice cards in prototype order. DevOps and cloud are separate cards with their own sub-links.
+const devopsLinks = [
+  ["DevOps and CI/CD", "/devops-services"],
+  ["Kubernetes", "/kubernetes-services"],
+  ["Docker", "/docker-containerisation-services"],
+  ["Terraform", "/terraform-infrastructure-services"],
+] as const;
+
+const practices = [
+  {
+    id: "software",
+    wide: true,
+    art: SoftwareArt,
+    tag: "hub-software-tag",
+    title: "t21",
+    body: "t23",
+    cta: "svc-software-cta",
+    service: "Custom software",
+    links: hubById("software").links,
+  },
+  {
+    id: "ai",
+    wide: true,
+    art: AiArt,
+    tag: "home-201",
+    title: "stripe-ai-title",
+    body: "stripe-ai-body",
+    cta: "svc-ai-cta",
+    service: "AI & business automation",
+    links: hubById("ai").links,
+  },
+  {
+    id: "devops",
+    wide: false,
+    art: DevOpsArt,
+    tag: "svc-devops-tag",
+    title: "svc-devops-title",
+    body: "svc-devops-body",
+    cta: "svc-devops-cta",
+    service: "Cloud & DevOps",
+    links: devopsLinks,
+  },
+  {
+    id: "mobile",
+    wide: false,
+    art: MobileArt,
+    tag: "hub-mobile-tag",
+    title: "t35",
+    body: "t37",
+    cta: "svc-mobile-cta",
+    service: "Mobile application development",
+    links: hubById("mobile").links,
+  },
+  {
+    id: "cloud",
+    wide: false,
+    art: CloudArt,
+    tag: "svc-cloud-tag",
+    title: "stripe-cloud-title",
+    body: "stripe-cloud-body",
+    cta: "svc-cloud-cta",
+    service: "Cloud & DevOps",
+    links: hubById("cloud").links.slice(0, 4),
+  },
+] as const;
 
 export function Hero() {
+  const track = useTrack();
   return (
-    <Section
-      id="hero"
-      labelledBy="hero-title"
-      className="relative overflow-hidden bg-n-indigo text-white"
-    >
-      <HeroArt />
-      <div
-        className={`${container} relative grid items-center gap-12 pt-14 pb-16 lg:grid-cols-12 lg:gap-12 lg:pt-20 lg:pb-24`}
-      >
-        <div className="lg:col-span-7">
-          <p
-            data-reveal
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white"
-          >
-            <span
-              aria-hidden="true"
-              className="size-2 rounded-full bg-n-lime"
-            />
+    <Section id="hero" labelledBy="hero-title" className="hero">
+      <div className="container hero__grid">
+        <div>
+          <span className="eyebrow">
             <T k="t0" />
-          </p>
-          <h1
-            id="hero-title"
-            data-reveal="1"
-            className="mt-7 text-[clamp(2.25rem,4.4vw,3.75rem)] leading-[1.04] font-semibold tracking-[-0.04em] text-balance"
-          >
+          </span>
+          <h1 id="hero-title">
             <T k="t1" />{" "}
-            <span className="text-n-lime">
+            <span className="hl">
               <T k="t2" />
             </span>
           </h1>
-          <div data-reveal="2">
-            <Block
-              k="t4"
-              className="mt-7 max-w-[56ch] text-[18px] leading-[1.6] text-white/85 lg:text-[19px]"
-            />
-          </div>
-          <div
-            data-reveal="3"
-            className="mt-9 flex flex-wrap items-center gap-3"
-          >
-            <Cta hub="hero" variant="lime">
+          <Block k="t4" className="lead" />
+          <div className="hero__actions">
+            <Button
+              href="#contact"
+              size="lg"
+              data-track="consultation_click"
+              onClick={() => track("consultation_click", "hero", "#contact")}
+            >
               <T k="home-49" />
-            </Cta>
-            <ButtonLink href="#services" variant="ghost">
+            </Button>
+            <Button
+              href="#services"
+              variant="secondary"
+              size="lg"
+              arrow={false}
+            >
               <T k="hero-secondary" />
-            </ButtonLink>
+            </Button>
           </div>
         </div>
-        <nav
-          data-reveal="2"
-          aria-label="Our four practices"
-          className={`${card} overflow-hidden text-n-ink shadow-n-float lg:col-span-5`}
-        >
-          <p
-            className={`${mono} border-b border-n-line/70 bg-n-paper/60 px-6 py-4`}
-          >
-            <T k="home-138" />
-          </p>
-          <ul>
-            {hubs.map((hub) => (
-              <li
-                key={hub.id}
-                className="border-b border-n-line/70 last:border-b-0"
-              >
-                <a
-                  href={`#${hub.id}`}
-                  className="group/btn flex items-center gap-4 px-6 py-5 transition-colors duration-150 hover:bg-n-paper/70"
-                >
-                  <span
-                    className={`inline-flex size-12 shrink-0 items-center justify-center rounded-2xl ${hubTheme[hub.id].accent}`}
-                  >
-                    <Icon name={hub.id} className="size-6" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-[17px] font-semibold tracking-[-0.015em]">
-                      <T k={hub.title} />
-                    </span>
-                    <span className="mt-0.5 block text-[14px] leading-[1.4] text-n-muted">
-                      <T k={`hero-prac-${hub.id}`} />
-                    </span>
-                  </span>
-                  <Arrow />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <HeroArt fallback={<HomeHeroArt />} priority />
       </div>
     </Section>
   );
 }
 
-const hubTheme = {
-  software: { panel: "bg-n-indigo-50", accent: "bg-n-indigo text-white" },
-  mobile: { panel: "bg-n-lime-50", accent: "bg-n-lime text-n-ink" },
-  ai: { panel: "bg-n-sky-50", accent: "bg-[#1f5f86] text-white" },
-  cloud: { panel: "bg-n-sand-50", accent: "bg-n-ink text-white" },
-} as const;
+// "What do you need built?" tiles. Choosing a tile and then "Start my brief" preselects that service in the form.
+const briefOptions = [
+  { label: "brief-opt-1", service: "t13", icon: "code-brackets" },
+  { label: "brief-opt-2", service: "home-48", icon: "brain-circuit" },
+  { label: "brief-opt-3", service: "service-cloud", icon: "cloud-upload" },
+  { label: "brief-opt-4", service: "home-130", icon: "mobile-device" },
+  { label: "brief-opt-5", service: "t185", icon: "users-group" },
+] as const;
 
-function HubVisual({ id }: { id: keyof typeof hubTheme }) {
-  const frame = `${card} w-full max-w-[420px] p-5`;
-  if (id === "mobile")
-    return (
-      <div className="flex items-end justify-center gap-5">
-        {[0, 1].map((n) => (
-          <div
-            key={n}
-            className={`w-[168px] rounded-[30px] border-[6px] border-n-ink bg-white p-3 shadow-n-float ${n ? "mb-10 hidden sm:block" : ""}`}
-          >
-            <div className="mx-auto h-1.5 w-12 rounded-full bg-n-ink/80" />
-            <p className="mt-4 text-[11px] text-n-muted">
-              {n ? "Bookings" : "Good morning"}
+export function Brief() {
+  const text = useText();
+  const [chosen, setChosen] = useState<string | null>(null);
+  return (
+    <Section id="brief" labelledBy="brief-title" className="brief">
+      <div className="container">
+        <div className="brief__card">
+          <div>
+            <h2 id="brief-title" className="brief__title">
+              <T k="brief-title" />
+            </h2>
+            <p className="brief__sub">
+              <T k="brief-sub" />
             </p>
-            <p className="text-[14px] font-semibold">
-              {n ? "Today, 4 visits" : "Your orders"}
-            </p>
-            <div className="mt-3 space-y-2">
-              {[0, 1, 2].map((r) => (
-                <div
-                  key={r}
-                  className="flex items-center gap-2 rounded-xl bg-n-paper p-2"
-                >
-                  <span
-                    className={`size-6 rounded-lg ${r === 0 ? "bg-n-lime" : "bg-n-indigo-100"}`}
-                  />
-                  <span className="flex-1 space-y-1">
-                    <span className="block h-1.5 w-4/5 rounded bg-n-ink/20" />
-                    <span className="block h-1.5 w-1/2 rounded bg-n-ink/10" />
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-3 rounded-full bg-n-indigo py-2 text-center text-[11px] font-medium text-white">
-              {n ? "Confirm visit" : "Track delivery"}
-            </div>
           </div>
-        ))}
-      </div>
-    );
-  if (id === "ai")
-    return (
-      <div className={frame}>
-        <p className="flex items-center gap-2 text-[12px] font-semibold">
-          <span className="inline-flex size-6 items-center justify-center rounded-lg bg-[#1f5f86] text-white">
-            <Icon name="ai" className="size-3.5" />
-          </span>
-          Operations assistant
-        </p>
-        <div className="mt-4 space-y-2.5 text-[12.5px] leading-[1.45]">
-          <p className="ml-auto max-w-[80%] rounded-2xl rounded-br-md bg-n-ink px-3.5 py-2 text-white">
-            Which invoices are still waiting on approval?
-          </p>
-          <p className="max-w-[88%] rounded-2xl rounded-bl-md bg-n-sky-50 px-3.5 py-2">
-            7 invoices are pending. 3 are over 14 days old. I&apos;ve drafted
-            reminders for review.
-          </p>
-          <div className="flex gap-2 pt-1">
-            <span className="rounded-full border border-n-line px-2.5 py-1 text-[11px]">
-              Review drafts
-            </span>
-            <span className="rounded-full border border-n-line px-2.5 py-1 text-[11px]">
-              Show oldest
-            </span>
+          <div
+            className="brief__opts"
+            role="group"
+            aria-labelledby="brief-title"
+          >
+            {briefOptions.map((option) => {
+              const on = chosen === option.service;
+              return (
+                <button
+                  key={option.service}
+                  type="button"
+                  className="brief-opt"
+                  aria-pressed={on}
+                  onClick={() => setChosen(on ? null : option.service)}
+                >
+                  <svg
+                    className="brief-opt__icon"
+                    width={28}
+                    height={28}
+                    aria-hidden="true"
+                  >
+                    <use href={`/assets/nx/icons.svg#${option.icon}`} />
+                  </svg>
+                  <span>
+                    <T k={option.label} />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="brief__foot">
+            <Block k="brief-note" className="brief__note" />
+            <Button
+              href="#contact"
+              size="lg"
+              onClick={() => {
+                if (chosen) selectService(text(chosen));
+              }}
+            >
+              <T k="brief-go" />
+            </Button>
           </div>
         </div>
       </div>
-    );
-  if (id === "cloud")
-    return (
-      <div className={frame}>
-        <p className="text-[12px] font-semibold">Deployment pipeline</p>
-        <ol className="mt-4 space-y-2.5">
-          {[
-            ["Build & test", "2m 14s", true],
-            ["Security scan", "48s", true],
-            ["Deploy to staging", "1m 02s", true],
-            ["Production release", "running", false],
-          ].map(([step, time, done]) => (
-            <li
-              key={step as string}
-              className="flex items-center gap-3 rounded-xl bg-n-paper px-3 py-2.5 text-[12.5px]"
-            >
-              <span
-                className={`inline-flex size-5 items-center justify-center rounded-full ${done ? "bg-n-lime" : "border-2 border-n-indigo border-t-transparent animate-spin"}`}
-              >
-                {done && (
-                  <svg viewBox="0 0 10 10" className="size-2.5">
-                    <path
-                      d="m2 5 2 2 4-4"
-                      fill="none"
-                      stroke="#0f1420"
-                      strokeWidth="1.6"
-                    />
-                  </svg>
-                )}
-              </span>
-              <span className="flex-1 font-medium">{step}</span>
-              <span className="font-n-mono text-[11px] text-n-muted">
-                {time}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    );
-  return (
-    <div className={frame}>
-      <div className="flex items-center justify-between">
-        <p className="text-[12px] font-semibold">Operations dashboard</p>
-        <span className="rounded-full bg-n-lime-50 px-2 py-0.5 text-[10px] font-medium text-[#5b6a00]">
-          Live
-        </span>
-      </div>
-      <div className="mt-4 grid grid-cols-3 gap-2">
-        {[
-          ["Orders", "1,284"],
-          ["Pending", "32"],
-          ["On time", "97%"],
-        ].map(([label, value]) => (
-          <div key={label} className="rounded-xl bg-n-paper p-2.5">
-            <p className="text-[10px] text-n-muted">{label}</p>
-            <p className="text-[15px] font-semibold">{value}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 flex h-24 items-end gap-1.5 rounded-xl bg-n-paper p-3">
-        {[30, 45, 38, 60, 52, 70, 64, 82, 76, 90].map((h, i) => (
-          <span
-            key={i}
-            style={{ height: `${h}%` }}
-            className={`flex-1 rounded-t-[3px] ${i > 7 ? "bg-n-indigo" : "bg-n-indigo-100"}`}
-          />
-        ))}
-      </div>
-    </div>
+    </Section>
   );
 }
 
-// The four priority practices, stacked so every one is readable (and crawlable) without a click.
-export function Services() {
+export function Assurance() {
+  const items = [
+    { n: 1, icon: "flag" },
+    { n: 2, icon: "check" },
+    { n: 3, icon: "clock" },
+    { n: 4, icon: "file" },
+  ] as const;
   return (
-    <Section
-      id="services"
-      labelledBy="services-title"
-      className="scroll-mt-20 bg-white py-20 lg:py-28"
-    >
-      <div className={container}>
+    <Section id="assurance" labelledBy="assure-label" className="assure">
+      <h2 id="assure-label" className="nx-sr">
+        <T k="assure-label" />
+      </h2>
+      <div className="container assure__grid">
+        {items.map((item) => (
+          <div key={item.n} className="assure__item">
+            <span className="assure__icon">
+              <Icon name={item.icon} size={18} className="nx-icon" />
+            </span>
+            <div>
+              <p className="assure__title">
+                <T k={`assure-${item.n}-title`} />
+              </p>
+              <Block k={`assure-${item.n}-text`} className="assure__text" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// Technology marquee. Published technology pages are linked from the screen-reader list.
+export function Stack() {
+  const destination = useDestination();
+  const names = stack.flatMap(([, items]) => items);
+  return (
+    <Section id="section-1" labelledBy="stack-title" className="strip">
+      <h2 id="stack-title" className="nx-sr">
+        <T k="stack-title" />
+      </h2>
+      <div
+        className="nx-marquee nx-marquee--pause"
+        style={{ "--nx-speed": "50s" } as CSSProperties}
+      >
+        <ul className="nx-sr">
+          {names.map((item) => {
+            const href = stackLinks[item]
+              ? destination(stackLinks[item])
+              : undefined;
+            return (
+              <li key={item}>
+                {href ? (
+                  <a href={href} data-published-link="true">
+                    {item}
+                  </a>
+                ) : (
+                  item
+                )}
+              </li>
+            );
+          })}
+        </ul>
+        <div className="nx-marquee__track" aria-hidden="true">
+          {names.map((item) => (
+            <span key={item} className="nx-marquee__item">
+              {item}
+            </span>
+          ))}
+          {names.map((item) => (
+            <span
+              key={`${item}-copy`}
+              className="nx-marquee__item nx-marquee__dup"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+export function Services() {
+  const destination = useDestination();
+  return (
+    <Section id="services" labelledBy="services-title" className="section">
+      <div className="container">
         <SectionHead
-          center
-          section="services"
           id="services-title"
-          eyebrow="home-138"
+          eyebrow={<T k="home-138" />}
           title={
             <>
-              <T k="services-title-1" />{" "}
-              <span className="text-n-muted">
-                <T k="services-title-2" />
-              </span>
+              <T k="services-title-1" /> <T k="services-title-2" />
             </>
           }
-          intro="home-4"
+          lead={<T k="home-4" />}
         />
-        <div className="mt-12 space-y-5">
-          {hubs.map((hub, i) => (
-            <article
-              key={hub.id}
-              id={hub.id}
-              data-hub={hub.id}
-              data-reveal
-              className={`hub-card grid scroll-mt-24 items-center gap-10 overflow-hidden rounded-[28px] p-7 sm:p-9 lg:grid-cols-2 lg:gap-12 lg:p-10 ${hubTheme[hub.id].panel}`}
-            >
-              {hub.anchor !== hub.id && (
-                <span id={hub.anchor} className="sr-only" />
-              )}
-              <div className={i % 2 ? "lg:order-2" : ""}>
-                <span
-                  className={`inline-flex size-12 items-center justify-center rounded-2xl ${hubTheme[hub.id].accent}`}
-                >
-                  <Icon name={hub.id} className="size-6" />
-                </span>
-                <h3 className="mt-5 text-[clamp(1.75rem,2.8vw,2.25rem)] leading-[1.1] font-semibold tracking-[-0.03em]">
-                  <T k={hub.title} />
-                </h3>
-                <Block
-                  k={hub.body}
-                  className="mt-4 max-w-[52ch] text-[17px] leading-[1.6] text-n-ink/70"
-                />
-                <ul className="mt-7 flex flex-wrap gap-2">
-                  {hub.links.map(([label, path]) => (
-                    <li key={path}>
-                      <PageLink
-                        path={path}
-                        hub={hub.id}
-                        planned
-                        className="inline-flex items-center gap-1.5 rounded-full border border-n-ink/10 bg-white/80 px-3.5 py-1.5 text-[14px] transition-colors duration-150 hover:border-n-indigo hover:text-n-indigo"
-                      >
-                        {label}
-                      </PageLink>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                  <PageLink
-                    path={hub.parent}
-                    hub={hub.id}
-                    className="inline-flex h-12 items-center gap-3 rounded-full bg-n-ink px-6 text-[15px] font-medium text-white transition-colors duration-150 hover:bg-n-ink-2"
-                  >
-                    <T k={hub.explore} />
-                    <Arrow />
-                  </PageLink>
-                  <Cta service={hub.service} hub={hub.id} variant="text">
-                    Discuss your project
-                  </Cta>
-                </div>
-              </div>
-              <div
-                className={`flex justify-center ${i % 2 ? "lg:order-1 lg:justify-start" : "lg:justify-end"}`}
+        <div className="svc-grid">
+          {practices.map((practice, i) => {
+            const Art = practice.art;
+            return (
+              <article
+                key={practice.id}
+                id={practice.id}
+                data-hub={practice.id}
+                className={`svc${practice.wide ? " svc--wide" : ""} nx-reveal`}
+                style={{ "--nx-delay": `${(i % 3) * 100}ms` } as CSSProperties}
               >
-                <HubVisual id={hub.id} />
-              </div>
-            </article>
-          ))}
+                <div className="svc__art">
+                  <Art />
+                </div>
+                <div className="svc__body">
+                  <span className="svc__tag">
+                    <T k={practice.tag} />
+                  </span>
+                  <h3 className="svc__title">
+                    <T k={practice.title} />
+                  </h3>
+                  <Block k={practice.body} className="svc__text" />
+                  <ul className="svc__links">
+                    {practice.links.map(([label, path]) => (
+                      <li key={path}>
+                        <PageLink path={path} hub={practice.id} planned>
+                          {label}
+                        </PageLink>
+                      </li>
+                    ))}
+                  </ul>
+                  <DiscussLink
+                    service={practice.service}
+                    hub={practice.id}
+                    className="svc__cta"
+                  >
+                    <T k={practice.cta} />
+                  </DiscussLink>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </Section>
   );
 }
-
-const supportIcons: Record<string, string> = {
-  design: "demand",
-  quality: "insurance",
-  transformation: "factory",
-  team: "team",
-  web: "retail",
-  search: "finance",
-};
 
 export function Supporting() {
   return (
     <Section
       id="supporting-services"
       labelledBy="supporting-title"
-      className="bg-white py-16 lg:py-20"
+      className="section"
     >
-      <div className={container}>
-        <SectionHead
-          center
-          section="supporting-services"
-          id="supporting-title"
-          small
-          eyebrow="home-244"
-          title={
-            <>
-              <T k="home-245" />{" "}
-              <span className="text-n-muted">
-                <T k="home-246" />
-              </span>
-            </>
-          }
-        />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {supporting.map((item, i) => (
-            <article
-              key={item.title}
-              data-hub={item.hub}
-              data-reveal={i % 3}
-              className={`${"service" in item ? "hub-card " : ""}${card} ${lift} group flex items-start gap-4 p-5 lg:p-6`}
-            >
-              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-n-indigo-50 text-n-indigo transition-colors duration-300 group-hover:bg-n-indigo group-hover:text-white">
-                <Icon name={supportIcons[item.hub]} className="size-5" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[17px] font-semibold tracking-[-0.015em]">
+      <div className="container">
+        <div className="nx-reveal">
+          <h2 id="supporting-title" className="more__head">
+            <T k="home-245" /> <T k="home-246" />
+          </h2>
+        </div>
+        <div className="more nx-reveal">
+          {supporting.map((item) => (
+            <PageLink key={item.path} path={item.path} hub={item.hub}>
+              <div>
+                <strong>
                   <T k={item.title} />
-                </h3>
-                <Block
-                  k={item.body}
-                  className="mt-1.5 text-[14.5px] leading-[1.55] text-n-muted"
-                />
-                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px]">
-                  <PageLink
-                    path={item.path}
-                    hub={item.hub}
-                    className="inline-flex items-center gap-2 font-medium text-n-indigo"
-                  >
-                    Learn more <Arrow />
-                  </PageLink>
-                  {"service" in item && (
-                    <Cta
-                      service={item.service}
-                      hub={item.hub}
-                      variant="text"
-                      className="text-[14px]!"
-                    >
-                      Discuss your project
-                    </Cta>
-                  )}
-                </div>
+                </strong>
+                <span>
+                  <T k={item.body} />
+                </span>
               </div>
-            </article>
+              <Icon name="arrow-right" size={20} className="nx-icon" />
+            </PageLink>
           ))}
         </div>
       </div>
@@ -557,66 +395,41 @@ export function Supporting() {
 export function Process() {
   const text = useText();
   return (
-    <Section
-      id="delivery"
-      labelledBy="delivery-title"
-      className="scroll-mt-20 py-20 lg:py-28"
-    >
-      <div className={container}>
+    <Section id="delivery" labelledBy="delivery-title" className="section band">
+      <div className="container">
         <SectionHead
-          section="delivery"
           id="delivery-title"
-          eyebrow="home-287"
+          eyebrow={<T k="home-287" />}
           title={
             <>
-              <T k="home-288" />
-              <br />
-              <span className="text-n-muted">
-                <T k="home-289" />
-              </span>
+              <T k="home-288" /> <T k="home-289" />
             </>
           }
+          lead={<T k="delivery-lead" />}
         />
-        <ol className="relative mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <span
-            aria-hidden="true"
-            className="absolute top-[27px] right-[12%] left-[12%] hidden h-px border-t-2 border-dashed border-n-indigo/25 lg:block"
-          />
+        <ol className="nx-steps" data-steps>
           {steps.map(([title, body, deliverables], i) => (
-            <li key={title} data-reveal={i} className="relative flex flex-col">
-              <span className="relative z-10 inline-flex size-14 items-center justify-center self-start rounded-2xl bg-n-indigo text-[18px] font-semibold text-white">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className={`${card} mt-5 flex flex-1 flex-col p-6`}>
-                <h3 className="text-[20px] font-semibold tracking-[-0.02em]">
-                  <T k={title} />
-                </h3>
-                <Block
-                  k={body}
-                  className="mt-3 flex-1 text-[15px] leading-[1.6] text-n-muted"
-                />
-                <div className="mt-6 rounded-xl bg-n-paper p-4">
-                  <p className={mono}>You receive</p>
-                  <ul className="mt-3 space-y-2">
-                    {text(deliverables)
-                      .split("·")
-                      .map((item) => item.trim())
-                      .filter(Boolean)
-                      .map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-2.5 text-[14px]"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-[7px] size-1.5 shrink-0 rounded-full bg-n-lime"
-                          />
-                          {item}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </div>
+            <li
+              key={title}
+              className="nx-step nx-reveal"
+              style={{ "--nx-delay": `${i * 100}ms` } as CSSProperties}
+            >
+              <h3 className="nx-step__title">
+                <T k={title} />
+              </h3>
+              <Block k={body} className="nx-step__desc" />
+              <p className="deliver-label">
+                <T k="deliver-label" />
+              </p>
+              <ul className="deliver">
+                {text(deliverables)
+                  .split("·")
+                  .map((item) => item.trim())
+                  .filter(Boolean)
+                  .map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+              </ul>
             </li>
           ))}
         </ol>
@@ -625,180 +438,203 @@ export function Process() {
   );
 }
 
-export function Stack() {
-  const destination = useDestination();
-  const chip =
-    "inline-flex items-center gap-2 rounded-full border border-n-ink/[0.08] bg-n-paper px-3 py-1.5 text-[14px]";
+export function India() {
   return (
-    <Section
-      id="section-1"
-      labelledBy="stack-title"
-      className="border-y border-n-ink/[0.06] bg-white py-20 lg:py-28"
-    >
-      <div className={container}>
-        <SectionHead
-          center
-          section="section-1"
-          id="stack-title"
-          eyebrow="home-228"
-          title={<T k="stack-title" />}
-        />
-        <dl className="mt-14 grid gap-5 sm:grid-cols-2">
-          {stack.map(([group, items], i) => (
-            <div
-              key={group}
-              data-reveal={i % 2}
-              className={`${card} p-6 lg:p-7`}
-            >
-              <dt className="text-[17px] font-semibold">
-                <T k={group} />
-              </dt>
-              <dd className="mt-4 flex flex-wrap gap-2">
-                {items.map((item) => {
-                  const href = stackLinks[item]
-                    ? destination(stackLinks[item])
-                    : undefined;
-                  const inner = (
-                    <>
-                      <TechIcon name={item} className="size-4" />
-                      {item}
-                    </>
-                  );
-                  return href ? (
-                    <a
-                      key={item}
-                      href={href}
-                      data-published-link="true"
-                      className={`${chip} transition-colors duration-150 hover:border-n-indigo hover:text-n-indigo`}
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <span key={item} className={chip}>
-                      {inner}
-                    </span>
-                  );
-                })}
-              </dd>
-            </div>
-          ))}
-        </dl>
+    <Section id="india" labelledBy="india-title" className="section">
+      <div className="container why">
+        <div className="why__art nx-reveal">
+          <HomeWhyArt />
+        </div>
+        <div className="nx-reveal">
+          <span className="eyebrow">
+            <T k="home-271" />
+          </span>
+          <h2 id="india-title" className="h-section">
+            <T k="home-272" /> <T k="home-273" /> <T k="home-274" />
+          </h2>
+          <Block k="home-275" className="lead" />
+          <ul className="why__list">
+            {indiaPoints.map(([label, title, body]) => (
+              <li key={label}>
+                <span className="why__label">
+                  <T k={label} />
+                </span>
+                <div>
+                  <h3>
+                    <T k={title} />
+                  </h3>
+                  <Block k={body} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </Section>
   );
 }
 
-export function India() {
-  return (
-    <Section
-      id="india"
-      labelledBy="india-title"
-      className="scroll-mt-20 py-20 lg:py-28"
-    >
-      <div className={container}>
-        <SectionHead
-          section="india"
-          id="india-title"
-          eyebrow="home-271"
-          title={
-            <>
-              <T k="home-272" />
-              <br />
-              <span className="text-n-muted">
-                <T k="home-273" /> <T k="home-274" />
-              </span>
-            </>
-          }
-          intro="home-275"
-        />
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {indiaPoints.map(([label, title, body], i) => (
-            <article
-              key={label}
-              data-reveal={i}
-              className={`${card} ${lift} p-7 lg:p-8`}
-            >
-              <p className="inline-flex rounded-full bg-n-lime-50 px-3 py-1 text-[13px] font-medium text-[#5b6a00]">
-                <T k={label} />
-              </p>
-              <h3 className="mt-5 text-[21px] font-semibold tracking-[-0.02em]">
-                <T k={title} />
-              </h3>
-              <Block
-                k={body}
-                className="mt-3 text-[15px] leading-[1.6] text-n-muted"
-              />
-            </article>
-          ))}
-        </div>
-        <div className="mt-10">
-          <ButtonLink href="#delivery">How we work</ButtonLink>
-        </div>
-      </div>
-    </Section>
-  );
-}
+// Engagement models switcher (data-seg / data-model are wired by SiteBehaviors).
+const models = [
+  {
+    value: "project",
+    title: "engage-1-title",
+    body: "engage-1-body",
+    best: "engage-1-best",
+    cta: "model-1-cta",
+    service: "Help defining the scope",
+    link: ["model-compare", "/engagement-models"],
+  },
+  {
+    value: "team",
+    title: "engage-2-title",
+    body: "engage-2-body",
+    best: "engage-2-best",
+    cta: "model-2-cta",
+    service: "Help defining the scope",
+    link: ["model-compare", "/engagement-models"],
+  },
+  {
+    value: "ext",
+    title: "engage-3-title",
+    body: "engage-3-body",
+    best: "engage-3-best",
+    cta: "model-3-cta",
+    service: "Help defining the scope",
+    link: ["home-350", "/hire-developers"],
+  },
+] as const;
+
+const roleIcons = [
+  "react-atom",
+  "nodejs-hexagon",
+  "flutter-diamond",
+  "kubernetes-wheel",
+] as const;
+const roleSubs = [
+  "role-group-1-sub",
+  "role-group-2-sub",
+  "role-group-3-sub",
+  "role-group-4-sub",
+] as const;
 
 export function Hire() {
   const destination = useDestination();
+  const text = useText();
   const fallback = destination("/hire-developers") ?? "#contact";
   return (
     <Section
       id="hire"
       labelledBy="hire-title"
-      className="scroll-mt-20 bg-white py-20 lg:py-28"
+      className="section section--white"
     >
-      <div className={container}>
-        <SectionHead
-          section="hire"
-          id="hire-title"
-          eyebrow="home-314"
-          title={
-            <>
+      <div className="container">
+        <div className="engage">
+          <div className="nx-reveal">
+            <span className="eyebrow">
+              <T k="home-314" />
+            </span>
+            <h2 id="hire-title" className="h-section">
               <T k="home-315" />
-              <br />
-              <span className="text-n-muted">
-                <T k="home-316" />
-              </span>
-            </>
-          }
-          intro="home-317"
-        />
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {engagements.map(([title, body], i) => (
-            <article
-              key={title}
-              data-reveal={i}
-              className={`${lift} rounded-n-card p-7 lg:p-8 ${i === 1 ? "bg-n-ink text-white shadow-n-float" : "border border-n-ink/[0.07] bg-n-paper"}`}
+            </h2>
+            <Block k="home-317" className="lead" />
+          </div>
+          <div className="nx-reveal">
+            <div
+              className="nx-seg"
+              role="radiogroup"
+              aria-label={text("home-314")}
+              data-seg
             >
-              <span
-                className={`inline-flex size-10 items-center justify-center rounded-xl text-[15px] font-semibold ${i === 1 ? "bg-n-lime text-n-ink" : "bg-white text-n-indigo shadow-n-card"}`}
+              <span className="nx-seg__thumb" aria-hidden="true" />
+              {models.map((model, i) => (
+                <button
+                  key={model.value}
+                  type="button"
+                  className="nx-seg__opt"
+                  role="radio"
+                  aria-checked={i === 0}
+                  tabIndex={i === 0 ? 0 : -1}
+                  data-value={model.value}
+                >
+                  <T k={model.title} />
+                </button>
+              ))}
+            </div>
+            {models.map((model, i) => (
+              <div
+                key={model.value}
+                className="model"
+                data-model={model.value}
+                hidden={i !== 0}
               >
-                {String.fromCharCode(65 + i)}
-              </span>
-              <h3 className="mt-6 text-[21px] font-semibold tracking-[-0.02em]">
-                <T k={title} />
-              </h3>
-              <Block
-                k={body}
-                className={`mt-3 text-[15px] leading-[1.6] ${i === 1 ? "text-white/70" : "text-n-muted"}`}
-              />
-            </article>
-          ))}
+                <h3>
+                  <T k={model.title} />
+                </h3>
+                <p>
+                  <T k={model.body} />
+                </p>
+                <span className="nx-badge nx-badge--lime model__best">
+                  <span className="nx-badge__dot" />
+                  <T k={model.best} />
+                </span>
+                <div className="model__actions">
+                  <Button
+                    href="#contact"
+                    data-service={model.service}
+                    onClick={() => selectService(model.service)}
+                  >
+                    <T k={model.cta} />
+                  </Button>
+                  <PageLink path={model.link[1]} className="nx-arrowlink">
+                    <span>
+                      <T k={model.link[0]} />
+                    </span>
+                    <Icon name="arrow-right" size={18} className="nx-icon" />
+                  </PageLink>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="role-grid mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {roleGroups.map(([group, roles]) => (
-            <div key={group} className={`${card} p-5`}>
-              <h3 className={mono}>{group}</h3>
-              <ul className="mt-3">
+
+        <div className="roles-head nx-reveal">
+          <div>
+            <span className="eyebrow">
+              <T k="roles-eyebrow" />
+            </span>
+            <h3 className="roles-head__title">
+              <T k="roles-title" />
+            </h3>
+          </div>
+          <PageLink path="/hire-developers" className="nx-arrowlink">
+            <span>
+              <T k="roles-all" />
+            </span>
+            <Icon name="arrow-right" size={18} className="nx-icon" />
+          </PageLink>
+        </div>
+        <div className="roles">
+          {roleGroups.map(([group, roles], i) => (
+            <article key={group} className="rc nx-reveal">
+              <div className="rc__top">
+                <span className="rc__icon" aria-hidden="true">
+                  <svg width={26} height={26}>
+                    <use href={`/assets/nx/icons.svg#${roleIcons[i]}`} />
+                  </svg>
+                </span>
+              </div>
+              <h4 className="rc__title">{group}</h4>
+              <p className="rc__sub">
+                <T k={roleSubs[i]} />
+              </p>
+              <ul className="rc__list">
                 {roles.map(([label, path]) => {
                   const href = destination(path);
                   return (
-                    <li
-                      key={path}
-                      className="border-b border-n-line/70 last:border-b-0"
-                    >
+                    <li key={path}>
                       <a
+                        className="rc__link"
                         href={href ?? fallback}
                         data-published-link={href ? "true" : undefined}
                         data-service={
@@ -814,78 +650,81 @@ export function Hire() {
                             ? undefined
                             : () => selectService("Help defining the scope")
                         }
-                        className="group/btn flex items-center justify-between py-2.5 text-[15px] transition-colors duration-150 hover:text-n-indigo"
                       >
-                        {label}
-                        <Arrow />
+                        <span>{label}</span>
+                        <Icon
+                          name="arrow-right"
+                          size={16}
+                          className="nx-icon"
+                        />
                       </a>
                     </li>
                   );
                 })}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
-        <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Cta service="Help defining the scope" hub="hire" variant="outline">
-            <T k="home-348" />
-          </Cta>
-          <PageLink
-            path="/hire-developers"
-            className="inline-flex items-center gap-2 text-[15px] font-medium text-n-indigo"
-          >
-            <T k="home-350" />
-            <Arrow />
-          </PageLink>
-        </div>
+        <Block k="roles-note" className="roles-note nx-reveal" />
       </div>
     </Section>
   );
 }
 
 export function Industries() {
+  const destination = useDestination();
+  const href = destination("/industries");
   return (
-    <Section
-      id="industries"
-      labelledBy="industries-title"
-      className="scroll-mt-20 py-20 lg:py-28"
-    >
-      <div className={container}>
+    <Section id="industries" labelledBy="industries-title" className="section">
+      <div className="container">
         <SectionHead
-          center
-          section="industries"
           id="industries-title"
-          eyebrow="home-298"
+          eyebrow={<T k="home-298" />}
           title={
             <>
-              <T k="home-299" />
-              <br />
-              <T k="home-300" />
+              <T k="home-299" /> <T k="home-300" />
             </>
           }
-          intro="home-301"
+          lead={<T k="home-301" />}
         />
-        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {industries.map(([name, detail, icon], i) => (
-            <li
-              key={name}
-              data-reveal={i % 4}
-              className={`${card} ${lift} group flex items-start gap-4 p-5`}
-            >
-              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-n-indigo-50 text-n-indigo transition-colors duration-300 group-hover:bg-n-indigo group-hover:text-white">
-                <Icon name={icon} className="size-5" />
-              </span>
-              <div>
-                <p className="text-[15px] font-semibold">
-                  <T k={name} />
-                </p>
-                <p className="mt-0.5 text-[13.5px] leading-[1.45] text-n-muted">
-                  <T k={detail} />
-                </p>
+        <div className="ind-grid nx-reveal">
+          {industries.map(([name, detail, icon]) => {
+            const body = (
+              <>
+                <div className="ind__main">
+                  <span className="ind__icon" aria-hidden="true">
+                    <svg width={26} height={26}>
+                      <use href={`/assets/nx/icons.svg#${icon}`} />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>
+                      <T k={name} />
+                    </strong>
+                    <span>
+                      <T k={detail} />
+                    </span>
+                  </div>
+                </div>
+                <Icon name="arrow-right" size={18} className="nx-icon" />
+              </>
+            );
+            return href ? (
+              <a
+                key={name}
+                className="ind"
+                href={href}
+                data-published-link="true"
+              >
+                {body}
+              </a>
+            ) : (
+              <div key={name} className="ind">
+                {body}
               </div>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
       </div>
     </Section>
   );
@@ -904,57 +743,36 @@ export function Work({
     return href ? [{ ...page, href }] : [];
   });
   if (!studies.length) return null;
-  const tints = [
-    "bg-n-indigo-50",
-    "bg-n-lime-50",
-    "bg-n-sky-50",
-    "bg-n-sand-50",
-  ];
   return (
     <Section
       id="work"
       labelledBy="work-title"
-      className="scroll-mt-20 bg-white py-20 lg:py-28"
+      className="section section--white"
     >
-      <div className={container}>
+      <div className="container">
         <SectionHead
-          section="work"
           id="work-title"
-          eyebrow="home-0"
+          eyebrow={<T k="home-0" />}
           title={
             <>
-              <T k="home-353" />
-              <br />
-              <T k="home-354" />
+              <T k="home-353" /> <T k="home-354" />
             </>
           }
-          intro="home-1"
+          lead={<T k="home-1" />}
         />
-        <div className="proof-grid mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {studies.map((study, i) => (
+        <div className="proof-grid">
+          {studies.map((study) => (
             <a
               key={study.path}
               href={study.href}
-              data-reveal={i % 3}
-              className={`proof-card group/btn ${card} ${lift} flex flex-col overflow-hidden`}
+              className="proof-card nx-reveal"
             >
-              <span
-                className={`flex h-36 items-end p-6 ${tints[i % tints.length]}`}
-              >
-                <span className="rounded-full bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-n-ink uppercase">
-                  Case study
-                </span>
-              </span>
-              <span className="flex flex-1 flex-col p-6">
-                <h3 className="text-[20px] font-semibold tracking-[-0.02em]">
-                  {study.title}
-                </h3>
-                <p className="mt-3 flex-1 text-[15px] leading-[1.6] text-n-muted">
-                  {study.description}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-medium text-n-indigo">
-                  Read the case study <Arrow />
-                </span>
+              <span className="proof-card__tag">Case study</span>
+              <h3>{study.title}</h3>
+              <p>{study.description}</p>
+              <span className="nx-arrowlink">
+                <span>Read the case study</span>
+                <Icon name="arrow-right" size={18} className="nx-icon" />
               </span>
             </a>
           ))}
@@ -966,39 +784,27 @@ export function Work({
 
 export function Faq() {
   return (
-    <Section id="faq" labelledBy="faq-title" className="py-20 lg:py-28">
-      <div className={`${container} grid gap-12 lg:grid-cols-12`}>
-        <div className="lg:col-span-5">
-          <SectionHead
-            section="faq"
-            id="faq-title"
-            eyebrow="faq-eyebrow"
-            title={<T k="faq-title" />}
-          />
+    <Section id="faq" labelledBy="faq-title" className="section section--white">
+      <div className="container faq">
+        <div className="faq__aside nx-reveal">
+          <span className="eyebrow">
+            <T k="faq-eyebrow" />
+          </span>
+          <h2 id="faq-title" className="h-section">
+            <T k="faq-title" />
+          </h2>
+          <Button href="#contact" variant="secondary">
+            <T k="faq-cta" />
+          </Button>
         </div>
-        <div className="space-y-3 lg:col-span-7">
-          {faqs.map(([question, answer], i) => (
-            <details
-              key={question}
-              data-reveal={i}
-              className="group rounded-2xl border border-n-ink/[0.07] bg-white px-6 transition-shadow duration-200 open:shadow-n-card"
-            >
-              <summary className="flex items-center justify-between gap-6 py-5 text-[clamp(1.0625rem,1.6vw,1.25rem)] font-medium tracking-[-0.015em]">
-                <T k={question} />
-                <span
-                  aria-hidden="true"
-                  className="relative inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-n-indigo-50 transition-transform duration-200 group-open:rotate-45"
-                >
-                  <span className="absolute h-[1.5px] w-3 bg-n-indigo" />
-                  <span className="absolute h-3 w-[1.5px] bg-n-indigo" />
-                </span>
-              </summary>
-              <Block
-                k={answer}
-                className="max-w-[68ch] pb-6 text-[16px] leading-[1.65] text-n-muted"
-              />
-            </details>
-          ))}
+        <div className="nx-reveal">
+          <FaqList
+            name="home-faq"
+            items={faqs.map(([question, answer]) => ({
+              q: <T k={question} />,
+              a: <Block k={answer} />,
+            }))}
+          />
         </div>
       </div>
     </Section>

@@ -4,8 +4,14 @@ import { siteUrl } from "@/site-url";
 import { company, companyProfiles, founderPage } from "@/company";
 import { blogPosts } from "@/blog-posts";
 import { publishedPaths } from "@/pages";
-import { StripeNavigation, StripeFooter } from "@/stripe-home-chrome";
 import { defaultShareImage } from "@/seo-policy";
+import { mediaPath } from "@/media-path";
+import { topicFor } from "@/blog-topics";
+import { NxShell } from "@/site/shell";
+import { ArrowLink, Breadcrumbs, HeroArt, Icon, SectionHead } from "@/site/ui";
+import { FounderArt } from "@/site/art/founder-art";
+
+// Founder profile, redesigned from html-prototype/founder.html. Styles: public/assets/nx/pages/founder.css.
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title, description, images: [defaultShareImage.url] },
 };
+
+/** Fixed locale and zone so the server and the browser print the same date. */
+const dateLabel = (iso?: string) => (iso ? new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }) : "");
 
 export default async function Page() {
   if (!process.env.DATABASE_URL) notFound();
@@ -77,71 +86,144 @@ export default async function Page() {
     ],
   };
   return (
-    <div className="v3-site">
-      <link rel="stylesheet" href="/assets/stripe-home.css" />
-      <link rel="stylesheet" href="/assets/brand-home.css" />
-      <link rel="stylesheet" href="/assets/v3-pages.css" />
-      <link rel="stylesheet" href="/assets/site-unified.css?v=20261008" />
-      <StripeNavigation paths={paths} />
-      <main id="main" className="author-page">
-        <section className="v3-section">
-          <div className="v3-wrap">
-            <nav aria-label="Breadcrumb" className="author-crumbs">
-              <a href="/">Home</a> / <a href="/about">About</a> / <span>{founder.name}</span>
-            </nav>
-            <p className="author-role">{founder.jobTitle}, Netofficials</p>
-            <h1>{founder.name}</h1>
+    <NxShell page="founder" paths={paths}>
+      <section className="page-hero">
+        <div className="container">
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About", href: "/about" }, { label: founder.name }]} />
+          <div className="hero__grid">
+            <div>
+              <span className="tag-pill">About</span>
+              <p className="founder-role">{founder.jobTitle}, Netofficials</p>
+              <h1>{founder.name}</h1>
+              <p className="lead">{founder.summary}</p>
+              <ul className="founder-facts">
+                <li>
+                  <Icon name="check" size={20} />
+                  <span>Founded Netofficials in {company.foundingYear}</span>
+                </li>
+                <li>
+                  <Icon name="user" size={20} />
+                  <span>Expertise in {founder.knowsAbout.join(" and ")}</span>
+                </li>
+              </ul>
+              <div className="hero__actions">
+                {founder.sameAs.map((url) => (
+                  <a key={url} className="nx-arrowlink" href={url} target="_blank" rel="me noopener noreferrer">
+                    <span>{founder.name} on LinkedIn</span>
+                    <Icon name="external" size={18} />
+                  </a>
+                ))}
+                <ArrowLink href="/contact">Start a project</ArrowLink>
+              </div>
+            </div>
+            <HeroArt fallback={<FounderArt />} priority className="hero__art founder-art" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="biography">
+        <div className="container">
+          <SectionHead eyebrow="Biography" title={`${founder.name}'s background`} />
+          <div className="founder-bio nx-reveal">
             {founder.bio.map((paragraph) => (
-              <p key={paragraph} className="author-bio">
-                {paragraph}
-              </p>
+              <p key={paragraph}>{paragraph}</p>
             ))}
-            <h2>Expertise</h2>
-            <ul className="author-list">
-              {founder.knowsAbout.map((topic) => (
-                <li key={topic}>{topic}</li>
-              ))}
-            </ul>
-            <h2>Find {founder.name.split(" ")[0]} online</h2>
-            <ul className="author-list">
-              {founder.sameAs.map((url) => (
-                <li key={url}>
-                  <a href={url} rel="me noopener noreferrer">
-                    {founder.name} on LinkedIn
-                  </a>
-                </li>
-              ))}
-              {company.profiles.map((url) => (
-                <li key={url}>
-                  <a href={url} rel="noopener noreferrer">
-                    Netofficials on LinkedIn
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {posts.length > 0 && (
-              <>
-                <h2>Guides by {founder.name}</h2>
-                <ul className="author-list">
-                  {posts.map((post) => (
-                    <li key={post.path}>
-                      <a href={post.path}>{post.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-            <p className="author-more">
-              Read more about <a href="/about">the company</a> or <a href="/contact">get in touch</a>.
-            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--white" id="expertise">
+        <div className="container">
+          <SectionHead eyebrow="Expertise" title="Areas of expertise" />
+          <ul className="founder-chips nx-reveal" aria-label="Areas of expertise">
+            {founder.knowsAbout.map((topic) => (
+              <li key={topic}>{topic}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {posts.length > 0 && (
+        <section className="section" id="guides">
+          <div className="container">
+            <SectionHead eyebrow="Guides" title={`Guides by ${founder.name}`} />
+            <div className="sk-cards">
+              {posts.map((post, i) => {
+                const date = dateLabel(post.date);
+                return (
+                  <article key={post.path} className="sk-card nx-reveal" style={{ ["--nx-delay" as string]: `${(i % 3) * 100}ms` }}>
+                    {post.image && (
+                      <figure className="founder-guide__media">
+                        <img
+                          src={mediaPath(post.image)}
+                          alt={post.image.alt}
+                          width={post.image.width}
+                          height={post.image.height}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </figure>
+                    )}
+                    <span className="nx-badge">
+                      <span className="nx-badge__dot" aria-hidden="true" />
+                      {topicFor(post.path).name}
+                    </span>
+                    <h3 className="sk-card__title">
+                      <a href={post.path} className="founder-guide">
+                        {post.title}
+                      </a>
+                    </h3>
+                    <p className="sk-card__label">
+                      {date && <time dateTime={post.date}>{date}</time>}
+                      {date && " · "}
+                      {post.readMinutes} min read
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="founder-more nx-reveal">
+              <ArrowLink href="/blog">See all guides</ArrowLink>
+            </div>
           </div>
         </section>
-      </main>
-      <StripeFooter paths={paths} />
+      )}
+
+      <section className="section section--white" id="work">
+        <div className="container">
+          <SectionHead eyebrow="Work with us" title="Work with Netofficials" />
+          <div className="more nx-reveal">
+            <a href="/about">
+              <div>
+                <strong>About</strong>
+                <span>Read more about the company</span>
+              </div>
+              <Icon name="arrow-right" size={20} />
+            </a>
+            <a href="/contact">
+              <div>
+                <strong>Contact</strong>
+                <span>Get in touch about your project</span>
+              </div>
+              <Icon name="arrow-right" size={20} />
+            </a>
+            {company.profiles.map((url) => (
+              <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                <div>
+                  <strong>Netofficials on LinkedIn</strong>
+                  <span>Company profile</span>
+                </div>
+                <Icon name="external" size={20} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replaceAll("<", "\\u003c") }}
       />
-    </div>
+    </NxShell>
   );
 }

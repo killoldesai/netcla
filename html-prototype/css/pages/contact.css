@@ -1,0 +1,34 @@
+/* Contact page: page-only rules. The form, steps, cards and FAQ reuse sections.css and components.css. */
+
+.ct-grid { margin-top: var(--space-6); align-items: start; }
+.ct-intro .lead { margin-top: var(--space-6); }
+
+.ct-trust { list-style: none; margin: var(--space-8) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+.ct-trust li { display: flex; align-items: center; gap: 12px; font: 500 16px/1.4 var(--font-sans); color: var(--ink); }
+.ct-trust svg { flex: none; color: var(--indigo-text); }
+
+.ct-form .form__title { margin-top: 0; }
+
+.ct-split { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--space-12); align-items: start; }
+.ct-split .lead { margin-top: var(--space-6); }
+
+.ct-checklist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.ct-checklist li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-4); padding: var(--space-6) 0; border-bottom: 1px solid var(--line); }
+.ct-checklist li > svg { color: var(--indigo-text); margin-top: 3px; }
+.ct-checklist h3 { font: 600 18px/1.35 var(--font-sans); letter-spacing: -0.015em; }
+.ct-checklist p { margin-top: 4px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+.ct-routes a { text-decoration: none; color: var(--ink); position: relative; }
+.ct-routes a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ct-routes a:hover .ct-route-arrow { transform: translateX(4px); }
+.ct-route-arrow { margin-top: auto; color: var(--indigo-text); display: inline-flex; transition: transform var(--duration-base) var(--ease-emphasized); }
+
+.ct-gated-text { margin-top: var(--space-2); font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 640px; }
+
+@media (max-width: 1100px) {
+  .ct-split { grid-template-columns: 1fr; gap: var(--space-8); }
+}
+@media (max-width: 720px) {
+  .ct-grid { margin-top: var(--space-4); }
+  .ct-trust { margin-top: var(--space-6); }
+}
