@@ -16,6 +16,7 @@ import { relatedPaths, sitePage, sitePages } from "./site-structure";
 import { PROMPT_VERSION, strategistSystemPrompt, writerSystemPrompt } from "./prompts/system";
 import { verifySameAs } from "./seo-verify";
 import { buildRepairPrompt, mergeRepair, overLimitFields } from "./prompts/length-repair";
+import { caseStudyLinkOptions } from "./case-study-related";
 import { buildBriefPrompt, parseBrief, type LinkOption, type PageBrief } from "./prompts/page-brief";
 import { buildSectionPrompt } from "./prompts/sections";
 import { artDirectionSchema, artDirectorSystemPrompt, buildArtDirectionPrompt, buildImagePrompt } from "./prompts/images";
@@ -316,7 +317,10 @@ export async function runPipelineTask() {
     const facts = await query<{ id: string; statement: string }>(
       "SELECT id,statement FROM facts WHERE approved=true",
     );
-    const links = linkOptions(spec.path, paths);
+    // Published case studies about this page are offered first, so new copy links to proof when it exists.
+    const caseLinks = await caseStudyLinkOptions(spec.path).catch(() => []);
+    const links = [...caseLinks, ...linkOptions(spec.path, paths)];
+    const linkPaths = [...paths, ...caseLinks.map((l) => l.path)];
     const [briefTask] = await query(
       "SELECT result FROM pipeline_tasks WHERE run_id=$1 AND kind='brief' AND status='completed'",
       [task.run_id],
@@ -420,7 +424,7 @@ export async function runPipelineTask() {
       if (task.kind === "brief") result = parseBrief(parsed, links);
       else {
         const sectionSpec = spec.sections.find((x) => x.id === task.section_id)!;
-        let cleaned = cleanSectionFields(sectionSpec, parsed, paths);
+        let cleaned = cleanSectionFields(sectionSpec, parsed, linkPaths);
         // Over-long fields get one shorten-only retry; the original stays if the retry is not shorter.
         const over = overLimitFields(cleaned.fields, task.section_id);
         if (over.length) {
@@ -431,7 +435,7 @@ export async function runPipelineTask() {
             });
             const merged = mergeRepair(cleaned.fields, (parseModelJSON(retry.text) as Record<string, unknown>), over);
             if (merged.fixed.length) {
-              cleaned = cleanSectionFields(sectionSpec, merged.fields, paths);
+              cleaned = cleanSectionFields(sectionSpec, merged.fields, linkPaths);
               cleaned.notes.push(`shortened ${merged.fixed.join(", ")} to fit the word limits`);
             }
           } catch {

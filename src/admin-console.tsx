@@ -8,6 +8,7 @@ import { SiteMap } from "./admin/site-map";
 import { GenerationBoard } from "./admin/generation-board";
 import { StorageSettings } from "./admin/storage-settings";
 import { Dashboard } from "./admin/dashboard";
+import { CaseStudies } from "./admin/case-studies";
 import { AdminSidebar, useSidebarCollapsed } from "./admin/sidebar";
 const titles: Record<string, string> = {
   dashboard: "Dashboard",
@@ -16,6 +17,7 @@ const titles: Record<string, string> = {
   generation: "Generation",
   production: "Review queue",
   media: "Media",
+  "case-studies": "Case studies",
   leads: "Leads",
   newsletter: "Newsletter",
   careers: "Careers",
@@ -29,6 +31,7 @@ const descriptions: Record<string, string> = {
   production:
     "Follow generation, resolve failures, and review completed drafts.",
   media: "Review illustrations and manage their page associations.",
+  "case-studies": "Brainstorm ideas, write from real project facts, and generate images for your portfolio.",
   leads: "Review enquiries and keep your next actions clear.",
   newsletter: "Manage subscribers and follow email delivery.",
   careers: "Manage verified vacancies and private applications.",
@@ -317,6 +320,7 @@ function ConsoleScreen(props: ScreenProps) {
   if (props.section === "settings") return <Settings {...props} />;
   if (props.section === "sitemap") return <SiteMap action={props.action} busy={props.busy} />;
   if (props.section === "generation") return <GenerationBoard action={props.action} busy={props.busy} />;
+  if (props.section === "case-studies") return <CaseStudies />;
   return <Inventory {...props} />;
 }
 function Loading() {

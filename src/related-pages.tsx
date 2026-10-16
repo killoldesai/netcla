@@ -132,7 +132,7 @@ export function RelatedPages({ path, paths }: { path: string; paths: string[] })
   if (!block) return null;
   return (
     <section className="v3-related-pages gen-related" aria-labelledby="related-pages-title">
-      <link rel="stylesheet" href="/assets/nx/related.css?v=20261015" />
+      <link rel="stylesheet" href="/assets/nx/related.css?v=20261017" />
       <div className="v3-wrap container">
         <h2 id="related-pages-title" className="related__title">{block.heading}</h2>
         {block.sections.map((s, i) => (

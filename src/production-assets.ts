@@ -93,8 +93,8 @@ export async function imageModels() {
   return (await response.json()).data as Record<string, any>[];
 }
 export async function generateHero(input: {
-  runId: string;
-  sectionId: string;
+  runId?: string;
+  sectionId?: string;
   model: string;
   quality?: string;
   prompt: string;
@@ -215,8 +215,8 @@ export async function generateHero(input: {
     "INSERT INTO generated_assets(id,run_id,section_id,hash,filename,mime,width,height,alt,source_prompt,provider,model,source_filename,source_hash,source_mime,seo_name,caption,storage,storage_key) VALUES($1,$2,$3,$4,$5,'image/webp',$6,$7,$8,$9,'openrouter',$10,$11,$12,'image/png',$13,$14,$15,$16)",
     [
       id,
-      input.runId,
-      input.sectionId,
+      input.runId ?? null,
+      input.sectionId ?? null,
       hash,
       filename,
       width,

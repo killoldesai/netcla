@@ -6,7 +6,7 @@ import { publicAssetUrl, readStoredFile } from "./asset-storage";
 export async function mediaResponse(id: string) {
   if (!/^[a-f0-9-]{36}$/i.test(id)) return new Response(null, { status: 404 });
   const [asset] = await query(
-    "SELECT a.*,EXISTS(SELECT 1 FROM pages p JOIN revisions r ON r.id=p.published_revision_id WHERE r.content @> jsonb_build_object('pageSections',jsonb_build_array(jsonb_build_object('asset',jsonb_build_object('id',a.id::text))))) AS published FROM generated_assets a WHERE a.id=$1",
+    "SELECT a.*,EXISTS(SELECT 1 FROM pages p JOIN revisions r ON r.id=p.published_revision_id WHERE r.content @> jsonb_build_object('pageSections',jsonb_build_array(jsonb_build_object('asset',jsonb_build_object('id',a.id::text))))) OR EXISTS(SELECT 1 FROM case_study_images ci JOIN case_studies cs ON cs.id=ci.study_id WHERE ci.asset_id=a.id AND cs.status='published') AS published FROM generated_assets a WHERE a.id=$1",
     [id],
   );
   if (!asset || (!asset.published && !(await owner()))) return new Response(null, { status: 404 });

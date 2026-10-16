@@ -14,6 +14,7 @@ export default async function Page({
       "pages",
       "production",
       "media",
+      "case-studies",
       "leads",
       "newsletter",
       "careers",

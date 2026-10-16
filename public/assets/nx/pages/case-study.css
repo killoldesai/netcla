@@ -1,0 +1,57 @@
+/* Case study detail and index (src/case-study-page.tsx). Loaded after generic.css; tokens only, scoped to .nx. */
+
+.nx .cs-preview { margin: var(--space-4) 0 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg); background: var(--lime-50); color: var(--lime-text); font: 600 14px/1.5 var(--font-sans); }
+.nx .cs-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
+.nx .cs-chips a { text-decoration: none; }
+
+.nx .cs-cover-wrap { padding: 0 0 var(--space-8); }
+.nx .cs-cover { margin: 0; border: 1px solid var(--line); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); box-shadow: var(--shadow-float); }
+.nx .cs-cover img, .nx .cs-figure img { display: block; width: 100%; height: auto; }
+.nx .cs-figure { border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
+
+.nx .cs-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--space-12); align-items: start; }
+.nx .cs-main { min-width: 0; }
+.nx .cs-block + .cs-block { margin-top: var(--space-12); }
+.nx .cs-h2 { font: 600 clamp(24px, 2.6vw, 32px)/1.15 var(--font-sans); letter-spacing: -0.025em; }
+.nx .cs-block .gen-body { max-width: 68ch; }
+.nx .cs-outcomes { margin-top: var(--space-16); }
+.nx .cs-note { display: block; margin-top: 2px; font-size: 12px; opacity: 0.8; }
+.nx .cs-quote { margin: var(--space-12) 0 0; padding: var(--space-6) var(--space-8); border-left: 3px solid var(--indigo); background: var(--indigo-50); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.nx .cs-quote p { margin: 0; font: 500 20px/1.5 var(--font-sans); color: var(--ink); }
+.nx .cs-quote footer { margin-top: var(--space-3); font-size: 14px; color: var(--muted); }
+
+.nx .cs-facts { position: sticky; top: 120px; display: grid; gap: var(--space-4); padding: var(--space-8); border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-float); min-width: 0; }
+.nx .cs-facts__title { font: 600 20px/1.25 var(--font-sans); letter-spacing: -0.02em; }
+.nx .cs-facts__sub { font: 600 12px/1.4 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: var(--space-2); }
+.nx .cs-facts dl { margin: 0; border-top: 1px solid var(--line); }
+.nx .cs-facts dl > div { display: grid; gap: 4px; padding: var(--space-4) 0; border-bottom: 1px solid var(--line); }
+.nx .cs-facts dt { font: 600 12px/1.4 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.nx .cs-facts dd { margin: 0; font: 600 15px/1.4 var(--font-sans); color: var(--ink); }
+.nx .cs-tech { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.nx .cs-tech li { padding: 5px 10px; border-radius: var(--radius-pill); background: var(--indigo-50); font: 600 13px/1.2 var(--font-sans); color: var(--ink); }
+.nx .cs-facts__cta { width: 100%; justify-content: center; margin-top: var(--space-2); }
+
+.nx .cs-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-6); margin-top: var(--space-8); }
+.nx .cs-gallery .gen-figure { margin: 0; }
+
+.nx .cs-disclosure { padding: var(--space-8) 0; border-top: 1px solid var(--line); background: var(--surface); }
+.nx .cs-disclosure p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 80ch; }
+.nx .cs-end .hero__actions { margin-top: var(--space-8); display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: center; }
+
+/* Index */
+.nx .cs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: var(--space-8); }
+.nx .cs-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); text-decoration: none; color: inherit; transition: box-shadow .2s ease, transform .2s ease; }
+.nx .cs-card:hover { box-shadow: var(--shadow-float); transform: translateY(-2px); }
+.nx .cs-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+.nx .cs-card__body { display: grid; gap: var(--space-3); padding: var(--space-6); }
+.nx .cs-card__meta { margin: 0; font: 600 12px/1.4 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.nx .cs-card h2 { font: 600 20px/1.25 var(--font-sans); letter-spacing: -0.02em; }
+.nx .cs-card p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+@media (max-width: 1100px) {
+  .nx .cs-layout { grid-template-columns: minmax(0, 1fr); }
+  .nx .cs-facts { position: static; order: -1; }
+}
+@media (max-width: 720px) {
+  .nx .cs-grid, .nx .cs-gallery { grid-template-columns: minmax(0, 1fr); }
+}

@@ -21,6 +21,7 @@ import { BlogIndexSections, isBlogIndexContent } from "./blog-index-page";
 import type { BlogPost } from "./blog-types";
 import { RelatedGuides } from "./related-guides";
 import { RelatedPages } from "./related-pages";
+import { RelatedCaseStudies } from "./related-case-studies";
 import { SiteStyles, IconSprite, Button, ArrowLink, Breadcrumbs, HeroArt, Icon as NxIcon } from "./site/ui";
 import { SiteFooter } from "./site/footer";
 import { SiteBehaviors } from "./site/behaviors";
@@ -877,6 +878,7 @@ export function V3Page({
         ))}
         {!sections.some((s) => s.id === "cta-banner" && !s.omitted) && afterContent}
         <RelatedPages path={path} paths={paths} />
+        <RelatedCaseStudies path={path} />
         {path.startsWith("/blog/") && <RelatedGuides posts={posts} path={path} />}
       </main>
       {nx ? (

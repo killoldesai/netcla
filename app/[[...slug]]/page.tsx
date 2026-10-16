@@ -24,6 +24,7 @@ import { structureRedirects } from "@/site-structure";
 import { legacyRedirects } from "@/legacy-redirects";
 import { homeMeta } from "@/home/copy";
 import { isIndexable, shareImage } from "@/seo-policy";
+import { caseStudyPaths } from "@/case-study-related";
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug?: string[] }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -96,9 +97,11 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   if (p.content.schemaVersion === 3) {
-    const paths = (
-      await query("SELECT path FROM pages WHERE archived_at IS NULL")
-    ).map((p) => p.path);
+    // Case study URLs are valid link targets, so content that links to them is not stripped.
+    const paths = [
+      ...(await query("SELECT path FROM pages WHERE archived_at IS NULL")).map((p) => p.path as string),
+      ...(await caseStudyPaths().catch(() => [])),
+    ];
     const vacancies =
       path === "/careers"
         ? await query(

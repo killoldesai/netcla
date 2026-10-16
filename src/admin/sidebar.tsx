@@ -15,6 +15,7 @@ const groups: { label: string; items: Item[] }[] = [
       { key: "generation", label: "Generation", href: "/admin/generation", icon: "spark" },
       { key: "production", label: "Review queue", href: "/admin/production", icon: "check" },
       { key: "pages", label: "All pages", href: "/admin/pages", icon: "document" },
+      { key: "case-studies", label: "Case studies", href: "/admin/case-studies", icon: "document" },
       { key: "media", label: "Media", href: "/admin/media", icon: "image" },
     ],
   },

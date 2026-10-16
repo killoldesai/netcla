@@ -37,3 +37,11 @@
   .nx .gen-related .container, .nx .gen-guides .container { padding: 0 16px; }
   .nx .related__card { padding: var(--space-6); }
 }
+
+/* Case study cards: the cover screenshot sits flush at the top of the card (src/related-case-studies.tsx, src/case-study-page.tsx). */
+.nx .related__card--cover { padding: 0; overflow: hidden; }
+.nx .related__thumb { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top left; border-bottom: 1px solid var(--line); background: var(--surface); }
+.nx .related__card--cover .related__text { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6) var(--space-8) var(--space-8); }
+@media (max-width: 720px) { .nx .related__card--cover .related__text { padding: var(--space-6); } }
+.nx .related__card--cover .related__text { color: var(--ink); font-size: inherit; line-height: inherit; }
+.nx .related__card--cover .related__text > span { font-weight: 400; font-size: 15px; line-height: 1.6; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

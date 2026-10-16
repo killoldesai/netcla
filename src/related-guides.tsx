@@ -30,7 +30,7 @@ export function RelatedGuides({ posts, path }: { posts: BlogPost[]; path: string
   if (!items.length) return null;
   return (
     <section className="v3-related-guides gen-guides" aria-labelledby="related-guides-title">
-      <link rel="stylesheet" href="/assets/nx/related.css?v=20261015" />
+      <link rel="stylesheet" href="/assets/nx/related.css?v=20261017" />
       <div className="v3-wrap container">
         <h2 id="related-guides-title" className="related__title">Keep reading</h2>
         <ul className="related__cards">
