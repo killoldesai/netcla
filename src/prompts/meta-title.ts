@@ -36,7 +36,7 @@ function norm(word: string): string {
   return w.length > 2 && w.endsWith("s") ? w.slice(0, -1) : w;
 }
 
-function titleCasePhrase(phrase: string): string {
+export function titleCasePhrase(phrase: string): string {
   return words(phrase)
     .map((word, i) => {
       // Tokens with an internal capital (iOS, AI, APIs, SaaS) are already intentional.

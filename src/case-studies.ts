@@ -3,7 +3,7 @@ import { query } from "./db";
 import { generate, parseOutput, providerSchema } from "./providers";
 import { generateHero } from "./production-assets";
 import { imageStyle, seoFilename } from "./prompts/images";
-import { composeMetaTitle, tidyMetaTitle } from "./prompts/meta-title";
+import { composeMetaTitle, tidyMetaTitle, titleCasePhrase } from "./prompts/meta-title";
 import { plainDashes } from "./prompts/punctuation";
 import { industries as industryList } from "./service-directory-data";
 import { serviceCatalog } from "./case-study-catalog";
@@ -26,10 +26,20 @@ const pickFrom = (values: string[] | undefined, allowed: string[]) => (values ??
 export const ratios = ["16:9", "4:3", "1:1", "3:2"] as const;
 
 // Model output is trimmed to the limits rather than rejected, so one long sentence never fails a whole run.
-const text = (max: number) => z.string().default("").transform((v) => v.trim().slice(0, max));
+/** Trims to a limit at the end of a sentence, else at a word, never mid-word, so saved text is never cut off in the middle of a thought. */
+export function fit(value: string, max: number) {
+  const v = value.trim();
+  if (v.length <= max) return v;
+  const cut = v.slice(0, max);
+  const sentence = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "), /[.!?]$/.test(cut) ? cut.length - 1 : -1);
+  if (sentence > max * 0.5) return cut.slice(0, sentence + 1);
+  const space = cut.lastIndexOf(" ");
+  return (space > max * 0.5 ? cut.slice(0, space) : cut).replace(/[\s,;:(-]+$/, "");
+}
+const text = (max: number) => z.string().default("").transform((v) => fit(v, max));
 const list = (max: number, item = 200) =>
   z.array(z.string()).default([]).transform((a) => a.map((s) => s.trim().slice(0, item)).filter(Boolean).slice(0, max));
-const str = (min: number, max: number) => z.string().trim().min(min).transform((v) => v.slice(0, max));
+const str = (min: number, max: number) => z.string().trim().min(min).transform((v) => fit(v, max));
 
 /** The publishable body of a case study. Every field is optional until the owner supplies the facts. */
 export const contentSchema = z.object({
@@ -37,7 +47,7 @@ export const contentSchema = z.object({
   summary: text(400),
   client: z.object({ name: text(120), industry: text(80), location: text(80), size: text(80) }).default({}),
   services: list(8, 80),
-  timeline: text(120),
+  timeline: text(160),
   challenge: text(2500),
   approach: text(3500),
   solution: text(3500),
@@ -311,7 +321,8 @@ export async function draftStudy(id: string) {
       requirements: [
         "If servicesDelivered is given, the study must cover how those services worked together, and 'services' must equal that list. If industry is given, use it.",
         "challenge, approach, solution and results are 2-4 short paragraphs each, separated by blank lines. Describe only what the facts support.",
-        "outcomes: only metrics that appear in the facts, copied exactly. Leave empty if none.",
+        "outcomes: only metrics that appear in the facts, copied exactly. Leave empty if none. 'value' is the figure alone and at most 20 characters (for example '38', '99.6%', 'AED 210,000', '11 to 4 days'); put the explanation in 'note'.",
+        "summary: 1-2 complete sentences, at most 300 characters. timeline: a short phrase of at most 80 characters, such as '7 months to launch'.",
         "techStack: every programming language, framework, database, cloud service and tool named in the facts, as short names (for example 'Next.js', 'PostgreSQL', 'AWS'). If the facts name none, leave it empty and add a gap.",
         "primaryKeyword: the search phrase a buyer would type to find this kind of work, built from the services, industry and, where natural, the city (for example 'custom software development for logistics' or 'ecommerce development company Sydney'). Lowercase, 3-7 words, no brand names.",
         "secondaryKeywords: 3-5 related search phrases, including one with 'case study'.",
@@ -631,6 +642,14 @@ export async function publicStudies() {
 const squash = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
 const sentenceCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+const DANGLING_END = /\s+(a|an|the|for|of|to|and|or|with|in|on|by|from|over|that|which|at|as|into|its|their)$/i;
+/** Drops words that cannot end a sentence ("... over seven months for a") and any trailing punctuation. */
+const tidyEnd = (text: string) => {
+  let t = text.trim().replace(/[\s,;:(-]+$/, "");
+  while (DANGLING_END.test(t)) t = t.replace(DANGLING_END, "");
+  return t;
+};
+
 /** The phrase a buyer would search for, from the services, industry and city when the AI gave none. */
 export function derivePrimaryKeyword(c: CaseStudyContent, title: string) {
   const service = (c.services[0] ?? "").replace(/\s+services?$/i, "").toLowerCase();
@@ -654,14 +673,15 @@ export function finalizeMeta(c: CaseStudyContent, title: string): CaseStudyConte
   if (!metaTitle || metaTitle.length > 60 || !has(metaTitle)) metaTitle = tidyMetaTitle(composeMetaTitle(primary, [...secondary, "case study"], "Netofficials"));
 
   let metaDescription = plainDashes(c.metaDescription).trim();
-  if (metaDescription.length < 110 || metaDescription.length > 160 || !has(metaDescription)) {
-    const lead = `${sentenceCase(primary)} case study: `;
+  if (metaDescription.length < 110 || metaDescription.length > 160 || !has(metaDescription) || DANGLING_END.test(metaDescription.replace(/[.!?]$/, ""))) {
+    const lead = `${titleCasePhrase(primary)} case study: `;
     const first = (c.summary.split(/(?<=[.!?])\s/)[0] || c.headline || title).replace(/\s+/g, " ").trim();
     let text = lead + first;
     if (text.length < 110) text += " See how Netofficials built it and what changed.";
     if (text.length > 155) {
       const cut = text.slice(0, 155);
-      text = cut.slice(0, Math.max(cut.lastIndexOf(" "), 100)).replace(/[\s,;:(-]+$/, "");
+      const clause = Math.max(cut.lastIndexOf(", "), cut.lastIndexOf(" while "), cut.lastIndexOf(" and "));
+      text = tidyEnd(cut.slice(0, clause > 110 ? clause : Math.max(cut.lastIndexOf(" "), 100))).replace(/[\s,;:(-]+$/, "");
     }
     metaDescription = plainDashes(text);
   }

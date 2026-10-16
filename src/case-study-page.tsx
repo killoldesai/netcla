@@ -97,7 +97,7 @@ export function CaseStudyView({ title, content: c, images, paths, preview, relat
             {c.outcomes.length > 0 && (
               <dl className="gen-stats cs-outcomes">
                 {c.outcomes.map((o, i) => (
-                  <div key={i}><dt>{o.metric}{o.note ? <span className="cs-note">{o.note}</span> : null}</dt><dd>{o.value}</dd></div>
+                  <div key={i} className={o.value.length > 16 ? "cs-stat--long" : undefined}><dt>{o.metric}{o.note ? <span className="cs-note">{o.note}</span> : null}</dt><dd>{o.value}</dd></div>
                 ))}
               </dl>
             )}

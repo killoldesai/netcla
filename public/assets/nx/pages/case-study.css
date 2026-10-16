@@ -14,7 +14,10 @@
 .nx .cs-block + .cs-block { margin-top: var(--space-12); }
 .nx .cs-h2 { font: 600 clamp(24px, 2.6vw, 32px)/1.15 var(--font-sans); letter-spacing: -0.025em; }
 .nx .cs-block .gen-body { max-width: 68ch; }
-.nx .cs-outcomes { margin-top: var(--space-16); }
+.nx .cs-outcomes { margin-top: var(--space-16); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: start; }
+.nx .cs-outcomes > div { min-width: 0; justify-content: flex-end; }
+.nx .cs-outcomes dd { overflow-wrap: anywhere; }
+.nx .cs-outcomes .cs-stat--long dd { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2; letter-spacing: -0.02em; }
 .nx .cs-note { display: block; margin-top: 2px; font-size: 12px; opacity: 0.8; }
 .nx .cs-quote { margin: var(--space-12) 0 0; padding: var(--space-6) var(--space-8); border-left: 3px solid var(--indigo); background: var(--indigo-50); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
 .nx .cs-quote p { margin: 0; font: 500 20px/1.5 var(--font-sans); color: var(--ink); }
