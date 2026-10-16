@@ -25,6 +25,7 @@ import { legacyRedirects } from "@/legacy-redirects";
 import { homeMeta } from "@/home/copy";
 import { isIndexable, shareImage } from "@/seo-policy";
 import { caseStudyPaths } from "@/case-study-related";
+import { RelatedCaseStudies } from "@/related-case-studies";
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug?: string[] }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -119,6 +120,7 @@ export default async function Page({ params }: Props) {
         vacancies={vacancies as any}
         newsletterEnabled={path === "/blog" && (await newsletterReady())}
         posts={path === "/blog" || path.startsWith("/blog/") ? await blogPosts() : []}
+        relatedStudies={<RelatedCaseStudies path={path} />}
         published={p.first_published_at}
         modified={p.created_at}
       />

@@ -21,7 +21,6 @@ import { BlogIndexSections, isBlogIndexContent } from "./blog-index-page";
 import type { BlogPost } from "./blog-types";
 import { RelatedGuides } from "./related-guides";
 import { RelatedPages } from "./related-pages";
-import { RelatedCaseStudies } from "./related-case-studies";
 import { SiteStyles, IconSprite, Button, ArrowLink, Breadcrumbs, HeroArt, Icon as NxIcon } from "./site/ui";
 import { SiteFooter } from "./site/footer";
 import { SiteBehaviors } from "./site/behaviors";
@@ -52,6 +51,8 @@ type Props = {
   posts?: BlogPost[];
   /** Extra content placed before the closing CTA band, or at the end (e.g. the 404 sitemap). */
   afterContent?: React.ReactNode;
+  /** Case studies about this page. Rendered by the server route: this component is also bundled for the client preview. */
+  relatedStudies?: React.ReactNode;
   published?: string | Date | null;
   modified?: string | Date | null;
 };
@@ -110,6 +111,7 @@ export function V3Page({
   newsletterEnabled = false,
   posts = [],
   afterContent,
+  relatedStudies,
   published,
   modified,
 }: Props) {
@@ -878,7 +880,7 @@ export function V3Page({
         ))}
         {!sections.some((s) => s.id === "cta-banner" && !s.omitted) && afterContent}
         <RelatedPages path={path} paths={paths} />
-        <RelatedCaseStudies path={path} />
+        {relatedStudies}
         {path.startsWith("/blog/") && <RelatedGuides posts={posts} path={path} />}
       </main>
       {nx ? (
