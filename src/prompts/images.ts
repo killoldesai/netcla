@@ -3,18 +3,25 @@ import type { PageSpecification } from "../page-spec-schema";
 import type { PageBrief } from "./page-brief";
 import { imageRatio } from "./templates";
 
+/**
+ * House style for every generated page image. It matches the v2 site design: playful 3D clay objects and characters in
+ * brand colours on a soft pastel or white backdrop. Stylised illustrated characters are allowed (roles, never real people);
+ * photography and readable text are not.
+ */
 export const imageStyle = [
-  "Flat vector editorial illustration on a plain white (#ffffff) background.",
-  "Palette limited to indigo #4353b3, deep ink #0f1420, light grey #e2e5ea and a small accent of lime #b5ce20.",
-  "Clean 2px line work, simple geometric shapes, generous empty space, consistent with a professional software company website.",
-  "Strictly no gradients, glows, shadows, 3D rendering, photography, human faces, readable text, letters, numbers, logos or brand marks.",
+  "Stylised 3D clay illustration in a playful premium SaaS brand style: soft rounded shapes, smooth shading, gentle studio lighting, generous empty space.",
+  "Colours: violet #5f5ff6, cobalt blue, hot pink, lime #b5ce20 and orange accents, with a plain white or soft pastel (lavender, sky blue, peach or pale lime) background.",
+  "Any people are friendly illustrated 3D characters in colourful jackets or hoodies, shown as roles (developer, designer, engineer), never photorealistic faces or real individuals.",
+  "Screens, boards and devices show only abstract coloured blocks and bars.",
+  "Strictly no photography, no readable text, letters, numbers, logos or brand marks anywhere in the image, no dark or busy backgrounds.",
 ].join(" ");
 
 export const artDirectorSystemPrompt = [
   "You are the art director for Netofficials, a B2B software development company.",
-  "You turn finished page copy into one precise brief for a flat conceptual illustration, plus the image's SEO metadata.",
-  "The illustration must depict the specific concept the copy explains (its systems, workflow, components or outcome), not a generic laptop or office scene.",
-  "Never ask for text, labels, letters, numbers, logos, brand marks, people's faces or photographs in the image: describe shapes, icons, diagrams and relationships instead.",
+  "You turn finished page copy into one precise brief for a stylised 3D clay illustration (friendly illustrated characters and soft rounded objects on a pastel background), plus the image's SEO metadata.",
+  "The illustration must depict the specific concept the copy explains (its systems, workflow, components or outcome) as a small scene: ALWAYS one friendly illustrated role character (a developer, designer or engineer in a colourful jacket or hoodie) interacting with chunky 3D clay objects such as a board of cards, devices, a pipeline or stacked layers. Not a generic laptop or office scene, and never a flat diagram.",
+  "In the subject, never name colours, hex codes, line weights or art styles (no flat, vector, outline, minimal, indigo): the house style is applied separately.",
+  "Never ask for text, labels, letters, numbers, logos, brand marks or photographs in the image: describe objects, abstract coloured blocks, icons, characters and their relationships instead. Characters are illustrated roles, never real people.",
   "Output exactly one JSON object. No markdown.",
 ].join("\n");
 
@@ -66,7 +73,7 @@ export function buildArtDirectionPrompt(input: {
     aspectRatio: imageRatio(spec, sectionId),
     ownerInstruction: input.instruction || undefined,
     requirements: [
-      "subject: 60-140 words describing exactly what to draw: the main visual metaphor for this section's message, the key elements and how they connect, and the composition for the aspect ratio. Use concrete visual nouns (devices, screens with abstract blocks, nodes, pipelines, stacked layers, arrows).",
+      "subject: 60-140 words describing exactly what to draw: the main visual metaphor for this section's message, the key elements and how they connect, and the composition for the aspect ratio. Use concrete visual nouns (devices, screens with abstract coloured blocks, boards of cards, nodes, pipelines, stacked layers, arrows, an illustrated role character working with them).",
       "alt: a factual description of the illustration for screen readers and image search, 80-125 characters, naturally including the primary keyword. Do not start with 'Image of' or 'Illustration of'.",
       "filename: 3-8 lowercase words for the file name, starting with the primary keyword, describing the picture (for example 'flutter-app-development-single-codebase-architecture').",
       "caption: one sentence (max 160 characters) that could sit under the image, stating what it shows.",
@@ -90,7 +97,7 @@ export function buildImagePrompt(spec: PageSpecification, sectionId: string, bri
     `A conceptual illustration of ${spec.title.replace(/\s*[|–-].*$/, "")}, showing the systems and workflow involved.`;
   const ratio = imageRatio(spec, sectionId);
   return {
-    prompt: `${subject}\n\nStyle: ${imageStyle}\nComposition for a ${ratio} frame.`,
+    prompt: `Style (mandatory, overrides any style wording in the scene): ${imageStyle}\n\nScene: ${subject}\n\nComposition for a ${ratio} frame.`,
     ratio,
     alt: (direction?.alt || planned?.alt || `Illustration: ${subject}`).replace(/\s+/g, " ").slice(0, 125),
     name: seoFilename(direction?.filename || planned?.alt || spec.title, brief?.primaryKeyword ?? ""),

@@ -39,27 +39,29 @@ export function CareerApplicationForm({
       <fieldset disabled={busy}>
         <legend>Apply for {title}</legend>
         <input type="hidden" name="vacancyId" value={id} />
-        <label>
-          Name
-          <input name="name" required autoComplete="name" maxLength={120} />
-        </label>
-        <label>
-          Email
-          <input name="email" type="email" required autoComplete="email" />
-        </label>
-        <label>
-          Phone (optional)
-          <input name="phone" type="tel" autoComplete="tel" />
-        </label>
-        <label>
-          Cover message (optional)
-          <textarea name="coverMessage" maxLength={5000} />
-        </label>
-        <label>
-          CV — PDF or DOCX, up to 5 MB
-          <input name="cv" type="file" accept=".pdf,.docx" required />
-        </label>
-        <label>
+        <div className="fgrid">
+          <label className="field">
+            Name
+            <input name="name" required autoComplete="name" maxLength={120} />
+          </label>
+          <label className="field">
+            Email
+            <input name="email" type="email" required autoComplete="email" />
+          </label>
+          <label className="field field--full">
+            Phone (optional)
+            <input name="phone" type="tel" autoComplete="tel" />
+          </label>
+          <label className="field field--full">
+            Cover message (optional)
+            <textarea name="coverMessage" maxLength={5000} />
+          </label>
+          <label className="field field--full">
+            CV: PDF or DOCX, up to 5 MB
+            <input name="cv" type="file" accept=".pdf,.docx" required />
+          </label>
+        </div>
+        <label className="consent">
           <input name="consent" type="checkbox" required />I consent to
           Netofficials reviewing and storing my application for recruitment.
           Applications are retained for up to the configured recruitment period.
@@ -68,7 +70,7 @@ export function CareerApplicationForm({
           Company URL
           <input name="company_url" tabIndex={-1} autoComplete="off" />
         </label>
-        <button className="v3-button" type="submit">
+        <button className="btn btn--grad" type="submit">
           {busy ? "Submitting…" : "Submit application"}
         </button>
       </fieldset>

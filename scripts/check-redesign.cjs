@@ -67,7 +67,7 @@ if (!paths.length) paths = Object.values(SAMPLE).flat();
           overflow: document.documentElement.scrollWidth - window.innerWidth,
           h1: document.querySelectorAll('h1').length,
           height: document.documentElement.scrollHeight,
-          nx: !!document.querySelector('.nx'),
+          nx: !!document.querySelector('.nx, .v2'),
           dashes: (text.match(/[^\n]{0,30}[–—][^\n]{0,30}/g) || []).slice(0, 3),
           drafts: (text.match(/\[draft[^\]]{0,40}/gi) || []).slice(0, 3),
           broken: [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.src).map((i) => i.src.replace(location.origin, '')).slice(0, 3),

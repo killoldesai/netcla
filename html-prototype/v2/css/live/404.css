@@ -1,0 +1,19 @@
+/* 404 live-only rules: the section sitemap under the popular pages. Tokens only. */
+.nf-sm { margin-top: 56px; }
+.nf-sm:first-of-type { margin-top: 0; }
+.nf-sm__head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px 24px; margin-bottom: 20px; }
+.nf-sm__head .h3 { margin: 0 0 4px; }
+.nf-sm__head .muted { margin: 0; font-size: 15.5px; }
+.nf-sm__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.nf-sm__box { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 22px 24px; min-width: 0; }
+.nf-sm__box h4 { font-size: 16px; font-weight: 500; margin: 0 0 12px; }
+.nf-sm__box ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.nf-sm__box a { color: var(--slate); text-decoration: none; font-size: 15px; overflow-wrap: anywhere; }
+.nf-sm__box a:hover { color: var(--violet); }
+@media (max-width: 960px) {
+  .nf-sm__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .nf-sm { margin-top: 44px; }
+  .nf-sm__grid { grid-template-columns: minmax(0, 1fr); }
+}

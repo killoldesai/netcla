@@ -50,7 +50,7 @@ function render(pageSections: ReturnType<typeof section>[] = [HERO, FAQ, CTA], o
 
 test("only published pages are linked, and unpublished pages are not shown", () => {
   const $ = render();
-  const hrefs = $("a.dir-link").map((_, a) => $(a).attr("href")).get();
+  const hrefs = $("a.dcard[href^='/'], a.dpill[href^='/']").map((_, a) => $(a).attr("href")).get();
   assert.ok(hrefs.includes("/saas-development-services"));
   assert.ok(hrefs.includes("/software-development-company-usa"));
   // Pages that exist in site-structure but are not in the published paths.
@@ -71,62 +71,66 @@ test("pages are grouped by pillar and menu group, in declaration order", () => {
   const $ = render();
   const software = $("#software");
   assert.equal(software.find("h2").text(), "Software Development");
-  assert.deepEqual(software.find(".dir-card__title").map((_, h) => $(h).text()).get(), ["Build", "Product stage", "Technologies"]);
-  assert.deepEqual(software.find(".dir-card").first().find(".dir-link__name").map((_, n) => $(n).text()).get(), ["Web applications", "SaaS development"]);
-  assert.equal($("#mobile .dir-card").length, 1);
-  assert.deepEqual($("#mobile .dir-link__name").map((_, n) => $(n).text()).get(), ["iOS apps"]);
-  assert.deepEqual($("#hire .dir-link__name").map((_, n) => $(n).text()).get(), ["React developers"]);
+  // Groups are tabs (name plus page count), each with its own panel of cards.
+  assert.deepEqual(software.find("[role=tab]").map((_, t) => $(t).contents().first().text()).get(), ["Build", "Product stage", "Technologies"]);
+  assert.deepEqual(software.find("[role=tabpanel]").first().find("a.dcard h3").map((_, n) => $(n).text()).get(), ["Web applications", "SaaS development"]);
+  assert.equal(software.find("[role=tabpanel]").length, 3);
+  assert.equal(software.find("[role=tabpanel][hidden]").length, 2);
+  assert.equal($("#mobile a.dcard").length, 1);
+  assert.deepEqual($("#mobile a.dcard h3").map((_, n) => $(n).text()).get(), ["iOS apps"]);
+  assert.deepEqual($("#hire a.dcard h3").map((_, n) => $(n).text()).get(), ["React developers"]);
 });
 
 test("page counts and the overview tiles come from the published links", () => {
   const $ = render();
   // Software: web application, SaaS, product development and Node.js are published (the hub is not), so 4 pages.
   assert.equal($("#software .eyebrow").text(), "4 pages");
-  assert.equal($('a.dir-tile[href="#software"] .dir-tile__count').text(), "4 pages");
-  assert.equal($('a.dir-tile[href="#mobile"] .dir-tile__count').text(), "1 page");
-  assert.equal($('a.dir-tile[href="#ai"] .dir-tile__count').text(), "1 page");
-  assert.equal($('a.dir-tile[href="#hire"] .dir-tile__count').text(), "1 page");
-  assert.equal($('a.dir-tile[href="#industries"] .dir-tile__count').text(), "1 page");
-  assert.equal($('a.dir-tile[href="#cloud"]').length, 0);
-  assert.equal($("a.dir-tile").length, 5);
-  // The subnav lists the rendered sections only, in page order.
-  assert.deepEqual($(".subnav a").map((_, a) => $(a).attr("href")).get(), ["#overview", "#software", "#mobile", "#ai", "#hire", "#industries", "#company", "#locations"]);
+  assert.equal($('#overview a.dir-area[href="#software"] small').text(), "4 pages");
+  assert.equal($('#overview a.dir-area[href="#mobile"] small').text(), "1 page");
+  assert.equal($('#overview a.dir-area[href="#ai"] small').text(), "1 page");
+  assert.equal($('#overview a.dir-area[href="#hire"] small').text(), "1 page");
+  assert.equal($('#overview a.dir-area[href="#industries"] small').text(), "1 page");
+  assert.equal($('#overview a.dir-area[href="#cloud"]').length, 0);
+  assert.equal($("#overview a.dir-area").length, 5);
+  // The chip navigation lists the rendered sections only, in page order.
+  assert.deepEqual($(".svc-nav a.chip").map((_, a) => $(a).attr("href")).get(), ["#overview", "#software", "#mobile", "#ai", "#hire", "#industries", "#company", "#locations"]);
 });
 
 test("company and locations lists link only published pages", () => {
   const $ = render();
-  const company = $("#company .dir-link__name").map((_, n) => $(n).text()).get();
+  const company = $("#company a.dcard h3").map((_, n) => $(n).text()).get();
   assert.deepEqual(company, ["About", "Contact", "How we work", "FAQ"]);
-  assert.deepEqual($("#locations .dir-link__name").map((_, n) => $(n).text()).get(), ["USA"]);
-  assert.match($(".dir-note").text(), /See how we work/);
+  assert.deepEqual($("#locations a.dpill").map((_, n) => $(n).text().trim()).get(), ["USA"]);
+  assert.match($(".svc-note").text(), /See how we work/);
 });
 
 test("the hero uses the page's own published copy, falling back to the title", () => {
   const $ = render();
   assert.equal($("#hero h1").text(), "Software Development, Mobile, AI and Digital Marketing Services");
-  assert.equal($("#hero .tag-pill").text(), "Service directory");
-  assert.equal($("#hero .lead").text(), "Every service Netofficials offers, in one place.");
-  assert.equal($("#hero .hero__art svg").attr("role"), "img");
+  assert.equal($("#hero .eyebrow").text(), "Service directory");
+  assert.equal($("#hero .hero__sub").text(), "Every service Netofficials offers, in one place.");
+  assert.equal($("#hero .heroart").length, 0, "no hero picture without the page's own image");
+  assert.ok($("#hero .hs--hub").length, "the hero shows the service map");
 
   const bare = render([]);
   assert.equal(bare("#hero h1").text(), "Software Services Directory | Netofficials");
-  assert.equal(bare("#hero .tag-pill").length, 0);
+  assert.equal(bare("#hero .eyebrow").length, 0);
 });
 
 test("the FAQ renders when the page has one and is left out otherwise", () => {
   const $ = render();
   assert.equal($("#faq h2").text(), "Questions about services");
-  assert.equal($("#faq .nx-acc__item").length, 2);
-  assert.equal($("#faq .nx-acc__item").first().find("summary").text(), "How do we start?");
-  assert.equal($("#faq .nx-acc__content p").first().text(), "Send a short brief.");
+  assert.equal($("#faq details").length, 2);
+  assert.equal($("#faq details").first().find("summary").text(), "How do we start?");
+  assert.equal($("#faq details p").first().text(), "Send a short brief.");
   assert.equal(render([HERO])("#faq").length, 0);
 });
 
-test("the closing band renders with the shared nx-cta markup", () => {
+test("the closing band comes from the shell, so the directory draws none of its own", () => {
   const $ = render();
-  assert.equal($("#cta-banner .nx-cta").length, 1);
-  assert.equal($("#cta-banner .nx-cta__title").text(), "Ready to scope it?");
-  assert.equal(render([HERO])("#cta-banner").length, 0);
+  assert.equal($("#cta-banner").length, 0);
+  assert.equal($("#cta-banner .nx-cta").length, 0);
+  assert.doesNotMatch($.text(), /Ready to scope it\?/);
 });
 
 test("preview maps links through linkMap and leaves unmapped pages unlinked", () => {
@@ -154,9 +158,10 @@ test("child services become pillar leads when they match a pillar, and unmatched
   });
   const $ = render([HERO, GRID]);
   assert.equal($("#mobile .lead").text(), "Apps for customers and staff.");
-  assert.equal($("#services-grid h2").text(), "Sectors we build for");
-  assert.equal($("#services-grid .dir-card__title").text(), "Consulting");
-  assert.equal($("#services-grid").text().includes("Scoping and architecture advice."), true);
+  // The grid's own heading leads the overview; unmatched services are listed under the area cards.
+  assert.equal($("#overview h2").text(), "Sectors we build for");
+  assert.equal($("#overview .cat h3").text(), "Consulting");
+  assert.equal($("#overview").text().includes("Scoping and architecture advice."), true);
   assert.equal($("#software .lead").text(), "Custom platforms, SaaS and business systems");
 });
 
@@ -166,9 +171,9 @@ test("other published sections keep their text", () => {
   const hidden = { ...section("testimonials", { quote_1: "Hidden quote" }), omitted: true };
   const $ = render([HERO, WHY, STATS, hidden]);
   assert.equal($("#why-netofficials h2").text(), "Why choose us");
-  assert.equal($("#why-netofficials .lead").text(), "A short honest case.");
-  assert.deepEqual($("#why-netofficials .dir-card").map((_, c) => $(c).text().trim()).get(), ["Fixed scope", "Named team"]);
-  assert.equal($("#stats-bar .dir-card__title").text(), "12");
+  assert.equal($("#why-netofficials .dir-why__copy p:not(.eyebrow)").text(), "A short honest case.");
+  assert.deepEqual($("#why-netofficials .dir-adv").map((_, c) => $(c).text().trim()).get(), ["Fixed scope", "Named team"]);
+  assert.equal($("#stats-bar h3").text(), "12");
   assert.equal($("#stats-bar").text().includes("Years delivering"), true);
   assert.equal($("#testimonials").length, 0);
   assert.equal($("body").text().includes("Hidden quote"), false);

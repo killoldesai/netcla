@@ -90,7 +90,7 @@ export const companyMenu: MegaGroup[] = [
   {
     name: "Explore",
     links: [
-      { name: "Our work", path: "/portfolio" },
+      { name: "Case studies", path: "/case-studies" },
       { name: "Insights", path: "/blog" },
       { name: "Careers", path: "/careers" },
       { name: "Contact", path: "/contact" },

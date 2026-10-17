@@ -1,12 +1,11 @@
 "use client";
 import type React from "react";
 import type { Content } from "../content";
-import { NxShell } from "../site/shell";
+import { V2Shell } from "../site/v2/shell";
 import { Contact } from "./Contact";
 import { homeSections } from "./copy";
 import {
   Assurance,
-  Brief,
   Faq,
   Hero,
   Hire,
@@ -16,7 +15,9 @@ import {
   Services,
   Stack,
   Supporting,
+  Team,
   Work,
+  Words,
 } from "./Sections";
 import { HomeContext } from "./ui";
 
@@ -29,7 +30,7 @@ type Listing = {
 
 const order = homeSections.map((section) => section.id);
 
-// The homepage, rendered inside the shared site shell (header, footer, styles and behaviours).
+// The homepage, rendered inside the v2 shell (header, footer, styles and behaviours).
 export function HomePage({
   content,
   paths = [],
@@ -47,29 +48,30 @@ export function HomePage({
 }) {
   return (
     <HomeContext.Provider value={{ content, paths, preview, linkMap, order }}>
-      <NxShell
-        page="home"
+      <V2Shell
+        home
         paths={paths}
         preview={preview}
         linkMap={linkMap}
         contactHref="#contact"
-        ctaHref="#contact"
+        cta={false}
       >
         <Hero />
-        <Brief />
-        <Assurance />
         <Stack />
         <Services />
         <Supporting />
-        <Process />
+        <Team />
         <India />
+        <Assurance />
+        <Process />
         <Hire />
         <Industries />
+        <Words />
         <Work listing={listing} />
         <Faq />
         <Contact />
         {children}
-      </NxShell>
+      </V2Shell>
     </HomeContext.Provider>
   );
 }

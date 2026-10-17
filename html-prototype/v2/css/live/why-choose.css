@@ -1,0 +1,7 @@
+/* Why choose Netofficials: live-only rules for approved client feedback cards and the hero stage. */
+.wc-hero .ctx__stage { height: 700px; margin-top: 80px; }
+@media (max-width: 960px) { .wc-hero .ctx__stage { height: auto; margin-top: 44px; } }
+.wc-quote { margin: 0; align-items: flex-start; }
+.wc-quote blockquote { margin: 0; }
+.wc-quote blockquote p { font-size: 18px; line-height: 1.5; color: var(--ink); }
+.wc-quote figcaption { font-size: 15px; color: var(--slate); margin-top: auto; }

@@ -1,0 +1,27 @@
+/* How we work: live-only rules for the stage detail that the prototype does not show. */
+.wf__step .hw-recv { display: block; margin: 12px 0 0; font-size: 13px; color: var(--violet-strong); }
+.hw-receives { margin-top: 4px; }
+.hw-approach .ctx__top { align-items: start; }
+.hw-approach .ctx__stage { height: 600px; margin-top: 80px; }
+@media (max-width: 960px) { .hw-approach .ctx__stage { height: auto; margin-top: 44px; } }
+.hw-comm__stack { margin-top: 56px; }
+.hw-comm .ct-pad { padding: 16px 20px 20px; }
+.hw-commit .feat__g { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .hw-commit .feat__g { grid-template-columns: minmax(0, 1fr); } }
+
+/* How we work, round two */
+.hw-approach__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 56px; align-items: center; }
+.hw-approach__top .h2 { margin: 12px 0 0; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.1; overflow-wrap: break-word; }
+.hw-approach__art { border-radius: 36px; background: var(--p-lime); padding: 24px; overflow: hidden; }
+.hw-approach__art img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; mix-blend-mode: multiply; animation: bob 8s ease-in-out infinite; }
+.hw-wf { max-width: 1080px; }
+.hw-cad { gap: 10px; }
+.hw-cad__ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; }
+.hw-cad__ico svg { width: 24px; height: 24px; }
+.hw-cad__meta { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.hw-cad__meta li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14.5px; line-height: 1.45; padding: 10px 12px; border-radius: 14px; background: var(--cloud); color: var(--black); overflow-wrap: anywhere; }
+.hw-cad__meta svg { width: 18px; height: 18px; color: var(--violet); margin-top: 1px; }
+.hw-tool__logo { width: 64px; height: 64px; border-radius: 18px; background: var(--cloud); display: grid; place-items: center; }
+.hw-tool h3 { margin: 4px 0 0; }
+@media (max-width: 960px) { .hw-approach__top { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+@media (prefers-reduced-motion: reduce) { .hw-approach__art img { animation: none; } }

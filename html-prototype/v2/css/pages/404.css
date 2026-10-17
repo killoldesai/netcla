@@ -1,0 +1,15 @@
+/* 404 page layout only. The hero, ghost text and catgrid come from components.css and core.css. */
+.hero--404 .wrap { position: relative; }
+.hero--404 .hero__acts { margin-top: 0; }
+.hero--404 .lead { margin: 18px auto 34px; color: var(--slate); }
+.nf-popular { padding-top: 96px; }
+.nf-popular .sec__head { margin-bottom: 48px; }
+.nf-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; background: var(--p-lavender); color: var(--violet); }
+.nf-ico svg { width: 30px; height: 30px; }
+.nf-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 48px; }
+@media (max-width: 720px) {
+  .nf-popular { padding-top: 64px; }
+  .nf-popular .sec__head { margin-bottom: 32px; }
+  .nf-links { margin-top: 36px; }
+  .nf-links .btn { flex: 1 1 100%; }
+}

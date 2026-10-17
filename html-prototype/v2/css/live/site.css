@@ -1,0 +1,282 @@
+/* Live-only header (mega menu) rules for the v2 shell. Loaded with site.css on every v2 page.
+   Selectors are written as body header.nm-header ... so the build maps them to .v2 header.nm-header ...,
+   which outranks public/assets/nx/header.css and public/assets/mega-navigation.css (loaded later, inside the header). */
+
+/* Bar: white, sticky, 72px, one hairline */
+body header.nm-header {
+  --nm-ink: var(--ink); --nm-muted: var(--slate); --nm-line: var(--line); --nm-soft: var(--cloud);
+  --nm-accent: var(--violet); --nm-accent-soft: var(--violet-wash);
+  position: sticky; top: 0; z-index: 60; background: #fff; border-bottom: 1px solid transparent; color: var(--ink);
+  font-family: var(--font); font-size: 15.5px; line-height: 1.5; transition: box-shadow .25s;
+}
+body header.nm-header.nx-scrolled { background: #fff; border-bottom: 1px solid transparent; box-shadow: 0 1px 0 var(--line); }
+body header.nm-header .nm-bar {
+  max-width: calc(var(--max) + 80px); width: 100%; margin: 0 auto; padding: 0 40px; height: 72px; gap: 28px;
+  background: transparent; border: 0; border-radius: 0; box-shadow: none;
+}
+body header.nm-header .nm-logo img { width: 186px; height: 28px; }
+
+/* Dropdown triggers: plain text links with a small chevron */
+body header.nm-header .nm-items { gap: 4px; }
+body header.nm-header .nm-trigger {
+  height: auto; padding: 8px 10px; gap: 6px; border-radius: 6px; background: transparent; color: var(--ink);
+  font-family: var(--font); font-size: 15.5px; font-weight: 400; line-height: 1.5;
+}
+body header.nm-header .nm-trigger svg { width: 12px; height: 12px; color: var(--iron); transition: transform .25s var(--ease); }
+body header.nm-header .nm-trigger:hover { background: var(--cloud); color: var(--ink); }
+body header.nm-header .nm-trigger.is-open { background: var(--cloud); color: var(--violet); }
+body header.nm-header .nm-trigger.is-open svg { color: var(--violet); }
+body header.nm-header .nm-trigger.is-current:not(.is-open) { color: var(--violet); }
+body header.nm-header .nm-trigger:focus-visible,
+body header.nm-header .nm-link:focus-visible,
+body header.nm-header .nm-cta:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; border-radius: 8px; }
+
+/* Right side: plain link, outlined pill, violet pill */
+body header.nm-header .nm-actions { gap: 12px; margin-left: auto; }
+body header.nm-header .nm-link {
+  height: auto; padding: 8px 10px; border-radius: 6px; background: transparent; color: var(--ink);
+  font-size: 15.5px; font-weight: 400;
+}
+body header.nm-header .nm-link:hover { background: transparent; color: var(--violet); }
+body header.nm-header .nm-cta {
+  height: 44px; padding: 10px 24px; gap: 10px; border-radius: 160px; border: 1px solid var(--violet);
+  background: var(--violet); color: #fff; font-family: var(--font); font-size: 16px; font-weight: 400; line-height: 1;
+  transition: background-color .2s, transform .25s var(--ease);
+}
+body header.nm-header .nm-cta:hover { background: var(--violet-strong); color: #fff; }
+body header.nm-header .nm-cta::after { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+body header.nm-header .nm-cta:hover::after { transform: translateX(4px); }
+
+/* Mega panels: white sheet under the bar, 1px line, soft shadow */
+body header.nm-header .nm-panel {
+  top: 100%; left: 0; right: 0; width: auto; transform: none; border: 0; border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: 0 12px 32px -16px rgba(20, 20, 60, .18);
+  max-height: calc(100dvh - 72px); overflow: hidden auto; background: #fff;
+}
+body header.nm-header .nm-panel-inner { max-width: calc(var(--max) + 80px); padding: 0 40px; }
+body header.nm-header .nm-rail { border-right: 1px solid var(--line); }
+body header.nm-header .nm-rail button:hover,
+body header.nm-header .nm-item-link:hover,
+body header.nm-header .nm-compact a:hover { background: var(--cloud); }
+body header.nm-header .nm-rail button.is-selected { background: var(--violet-wash); }
+body header.nm-header .nm-rail button.is-selected strong,
+body header.nm-header .nm-item-link:hover strong,
+body header.nm-header .nm-guide:hover strong { color: var(--violet); }
+body header.nm-header .nm-rail-icon,
+body header.nm-header .nm-item-icon { border-color: var(--line); border-radius: 8px; color: var(--violet); }
+body header.nm-header .nm-kicker,
+body header.nm-header .nm-h,
+body header.nm-header .nm-groups .nm-h,
+body header.nm-header .nm-columns .nm-h { color: var(--iron); }
+body header.nm-header .nm-main-head a,
+body header.nm-header .nm-footer a,
+body header.nm-header .nm-feature-link { color: var(--violet); }
+body header.nm-header .nm-footer { background: var(--cloud); border-top: 1px solid var(--line); }
+body header.nm-header .nm-footer .nm-footer-all { color: var(--ink); }
+body header.nm-header .nm-compact a:hover,
+body header.nm-header .nm-guide:hover { border-color: var(--violet); color: var(--violet); }
+body header.nm-header .nm-aside { background: var(--cloud); border-radius: 12px; }
+body header.nm-header .nm-aside-cta { background: var(--violet); border-color: var(--violet); color: #fff !important; border-radius: 160px; }
+body header.nm-header .nm-aside-cta:hover { background: var(--violet-strong); border-color: var(--violet-strong); }
+body header.nm-header .nm-tech { border-top-color: var(--line); }
+body header.nm-header .nm-tech .nm-compact a { border-radius: 160px; border-color: var(--line-2); }
+body header.nm-header .nm-skip { background: var(--violet); }
+
+/* Narrow screens: the drawer replaces the bar links (same breakpoint as the live menu, 1080px) */
+@media (max-width: 1080px) {
+  body header.nm-header .nm-bar { padding: 0 16px; height: 64px; }
+  body header.nm-header .nm-logo img { width: 150px; height: 22px; }
+  body header.nm-header .nm-toggle {
+    height: 44px; padding: 0 18px; border-radius: 160px; border: 1px solid var(--line-2); background: #fff;
+    color: var(--violet); font-family: var(--font); font-size: 14px; font-weight: 400;
+  }
+  body header.nm-header.nm-mobile-open .nm-drawer {
+    top: 64px; inset: 64px 0 0; padding: 8px 16px 24px; background: #fff; gap: 16px; border: 0; border-radius: 0;
+  }
+  body header.nm-header .nm-item { border-bottom: 1px solid var(--line); }
+  body header.nm-header .nm-trigger {
+    height: 56px; padding: 0; font-size: 17px; border-radius: 0; background: transparent;
+  }
+  body header.nm-header .nm-trigger:hover, body header.nm-header .nm-trigger.is-open { background: transparent; }
+  body header.nm-header .nm-panel { border: 0; box-shadow: none; max-height: none; overflow: visible; }
+  body header.nm-header .nm-panel-inner { padding: 0 0 16px; }
+  body header.nm-header .nm-actions { flex-direction: column; align-items: stretch; gap: 12px; margin: 8px 0 0; }
+  body header.nm-header .nm-link { justify-content: center; border: 1px solid var(--line-2); border-radius: 160px; padding: 12px 20px; font-size: 16px; }
+  body header.nm-header .nm-cta { justify-content: center; height: 48px; }
+}
+@media (max-width: 720px) {
+  body header.nm-header .nm-bar { padding: 0 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body header.nm-header, body header.nm-header * { transition: none !important; }
+}
+
+/* ---- Round two: right-aligned bar, floating right-aligned mega panels, content links, footer ---- */
+@media (min-width: 1081px) {
+  /* Menu items sit on the right, next to Contact and the quote button */
+  body header.nm-header .nm-drawer { justify-content: flex-end; gap: 28px; }
+  body header.nm-header .nm-actions { margin-left: 0; padding-left: 20px; border-left: 1px solid var(--line); }
+  body header.nm-header .nm-items { gap: 2px; }
+  body header.nm-header .nm-trigger { padding: 9px 14px; border-radius: 99px; }
+  body header.nm-header .nm-trigger:hover { background: var(--cloud); }
+  body header.nm-header .nm-trigger.is-open { background: var(--violet-wash); color: var(--violet-strong); }
+
+  /* A floating card under the bar, its right edge on the page's right edge */
+  body header.nm-header .nm-panel {
+    left: auto; right: max(40px, calc((100% - (var(--max) + 80px)) / 2 + 40px)); top: calc(100% + 10px);
+    width: min(1120px, calc(100% - 80px)); max-height: calc(100dvh - 100px);
+    border: 1px solid var(--line); border-radius: 28px; overflow: hidden auto; background: #fff;
+    box-shadow: 0 40px 90px -24px rgba(30, 30, 100, .3), 0 8px 24px rgba(20, 20, 60, .08);
+    transform-origin: top right;
+  }
+  body header.nm-header .nm-panel:not([hidden]) { animation: nmPop .22s var(--ease); }
+  body header.nm-header .nm-panel-hire { width: min(1040px, calc(100% - 80px)); }
+  body header.nm-header .nm-panel-industries { width: min(880px, calc(100% - 80px)); }
+  body header.nm-header .nm-panel-resources { width: min(800px, calc(100% - 80px)); }
+  body header.nm-header .nm-panel-company { width: min(900px, calc(100% - 80px)); }
+  body header.nm-header .nm-panel-inner { max-width: none; padding: 0 28px; }
+  body header.nm-header .nm-panel-industries .nm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  body header.nm-header .nm-panel-industries .nm-columns, body header.nm-header .nm-panel-resources .nm-columns { grid-template-columns: minmax(0, 1fr); }
+  body header.nm-header .nm-panel-resources .nm-columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  body header.nm-header .nm-panel-company .nm-columns { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  body header.nm-header .nm-panel-company .nm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body header.nm-header .nm-panel-company section:last-child .nm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* The page behind dims a little while a panel is open */
+  body header.nm-header.nm-has-open::after {
+    content: ""; position: fixed; inset: 72px 0 0; z-index: -1; background: rgba(20, 20, 60, .22); backdrop-filter: blur(2px); pointer-events: none;
+    animation: nmFade .2s ease both;
+  }
+
+  /* Inside the card: soft rail pills, tinted icon tiles, a CTA bar */
+  body header.nm-header .nm-rail { border-right: 0; padding: 22px 16px 22px 0; gap: 4px; }
+  body header.nm-header .nm-rail button { border-radius: 16px; padding: 11px 14px; transition: background-color .2s, transform .25s var(--ease); }
+  body header.nm-header .nm-rail button:hover { transform: translateX(3px); }
+  body header.nm-header .nm-rail button.is-selected { background: var(--violet-wash); }
+  body header.nm-header .nm-panel-services .nm-main { border-left: 1px solid var(--line); padding-left: 32px; }
+  body header.nm-header .nm-rail-icon, body header.nm-header .nm-item-icon { background: var(--violet-wash); border-color: transparent; border-radius: 12px; }
+  body header.nm-header .nm-item-icon img, body header.nm-header .nm-item-icon .nm-brand { filter: none; }
+  body header.nm-header .nm-item-link { border-radius: 14px; transition: background-color .2s, transform .25s var(--ease); }
+  body header.nm-header .nm-item-link:hover { background: var(--cloud); transform: translateX(2px); }
+  body header.nm-header .nm-main-head { border-bottom-color: var(--line); padding-left: 10px; padding-right: 10px; margin-bottom: 14px; }
+  body header.nm-header .nm-main { padding: 26px 0 24px 32px; }
+  body header.nm-header .nm-panel-services .nm-main { padding-left: 32px; }
+  body header.nm-header .nm-groups { column-gap: 24px; }
+  body header.nm-header .nm-groups section { padding-bottom: 12px; }
+  body header.nm-header .nm-groups .nm-h, body header.nm-header .nm-columns .nm-h { padding: 0 10px 8px; }
+  body header.nm-header .nm-tech { margin-top: 6px; }
+  body header.nm-header .nm-span { padding-left: 0; }
+  body header.nm-header .nm-feature .nm-item-link { border-radius: 18px; background: var(--cloud); border: 0; }
+  body header.nm-header .nm-feature .nm-item-link:hover { background: var(--violet-wash); }
+  body header.nm-header .nm-footer { padding: 14px 28px; background: linear-gradient(90deg, var(--violet-wash), var(--cloud) 60%); border-top: 1px solid var(--line); }
+  body header.nm-header .nm-footer a:not(.nm-footer-all) { color: #fff; background: var(--violet); padding: 8px 16px; border-radius: 99px; font-weight: 500; }
+  body header.nm-header .nm-footer a:not(.nm-footer-all):hover { background: var(--violet-strong); text-decoration: none; }
+  body header.nm-header .nm-footer .nm-footer-all { color: var(--ink); font-weight: 500; }
+  body header.nm-header .nm-tech .nm-compact a { padding: 7px 14px 7px 11px; }
+  body header.nm-header .nm-guide { border-radius: 18px; background: var(--cloud); border: 0; }
+  body header.nm-header .nm-guide:hover { background: var(--violet-wash); }
+}
+@keyframes nmPop { from { opacity: 0; transform: translateY(-10px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes nmFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Links inside page copy: ink text with a lime marker under it (the homepage highlight); on hover the marker fills with violet wash.
+   Buttons, cards and anything with a class are not touched. */
+body main a:not([class]), body main .prose a:not(.btn), body main details a:not([class]) {
+  color: var(--black); font-weight: 500; text-decoration: none; padding: 0 .12em; margin: 0 -.12em; border-radius: 4px;
+  background: linear-gradient(transparent 62%, var(--p-lime) 62%, var(--p-lime) 92%, transparent 92%) 0 0 / 100% 100% no-repeat;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  transition: background-color .25s, color .25s, background-size .35s var(--ease);
+}
+body main a:not([class]):hover, body main .prose a:not(.btn):hover {
+  color: var(--violet-strong);
+  background-image: linear-gradient(var(--violet-wash), var(--violet-wash));
+}
+body main a:not([class]):focus-visible, body main .prose a:not(.btn):focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+
+/* Footer */
+body .ftr { margin-top: 24px; padding: 72px 0 32px; background: var(--cloud); border-radius: 48px 48px 0 0; }
+body .ftr__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); gap: 56px; }
+body .ftr__brand { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+body .ftr__logo img { height: 28px; width: auto; display: block; }
+body .ftr__tag { margin: 0; max-width: 280px; font-size: 16px; line-height: 1.55; color: var(--slate); }
+body .ftr__acts { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+body .ftr__brand a.ftr__cta { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 99px; background: var(--violet); color: #fff; font-size: 15.5px; text-decoration: none; transition: background-color .2s, transform .25s var(--ease); }
+body .ftr__brand a.ftr__cta svg { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+body .ftr__brand a.ftr__cta:hover { background: var(--violet-strong); color: #fff; }
+body .ftr__brand a.ftr__cta:hover svg { transform: translateX(4px); }
+body .ftr__brand a.ftr__social { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--ink); border: 1px solid var(--line); transition: transform .25s var(--ease), color .2s, border-color .2s; }
+body .ftr__brand a.ftr__social svg { width: 20px; height: 20px; }
+body .ftr__brand a.ftr__social:hover { color: var(--violet); border-color: var(--violet); transform: translateY(-3px); }
+body .ftr__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+body .ftr h4 { margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--violet-strong); }
+body .ftr li a { position: relative; display: inline-block; padding: 7px 0; font-size: 15px; color: var(--ink); text-decoration: none; background: linear-gradient(var(--violet), var(--violet)) 0 calc(100% - 4px) / 0 1.5px no-repeat; transition: color .2s, background-size .3s var(--ease); }
+body .ftr li a:hover { color: var(--violet); background-size: 100% 1.5px; }
+body .ftr__where { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line-2); }
+body .ftr__where h4 { margin: 0; }
+body .ftr__where ul { display: flex; flex-wrap: wrap; gap: 10px; }
+body .ftr__where li a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #fff; border: 1px solid var(--line); font-size: 14.5px; background-image: none; transition: transform .25s var(--ease), border-color .2s, color .2s; }
+body .ftr__where li a svg { width: 15px; height: 15px; color: var(--violet); }
+body .ftr__where li a:hover { transform: translateY(-3px); border-color: var(--violet); }
+body .ftr__b { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line-2); }
+@media (max-width: 960px) {
+  body .ftr { border-radius: 32px 32px 0 0; padding-top: 56px; }
+  body .ftr__top { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  body .ftr__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) { body .ftr__where { align-items: flex-start; flex-direction: column; gap: 14px; } }
+@media (prefers-reduced-motion: reduce) { body header.nm-header .nm-panel:not([hidden]), body header.nm-header.nm-has-open::after { animation: none; } }
+@media (min-width: 1081px) {
+  body header.nm-header .nm-panel-resources .nm-columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 24px 32px; align-items: start; }
+  body header.nm-header .nm-panel-resources .nm-columns > section { grid-column: auto !important; }
+  body header.nm-header .nm-guides .nm-h { padding-left: 10px !important; }
+  body header.nm-header .nm-panel-resources .nm-guide-list { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  body header.nm-header .nm-panel-resources .nm-main { padding-top: 26px; }
+}
+
+/* Mega menu, monday-style: 3D tiles in the rail, plain line icons in the lists, a dark promo bar instead of the grey footer */
+@media (min-width: 1081px) {
+  body header.nm-header .nm-panel-inner { grid-template-columns: 300px minmax(0, 1fr); }
+  body header.nm-header .nm-rail button { align-items: center; gap: 14px; padding: 10px 14px; }
+  body header.nm-header .nm-rail-spot { flex: none; width: 46px; height: 46px; border-radius: 14px; object-fit: cover; box-shadow: 0 4px 12px rgba(20, 20, 60, .12); transition: transform .35s var(--ease); }
+  body header.nm-header .nm-rail button:hover .nm-rail-spot, body header.nm-header .nm-rail button.is-selected .nm-rail-spot { transform: rotate(-6deg) scale(1.06); }
+  body header.nm-header .nm-rail-text { display: grid; gap: 1px; min-width: 0; }
+  body header.nm-header .nm-rail-text strong { font-size: 15px; line-height: 1.3; }
+  body header.nm-header .nm-rail-text small { display: block; font-size: 13px; line-height: 1.35; color: var(--slate); font-weight: 400; }
+  body header.nm-header .nm-rail button.is-selected .nm-rail-text small { color: var(--ink); }
+
+  body header.nm-header .nm-item-icon { background: transparent; border-radius: 0; flex-basis: 24px; }
+  body header.nm-header .nm-item-link:hover .nm-item-icon { color: var(--violet-strong); }
+
+  body header.nm-header .nm-footer {
+    display: flex; align-items: center; gap: 14px; margin: 0 24px 24px; padding: 14px 18px 14px 18px; border: 0; border-radius: 20px;
+    background: var(--black); color: rgba(255, 255, 255, .78);
+  }
+  body header.nm-header .nm-footer-av { display: inline-flex; }
+  body header.nm-header .nm-footer-av img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--black); margin-left: -10px; background: #fff; }
+  body header.nm-header .nm-footer-av img:first-child { margin-left: 0; }
+  body header.nm-header .nm-footer a:not(.nm-footer-all) { background: var(--p-lime); color: var(--black); font-weight: 600; padding: 9px 18px; }
+  body header.nm-header .nm-footer a:not(.nm-footer-all):hover { background: #fff; color: var(--black); }
+  body header.nm-header .nm-footer .nm-footer-all { color: #fff; margin-left: auto; font-weight: 500; }
+  body header.nm-header .nm-footer .nm-footer-all:hover { text-decoration: underline; text-underline-offset: 4px; }
+}
+
+/* Attached to the bar (no gap) and compact enough not to scroll on a 720px-tall window */
+@media (min-width: 1081px) {
+  body header.nm-header .nm-panel { top: 100%; border-top: 0; border-radius: 0 0 28px 28px; max-height: calc(100dvh - 76px); scrollbar-width: thin; }
+  body header.nm-header .nm-rail { padding: 16px 14px 14px 0; gap: 2px; }
+  body header.nm-header .nm-rail button { padding: 8px 12px; }
+  body header.nm-header .nm-rail-spot { width: 40px; height: 40px; border-radius: 12px; }
+  body header.nm-header .nm-rail-text small { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  body header.nm-header .nm-main { padding: 18px 0 14px 28px; }
+  body header.nm-header .nm-main-head { padding-bottom: 10px; margin-bottom: 10px; }
+  body header.nm-header .nm-groups section { padding-bottom: 8px; }
+  body header.nm-header .nm-item-link { padding: 6px 10px; }
+  body header.nm-header .nm-item-compact { padding: 4px 10px; }
+  body header.nm-header .nm-tech { margin-top: 2px; padding-top: 12px; }
+  body header.nm-header .nm-tech .nm-compact { gap: 6px; }
+  body header.nm-header .nm-tech .nm-compact a { padding: 5px 12px 5px 9px; font-size: 13px; }
+  body header.nm-header .nm-footer { margin: 0 20px 16px; padding: 10px 14px; }
+  body header.nm-header.nm-has-open::after { inset: 72px 0 0; }
+}
+/* The bar is the whole header: no extra padding from the older pill header, so panels attach directly under it */
+body header.nm-header { padding: 0; }

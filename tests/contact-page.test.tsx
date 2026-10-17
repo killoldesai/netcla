@@ -47,7 +47,7 @@ test("Contact renders its own layout; the form fields all exist in the lead sche
   assert.ok(!isContactContent(c, "/about"));
   const $ = render(c);
   assert.ok($("main.v3-contact").length);
-  assert.ok($("link[href^='/assets/nx/pages/contact.css']").length);
+  assert.ok($("link[href^='/assets/v2/pages/contact.css']").length);
   assert.equal($("[class*='ab-'], [class*='v3-skeleton']").length, 0);
   assert.equal($("h1").length, 1);
   const names = new Set($("#contact-form [name]").map((_, el) => $(el).attr("name")).get());
@@ -81,7 +81,7 @@ test("sections link only to live pages, and the other-ways cards render", () => 
   const $ = render(content({ "other-routes": { route_1_url: "/engagement-models", route_2_url: "/not-a-page", route_3_url: "/how-we-work" } }));
   assert.equal($("#other-routes a").length, 2);
   assert.equal($("#next-steps li").length, 3);
-  assert.equal($("#prepare .ct-checklist li").length, 4);
+  assert.equal($("#prepare .ct-frame .fc__row").length, 4);
   assert.equal($("#faq details").length, 5);
 });
 

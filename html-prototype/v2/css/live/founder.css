@@ -1,0 +1,15 @@
+/* Founder live-only rules: facts list and the expertise cards. Tokens only. */
+.about-founder-feature .ticks { margin-top: 24px; }
+.about-founder-feature .ticks li { font-size: 16px; }
+.about-founder-feature .feature__img { aspect-ratio: 4 / 3; }
+.about-founder-feature .feature__img img { height: 100%; object-fit: cover; }
+.about-expertise { margin-top: 36px; }
+.about-expertise .cat { padding: 32px; }
+.about-expertise .cat h3 { margin-top: 6px; }
+.about-expertise .about-ico { margin-bottom: 8px; }
+.about-bio p:last-child { margin-bottom: 0; }
+.about-more .tlink { font-size: 16px; }
+@media (max-width: 720px) {
+  .about-expertise .cat { padding: 24px; }
+}
+.about-expertise { grid-template-columns: repeat(auto-fit, minmax(240px, 300px)); justify-content: center; }

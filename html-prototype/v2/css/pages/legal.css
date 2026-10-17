@@ -1,0 +1,27 @@
+/* Legal page layout only. The article grid, toc and prose come from components.css. */
+.legal-hero h1 { font-size: clamp(40px, 5vw, 64px); }
+.legal-meta { margin-top: 18px; font-size: 15px; color: var(--iron); }
+.legal-hero .lead { margin-top: 18px; color: var(--slate); }
+.legal-switch { margin-top: 34px; }
+.legal-switch ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.legal-switch a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 22px; border-radius: 99px; background: var(--cloud); color: var(--ink); text-decoration: none; font-size: 15px; transition: background-color .25s, color .25s; }
+.legal-switch a:hover { background: var(--violet-wash); color: var(--black); }
+.legal-switch a[aria-current="page"] { background: var(--violet-wash); color: var(--black); }
+.legal-page { padding-top: 88px; }
+.legal-doc .draft { line-height: 1.6; }
+.legal-table { margin: 8px 0 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; }
+.legal-table:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+.legal-table table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15.5px; line-height: 1.5; }
+.legal-table th, .legal-table td { padding: 16px 20px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.legal-table th { background: var(--cloud); font-weight: 500; color: var(--black); }
+.legal-table tr:last-child td { border-bottom: 0; }
+.legal-table .draft { padding: 4px 8px; }
+.legal-gated { margin-top: 24px; text-align: left; }
+.legal-gated .gated__label { margin-bottom: 14px; }
+.legal-gated p { margin: 0 0 12px; }
+.legal-gated p:last-child { margin-bottom: 0; }
+.legal-page .toc a { font-size: 15px; }
+@media (max-width: 720px) {
+  .legal-page { padding-top: 56px; }
+  .legal-switch a { flex: 1 1 auto; justify-content: center; }
+}

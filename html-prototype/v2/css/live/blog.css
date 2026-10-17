@@ -1,0 +1,8 @@
+/* Guides index: live-only rules (topic blurbs, tag pills on the featured guide). Shared parts come from pages/blog.css, core.css and components.css. */
+.gx-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.gx-tags .bcard__tag { margin: 0; }
+.gx-blurbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin: 0 0 44px; }
+.gx-blurbs h3 { font-size: 17px; font-weight: 600; margin: 0 0 8px; }
+.gx-blurbs p { font-size: 15.5px; line-height: 1.55; color: var(--slate); margin: 0; }
+.gx-empty { font-size: 18px; color: var(--slate); text-align: center; }
+@media (max-width: 960px) { .gx-blurbs { grid-template-columns: minmax(0, 1fr); gap: 20px; } }

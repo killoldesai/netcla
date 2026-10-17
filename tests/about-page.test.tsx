@@ -64,34 +64,35 @@ test("About renders its own layout on the redesigned shell and hides empty proof
   assert.ok(!isAboutContent(c, "/contact"));
   const $ = render(c);
   assert.ok($("main.v3-about").length);
-  assert.ok($(".nx").length);
-  assert.ok($("link[href^='/assets/nx/pages/about.css']").length);
+  assert.ok($(".v2").length);
+  assert.ok($("link[href^='/assets/v2/pages/about.css']").length);
   assert.equal($("link[href^='/assets/about.css']").length, 0);
   assert.equal($("link[href^='/assets/skeleton.css']").length, 0);
   assert.equal($("[class*='ab-']").length, 0, "legacy about-page classes are gone");
   assert.equal($("h1").length, 1);
   for (const id of ["proof-team", "proof-clients", "proof-awards"]) assert.equal($("#" + id).length, 0, id + " must not render without evidence");
   // Only the founder card (from company.ts) shows in the team section until leaders are approved.
-  assert.equal($("#team .about-team > article").length, 1);
-  assert.equal($("#team .sk-card__title").text().trim(), "Killol Desai");
-  // Glance rows with no approved fact are not shown; the computed row is.
-  assert.deepEqual($(".about-glance dt").map((_, el) => $(el).text()).get(), ["Core practices"]);
-  // No illustration in the content, so the hero shows the prototype fallback art.
-  assert.equal($("#hero .about-art svg.il[role='img']").length, 1);
+  assert.equal($("#team .about-founder-solo > .cat").length, 1);
+  assert.equal($("#team h3").text().trim(), "Killol Desai");
+  // Glance facts with no approved value are not shown; the computed core practices row is. The founding year is always shown from company.ts.
+  // The four core practices are always shown (computed); no extra fact cards without an approved value.
+  assert.equal($(".about-bento__practices li").length, 4);
+  assert.equal($(".about-bento__fact").length, 0);
+  assert.equal($(".about-bento__year b").text(), "2011");
+  // No generated illustration in the content, so the hero shows the prototype fallback art.
+  assert.match($(".about-story-panel__art img").attr("src") ?? "", /scene-about-team\.webp$/);
 });
 
-test("sections render in the prototype order, and the on-page nav links only to rendered sections", () => {
+test("sections render in the prototype order, and the sections with a prototype slot render their content", () => {
   const $ = render();
   assert.deepEqual($("main section[id]").map((_, el) => $(el).attr("id")).get(), ["hero", "company-story", "company-glance", "practice-index", "principles", "delivery-timeline", "working-model", "industries-intro", "india-partner", "team", "faq", "cta-banner"]);
-  const targets = $(".subnav a").map((_, el) => $(el).attr("href")!).get();
-  assert.deepEqual(targets, ["#company-story", "#company-glance", "#practice-index", "#principles", "#delivery-timeline", "#working-model", "#industries-intro", "#india-partner", "#team", "#faq"]);
-  for (const href of targets) assert.equal($(href).length, 1, href);
-  // Process steps are a real sequence: five numbered steps in the ordered list.
-  assert.equal($("#delivery-timeline ol.nx-steps.nx-steps--five > li.nx-step").length, 5);
-  // Each FAQ question is a native details element, the first one open.
+  // Process steps are a real sequence: five numbered steps.
+  assert.equal($("#delivery-timeline .wf__step").length, 5);
+  assert.deepEqual($("#delivery-timeline .wf__step .n").map((_, el) => $(el).text()).get(), ["1", "2", "3", "4", "5"]);
+  // Each FAQ question is a native details element; six or more questions sit in two columns, all closed.
   assert.equal($("#faq details").length, 6);
-  assert.ok($("#faq details").first().attr("open") !== undefined);
-  assert.equal($("#faq details").eq(1).attr("open"), undefined);
+  assert.equal($("#faq .sc-faq__cols .acc").length, 2);
+  assert.equal($("#faq details[open]").length, 0);
 });
 
 test("practice rows and sector chips come from the site structure and link to live pages", () => {
@@ -101,9 +102,9 @@ test("practice rows and sector chips come from the site structure and link to li
   }
   for (const [url] of ALSO) assert.ok(sitePage(url), url);
   const $ = render();
-  assert.equal($("#practice-index .sk-cards > article").length, 4);
-  assert.equal($("#practice-index .sk-cards > article").first().find("a[href='/custom-software-development']").length > 0, true);
-  assert.equal($("#industries-intro .about-sectors li").length, sectorPaths.length);
+  assert.equal($("#practice-index .catgrid > article").length, 4);
+  assert.equal($("#practice-index .catgrid > article").first().find("a[href='/custom-software-development']").length > 0, true);
+  assert.equal($("#industries-intro .irow > a.icard").length, sectorPaths.length);
 });
 
 test("approved evidence fills the glance list, and proof blocks appear once they have content", () => {
@@ -112,10 +113,10 @@ test("approved evidence fills the glance list, and proof blocks appear once they
     "proof-team": { heading: "The team", leader_1_name: "Asha Rao", leader_1_title: "Head of Engineering", leader_1_bio: "Leads delivery." },
     "proof-awards": { heading: "Recognition", award_1: "Clutch top developer" },
   }));
-  assert.deepEqual($(".about-glance dt").map((_, el) => $(el).text()).get(), ["Founded", "Based in", "Core practices"]);
+  assert.deepEqual($(".about-bento__fact .about-glance__k").map((_, el) => $(el).text()).get(), ["Base city"]);
   // The approved leader sits beside the founder card in the team section, which now takes the proof-team id.
-  assert.equal($("#proof-team .about-team > article").length, 2);
-  assert.equal($("#proof-team .sk-card__title").last().text().trim(), "Asha Rao");
+  assert.equal($("#proof-team .catgrid > .cat").length, 2);
+  assert.equal($("#proof-team h3").last().text().trim(), "Asha Rao");
   assert.equal($("#team").length, 0);
   assert.equal($("#proof-awards .about-awards li").length, 1);
   assert.equal($("#proof-clients").length, 0);

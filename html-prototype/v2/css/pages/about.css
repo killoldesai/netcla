@@ -1,0 +1,56 @@
+/* About page: layout tweaks only. Styling comes from css/core.css and css/components.css. */
+
+/* Hero: breadcrumb spans the grid, actions sit under the lead */
+.hero--statement h1 { font-size: clamp(40px, 5vw, 72px); }
+.about-nowrap { white-space: nowrap; }
+.about-crumbs { grid-column: 1 / -1; margin-bottom: 8px; }
+.about-acts { grid-column: 2; margin-top: 28px; }
+
+/* Who we are */
+.about-story-body p { font-size: 18px; line-height: 1.65; color: var(--slate); margin-bottom: 18px; }
+.about-story-body .tlink { margin-top: 8px; }
+.about-pull { margin-top: 18px; font-size: 22px; line-height: 1.4; }
+
+/* Practice cards */
+.cat h3 a { color: inherit; text-decoration: none; }
+.cat h3 a:hover { color: var(--violet); }
+.about-subs { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14.5px; }
+.about-subs a { color: var(--violet); }
+.about-also-label { margin-top: 56px; }
+.about-also { justify-content: center; margin-top: 16px; }
+
+/* How we work: four principles in a 2 by 2 grid */
+.feat__g.about-feat { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 80px; }
+
+/* Process */
+.wf__step .about-receive, .wf__step ul { grid-column: 1 / -1; }
+.about-receive { font-size: 13px; font-weight: 500; color: var(--violet); margin: 14px 0 6px; }
+
+/* Where we work */
+.about-where .icard { flex-basis: 300px; }
+.about-tools { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+.about-tools li { font-size: 15px; }
+.about-where-tools { margin-top: 48px; }
+
+/* Why India trade-offs */
+.about-benefit, .about-watch { font-size: 15.5px; line-height: 1.55; color: var(--slate); }
+.about-benefit strong, .about-watch strong { display: block; font-size: 13px; font-weight: 500; color: var(--violet); margin-bottom: 4px; }
+
+/* Timeline */
+.about-timeline { max-width: 760px; margin: 0 auto; }
+.about-timeline .gated { padding: 20px; text-align: left; }
+.about-timeline .gated p { margin: 0; }
+
+/* Team, clients and recognition: gated cells sit in the grid they will become */
+.catgrid .gated { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 220px; }
+.catgrid .gated p { margin: 0; }
+.about-ico { width: 64px; height: 64px; border-radius: 16px; background: var(--p-lavender); display: grid; place-items: center; color: var(--violet); }
+.about-ico svg { width: 28px; height: 28px; }
+
+@media (max-width: 960px) {
+  .about-acts { grid-column: auto; }
+}
+@media (max-width: 720px) {
+  .feat__g.about-feat { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .catgrid .gated { min-height: 0; }
+}

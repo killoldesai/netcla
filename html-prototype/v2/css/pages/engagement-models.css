@@ -1,0 +1,10 @@
+/* engagement models: layout tweaks only. Shared pieces live in css/core.css and css/components.css. */
+.plan__img { aspect-ratio: 4 / 3; }
+.ct-pad { padding: 16px 20px; }
+.ct-lead { max-width: 680px; margin: 18px auto 0; }
+.ct-spot-c { display: block; margin: 0 auto 18px; }
+.ct-center { text-align: center; margin-top: 40px; }
+.em-feat .feat__g { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) {
+  .em-feat .feat__g { grid-template-columns: minmax(0, 1fr); }
+}

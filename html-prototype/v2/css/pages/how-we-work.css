@@ -1,0 +1,23 @@
+/* How we work: layout tweaks only. Components come from components.css and core.css. */
+.hw-hero { padding-bottom: 48px; }
+.hw-hero .wrap { gap: 64px; }
+.hw-scene { display: block; width: 100%; height: auto; border-radius: 32px; background: var(--cloud); }
+.hw-approach .huge { font-size: clamp(44px, 6.2vw, 96px); }
+.hw-approach .ctx__stage { margin-top: 80px; }
+.hw-approach .ctx__top > div:first-child .eyebrow { margin-bottom: 14px; }
+.hw-stages__lead { max-width: 680px; margin: 22px auto 0; }
+.hw-recv { font-size: 14px; color: var(--slate); margin: 28px 0 0; }
+.hw-files { padding: 20px; display: grid; gap: 12px; }
+.hw-files .fc__file { font-size: 15px; padding: 14px 16px; }
+.hw-comm__lead { max-width: 680px; margin: 22px auto 0; text-align: center; }
+.hw-tz { display: grid; gap: 18px; padding: 20px 4px 8px; }
+.hw-tz__cap { display: block; margin-top: 14px; }
+.hw-tools__grid { margin-top: 48px; }
+.hw-tools .cat h3 { margin-top: 6px; }
+.hw-faq .faq h2 { margin-bottom: 0; }
+@media (max-width: 720px) {
+  .hw-tabs .tbl .tr > :nth-child(4) { display: none; }
+  .hw-tabs .tbl .tr { grid-template-columns: minmax(0, 1.4fr) 44px minmax(0, 1fr); }
+  .hw-tabs .tbl--plan .tr { grid-template-columns: minmax(0, 1.4fr) 44px minmax(0, 1fr); }
+  .hw-tabs .tbl--plan .tr > :nth-child(4) { display: flex; }
+}

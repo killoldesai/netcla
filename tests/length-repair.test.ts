@@ -22,7 +22,7 @@ test("only fields over their hard limit are flagged", () => {
   assert.equal(overLimitFields({ heading: words(10) }).length, 0);
   // The same field name can have a tighter limit in one section.
   assert.equal(overLimitFields({ body_paragraph: `<p>${words(180)}</p>` }, "why-netofficials").length, 1);
-  assert.equal(overLimitFields({ body_paragraph: `<p>${words(180)}</p>` }, "service-overview").length, 0);
+  assert.equal(overLimitFields({ body_paragraph: [50, 60, 60, 60].map((n) => `<p>${words(n)}</p>`).join("") }, "service-overview").length, 0);
   assert.equal(over.find((o) => o.key === "a2")?.words, 130);
 });
 
@@ -80,4 +80,20 @@ test("a reply with commentary and a second draft still parses, using the last co
   // Still handles the plain and fenced cases.
   assert.deepEqual(parseModelJSON('{"a":"b"}'), { a: "b" });
   assert.throws(() => parseModelJSON("no json at all"));
+});
+
+test("overview paragraphs are capped one by one, so one long paragraph is sent back for shortening", () => {
+  const body = (counts: number[]) => counts.map((n) => `<p>${words(n)}</p>`).join("");
+  // Within the whole-body cap (250) but the first paragraph is far over the answer cap.
+  const flagged = overLimitFields({ body_paragraph: body([120, 45, 45, 40]) }, "service-overview");
+  assert.equal(flagged.length, 1);
+  assert.match(flagged[0].label, /first paragraph at most 55/);
+  assert.equal(overLimitFields({ body_paragraph: body([52, 62, 60, 58]) }, "service-overview").length, 0);
+  // Other sections keep only the whole-field cap.
+  assert.equal(overLimitFields({ body_paragraph: body([120, 45, 45, 40]) }, "why-netofficials").length, 1);
+});
+
+test("short card fields have caps too", () => {
+  const over = overLimitFields({ card_1_title: words(14), step_2_title: words(5), outcome_1: words(30), outcome_2: words(12) });
+  assert.deepEqual(over.map((o) => o.key).sort(), ["card_1_title", "outcome_1"]);
 });

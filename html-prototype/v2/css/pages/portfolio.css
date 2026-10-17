@@ -1,0 +1,7 @@
+/* portfolio: gated project cards in the bgrid */
+.pf-gate { margin-bottom: 40px; }
+.bgrid .bcard .gated { padding: 22px; text-align: left; margin-top: 14px; }
+.bgrid .bcard .gated__label { margin-bottom: 8px; }
+.bgrid .bcard .gated h3 { font-size: 18px; font-weight: 500; margin: 0 0 6px; color: var(--ink); }
+.bgrid .bcard .gated p { font-size: 15px; margin: 0; }
+.bgrid .bcard .bcard__tag { margin-top: 14px; font-size: 14px; color: var(--violet-strong); }

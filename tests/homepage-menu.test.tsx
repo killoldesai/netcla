@@ -6,6 +6,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { getDesign } from "../src/designs";
 import { HomePage } from "../src/home/HomePage";
 import { menuLabel, menuGroup } from "../src/menu-labels";
+import { V2_VERSION } from "../src/site/v2/ui";
 test("Homepage renders one h1 and a heading for every section", () => {
   const d = getDesign("software-led");
   const actual = load(
@@ -34,9 +35,8 @@ test("Homepage renders one h1 and a heading for every section", () => {
     .map((_, l) => actual(l).attr("href"))
     .get();
   for (const href of [
-    "/assets/nx/site.css?v=20261016",
-    "/assets/nx/live.css?v=20261016",
-    "/assets/nx/pages/home.css?v=20261016",
+    `/assets/v2/site.css?v=${V2_VERSION}`,
+    `/assets/v2/home.css?v=${V2_VERSION}`,
   ])
     assert.ok(styles.includes(href), href);
   assert.equal(actual("link[rel=stylesheet][href*=gradient]").length, 0);

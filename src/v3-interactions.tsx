@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Icon } from "./site/ui";
+import { V2Icon as Icon } from "./site/v2/ui";
 export function TrackedLink({
   href,
   event,
@@ -32,11 +32,12 @@ export function TrackedLink({
     </a>
   );
 }
-export function NewsletterForm({ enabled }: { enabled: boolean }) {
+export function NewsletterForm({ enabled, note }: { enabled: boolean; note?: string }) {
   const [status, setStatus] = useState(""),
     [busy, setBusy] = useState(false);
   return (
     <form
+      className="news__form"
       onSubmit={async (e) => {
         e.preventDefault();
         if (!enabled || busy) return;
@@ -57,20 +58,23 @@ export function NewsletterForm({ enabled }: { enabled: boolean }) {
         }
       }}
     >
-      <label>
-        Email
-        <input
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          disabled={!enabled || busy}
-        />
-      </label>
-      <button type="submit" className="v3-button" disabled={!enabled || busy}>
+      <div className="field">
+        <label>
+          Email address
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            disabled={!enabled || busy}
+          />
+        </label>
+      </div>
+      <button type="submit" className="btn btn--violet" disabled={!enabled || busy}>
         {busy ? "Sending…" : "Subscribe"}
       </button>
-      <p role="status">
+      {note && <p className="news__note">{note}</p>}
+      <p role="status" className="news__note">
         {status ||
           (enabled
             ? "Confirm your subscription by email. Unsubscribe at any time."
@@ -95,41 +99,30 @@ export function VacancyDirectory({
 }) {
   if (!vacancies.length)
     return (
-      <div className="v3-vacancies role-empty">
-        <p className="role-empty__text">There are no open positions listed at the moment.</p>
+      <div className="cat cat--fill careers-empty" style={{ background: "var(--p-sky)" }}>
+        <h3>There are no open positions listed at the moment.</h3>
       </div>
     );
   return (
-    <ul className="v3-vacancies role-list">
+    <div className="catgrid catgrid--2 careers-roles">
       {vacancies.map((v) => {
         const href = preview ? "#open-roles" : "/careers/" + v.slug;
         return (
-          <li key={v.id} className="role-row">
-            <div className="role-row__main">
-              <h3 className="role-row__title">{v.title}</h3>
-              <p className="role-row__team">{v.department}</p>
-              <div className="role-row__badges">
-                {v.location && (
-                  <span className="nx-badge">
-                    <span className="nx-badge__dot" aria-hidden="true" />
-                    {v.location}
-                  </span>
-                )}
-                {v.employment_type && (
-                  <span className="nx-badge nx-badge--lime">
-                    <span className="nx-badge__dot" aria-hidden="true" />
-                    {v.employment_type}
-                  </span>
-                )}
-              </div>
-            </div>
-            <a className="nx-arrowlink role-row__link" href={href}>
-              <span>View role</span>
-              <Icon name="arrow-right" size={18} />
-            </a>
-          </li>
+          <a key={v.id} className="cat rv" href={href}>
+            {v.department && (
+              <span className="cat__tag">
+                <i aria-hidden="true" />
+                {v.department}
+              </span>
+            )}
+            <h3>{v.title}</h3>
+            {(v.location || v.employment_type) && <p>{[v.location, v.employment_type].filter(Boolean).join(" · ")}</p>}
+            <span className="more">
+              View role <Icon name="arrow" />
+            </span>
+          </a>
         );
       })}
-    </ul>
+    </div>
   );
 }

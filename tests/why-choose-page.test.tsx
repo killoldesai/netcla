@@ -56,38 +56,39 @@ test("reasons are an unnumbered list with no icons, and the comparison is a real
   assert.ok(!isWhyChooseContent(c, "/about"));
   const $ = render(c);
   assert.ok($("main.v3-why").length);
-  assert.ok($("link[href^='/assets/nx/pages/why-choose.css']").length);
-  assert.equal($("[class*='wc-'], [class*='ab-'], [class*='ct-'], [class*='en-'], [class*='hw-']").length, 0, "no classes from the legacy or other renderers");
+  assert.ok($("link[href^='/assets/v2/pages/why-choose.css']").length);
+  assert.equal($("#hero, #reasons, #comparison, #not-a-fit, #faq, #cta-banner").find("[class*='hw-'], [class*='ab-'], [class*='ct-'], [class*='en-'], [class*='em-']").length, 0, "no classes from the legacy or other renderers");
   assert.equal($("h1").length, 1);
-  assert.equal($("#reasons .sk-cards > article").length, 6);
+  assert.equal($("#reasons .kit-card").length, 6);
   assert.equal($("main section:not(#hero) ol").length, 0, "nothing in the content is a numbered sequence");
-  assert.equal($("#reasons svg, #not-a-fit svg").length, 0, "no decorative icons on the reason and fit cards: the content has no icon field");
-  assert.equal($("table.why-matrix thead th").length, 3);
-  assert.equal($("table.why-matrix tbody tr").length, 5);
-  assert.equal($("table.why-matrix tbody td").length, 15);
-  assert.equal($("table.why-matrix tbody td.is-us").length, 5);
-  assert.equal($("#not-a-fit .sk-cards > article").length, 3);
+  assert.equal($("#reasons svg").length, 0, "reason cards use spot icon images, not line icons");
+  assert.equal($("table.cmp thead th").length, 3);
+  assert.equal($("table.cmp tbody tr").length, 5);
+  assert.equal($("table.cmp tbody td").length, 15);
+  assert.equal($("table.cmp tbody td.on").length, 5);
+  assert.equal($("#not-a-fit .catgrid > .cat").length, 3);
+  assert.equal($("#not-a-fit .catgrid > .cat svg").length, 3, "each fit card carries the x mark");
   assert.equal($("#faq details").length, 5);
 });
 
 test("the alternatives get a fair hearing: both 'better choice' notes render under the table", () => {
   const $ = render();
-  assert.equal($("#comparison .why-notes > div").length, 2);
-  assert.match($("#comparison .why-notes h3").first().text(), /large outsourcing firm is the better choice/);
-  assert.match($("#comparison .why-notes h3").last().text(), /freelancer is the better choice/);
+  assert.equal($("#comparison .wc-notes > div").length, 2);
+  assert.match($("#comparison .wc-notes h3").first().text(), /large outsourcing firm is the better choice/);
+  assert.match($("#comparison .wc-notes h3").last().text(), /freelancer is the better choice/);
 });
 
 test("the hero keeps its analytics CTA and shows the section image when one exists", () => {
   const $ = render();
-  assert.equal($("#hero .hero__actions a").first().attr("href"), "/contact?service=Help%20defining%20the%20scope");
-  assert.equal($("#hero .hero__art svg.il").length, 1, "fallback illustration without an image");
+  assert.equal($("#hero .hero__cta a").first().attr("href"), "/contact?service=Help%20defining%20the%20scope");
+  assert.ok($("#hero .hs--checklist").length, "the hero shows the checklist scene");
+  assert.equal($(".wc-hero-art").length, 0, "no picture under the hero");
   const c = content();
   const hero = c.pageSections!.find((s) => s.id === "hero")!;
   hero.asset = { id: "hero-image", name: "why-hero", alt: "Hero image", width: 640, height: 400 } as never;
   const $img = render(c);
-  assert.equal($img("#hero .hero__art img").attr("width"), "640");
-  assert.equal($img("#hero .hero__art img").attr("height"), "400");
-  assert.equal($img("#hero .hero__art svg").length, 0);
+  assert.equal($img(".wc-hero-art").length, 0, "a generated image does not add a picture under the hero");
+  assert.ok($img("#hero .hs--checklist").length);
 });
 
 test("testimonials stay hidden until approved quotes exist, and are never generated", () => {

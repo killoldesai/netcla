@@ -1,0 +1,19 @@
+/* career-role: split with a sticky summary card and the apply form */
+.role-split { grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.8fr); gap: 72px; align-items: start; }
+.role-summary { position: sticky; top: 110px; }
+.role-summary .h3 { font-size: 26px; margin-bottom: 4px; }
+.role-summary dl { margin: 18px 0 26px; }
+.role-summary dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.role-summary dt { font-size: 15px; color: var(--slate); }
+.role-summary dd { margin: 0; font-size: 15px; text-align: right; }
+.role-summary .btn { width: 100%; }
+.role-summary__note { margin-top: 16px; font-size: 14px; color: var(--slate); }
+.role-facts { justify-content: center; margin-top: 28px; }
+.role-apply { align-items: start; }
+.role-apply .form { margin-top: 0; }
+.consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 20px; font-size: 14px; color: var(--slate); line-height: 1.5; }
+.consent input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--violet); }
+@media (max-width: 960px) {
+  .role-split { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .role-summary { position: relative; top: 0; }
+}

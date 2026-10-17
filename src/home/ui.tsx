@@ -2,7 +2,7 @@
 import React, { createContext, useContext } from "react";
 import type { Content } from "../content";
 import { RichContent } from "../rich-content";
-import { Icon } from "../site/ui";
+import { V2Icon } from "../site/v2/ui";
 import { homeTexts } from "./copy";
 
 export type HomeContextValue = {
@@ -88,7 +88,7 @@ export function useTrack() {
 
 // Sets the enquiry form's service field (the form listens to it through the select element).
 export function selectService(service: string) {
-  const select = document.querySelector<HTMLSelectElement>("#service");
+  const select = document.querySelector<HTMLSelectElement>("#f-svc");
   if (!select) return;
   select.value = service;
   select.dispatchEvent(new Event("change", { bubbles: true }));
@@ -128,7 +128,7 @@ export function PageLink({
   );
 }
 
-// Arrow link that opens the enquiry form with a service preselected.
+// Button that opens the enquiry form with a service preselected (data-pre is read by the v2 behaviours too).
 export function DiscussLink({
   service,
   hub,
@@ -147,14 +147,14 @@ export function DiscussLink({
       data-track="consultation_click"
       data-hub={hub}
       data-service={service}
+      data-pre={service}
       onClick={() => {
         selectService(service);
         track("consultation_click", hub, "#contact");
       }}
-      className={`nx-arrowlink ${className}`.trim()}
+      className={`btn btn--violet ${className}`.trim()}
     >
-      <span>{children}</span>
-      <Icon name="arrow-right" size={18} />
+      {children} <V2Icon name="arrow" />
     </a>
   );
 }
@@ -164,11 +164,14 @@ export function Section({
   children,
   className = "",
   labelledBy,
+  attrs = {},
 }: {
   id: string;
   children: React.ReactNode;
   className?: string;
   labelledBy?: string;
+  /** Extra attributes for the wrapper, such as data-parallax or data-scroller. */
+  attrs?: Record<string, string>;
 }) {
   const { content } = useHome();
   if (content.hiddenSections?.includes(id)) return null;
@@ -178,6 +181,7 @@ export function Section({
       data-section={id}
       aria-labelledby={labelledBy}
       className={className || undefined}
+      {...attrs}
     >
       {children}
     </section>

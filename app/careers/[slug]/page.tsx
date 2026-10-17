@@ -1,13 +1,12 @@
 import { query } from "@/db";
 import { notFound } from "next/navigation";
 import { CareerApplicationForm } from "@/career-application-form";
-import { NxShell } from "@/site/shell";
-import { ArrowLink, Breadcrumbs, Button, HeroArt, SectionHead } from "@/site/ui";
-import { CareerRoleArt } from "@/site/art/career-role-art";
+import { V2Shell } from "@/site/v2/shell";
+import { V2Crumbs, V2Icon, V2Img } from "@/site/v2/ui";
 import type { Metadata } from "next";
 
-// Role detail, redesigned from html-prototype/career-role.html. Styles: public/assets/nx/pages/career-role.css.
-// The application form is the real CareerApplicationForm; its logic and fields are unchanged.
+// Role detail, redesigned from html-prototype/v2/career-role.html. Styles: public/assets/v2/pages/career-role.css.
+// The application form is the real CareerApplicationForm; its logic, fields, validation and honeypot are unchanged.
 
 export const dynamic = "force-dynamic";
 
@@ -53,45 +52,46 @@ export default async function Page({
   ].filter((d): d is { label: string; value: string } => !!d.value);
   const badges = [vacancy.location, vacancy.employment_type, vacancy.department].filter(Boolean) as string[];
   return (
-    <NxShell page="career-role" paths={paths}>
-      <section className="page-hero">
-        <div className="container">
-          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: vacancy.title }]} />
-          <div className="hero__grid">
-            <div>
-              <span className="tag-pill">Open role</span>
-              <h1>{vacancy.title}</h1>
-              {badges.length > 0 && (
-                <div className="role-badges">
-                  {badges.map((badge, i) => (
-                    <span key={badge} className={"nx-badge" + (i === 1 ? " nx-badge--lime" : "")}>
-                      <span className="nx-badge__dot" aria-hidden="true" />
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div className="hero__actions">
-                <Button href="#apply" size="lg">Apply for this role</Button>
-                <ArrowLink href="/careers">All open roles</ArrowLink>
-              </div>
+    <V2Shell page="career-role" paths={paths}>
+      <section className="hero--center role-hero">
+        <div className="wrap">
+          <V2Crumbs trail={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: vacancy.title }]} />
+          <p className="eyebrow">
+            <V2Img name="ic-team" />
+            Open role
+          </p>
+          <h1>{vacancy.title}</h1>
+          {badges.length > 0 && (
+            <div className="skills role-facts">
+              {badges.map((badge) => (
+                <span key={badge}>{badge}</span>
+              ))}
             </div>
-            <HeroArt fallback={<CareerRoleArt />} priority />
+          )}
+          <div className="hero__acts">
+            <a className="btn btn--grad" href="#apply">
+              Apply for this role <V2Icon name="arrow" />
+            </a>
+            <a className="btn btn--ghost" href="/careers">
+              All open roles
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="section" id="overview">
-        <div className="container role-grid">
-          <div className="role-main nx-reveal">
-            <h2 className="h-section">About the role</h2>
+      <section className="sec" id="overview" aria-label="About the role">
+        <div className="wrap split role-split">
+          <div className="prose rv">
+            <h2>About the role</h2>
             <p className="role-text">{vacancy.description}</p>
           </div>
 
-          <aside className="role-summary nx-reveal" aria-labelledby="role-summary-title">
-            <h2 className="role-summary__title" id="role-summary-title">Role summary</h2>
+          <aside className="frame role-summary rv" aria-labelledby="role-summary-title">
+            <h2 className="h3" id="role-summary-title">
+              Role summary
+            </h2>
             {details.length > 0 && (
-              <dl className="role-summary__list">
+              <dl>
                 {details.map((d) => (
                   <div key={d.label}>
                     <dt>{d.label}</dt>
@@ -100,21 +100,26 @@ export default async function Page({
                 ))}
               </dl>
             )}
-            <Button href="#apply" size="lg" className="role-summary__apply">Apply for this role</Button>
+            <a className="btn btn--grad" href="#apply">
+              Apply for this role <V2Icon name="arrow" />
+            </a>
           </aside>
         </div>
       </section>
 
-      <section className="section section--white" id="apply">
-        <div className="container role-apply">
-          <div className="role-apply__intro nx-reveal">
-            <SectionHead eyebrow="Apply" title="Apply for this role" />
+      <section className="sec sec--cloud" id="apply" aria-labelledby="apply-t">
+        <div className="wrap split role-apply">
+          <div className="rv">
+            <p className="eyebrow">Apply</p>
+            <h2 className="h2" id="apply-t">
+              Apply for this role
+            </h2>
           </div>
-          <div className="role-form nx-reveal">
+          <div className="role-form rv">
             <CareerApplicationForm id={vacancy.id} title={vacancy.title} />
           </div>
         </div>
       </section>
-    </NxShell>
+    </V2Shell>
   );
 }

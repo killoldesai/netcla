@@ -1,0 +1,13 @@
+/* careers: layout tweaks only; components live in components.css and core.css */
+.careers-art { padding: 0 0 96px; }
+.careers-art .media { border-radius: 36px; }
+.feat__g { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.careers-roles > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+.careers-empty-note { margin-top: 36px; text-align: center; }
+.careers-empty { margin-top: 16px; }
+.careers-empty h3 { font-size: 22px; font-weight: 500; }
+.careers-empty .more { margin-top: 12px; }
+.careers-stage { height: 640px; }
+@media (max-width: 960px) {
+  .feat__g { grid-template-columns: minmax(0, 1fr); }
+}

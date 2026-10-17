@@ -440,7 +440,16 @@ export const lengthTargets: { pattern: RegExp; min: number; max: number; label: 
   { pattern: /^row_\d+_(?:us|firms|freelancers)$/, min: 6, max: 24, label: "comparison cell" },
   { pattern: /^(?:firms|freelancers)_better$/, min: 14, max: 40, label: "when better" },
   { pattern: /^fit_\d+_body$/, min: 22, max: 40, label: "not a fit" },
+  // Short fields the layouts show in a fixed box (card and step titles, overview outcomes): one long value must not stretch a card.
+  { pattern: /^(?:card|step|factor|persona|svc|item)_\d+_title$/, min: 2, max: 8, label: "card title" },
+  { pattern: /^outcome_\d+$/, min: 8, max: 14, label: "overview outcome" },
 ];
+
+/**
+ * Overview body: the first paragraph is the direct answer shown beside the visual, the next three become labelled
+ * cards. Each paragraph has its own cap on top of the whole-field cap above, so the layout never gets a wall of text.
+ */
+export const overviewParagraphCaps = [55, 65, 65, 65];
 
 /** Guides run longer per section. */
 export const guideBodyTarget = { min: 280, max: 480 };

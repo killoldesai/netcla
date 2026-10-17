@@ -37,49 +37,54 @@ const render = (path: string, c = content(path)) => load(renderToStaticMarkup(<V
 test("skeleton pages render every section in order with the shared design hooks", () => {
   const $ = render("/android-app-development");
   assert.ok($("main.v3-skeleton").length);
-  assert.ok($("link[href^='/assets/nx/pages/skeleton.css']").length);
+  assert.ok($("link[href^='/assets/v2/pages/service.css']").length);
   const ids = $("main > section[id]").map((_, el) => $(el).attr("id")).get();
   assert.deepEqual(ids, ["hero", "service-overview", "what-we-deliver", "process", "technology-stack", "who-its-for", "industry-applications", "cost-factors", "faq", "related-services", "cta-banner"]);
   assert.equal($("h1").length, 1);
-  // Background rhythm: hero paper, dark band for process, paper and white alternating between the rest.
-  assert.ok($("#hero").hasClass("page-hero"));
-  assert.ok($("#hero").hasClass("page-hero") && !$("#hero").hasClass("section--white"));
-  assert.ok($("#process").hasClass("band"));
-  assert.ok(!$("#cta-banner").hasClass("band"));
-  assert.ok(!$("#service-overview").hasClass("section--white"));
-  assert.ok($("#what-we-deliver").hasClass("section--white"));
+  // Service pages use the showcase layout: topic hero scene, flowing process, cost cards around a character.
+  assert.ok($("#hero").hasClass("sc-hero"));
+  assert.ok($("link[href^='/assets/v2/pages/showcase.css']").length);
+  assert.ok($("#process").hasClass("flow"));
+  assert.ok($("#cta-banner").hasClass("cta-band"));
+  assert.ok($("#service-overview").hasClass("sec") && !$("#service-overview").hasClass("sec--cloud"));
+  assert.ok($("#what-we-deliver").hasClass("sec--cloud"));
 });
 
-test("overview leads with the quick answer and shows the key facts", () => {
+test("overview keeps the answer beside the visual, facts in a row and the other paragraphs as labelled cards", () => {
   const $ = render("/android-app-development");
-  assert.match($("#service-overview .quick__label").text(), /Quick answer/);
-  assert.match($("#service-overview .quick .lead").text(), /body_paragraph/);
-  assert.equal($("#service-overview aside.facts li").length, 2);
-  assert.equal($("#service-overview .overview__outcomes li").length, 4);
+  assert.match($("#service-overview .sc-ov__answer").first().text(), /body_paragraph/);
+  // Key facts (2) have their own row; the four outcomes float over the picture.
+  assert.equal($("#service-overview .sc-ov__facts li").length, 2);
+  assert.equal($("#service-overview .sc-fc .fc__row").length, 4);
+  // The second paragraph becomes the first detail card with its fixed label; the full text stays in the HTML.
+  assert.equal($("#service-overview .sc-ov__card").length, 1);
+  assert.match($("#service-overview .sc-ov__card h3").first().text(), /What is covered/);
+  assert.match($("#service-overview .sc-ov__card").first().text(), /second paragraph/);
 });
 
-test("cost factors are a list, FAQ is a native accordion, and the sub-nav links to real sections", () => {
+test("overview with more than four paragraphs puts the extras in a native expander", () => {
+  const long = content("/android-app-development", { "service-overview": { body_paragraph: ["a", "b", "c", "d", "e", "f"].map((x) => `<p>para ${x}</p>`).join("") } });
+  const $ = render("/android-app-development", long);
+  assert.equal($("#service-overview .sc-ov__card").length, 3);
+  assert.equal($("#service-overview details.sc-ov__rest p").length, 2);
+});
+
+test("cost factors are floating cards, FAQ is a two-column native accordion and the page has no sub-nav", () => {
   const $ = render("/android-app-development");
-  assert.equal($("#cost-factors .sk-rows > li").length, 5);
+  assert.equal($("#cost-factors .sc-factor").length, 5);
   assert.equal($("#faq details").length, 8);
-  assert.equal($("#faq details[open]").length, 1);
-  const targets = $("nav.subnav a").map((_, a) => $(a).attr("href")).get();
-  assert.ok(targets.length >= 3);
-  for (const href of targets) assert.equal($(href).length, 1, href);
-  // The sub-nav sits right after the hero.
-  assert.equal($("#hero").next().is("nav.subnav"), true);
+  assert.equal($("#faq .sc-faq__cols .acc").length, 2);
+  assert.equal($("nav.subnav").length, 0);
 });
 
 test("hubs get the child-service cards, industries, engagement models and no process band", () => {
   const $ = render("/mobile-app-development");
-  assert.equal($("#services-grid a.hub-card").length, 6);
-  assert.equal($("#industry-applications .ind").length, 6);
-  assert.equal($("#engagement-models .model").length, 3);
-  assert.equal($("#engagement-models .model[hidden]").length, 2);
-  assert.equal($("#engagement-models [data-seg] [role=radio]").length, 3);
-  assert.ok($("#engagement-models").hasClass("band"));
+  assert.equal($("#services-grid a.cat").length, 6);
+  assert.equal($("#industry-applications .icard").length, 6);
+  assert.equal($("#engagement-models .mcard").length, 3);
+  assert.ok($("#engagement-models").hasClass("models"));
   assert.equal($("#process").length, 0);
-  assert.equal($("#why-netofficials .sk-adv").length, 4);
+  assert.equal($("#why-netofficials .feat__g > div").length, 4);
 });
 
 test("industry cards link to the matching industry page when the model left the link empty", () => {
@@ -87,14 +92,14 @@ test("industry cards link to the matching industry page when the model left the 
     "industry-applications": { industry_1_name: "Healthcare Mobile App Development", industry_1_url: "", industry_2_name: "Space Mobile App Development", industry_2_url: "" },
   });
   const $ = render("/mobile-app-development", c);
-  assert.equal($("#industry-applications a.ind").first().attr("href"), "/healthcare-software-development");
-  assert.equal($("#industry-applications .ind").eq(1).find("a").length, 0);
+  assert.equal($("#industry-applications a.icard").first().attr("href"), "/healthcare-software-development");
+  assert.equal($("#industry-applications .icard").eq(1).find("a").length, 0);
 });
 
 test("industry pages render compliance cards; legacy drafts keep the old renderer", () => {
   const $ = render("/healthcare-software-development");
-  assert.equal($("#compliance-data .sk-card").length, 4);
-  assert.equal($("#related-services .more a").length, 3);
+  assert.equal($("#compliance-data .cat").length, 4);
+  assert.equal($("#related-services a.sc-rel__row").length, 3);
   const legacy = content("/android-app-development");
   legacy.pageSections = legacy.pageSections!.filter((s) => s.id !== "cost-factors");
   assert.equal(isSkeletonContent(legacy, "/android-app-development"), false);
@@ -110,13 +115,14 @@ test("guides render one article block with a contents rail, numbered chapters an
   assert.ok($("main.v3-skeleton").length);
   assert.equal($(".subnav").length, 0);
   const ids = $("main > section[id]").map((_, el) => $(el).attr("id")).get();
-  assert.deepEqual(ids, ["hero", "guide", "cta-banner"]);
+  assert.deepEqual(ids, ["hero", "guide", "faq", "related-services", "cta-banner"]);
   assert.equal($("#guide section.guide-chapter[id^=editorial-]").length, 5);
-  assert.equal($("#guide .guide-takeaways li").length, 2);
-  assert.equal($("#guide .guide-toc li").length, 5);
-  assert.equal($("#guide .guide-toc a").first().attr("href"), "#editorial-1");
-  assert.equal($("#guide #faq details").length, 6);
-  assert.ok($("#guide #related-services .more a").length > 0);
+  assert.equal($("#guide .keybox li").length, 2);
+  // Contents: key takeaways, the five chapters, FAQ and related services.
+  assert.equal($("#guide nav.toc a").length, 8);
+  assert.equal($("#guide nav.toc a").first().attr("href"), "#key-takeaways");
+  assert.equal($("#faq details").length, 6);
+  assert.ok($("#related-services a.rel").length > 0);
   assert.equal($(".guide-author").length, 1);
   assert.match($(".guide-meta").text(), /min read/);
   assert.equal($("h1").length, 1);

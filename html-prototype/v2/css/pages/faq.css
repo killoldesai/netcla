@@ -1,0 +1,24 @@
+/* FAQ page layout only. Shared parts (seg, faq, acc, band, spot, cta) live in core.css and components.css. */
+.faq-hero .eyebrow { justify-content: center; }
+.faq-search { position: relative; display: flex; align-items: center; gap: 12px; max-width: 580px; min-height: 60px; margin: 40px auto 0; padding: 0 24px; border: 1px solid var(--line-2); border-radius: 99px; background: transparent; box-shadow: var(--shadow); transition: border-color .25s, box-shadow .25s; }
+.faq-search:focus-within { border-color: var(--violet); box-shadow: 0 10px 40px rgba(95, 95, 246, 0.16); }
+.faq-search > svg { width: 20px; height: 20px; flex: none; color: var(--iron); }
+.faq-search input { flex: 1; min-width: 0; min-height: 56px; border: 0; outline: 0; background: transparent; font: inherit; font-size: 17px; color: var(--black); }
+.faq-search input::placeholder { color: var(--iron); }
+.faq-search label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.faq-tabs { padding-top: 72px; }
+.faq-tabs .seg { margin: 0 auto 72px; }
+.faq-panel[hidden] { display: none; }
+.faq-panel .faq__aside .spot { margin-bottom: 26px; }
+.faq-panel .faq__aside h2 { margin-bottom: 0; }
+.faq-panel .faq__aside p { margin-top: 18px; }
+.sec--still { padding-top: 0; }
+.sec--still .band { margin-top: 0; }
+.sec--still .band h2 { margin-bottom: 18px; }
+.sec--still .band .lead { font-size: 18px; color: var(--slate); }
+@media (max-width: 720px) {
+  .faq-tabs { padding-top: 48px; }
+  .faq-tabs .seg { margin-bottom: 44px; }
+  .faq-search { margin-top: 32px; }
+  .sec--still .band { padding-top: 84px; }
+}

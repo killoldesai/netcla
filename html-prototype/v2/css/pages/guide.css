@@ -1,0 +1,59 @@
+/* Guide article: layout tweaks only. Shared parts come from core.css and components.css. */
+.guide-hero { padding-top: 56px; }
+.guide-hero .crumbs { margin-bottom: 30px; }
+.guide-hero .feature { align-items: center; }
+.guide-hero .bcard__tag { margin: 0 0 18px; font-size: 15px; }
+.guide-hero h1 { font-size: clamp(36px, 4.4vw, 56px); line-height: 1.1; letter-spacing: -0.025em; }
+.guide-lead { margin: 22px 0 0; }
+.guide-hero .feature__img img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.guide-hero .hero__acts { margin-top: 34px; }
+
+.guide-byline { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--ink); margin: 26px 0 8px; }
+.guide-byline a { color: var(--violet); text-decoration: none; }
+.guide-byline .ph { width: 44px; height: 44px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 14px; font-weight: 500; color: var(--ink); }
+
+.guide-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--slate); margin: 0; }
+
+.article .prose > h2:first-child { margin-top: 0; }
+.prose .keybox { margin-top: 0; }
+.prose .keybox ul { padding-left: 22px; }
+.prose .keybox li:last-child { margin-bottom: 0; }
+.guide-callout { margin: 0 0 24px; font-size: 19px; color: var(--ink); }
+.prose .catgrid { margin: 8px 0 14px; gap: 18px; }
+.prose .cat { padding: 24px; gap: 8px; }
+.prose .cat h3 { font-size: 19px; margin: 0; }
+.prose .cat p { margin: 0; font-size: 15px; line-height: 1.55; }
+.prose .cat .spot { width: 56px; height: 56px; border-radius: 14px; }
+.guide-caption { font-size: 14px; color: var(--iron); margin: 0 0 40px; }
+
+.guide-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; background: var(--p-lime); padding: 28px 30px; margin: 0 0 56px; }
+.guide-cta h3 { font-size: 24px; font-weight: 500; margin: 0 0 6px; }
+.guide-cta p { margin: 0; font-size: 16px; line-height: 1.55; }
+.guide-cta .btn { flex: none; }
+.prose .btn--violet { color: var(--snow); }
+
+.prose .ticks { margin: 12px 0 26px; gap: 12px; font-size: 17px; }
+
+.guide-figure { margin: 8px 0 32px; }
+.guide-figure figcaption { font-size: 14px; color: var(--iron); margin-top: 16px; }
+
+#faq { padding-top: 40px; }
+.faq .acc { min-width: 0; }
+
+#related-services .cat { height: 100%; }
+
+.guide-author { max-width: 860px; margin: 0 auto; }
+.guide-author__name { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 6px; }
+.guide-author__role { font-size: 15px; color: var(--iron); margin: 0 0 14px; }
+.guide-author p { margin: 0 0 14px; }
+.guide-author .btn { margin-top: 10px; max-width: 100%; white-space: normal; text-align: left; }
+.guide-author > div { min-width: 0; flex: 1; }
+.guide-author > .ph { width: 72px; height: 72px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 18px; font-weight: 500; color: var(--ink); }
+
+#keep-reading .sec__head { margin-bottom: 40px; }
+
+@media (max-width: 720px) {
+  .guide-hero { padding-top: 32px; }
+  .guide-cta { padding: 24px 20px; }
+  .guide-author { flex-direction: column; align-items: stretch; }
+}

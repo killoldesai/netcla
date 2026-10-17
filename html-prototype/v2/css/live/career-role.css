@@ -1,0 +1,16 @@
+/* Career role live-only rules: the real application form (CareerApplicationForm) inside the v2 .form and .fgrid. Tokens only. */
+.role-form { min-width: 0; }
+.role-form .form { position: relative; margin-top: 0; }
+.role-form fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.role-form legend { padding: 0; margin-bottom: 22px; font-size: 24px; line-height: 1.25; font-weight: 400; letter-spacing: -0.01em; color: var(--ink); }
+.role-form .fgrid { margin-bottom: 4px; }
+.role-form .field { font-size: 14px; color: var(--ink); }
+.role-form .field input[type="file"] { padding: 10px 12px; background: var(--cloud); }
+.role-form .consent { margin-top: 22px; }
+.role-form .form .btn { margin-top: 26px; }
+.role-form fieldset:disabled .btn { opacity: 0.6; pointer-events: none; }
+.role-form [role="status"] { min-height: 1.5em; margin: 18px 0 0; font-size: 15px; color: var(--slate); }
+.role-form .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; border: 0; clip: rect(0 0 0 0); }
+@media (max-width: 720px) {
+  .role-form legend { font-size: 22px; }
+}

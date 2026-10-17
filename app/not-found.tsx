@@ -3,24 +3,22 @@ import { query } from "@/db";
 import { V3Page } from "@/v3-page";
 import { verifiedV3Content } from "@/v3-evidence";
 import { withAssetNames } from "@/asset-names";
-import { SectionSitemap } from "@/section-sitemap";
+import { SectionSitemap, sitemapBlocks } from "@/section-sitemap";
 import { pillars } from "@/site-structure";
-import { NxShell } from "@/site/shell";
-import { ArrowLink, Button, HeroArt, ProductIcon } from "@/site/ui";
-import { NxSitemap } from "@/site/sitemap";
-import { NotFoundArt } from "@/site/art/not-found-art";
+import { V2Shell } from "@/site/v2/shell";
+import { V2Icon, V2Img, v2img } from "@/site/v2/ui";
 
-// The built-in 404 is redesigned from html-prototype/404.html (styles: public/assets/nx/pages/not-found.css).
+// The built-in 404 uses the v2 design (html-prototype/v2/404.html, styles: public/assets/v2/pages/404.css).
 // A published /404 page from the admin still renders through V3Page, unchanged.
 
-/** Hub cards on the built-in 404, with the prototype's product icon for each pillar. */
+/** Hub cards on the built-in 404: the shipped spot icon for each pillar (line icon when there is none). */
 const popularHubs: Record<string, string> = {
-  software: "code-brackets",
-  mobile: "mobile-device",
-  ai: "brain-circuit",
-  cloud: "aws-cloud",
-  hire: "users-group",
-  industries: "layers-stack",
+  software: "ic-software",
+  mobile: "ic-mobile",
+  ai: "ic-ai",
+  cloud: "ic-devops",
+  hire: "ic-team",
+  industries: "",
 };
 
 async function load() {
@@ -31,6 +29,52 @@ async function load() {
   } catch {
     return { listing: [], page: null };
   }
+}
+
+/** Section-wise sitemap in the v2 markup. Same blocks as SectionSitemap, built from the published listing. */
+function V2Sitemap({ listing }: { listing: { path: string; title?: string | null }[] }) {
+  const blocks = sitemapBlocks(listing);
+  if (!blocks.length) return null;
+  return (
+    <section id="sitemap" className="sec sec--cloud nf-sitemap" aria-labelledby="sitemap-heading">
+      <div className="wrap">
+        <div className="sec__head rv">
+          <p className="eyebrow">Sitemap</p>
+          <h2 className="h2" id="sitemap-heading">Every live page, grouped by section</h2>
+        </div>
+        {blocks.map((b) => (
+          <div key={b.id} className="nf-sm rv">
+            <div className="nf-sm__head">
+              <div>
+                <h3 className="h3">{b.title}</h3>
+                {b.blurb && <p className="muted">{b.blurb}</p>}
+              </div>
+              {b.hub && (
+                <a className="tlink" href={b.hub.path}>
+                  <span>Explore {b.title}</span>
+                  <V2Icon name="arrow" />
+                </a>
+              )}
+            </div>
+            <div className="nf-sm__grid">
+              {b.groups.map((g) => (
+                <nav key={g.heading ?? "all"} className="nf-sm__box" aria-label={`${b.title}${g.heading ? " - " + g.heading : ""}`}>
+                  <h4>{g.heading ?? b.title}</h4>
+                  <ul>
+                    {g.links.map((l) => (
+                      <li key={l.path}>
+                        <a href={l.path}>{l.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 // The 404 copy is the published /404 page from the admin, else the built-in page below.
@@ -51,58 +95,69 @@ export default async function NotFound() {
       />
     );
   }
-  const hubs = pillars.filter((p) => popularHubs[p.id]);
+  const hubs = pillars.filter((p) => p.id in popularHubs);
   return (
-    <NxShell page="not-found" paths={paths}>
-      <section className="page-hero nf-hero">
-        <div className="container">
-          <div className="hero__grid">
-            <div>
-              <span className="tag-pill">Error 404</span>
-              <h1>This page took a different route</h1>
-              <p className="lead">
-                The link may be out of date, or the page has moved. Every live page is listed below by section, or tell us what you were looking for and we will point you to it.
-              </p>
-              <div className="hero__actions">
-                <Button href="/" size="lg">Back to the homepage</Button>
-                <ArrowLink href="/contact">Tell us what you need</ArrowLink>
-              </div>
-            </div>
-            <HeroArt fallback={<NotFoundArt />} priority />
+    <V2Shell page="404" paths={paths} cta={false}>
+      <section className="hero--404" aria-labelledby="nf-h">
+        <div className="wrap">
+          <span className="ghost" aria-hidden="true">404</span>
+          <V2Img name="scene-404" alt="Illustrated character holding a map upside down" width={220} height={220} priority />
+          <p className="eyebrow">Error 404</p>
+          <h1 id="nf-h">This page took a different route</h1>
+          <p className="lead">
+            The link may be out of date, or the page has moved. Every live page is listed below by section, or tell us what you were looking for and we will point you to it.
+          </p>
+          <div className="hero__acts">
+            <a className="btn btn--grad" href="/">
+              Back to the homepage <V2Icon name="arrow" />
+            </a>
+            <a className="tlink" href="/contact">
+              <span>Tell us what you need</span>
+              <V2Icon name="arrow" />
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="section section--white" aria-labelledby="popular-title">
-        <div className="container">
-          <div className="section-head nx-reveal">
-            <div>
-              <h2 className="h-section" id="popular-title">Popular pages</h2>
-            </div>
+      <section className="sec nf-popular" aria-labelledby="popular-title">
+        <div className="wrap">
+          <div className="sec__head rv">
+            <h2 className="h2" id="popular-title">Popular pages</h2>
           </div>
-          <div className="sk-cards nf-cards nx-reveal">
+          <div className="catgrid">
             {hubs.map((hub) => (
-              <a key={hub.id} className="sk-card nf-card" href={hub.hub}>
-                <span className="sk-card__icon" aria-hidden="true">
-                  <ProductIcon name={popularHubs[hub.id]} size={26} />
+              <a key={hub.id} className="cat rv" href={hub.hub}>
+                {popularHubs[hub.id] ? (
+                  <img className="spot" src={v2img(popularHubs[hub.id])} alt="" width={64} height={64} loading="lazy" decoding="async" />
+                ) : (
+                  <span className="nf-ico" aria-hidden="true">
+                    <V2Icon name="layers" />
+                  </span>
+                )}
+                <h3>{hub.label}</h3>
+                {hub.blurb && <p>{hub.blurb}</p>}
+                <span className="more" aria-hidden="true">
+                  <V2Icon name="arrow" />
                 </span>
-                <span className="sk-card__title">{hub.label}</span>
-                <span className="sk-card__text">{hub.blurb}</span>
               </a>
             ))}
           </div>
-          <div className="nf-links">
-            <ArrowLink href="/services">Services</ArrowLink>
-            <ArrowLink href="/blog">Guides</ArrowLink>
+          <div className="nf-links rv">
+            <a className="btn btn--ghost" href="/services">
+              Services <V2Icon name="arrow" />
+            </a>
+            <a className="btn btn--ghost" href="/blog">
+              Guides <V2Icon name="arrow" />
+            </a>
           </div>
         </div>
       </section>
 
-      <NxSitemap listing={listing} />
+      <V2Sitemap listing={listing} />
 
-      <section className="section band" aria-labelledby="nf-cta-title">
-        <div className="container">
-          <div className="footer__cta">
+      <section className="cta-band" aria-labelledby="nf-cta-title">
+        <div className="wrap">
+          <div className="cta-band__in rv">
             <div>
               <h2 id="nf-cta-title">
                 Still can&apos;t find it? <span>Tell us what you need built.</span>
@@ -111,13 +166,15 @@ export default async function NotFound() {
                 Describe the service or page you were after and a Netofficials team member will reply with the right link, or the questions needed to scope your project.
               </p>
             </div>
-            <div className="footer__cta-actions">
-              <Button href="/contact" variant="lime" size="lg">Contact us</Button>
-              <Button href="/services" variant="secondary" size="lg">Browse all services</Button>
+            <div className="cta-band__acts">
+              <a className="btn btn--white" href="/contact">
+                Contact us <V2Icon name="arrow" />
+              </a>
+              <a className="btn btn--ghost-w" href="/services">Browse all services</a>
             </div>
           </div>
         </div>
       </section>
-    </NxShell>
+    </V2Shell>
   );
 }

@@ -1,4 +1,4 @@
-import { lengthTargets } from "./templates";
+import { lengthTargets, overviewParagraphCaps } from "./templates";
 
 // Models overshoot word limits even when told the exact number. Instead of accepting a page that
 // is 30% over its band, an over-long field is sent back once with its limit and asked to shorten.
@@ -18,6 +18,15 @@ const sectionMax: Record<string, Record<string, number>> = {
   "working-model": { body_paragraph: 120 },
 };
 
+/** Sections whose body_paragraph has a cap per <p> block (see overviewParagraphCaps). */
+const paragraphCapped = new Set(["service-overview", "services-overview"]);
+
+/** Word count of each <p> block (the whole value when it has no paragraphs). */
+export function paragraphWords(value: string): number[] {
+  const blocks = value.match(/<p[\s>][\s\S]*?<\/p>/gi);
+  return (blocks && blocks.length ? blocks : [value]).map(wordCount);
+}
+
 export function overLimitFields(fields: Record<string, string>, sectionId = ""): OverLimit[] {
   const out: OverLimit[] = [];
   for (const [key, value] of Object.entries(fields)) {
@@ -25,7 +34,15 @@ export function overLimitFields(fields: Record<string, string>, sectionId = ""):
     if (!target || !value) continue;
     const max = sectionMax[sectionId]?.[key] ?? target.max;
     const words = wordCount(value);
-    if (words > max * TOLERANCE) out.push({ key, words, max, label: target.label });
+    if (words > max * TOLERANCE) {
+      out.push({ key, words, max, label: target.label });
+      continue;
+    }
+    if (key === "body_paragraph" && paragraphCapped.has(sectionId)) {
+      const per = paragraphWords(value);
+      const capped = per.some((w, i) => w > (overviewParagraphCaps[Math.min(i, overviewParagraphCaps.length - 1)] ?? 65) * TOLERANCE);
+      if (capped) out.push({ key, words, max: Math.min(max, overviewParagraphCaps.reduce((a, b) => a + b, 0)), label: `${target.label}: the first paragraph at most ${overviewParagraphCaps[0]} words and each of the other paragraphs at most ${overviewParagraphCaps[1]} words, exactly 4 paragraphs` });
+    }
   }
   return out;
 }

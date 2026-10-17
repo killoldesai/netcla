@@ -1,0 +1,12 @@
+/* contact: layout tweaks only. Shared pieces live in css/core.css and css/components.css. */
+.ct-media { margin-top: 40px; }
+.ct-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 28px; }
+.ct-steps { max-width: 640px; margin: 0 auto; }
+.ct-frame { position: relative; left: auto; top: auto; width: 100%; max-width: 460px; justify-self: end; padding: 22px; }
+.ct-frame .fc__row { align-items: flex-start; padding: 8px 4px; }
+.ct-frame .fc__row i { margin-top: 3px; }
+.ct-item { display: grid; gap: 4px; font-size: 15px; line-height: 1.45; }
+.ct-line { width: 28px; height: 28px; color: var(--violet); margin-bottom: 6px; }
+.ct-spot { margin-bottom: 14px; }
+.ct-steps li { background: var(--p-lavender); }
+.faq__aside .btn { margin-top: 26px; }

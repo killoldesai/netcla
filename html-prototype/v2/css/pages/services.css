@@ -1,0 +1,21 @@
+/* Services directory: layout tweaks only. Tokens and components come from core.css and components.css. */
+.svc-nav { margin-top: 44px; }
+.svc-nav .chips { justify-content: center; max-width: none; margin: 0 auto; }
+.chip { text-decoration: none; color: var(--ink); }
+.chip:hover { color: var(--violet); }
+
+.sec__head--left .tlink { margin-top: 22px; color: var(--violet); }
+.svc-sub { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 56px 0 22px; }
+.sec__head--left + .svc-sub { margin-top: 0; }
+
+.ico-tile { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 16px; background: var(--p-lavender); color: var(--violet); flex: none; }
+.ico-tile svg { width: 28px; height: 28px; }
+.cat .ico-tile { margin-bottom: 6px; }
+.eyebrow .ico-tile { width: 32px; height: 32px; border-radius: 9px; }
+.eyebrow .ico-tile svg { width: 18px; height: 18px; }
+
+.ind .eyebrow { margin-bottom: 14px; }
+.irow .spot { margin-top: 20px; }
+
+.svc-note { margin-top: 48px; font-size: 18px; color: var(--slate); text-align: center; }
+.svc-note .tlink { color: var(--violet); }

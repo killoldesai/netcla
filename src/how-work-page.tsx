@@ -1,15 +1,16 @@
-import type { CSSProperties } from "react";
+import { type CSSProperties } from "react";
 import { TrackedLink } from "./v3-interactions";
 import { breadcrumbs } from "./site-structure";
 import { sanitizeRichHTML } from "./rich-text";
-import { ArrowLink, Breadcrumbs, FaqList, HeroArt, Icon } from "./site/ui";
-import { HowWorkArt } from "./site/art/how-work-art";
+import { TechMark, V2Icon, V2Img } from "./site/v2/ui";
+import { SceneHero } from "./site/v2/scene-hero";
+import { HeroScene } from "./site/v2/hero-scenes";
 import type { Content } from "./content";
 import type { PageSection } from "./page-spec-schema";
 
-// How We Work: the delivery method as a sequence of stages, a communication table, the tools and the commitments.
-// Markup follows html-prototype/how-we-work.html (styles: public/assets/nx/pages/how-work.css). Numbers appear only
-// on the stages, which are a real sequence (the nx-steps counter).
+// How We Work: the delivery method as a sequence of stages (with a detail tab per stage), the communication
+// cadence as stacked cards, the tools and the commitments. Markup follows html-prototype/v2/how-we-work.html;
+// styles are public/assets/v2/pages/how-we-work.css. Numbers appear only on the stages, which are a real sequence.
 
 /** True for content generated from the how-we-work spec; older accepted content keeps the legacy renderer. */
 export function isHowWorkContent(content: Content, path: string) {
@@ -20,7 +21,11 @@ type Props = { content: Content; path: string; paths: string[]; preview?: boolea
 
 const clean = (html: string, paths: string[]) => sanitizeRichHTML(html, false, paths.length ? paths : undefined);
 const hasHtml = (value: string) => /<[a-z][\s\S]*>/i.test(value);
-const delay = (i: number) => ({ ["--nx-delay" as string]: `${i * 100}ms` }) as CSSProperties;
+const stepDelay = (i: number, offset = 0) => ({ transitionDelay: `${(i * 0.2 + offset).toFixed(1)}s` }) as CSSProperties;
+const STEP_COLORS = ["var(--p-lime)", "var(--p-sky)", "var(--p-lavender)", "var(--p-peach)", "var(--p-peri)"];
+const CADENCE_ICONS = ["calendar", "chat", "clock", "users"] as const;
+const TINTS = ["var(--p-lavender)", "var(--p-sky)", "var(--p-lime)", "var(--p-peach)"];
+const COMMIT_ICONS = ["ic-scope", "ic-milestones", "ic-timezone", "ic-handover"];
 
 function rows(fields: Record<string, string>, prefix: string, keys: string[], max: number) {
   const out: Record<string, string>[] = [];
@@ -31,11 +36,11 @@ function rows(fields: Record<string, string>, prefix: string, keys: string[], ma
   return out;
 }
 
-/** Plain text becomes a paragraph; rich HTML goes through the sanitiser inside .nx-prose. */
+/** Plain text becomes a paragraph; rich HTML goes through the sanitiser inside the .prose wrapper. */
 function Prose({ value, paths, className }: { value?: string; paths: string[]; className?: string }) {
   if (!value?.trim()) return null;
   if (!hasHtml(value)) return <p className={className}>{value}</p>;
-  return <div className={"nx-prose " + (className ?? "")} dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
+  return <div className={`prose ${className ?? ""}`.trim()} dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
 }
 
 export function HowWorkSections({ content, path, paths, preview = false, linkMap = {} }: Props) {
@@ -45,7 +50,8 @@ export function HowWorkSections({ content, path, paths, preview = false, linkMap
   const hero = by("hero");
   const h = f("hero");
   const signals = [h.signal_1, h.signal_2, h.signal_3].map((t) => t?.trim()).filter(Boolean);
-  const trail = breadcrumbs(path, h.h1 || content.title);
+  const heroTitle = h.h1 || content.title;
+  const trail = breadcrumbs(path, heroTitle);
   const contact = go("/contact") + "?service=" + encodeURIComponent("Delivery process");
   const approach = f("approach");
   const stagesSec = f("stages");
@@ -60,99 +66,94 @@ export function HowWorkSections({ content, path, paths, preview = false, linkMap
   const faqPairs = Object.keys(faq).filter((k) => /^q\d+$/.test(k) && faq[k] && faq[k.replace("q", "a")]);
   const cta = f("cta-banner");
 
-  const navItems = (
-    [
-      approach.body_paragraph && { id: "approach", label: "Approach" },
-      stages.length > 0 && { id: "stages", label: "Stages" },
-      cadence.length > 0 && { id: "communication", label: "Communication" },
-      tools.length > 0 && { id: "tools", label: "Tools" },
-      commitments.length > 0 && { id: "commitments", label: "Commitments" },
-      faqPairs.length > 0 && { id: "faq", label: "FAQ" },
-    ] as (false | { id: string; label: string })[]
-  ).filter((n): n is { id: string; label: string } => !!n);
-
   return (
     <>
       {hero && (
-        <section id="hero" className="page-hero">
-          <div className="container">
-            <Breadcrumbs items={trail.map((c, i) => ({ label: c.label, href: i === trail.length - 1 ? undefined : go(c.path) }))} />
-            <div className="hero__grid">
-              <div>
-                <span className="tag-pill">{h.tag_pill || "How we work"}</span>
-                <h1>{h.h1 || content.title}</h1>
-                {h.subheadline && <p className="lead">{h.subheadline}</p>}
-                {signals.length > 0 && (
-                  <ul className="hw-signals">
-                    {signals.map((s) => (
-                      <li key={s}>
-                        <Icon name="check" size={18} />
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
+        <>
+          <SceneHero
+            labelId="hw-h1"
+            trail={trail.map((c) => ({ label: c.label, href: go(c.path) }))}
+            eyebrow={h.tag_pill}
+            h1={heroTitle}
+            sub={h.subheadline}
+            signals={signals}
+            actions={
+              <>
+                <TrackedLink href={contact} event="consultation_click" service="Delivery process" className="btn btn--grad">
+                  {h.cta_primary_label || "Start a conversation"} <V2Icon name="arrow" />
+                </TrackedLink>
+                {h.cta_secondary_label && (
+                  <a className="btn btn--ghost" href={go(h.cta_secondary_url || "/engagement-models")}>
+                    {h.cta_secondary_label}
+                  </a>
                 )}
-                <div className="hero__actions">
-                  <TrackedLink href={contact} event="consultation_click" service="Delivery process" className="nx-btn nx-btn--primary nx-btn--lg">
-                    <span>{h.cta_primary_label || "Start a conversation"}</span>
-                    <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
-                  </TrackedLink>
-                  {h.cta_secondary_label && <ArrowLink href={go(h.cta_secondary_url || "/engagement-models")}>{h.cta_secondary_label}</ArrowLink>}
-                </div>
-              </div>
-              <HeroArt asset={hero.asset} fallback={<HowWorkArt />} priority />
-            </div>
-          </div>
-        </section>
-      )}
-
-      {navItems.length > 0 && (
-        <nav className="subnav" aria-label="On this page" data-subnav>
-          <div className="container">
-            <ul className="subnav__list">
-              {navItems.map((n) => (
-                <li key={n.id}>
-                  <a href={`#${n.id}`}>{n.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
+              </>
+            }
+            scene={<HeroScene kind="stages" title="Delivery" items={[]} stack={stages.map((r) => r.title).filter(Boolean)} />}
+          />
+        </>
       )}
 
       {approach.body_paragraph && (
-        <section id="approach" className="section">
-          <div className="container engage">
-            <div className="nx-reveal">
-              {approach.section_label && <span className="eyebrow">{approach.section_label}</span>}
-              <h2 className="h-section">{approach.heading}</h2>
+        <section id="approach" className="sec hw-approach" aria-labelledby={approach.heading ? "approach-t" : undefined}>
+          <div className="wrap">
+            <div className="hw-approach__top rv">
+              <div>
+                {approach.section_label && <span className="eyebrow">{approach.section_label}</span>}
+                {approach.heading && (
+                  <h2 className="h2" id="approach-t">
+                    {approach.heading}
+                  </h2>
+                )}
+              </div>
+              <div className="hw-approach__art" aria-hidden="true">
+                <V2Img name="scene-models" alt="" />
+              </div>
             </div>
-            <div className="nx-reveal">
-              <Prose value={approach.body_paragraph} paths={paths} className="lead" />
+            <div className="kit-text rv">
+              <Prose value={approach.body_paragraph} paths={paths} />
             </div>
           </div>
         </section>
       )}
 
       {stages.length > 0 && (
-        <section id="stages" className="section band">
-          <div className="container hw-stages-grid">
-            <div className="hw-stages-head nx-reveal">
-              {stagesSec.section_label && <span className="eyebrow">{stagesSec.section_label}</span>}
-              <h2 className="h-section">{stagesSec.heading}</h2>
-              {stagesSec.intro && <p className="lead">{stagesSec.intro}</p>}
+        <section id="stages" className="flow hw-stages" aria-labelledby="stages-t">
+          <div className="wrap">
+            {stagesSec.section_label && <p className="label rv">{stagesSec.section_label}</p>}
+            {stagesSec.heading && (
+              <h2 className="big rv" id="stages-t">
+                {stagesSec.heading}
+              </h2>
+            )}
+            {stagesSec.intro && <p className="lead hw-stages__lead rv">{stagesSec.intro}</p>}
+            <div className="em-trig rv">
+              <span className="wf__bolt">
+                <V2Icon name="bolt" />
+              </span>
+              <V2Icon name="brief" />
+              When your brief arrives
             </div>
-            <ol className="nx-steps nx-steps--vertical hw-timeline" data-steps>
+            <ol className="wf sc-wf hw-wf" data-wf>
               {stages.map((r, i) => (
-                <li className="nx-step nx-reveal" key={`${i}-${r.title}`} style={delay(i)}>
-                  <h3 className="nx-step__title">{r.title}</h3>
-                  <p className="nx-step__desc">{r.body}</p>
-                  {r.receives && (
-                    <>
-                      <p className="deliver-label">You receive</p>
-                      <p className="hw-receives">{r.receives}</p>
-                    </>
-                  )}
+                <li key={`${i}-${r.title}`} className="sc-step">
+                  {i > 0 && <span className="wf__ln" style={stepDelay(i)} />}
+                  <div className="wf__step" style={stepDelay(i, 0.1)}>
+                    <div>
+                      <span className="n" style={{ background: STEP_COLORS[i % STEP_COLORS.length] }}>
+                        {i + 1}
+                      </span>
+                      <div>
+                        <h3>{r.title}</h3>
+                        {r.body && <p>{r.body}</p>}
+                        {r.receives && (
+                          <p className="hw-receives">
+                            <span className="hw-recv">You receive</span> {r.receives}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -161,70 +162,92 @@ export function HowWorkSections({ content, path, paths, preview = false, linkMap
       )}
 
       {cadence.length > 0 && (
-        <section id="communication" className="section section--white">
-          <div className="container">
-            <header className="hw-head nx-reveal">
-              {comms.section_label && <span className="eyebrow">{comms.section_label}</span>}
-              <h2 className="h-section">{comms.heading}</h2>
-              {comms.intro && <p className="lead">{comms.intro}</p>}
-            </header>
-            <div className="hw-table-wrap nx-reveal" data-allow-overflow tabIndex={0} role="region" aria-label={comms.heading || "Communication cadence"}>
-              <table className="hw-cadence">
-                <thead>
-                  <tr>
-                    <th scope="col">Meeting or update</th>
-                    <th scope="col">When</th>
-                    <th scope="col">Who attends</th>
-                    <th scope="col">What it settles</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cadence.map((r, i) => (
-                    <tr key={`${i}-${r.name}`}>
-                      <th scope="row">{r.name}</th>
-                      <td data-label="When">{r.when}</td>
-                      <td data-label="Who attends">{r.who}</td>
-                      <td data-label="What it settles">{r.purpose}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <section id="communication" className="sec sec--cloud hw-comm" aria-labelledby={comms.heading ? "comm-t" : undefined}>
+          <div className="wrap">
+            {(comms.section_label || comms.heading || comms.intro) && (
+              <div className="sec__head rv">
+                {comms.section_label && <p className="eyebrow">{comms.section_label}</p>}
+                {comms.heading && (
+                  <h2 className="h2" id="comm-t">
+                    {comms.heading}
+                  </h2>
+                )}
+                {comms.intro && <p className="lead">{comms.intro}</p>}
+              </div>
+            )}
+            <div className="kit-cards kit-cards--2">
+              {cadence.map((r, i) => (
+                <article className="kit-card kit-card--plain hw-cad rv" key={`${i}-${r.name}`} style={{ transitionDelay: `${i * 0.08}s` }}>
+                  <span className="hw-cad__ico" style={{ background: TINTS[i % TINTS.length] }}>
+                    <V2Icon name={CADENCE_ICONS[i % CADENCE_ICONS.length]} />
+                  </span>
+                  <h3>{r.name}</h3>
+                  {r.purpose && <p>{r.purpose}</p>}
+                  <ul className="hw-cad__meta">
+                    {r.when && (
+                      <li>
+                        <V2Icon name="clock" />
+                        {r.when}
+                      </li>
+                    )}
+                    {r.who && (
+                      <li>
+                        <V2Icon name="users" />
+                        {r.who}
+                      </li>
+                    )}
+                  </ul>
+                </article>
+              ))}
             </div>
           </div>
         </section>
       )}
 
       {tools.length > 0 && (
-        <section id="tools" className="section">
-          <div className="container">
-            <header className="hw-head nx-reveal">
-              {toolsSec.section_label && <span className="eyebrow">{toolsSec.section_label}</span>}
-              <h2 className="h-section">{toolsSec.heading}</h2>
-            </header>
-            <dl className="sk-stack hw-tools nx-reveal">
+        <section id="tools" className="sec hw-tools" aria-labelledby={toolsSec.heading ? "tools-t" : undefined}>
+          <div className="wrap">
+            {toolsSec.heading && (
+              <div className="sec__head rv">
+                <h2 className="h2" id="tools-t">
+                  {toolsSec.heading}
+                </h2>
+              </div>
+            )}
+            <div className="kit-cards kit-cards--4">
               {tools.map((t, i) => (
-                <div className="sk-stack__group" key={`${i}-${t.name}`}>
-                  <dt className="sk-stack__name">{t.name}</dt>
-                  <dd className="sk-card__text">{t.use}</dd>
-                </div>
+                <article className="kit-card kit-card--plain hw-tool rv" key={`${i}-${t.name}`} style={{ transitionDelay: `${i * 0.08}s` }}>
+                  <span className="hw-tool__logo">
+                    <TechMark name={t.name} size={40} />
+                  </span>
+                  <h3>{t.name}</h3>
+                  {t.use && <p>{t.use}</p>}
+                </article>
               ))}
-            </dl>
+            </div>
           </div>
         </section>
       )}
 
       {commitments.length > 0 && (
-        <section id="commitments" className="section section--white">
-          <div className="container">
-            <header className="hw-head nx-reveal">
-              {commitSec.section_label && <span className="eyebrow">{commitSec.section_label}</span>}
-              <h2 className="h-section">{commitSec.heading}</h2>
-            </header>
-            <div className="hw-commits nx-reveal">
+        <section id="commitments" className="sec sec--cloud hw-commit" aria-labelledby={commitSec.heading ? "commit-t" : undefined}>
+          <div className="wrap">
+            {(commitSec.section_label || commitSec.heading) && (
+              <div className="sec__head rv">
+                {commitSec.section_label && <p className="eyebrow">{commitSec.section_label}</p>}
+                {commitSec.heading && (
+                  <h2 className="h2" id="commit-t">
+                    {commitSec.heading}
+                  </h2>
+                )}
+              </div>
+            )}
+            <div className="kit-cards kit-cards--2">
               {commitments.map((r, i) => (
-                <article className="sk-card" key={`${i}-${r.title}`}>
-                  <h3 className="sk-card__title">{r.title}</h3>
-                  <p className="sk-card__text">{r.body}</p>
+                <article className="kit-card rv" key={`${i}-${r.title}`} style={{ background: TINTS[i % TINTS.length], transitionDelay: `${i * 0.08}s` }}>
+                  <V2Img name={COMMIT_ICONS[i % COMMIT_ICONS.length]} className="kit-card__ico" />
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
                 </article>
               ))}
             </div>
@@ -233,36 +256,85 @@ export function HowWorkSections({ content, path, paths, preview = false, linkMap
       )}
 
       {faqPairs.length > 0 && (
-        <section id="faq" className="section">
-          <div className="container faq">
-            <div className="faq__aside nx-reveal">
-              {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
-              <h2 className="h-section">{faq.heading}</h2>
+        <section id="faq" className="sec hw-faq" aria-labelledby={faq.heading ? "faq-t" : undefined}>
+          {faqPairs.length >= 4 ? (
+            <div className="wrap sc-faq">
+              <div className="sc-faq__head rv">
+                {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+                {faq.heading && (
+                  <h2 className="h2" id="faq-t">
+                    {faq.heading}
+                  </h2>
+                )}
+              </div>
+              <div className="sc-faq__cols rv">
+                {[faqPairs.slice(0, Math.ceil(faqPairs.length / 2)), faqPairs.slice(Math.ceil(faqPairs.length / 2))].map((col, c) => (
+                  <div className="acc" key={c}>
+                    {col.map((k) => (
+                      <details key={k}>
+                        <summary>
+                          {faq[k]}
+                          <i aria-hidden="true">
+                            <V2Icon name="plus" />
+                          </i>
+                        </summary>
+                        <Prose value={faq[k.replace("q", "a")]} paths={paths} className="hw-answer" />
+                      </details>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <p className="sc-faq__ask rv">
+                Not listed here?{" "}
+                <a className="btn btn--ghost" href={go("/contact")}>
+                  Ask us directly <V2Icon name="arrow" />
+                </a>
+              </p>
             </div>
-            <div className="nx-reveal">
-              <FaqList
-                name="hw-faq"
-                items={faqPairs.map((k) => ({ q: faq[k], a: <Prose value={faq[k.replace("q", "a")]} paths={paths} className="hw-answer" /> }))}
-              />
+          ) : (
+            <div className="wrap faq">
+              <div className="faq__aside rv">
+                {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+                {faq.heading && <h2 id="faq-t">{faq.heading}</h2>}
+                <a className="btn btn--ghost" href={go("/contact")}>
+                  Ask us directly <V2Icon name="arrow" />
+                </a>
+              </div>
+              <div className="acc rv">
+                {faqPairs.map((k, i) => (
+                  <details key={k} open={i === 0}>
+                    <summary>
+                      {faq[k]}
+                      <i aria-hidden="true">
+                        <V2Icon name="plus" />
+                      </i>
+                    </summary>
+                    <Prose value={faq[k.replace("q", "a")]} paths={paths} className="hw-answer" />
+                  </details>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </section>
       )}
 
       {by("cta-banner") && (
-        <section id="cta-banner" className="section">
-          <div className="container">
-            <div className="nx-cta nx-cta--indigo nx-reveal">
+        <section id="cta-banner" className="cta-band">
+          <div className="wrap">
+            <div className="cta-band__in rv">
               <div>
-                {cta.heading && <h2 className="nx-cta__title">{cta.heading}</h2>}
-                {cta.subheadline && <p className="nx-cta__desc">{cta.subheadline}</p>}
+                {cta.heading && <h2>{cta.heading}</h2>}
+                {cta.subheadline && <p>{cta.subheadline}</p>}
               </div>
-              <div className="hw-cta-actions">
-                <TrackedLink href={contact} event="consultation_click" service="Delivery process" className="nx-btn nx-btn--lime nx-btn--lg">
-                  <span>{cta.cta_primary_label || "Start a conversation"}</span>
-                  <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
+              <div className="cta-band__acts">
+                <TrackedLink href={contact} event="consultation_click" service="Delivery process" className="btn btn--white">
+                  {cta.cta_primary_label || "Start a conversation"} <V2Icon name="arrow" />
                 </TrackedLink>
-                {cta.cta_secondary_label && <ArrowLink href={go(cta.cta_secondary_url || "/portfolio")}>{cta.cta_secondary_label}</ArrowLink>}
+                {cta.cta_secondary_label && (
+                  <a className="btn btn--ghost-w" href={go(cta.cta_secondary_url || "/case-studies")}>
+                    {cta.cta_secondary_label}
+                  </a>
+                )}
               </div>
             </div>
           </div>

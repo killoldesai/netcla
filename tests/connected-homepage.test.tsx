@@ -84,9 +84,9 @@ test("Service hubs preserve priority and only expose published destinations", ()
     .get();
   assert.ok(options.includes("AI & business automation"));
   assert.ok(options.includes("Cloud & DevOps"));
-  assert.equal($("#brief .brief-opt").length, 5);
-  assert.equal($("#brief .brief-opt[aria-pressed=true]").length, 0);
-  assert.equal($("#brief a[href='#contact']").length, 1);
+  assert.equal($("#brief .chip").length, 5);
+  assert.equal($("#brief .chip[aria-pressed=true]").length, 1);
+  assert.ok($("#hero a[href='#contact']").length >= 1);
   for (const name of [
     "name",
     "email",
@@ -99,7 +99,7 @@ test("Service hubs preserve priority and only expose published destinations", ()
   assert.equal($("form .honeypot input[name=company_url]").length, 1);
 });
 
-test("The five practices lead the page and are all visible without a click", () => {
+test("The five practices lead the page as tabs with one panel open at a time", () => {
   const $ = render();
   assert.match(
     $("h1").text(),
@@ -112,10 +112,10 @@ test("The five practices lead the page and are all visible without a click", () 
       .get(),
     ["software", "ai", "devops", "mobile", "cloud"],
   );
-  assert.equal($("#services [role=tab]").length, 0);
-  assert.equal($("#services [hidden]").length, 0);
+  assert.equal($("#services [role=tab]").length, 5);
+  assert.equal($("#services [hidden]").length, 4);
   assert.equal($("#results").length, 0);
-  assert.equal($("main [role=tablist]").length, 0);
+  assert.equal($("main [role=tablist]").length, 2);
 });
 
 test("Published case studies supply proof without exposing draft examples", () => {
@@ -163,6 +163,6 @@ test("Technology chips link to published pages only, and the process lists every
   assert.equal($("#section-1 a[href='/flutter-app-development']").length, 1);
   assert.equal($("#section-1 a").length, 2);
   assert.ok($("#section-1").text().includes("Kubernetes"));
-  assert.equal($("#delivery ol > li").length, 4);
+  assert.equal($("#delivery .wf__step").length, 4);
   assert.equal($("#faq details").length, 6);
 });

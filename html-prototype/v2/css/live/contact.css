@@ -1,0 +1,31 @@
+/* Contact page, live-only rules: the enquiry form's timeline chips, honeypot, status line and the content lists. */
+.form__title { font-size: 24px; font-weight: 400; margin: 0 0 6px; }
+.form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.form fieldset:disabled { opacity: 0.7; }
+.ct-choice legend { font-size: 14px; margin-bottom: 8px; }
+.ct-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.ct-chip { position: relative; cursor: pointer; }
+.ct-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.ct-chip span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line-2); border-radius: 99px; font-size: 15px; background: #fff; transition: border-color 0.2s, background 0.2s; }
+.ct-chip:hover span { border-color: var(--violet); }
+.ct-chip input:focus-visible + span { box-shadow: 0 0 0 3px var(--violet-wash); }
+.ct-chip input:checked + span { border-color: var(--violet); background: var(--violet-wash); color: var(--violet-strong); }
+.ct-trap, .honeypot { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+.form-status { font-size: 14px; text-align: center; color: var(--slate); margin: 12px 0 0; min-height: 1em; }
+.form .error { font-size: 14px; color: var(--s-stuck); margin: 12px 0 0; }
+.ct-direct p { display: grid; grid-template-columns: minmax(0, 140px) minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 18px 0; margin: 0; border-bottom: 1px solid var(--line-2); font-size: 18px; }
+.ct-direct p:first-child { border-top: 1px solid var(--line-2); }
+.ct-direct span { font-size: 14px; color: var(--slate); }
+.ct-direct a { color: var(--violet); overflow-wrap: anywhere; }
+.ct-office span { color: var(--ink); }
+@media (max-width: 720px) {
+  .ct-direct p { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+.npills strong { display: block; font-weight: 600; margin-bottom: 2px; }
+
+/* Contact, round two */
+.hero--form .lead { margin-top: 20px; }
+.hero--form .ticks { margin-top: 22px; }
+.ct-route-ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; }
+.ct-route-ico svg { width: 24px; height: 24px; }
+.kit-step { list-style: none; }

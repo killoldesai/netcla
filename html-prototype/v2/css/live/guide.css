@@ -1,0 +1,48 @@
+/* Guide article, round two: framed hero visual, reading bar, takeaway cards, chapters, tables, figures */
+.readbar { position: fixed; left: 0; right: 0; top: 0; height: 4px; z-index: 60; background: transparent; pointer-events: none; }
+.readbar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--violet), #d65bd1); transform-origin: left; transform: scaleX(0); will-change: transform; }
+
+.guide-visual { position: relative; padding: 0; }
+.guide-visual__frame { margin: 0; border-radius: 36px; padding: 28px; background: var(--p-lavender); overflow: hidden; }
+.guide-visual__frame img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; mix-blend-mode: multiply; border-radius: 20px; }
+.guide-visual__chip { position: absolute; z-index: 2; font-size: 14px; padding: 9px 16px; border-radius: 99px; background: var(--snow); box-shadow: var(--shadow-2); animation: bob 7s ease-in-out infinite; }
+.guide-visual__chip--a { left: -14px; bottom: 28px; }
+.guide-visual__chip--b { right: -10px; top: 24px; animation-delay: -3s; }
+
+/* Key takeaways as a grid of tick cards */
+.prose .keybox { background: var(--p-lavender); border-radius: 32px; padding: 32px; }
+.prose .keybox > b { display: block; font-size: 22px; font-weight: 500; margin-bottom: 18px; }
+.prose .keybox ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.prose .keybox li { position: relative; margin: 0; padding: 16px 18px 16px 52px; border-radius: 18px; background: rgba(255, 255, 255, .78); font-size: 16px; line-height: 1.55; }
+.prose .keybox li::before { content: ""; position: absolute; left: 16px; top: 17px; width: 24px; height: 24px; border-radius: 50%; background: var(--violet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat; }
+
+/* Chapters */
+.guide-chapter { scroll-margin-top: 110px; }
+.guide-chapter + .guide-chapter, .guide-chapter + aside, .keybox + .guide-chapter { margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--line); }
+.guide-chapter > .eyebrow { display: inline-flex; margin-bottom: 14px; padding: 5px 14px; border-radius: 99px; background: var(--violet-wash); color: var(--violet-strong); font-size: 13.5px; }
+.guide-chapter > h2 { margin-top: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.15; overflow-wrap: break-word; }
+.guide-chapter h3 { position: relative; margin: 36px 0 12px; padding-left: 16px; font-size: 21px; font-weight: 500; }
+.guide-chapter h3::before { content: ""; position: absolute; left: 0; top: .2em; bottom: .2em; width: 4px; border-radius: 3px; background: var(--violet); }
+.guide-chapter li::marker { color: var(--violet); }
+
+/* Tables inside the article */
+.prose table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 26px 0 30px; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; font-size: 15px; line-height: 1.5; }
+.prose thead th { background: var(--p-lavender); color: var(--black); font-weight: 500; text-align: left; padding: 14px 18px; }
+.prose td, .prose tbody th { padding: 14px 18px; text-align: left; vertical-align: top; border-top: 1px solid var(--line); }
+.prose tbody tr:nth-child(even) td, .prose tbody tr:nth-child(even) th { background: var(--cloud); }
+.prose tbody th { font-weight: 500; }
+
+/* Figures: a pastel frame, white picture backgrounds blend into it */
+.guide-figure { margin: 8px 0 36px; border-radius: 28px; padding: 22px; background: var(--p-sky); overflow: hidden; }
+.guide-chapter:nth-of-type(2n) .guide-figure { background: var(--p-lime); }
+.guide-chapter:nth-of-type(3n) .guide-figure { background: var(--p-peach); }
+.guide-figure img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; border-radius: 16px; }
+
+#faq { padding-top: 56px; }
+
+@media (max-width: 960px) {
+  .guide-visual__chip--a { left: 8px; }
+  .guide-visual__chip--b { right: 8px; }
+  .prose .keybox { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .guide-visual__chip { animation: none; } .readbar span { transition: none; } }

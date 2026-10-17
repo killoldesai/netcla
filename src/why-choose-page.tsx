@@ -1,16 +1,16 @@
-import type { CSSProperties } from "react";
 import { TrackedLink } from "./v3-interactions";
 import { breadcrumbs } from "./site-structure";
 import { sanitizeRichHTML } from "./rich-text";
-import { ArrowLink, Breadcrumbs, FaqList, HeroArt, Icon } from "./site/ui";
-import { WhyChooseArt } from "./site/art/why-choose-art";
+import { V2Icon, V2Img } from "./site/v2/ui";
+import { SceneHero } from "./site/v2/scene-hero";
+import { HeroScene } from "./site/v2/hero-scenes";
 import type { Content } from "./content";
 import type { PageSection } from "./page-spec-schema";
 
 // Why Choose Netofficials: the reasons as checkable working practices, a category comparison that says when the
-// alternatives are the better choice, who Netofficials is not right for, and where to read next.
-// Markup follows html-prototype/why-choose.html; styles live in public/assets/nx/site.css and pages/why-choose.css.
-// Nothing is numbered: the reasons have no order.
+// alternatives are the better choice, who Netofficials is not right for, approved client feedback (only when it
+// exists), and where to read next. Markup follows html-prototype/v2/why-choose.html; styles are
+// public/assets/v2/pages/why-choose.css. Nothing is numbered: the reasons have no order.
 
 /** True for content generated from the why-choose spec; older accepted content keeps the legacy renderer. */
 export function isWhyChooseContent(content: Content, path: string) {
@@ -21,8 +21,8 @@ type Props = { content: Content; path: string; paths: string[]; preview?: boolea
 
 const clean = (html: string, paths: string[]) => sanitizeRichHTML(html, false, paths.length ? paths : undefined);
 const hasHtml = (value: string) => /<[a-z][\s\S]*>/i.test(value);
-/** Staggered reveal delay for card N in a row of three, as the prototype does. */
-const delay = (i: number) => ({ ["--nx-delay" as string]: `${(i % 3) * 100}ms` }) as CSSProperties;
+const TINTS = ["var(--p-lavender)", "var(--p-sky)", "var(--p-lime)", "var(--p-peach)"];
+const REASON_ICONS = ["ic-scope", "ic-timezone", "ic-team", "ic-milestones", "ic-handover", "ic-cost"];
 
 function rows(fields: Record<string, string>, prefix: string, keys: string[], max: number) {
   const out: Record<string, string>[] = [];
@@ -33,21 +33,24 @@ function rows(fields: Record<string, string>, prefix: string, keys: string[], ma
   return out;
 }
 
-function Prose({ value, paths, className }: { value?: string; paths: string[]; className?: string }) {
+/** Plain text becomes a paragraph; rich HTML goes through the sanitiser inside the .prose wrapper. */
+function Prose({ value, paths }: { value?: string; paths: string[] }) {
   if (!value?.trim()) return null;
-  if (!hasHtml(value)) return <p className={className}>{value}</p>;
-  return <div className={"nx-prose " + (className ?? "")} dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
+  if (!hasHtml(value)) return <p>{value}</p>;
+  return <div className="prose" dangerouslySetInnerHTML={{ __html: clean(value, paths) }} />;
 }
 
-/** Section header: eyebrow (section_label), h2 (heading) and optional lead, each only when the content has it. */
-function Head({ f, lead }: { f: Record<string, string>; lead?: string }) {
-  if (!f.section_label && !f.heading && !lead) return null;
+/** Section header (.sec__head): each part renders only when the content has it. */
+function Head({ eyebrow, title, lead, id }: { eyebrow?: string; title?: string; lead?: string; id?: string }) {
+  if (!eyebrow && !title && !lead) return null;
   return (
-    <div className="section-head nx-reveal">
-      <div>
-        {f.section_label && <span className="eyebrow">{f.section_label}</span>}
-        {f.heading && <h2 className="h-section">{f.heading}</h2>}
-      </div>
+    <div className="sec__head rv">
+      {eyebrow && <p className="label">{eyebrow}</p>}
+      {title && (
+        <h2 className="big" id={id}>
+          {title}
+        </h2>
+      )}
       {lead && <p className="lead">{lead}</p>}
     </div>
   );
@@ -60,7 +63,8 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
   const f = (id: string) => by(id)?.fields ?? {};
   const hero = by("hero");
   const h = f("hero");
-  const trail = breadcrumbs(path, h.h1 || content.title);
+  const heroTitle = h.h1 || content.title;
+  const trail = breadcrumbs(path, heroTitle);
   const contact = go("/contact") + "?service=" + encodeURIComponent("Help defining the scope");
   const reasonsSec = f("reasons");
   const reasons = rows(reasonsSec, "reason", ["title", "body"], 6);
@@ -77,68 +81,40 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
   const cta = f("cta-banner");
   const hasNotes = !!(cmp.firms_better || cmp.freelancers_better);
 
-  const Cta = ({ label, variant }: { label: string; variant: "primary" | "lime" }) => (
-    <TrackedLink href={contact} event="consultation_click" service="Why choose" className={`nx-btn nx-btn--${variant} nx-btn--lg`}>
-      <span>{label}</span>
-      <Icon name="arrow-right" size={18} className="nx-icon nx-btn__arrow" />
-    </TrackedLink>
-  );
-
-  // Sub-nav lists only the sections that actually render on this page.
-  const nav = [
-    reasons.length > 0 && { id: "reasons", label: "Reasons" },
-    cmpRows.length > 0 && { id: "comparison", label: "How we compare" },
-    fits.length > 0 && { id: "not-a-fit", label: "Not the right fit" },
-    quotes.length > 0 && { id: "proof-testimonials", label: "Client feedback" },
-    routes.length > 0 && { id: "routes", label: "Where to read next" },
-    faqPairs.length > 0 && { id: "faq", label: "FAQ" },
-  ].filter((n): n is { id: string; label: string } => !!n);
-
   return (
     <>
       {hero && (
-        <section id="hero" className="page-hero">
-          <div className="container">
-            <Breadcrumbs items={trail.map((c, i) => ({ label: c.label, href: i === trail.length - 1 ? undefined : go(c.path) }))} />
-            <div className="hero__grid">
-              <div>
-                <span className="tag-pill">{h.tag_pill || "Why Netofficials"}</span>
-                <h1>{h.h1 || content.title}</h1>
-                {h.subheadline && <p className="lead">{h.subheadline}</p>}
-                <div className="hero__actions">
-                  <Cta label={h.cta_primary_label || "Start a conversation"} variant="primary" />
-                  {h.cta_secondary_label && <ArrowLink href={go(h.cta_secondary_url || "/how-we-work")}>{h.cta_secondary_label}</ArrowLink>}
-                </div>
-              </div>
-              <HeroArt asset={hero.asset} fallback={<WhyChooseArt />} priority />
-            </div>
-          </div>
-        </section>
+        <SceneHero
+          labelId="wc-h1"
+          trail={trail.map((c) => ({ label: c.label, href: go(c.path) }))}
+          eyebrow={h.tag_pill || "Why Netofficials"}
+          h1={heroTitle}
+          sub={h.subheadline}
+          actions={
+            <>
+              <TrackedLink href={contact} event="consultation_click" service="Why choose" className="btn btn--grad">
+                {h.cta_primary_label || "Start a conversation"} <V2Icon name="arrow" />
+              </TrackedLink>
+              {h.cta_secondary_label && (
+                <a className="btn btn--ghost" href={go(h.cta_secondary_url || "/how-we-work")}>
+                  {h.cta_secondary_label}
+                </a>
+              )}
+            </>
+          }
+          scene={<HeroScene kind="checklist" title="Why Netofficials" items={reasons.map((r) => r.title).filter(Boolean)} stack={cmpRows.map((r) => r.attribute).filter(Boolean)} />}
+        />
       )}
-
-      {nav.length > 0 && (
-        <nav className="subnav" aria-label="On this page" data-subnav>
-          <div className="container">
-            <ul className="subnav__list">
-              {nav.map((n) => (
-                <li key={n.id}>
-                  <a href={`#${n.id}`}>{n.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      )}
-
       {reasons.length > 0 && (
-        <section id="reasons" className="section">
-          <div className="container">
-            <Head f={reasonsSec} lead={reasonsSec.intro} />
-            <div className="sk-cards">
+        <section id="reasons" className="sec wc-reasons" aria-labelledby={reasonsSec.heading ? "reasons-t" : undefined}>
+          <div className="wrap">
+            <Head eyebrow={reasonsSec.section_label || undefined} title={reasonsSec.heading || undefined} lead={reasonsSec.intro || undefined} id="reasons-t" />
+            <div className="kit-cards kit-cards--3">
               {reasons.map((r, i) => (
-                <article className="sk-card nx-reveal" key={`${i}-${r.title}`} style={delay(i)}>
-                  <h3 className="sk-card__title">{r.title}</h3>
-                  <p className="sk-card__text">{r.body}</p>
+                <article className="kit-card rv" key={`${i}-${r.title}`} style={{ background: TINTS[i % TINTS.length], transitionDelay: `${(i % 3) * 0.08}s` }}>
+                  <V2Img name={REASON_ICONS[i % REASON_ICONS.length]} className="kit-card__ico" />
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
                 </article>
               ))}
             </div>
@@ -147,16 +123,15 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
       )}
 
       {cmpRows.length > 0 && (
-        <section id="comparison" className="section section--white">
-          <div className="container">
-            <Head f={cmp} lead={cmp.intro} />
-            <div className="why-table-wrap nx-reveal" data-allow-overflow>
-              <table className="why-matrix">
-                <caption className="nx-sr">Netofficials compared with typical large outsourcing firms and freelancers</caption>
+        <section id="comparison" className="sec wc-compare" aria-labelledby={cmp.heading ? "comp-t" : undefined}>
+          <div className="wrap">
+            <Head eyebrow={cmp.section_label || undefined} title={cmp.heading || undefined} lead={cmp.intro || undefined} id="comp-t" />
+            <div className="cmp__wrap rv">
+              <table className="cmp" aria-label={cmp.heading || "Netofficials compared with typical large outsourcing firms and freelancers"}>
                 <thead>
                   <tr>
                     <td aria-hidden="true" />
-                    <th scope="col" className="is-us">Netofficials</th>
+                    <th scope="col">Netofficials</th>
                     <th scope="col">Large outsourcing firm, typically</th>
                     <th scope="col">Freelancer, typically</th>
                   </tr>
@@ -165,7 +140,9 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
                   {cmpRows.map((r) => (
                     <tr key={r.attribute}>
                       <th scope="row">{r.attribute}</th>
-                      <td data-label="Netofficials" className="is-us">{r.us}</td>
+                      <td data-label="Netofficials" className="on">
+                        {r.us}
+                      </td>
                       <td data-label="Large outsourcing firm">{r.firms}</td>
                       <td data-label="Freelancer">{r.freelancers}</td>
                     </tr>
@@ -174,15 +151,15 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
               </table>
             </div>
             {hasNotes && (
-              <div className="why-notes nx-reveal">
+              <div className="wc-notes rv">
                 {cmp.firms_better && (
-                  <div>
+                  <div className="cat cat--fill" style={{ background: "var(--p-lavender)" }}>
                     <h3>When a large outsourcing firm is the better choice</h3>
                     <p>{cmp.firms_better}</p>
                   </div>
                 )}
                 {cmp.freelancers_better && (
-                  <div>
+                  <div className="cat cat--fill" style={{ background: "var(--p-lime)" }}>
                     <h3>When a freelancer is the better choice</h3>
                     <p>{cmp.freelancers_better}</p>
                   </div>
@@ -194,15 +171,19 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
       )}
 
       {fits.length > 0 && (
-        <section id="not-a-fit" className="section">
-          <div className="container">
-            <Head f={fitSec} lead={fitSec.intro} />
-            <div className="sk-cards">
+        <section id="not-a-fit" className="sec sec--cloud wc-fit" aria-labelledby={fitSec.heading ? "fit-t" : undefined}>
+          <div className="wrap">
+            <Head eyebrow={fitSec.section_label || undefined} title={fitSec.heading || undefined} lead={fitSec.intro || undefined} id="fit-t" />
+            <div className="catgrid catgrid--2">
               {fits.map((r, i) => (
-                <article className="sk-card nx-reveal" key={`${i}-${r.title}`} style={delay(i)}>
-                  <h3 className="sk-card__title">{r.title}</h3>
-                  <p className="sk-card__text">{r.body}</p>
-                </article>
+                <div className="cat rv" key={`${i}-${r.title}`}>
+                  <span className="cat__tag">
+                    <V2Icon name="x" />
+                    Not a fit
+                  </span>
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -210,13 +191,15 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
       )}
 
       {quotes.length > 0 && (
-        <section id="proof-testimonials" className="section section--white">
-          <div className="container">
-            <Head f={quoteSec} />
-            <div className="why-quotes">
+        <section id="proof-testimonials" className="sec wc-proof" aria-labelledby="proof-t">
+          <div className="wrap">
+            <Head eyebrow={quoteSec.section_label || undefined} title={quoteSec.heading || undefined} id="proof-t" />
+            <div className="wc-proof__grid">
               {quotes.map((q, i) => (
-                <figure className="why-quote nx-reveal" key={`${i}-${q.name}`} style={delay(i)}>
-                  <blockquote>{q.text}</blockquote>
+                <figure className="cat wc-quote rv" key={`${i}-${q.name}`}>
+                  <blockquote>
+                    <p>{q.text}</p>
+                  </blockquote>
                   <figcaption>
                     <strong>{q.name}</strong>
                     {q.role && <span>, {q.role}</span>}
@@ -229,17 +212,17 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
       )}
 
       {routes.length > 0 && (
-        <section id="routes" className="section">
-          <div className="container">
-            <Head f={routesSec} />
-            <div className="more nx-reveal">
-              {routes.map((r) => (
-                <a key={r.name} href={go(r.url || "/services")}>
-                  <div>
-                    <strong>{r.name}</strong>
-                    <span>{r.body}</span>
-                  </div>
-                  <Icon name="arrow-right" size={20} />
+        <section id="routes" className="sec sec--cloud wc-routes" aria-labelledby={routesSec.heading ? "routes-t" : undefined}>
+          <div className="wrap">
+            <Head eyebrow={routesSec.section_label || undefined} title={routesSec.heading || undefined} id="routes-t" />
+            <div className="kit-cards kit-cards--3">
+              {routes.map((r, i) => (
+                <a className="kit-card kit-card--link rv" key={r.name} href={go(r.url || "/services")} style={{ background: TINTS[(i + 1) % TINTS.length], transitionDelay: `${i * 0.08}s` }}>
+                  <h3>{r.name}</h3>
+                  {r.body && <p>{r.body}</p>}
+                  <span className="kit-card__go">
+                    Learn more <V2Icon name="arrow" />
+                  </span>
                 </a>
               ))}
             </div>
@@ -248,34 +231,85 @@ export function WhyChooseSections({ content, path, paths, preview = false, linkM
       )}
 
       {faqPairs.length > 0 && (
-        <section id="faq" className="section section--white">
-          <div className="container faq">
-            <div className="faq__aside nx-reveal">
-              {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
-              {faq.heading && <h2 className="h-section">{faq.heading}</h2>}
+        <section id="faq" className="sec wc-faq" aria-labelledby={faq.heading ? "faq-t" : undefined}>
+          {faqPairs.length >= 4 ? (
+            <div className="wrap sc-faq">
+              <div className="sc-faq__head rv">
+                {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+                {faq.heading && (
+                  <h2 className="h2" id="faq-t">
+                    {faq.heading}
+                  </h2>
+                )}
+              </div>
+              <div className="sc-faq__cols rv">
+                {[faqPairs.slice(0, Math.ceil(faqPairs.length / 2)), faqPairs.slice(Math.ceil(faqPairs.length / 2))].map((col, c) => (
+                  <div className="acc" key={c}>
+                    {col.map((k) => (
+                      <details key={k}>
+                        <summary>
+                          {faq[k]}
+                          <i aria-hidden="true">
+                            <V2Icon name="plus" />
+                          </i>
+                        </summary>
+                        <Prose value={faq[k.replace("q", "a")]} paths={paths} />
+                      </details>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <p className="sc-faq__ask rv">
+                Not listed here?{" "}
+                <a className="btn btn--ghost" href={go("/contact")}>
+                  Ask us directly <V2Icon name="arrow" />
+                </a>
+              </p>
             </div>
-            <FaqList
-              name="why-faq"
-              items={faqPairs.map((k) => ({
-                q: faq[k],
-                a: <Prose value={faq[k.replace("q", "a")]} paths={paths} />,
-              }))}
-            />
-          </div>
+          ) : (
+            <div className="wrap faq">
+              <div className="faq__aside rv">
+                {faq.section_label && <span className="eyebrow">{faq.section_label}</span>}
+                {faq.heading && <h2 id="faq-t">{faq.heading}</h2>}
+                <a className="btn btn--ghost" href={go("/contact")}>
+                  Ask us directly <V2Icon name="arrow" />
+                </a>
+              </div>
+              <div className="acc rv">
+                {faqPairs.map((k, i) => (
+                  <details key={k} open={i === 0}>
+                    <summary>
+                      {faq[k]}
+                      <i aria-hidden="true">
+                        <V2Icon name="plus" />
+                      </i>
+                    </summary>
+                    <Prose value={faq[k.replace("q", "a")]} paths={paths} />
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
       )}
 
       {by("cta-banner") && (
-        <section id="cta-banner" className="section">
-          <div className="container">
-            <div className="nx-cta nx-cta--indigo nx-reveal">
+        <section id="cta-banner" className="cta-band">
+          <div className="wrap">
+            <div className="cta-band__in rv">
               <div>
-                {cta.heading && <h2 className="nx-cta__title">{cta.heading}</h2>}
-                {cta.subheadline && <p className="nx-cta__desc">{cta.subheadline}</p>}
+                {cta.heading && <h2>{cta.heading}</h2>}
+                {cta.subheadline && <p>{cta.subheadline}</p>}
               </div>
-              <div className="hero__actions">
-                <Cta label={cta.cta_primary_label || "Start a conversation"} variant="lime" />
-                {cta.cta_secondary_label && <ArrowLink href={go(cta.cta_secondary_url || "/how-we-work")}>{cta.cta_secondary_label}</ArrowLink>}
+              <div className="cta-band__acts">
+                <TrackedLink href={contact} event="consultation_click" service="Why choose" className="btn btn--white">
+                  {cta.cta_primary_label || "Start a conversation"} <V2Icon name="arrow" />
+                </TrackedLink>
+                {cta.cta_secondary_label && (
+                  <a className="btn btn--ghost-w" href={go(cta.cta_secondary_url || "/how-we-work")}>
+                    {cta.cta_secondary_label}
+                  </a>
+                )}
               </div>
             </div>
           </div>

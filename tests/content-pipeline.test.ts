@@ -106,13 +106,14 @@ test("brief parsing drops links outside the allowed list and prompts carry the r
   assert.match(writerSystemPrompt, /cutting-edge/);
 });
 
-test("guides get a long-form template and images get flat-style prompts with alt text", () => {
+test("guides get a long-form template and images get house-style (3D clay) prompts with alt text", () => {
   const guide = effectiveSpec(spec("/blog/custom-software-development-cost", [section("hero", ["h1"], { hero: true, ratio: "16:9" })]));
   assert.deepEqual(guide.sections.map((s) => s.id).slice(0, 3), ["hero", "key-takeaways", "editorial-1"]);
   assert.ok(guide.sections.find((s) => s.id === "faq")!.fields.includes("a6"));
   assert.deepEqual(imageSectionIds(guide), ["hero", "editorial-2"]);
   const image = buildImagePrompt(guide, "hero", undefined);
-  assert.match(image.prompt, /no gradients/i);
+  assert.match(image.prompt, /3D clay/i);
+  assert.match(image.prompt, /no readable text/i);
   assert.ok(image.alt.length <= 125 && image.alt.length > 10);
 });
 

@@ -1,0 +1,14 @@
+/* Live-only rules for the skeleton pages (service, hub, technology, hire, industry, location, industries hub). */
+.overview > .media, .wrap > .media { margin-top: 56px; }
+.marquee__track img { width: 30px; height: 30px; flex: none; }
+.mcard__m .mcard__img { width: 100%; height: auto; display: block; border-radius: 18px; }
+.chips > span { display: inline-flex; align-items: center; min-height: 38px; padding: 7px 14px; border-radius: 99px; background: var(--cloud); font-size: 15px; }
+.wrap > .prose { margin-top: 48px; }
+/* Accordion visual: a soft panel with a large 3D spot icon and the active item's title */
+.accs__vis { background: var(--panel); padding: 0; min-height: 480px; position: relative; }
+.accs__vis > [data-vis] { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 32px; }
+.accs__spot { width: min(320px, 70%); aspect-ratio: 1; height: auto; border-radius: 56px; object-fit: cover; box-shadow: 0 24px 60px rgba(60, 60, 140, 0.22); animation: bob 6s ease-in-out infinite; }
+.accs__cap { max-width: 90%; text-align: center; font-size: 17px; line-height: 1.4; padding: 10px 20px; border-radius: 99px; background: #fff; box-shadow: var(--shadow); }
+.accs__vis > [data-vis]:nth-child(5n+1) { background: var(--p-lavender); } .accs__vis > [data-vis]:nth-child(5n+2) { background: var(--p-sky); } .accs__vis > [data-vis]:nth-child(5n+3) { background: var(--p-lime); } .accs__vis > [data-vis]:nth-child(5n+4) { background: var(--p-peach); } .accs__vis > [data-vis]:nth-child(5n) { background: var(--p-peri); }
+@media (max-width: 960px) { .accs__vis { min-height: 380px; } .accs__spot { width: min(240px, 60%); border-radius: 40px; } }
+.mcard__m { display: grid; place-items: center; min-height: 260px; }

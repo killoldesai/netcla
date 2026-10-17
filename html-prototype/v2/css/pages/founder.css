@@ -1,0 +1,24 @@
+/* Founder page: layout tweaks only. Styling comes from css/core.css and css/components.css. */
+
+.about-founder-feature { margin-top: 24px; }
+.about-founder-acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.about-photo-gate { max-width: 320px; margin-top: 28px; padding: 20px; text-align: left; }
+.about-photo-gate .gated__label { margin-bottom: 8px; }
+.about-photo-gate p { margin: 0; }
+
+/* Biography */
+.about-bio { max-width: 760px; }
+.about-bio p { font-size: 19px; line-height: 1.7; color: var(--slate); margin-bottom: 20px; }
+
+/* Expertise */
+.about-chips { justify-content: center; margin-bottom: 56px; }
+.about-expertise .cat p { font-size: 15.5px; }
+.about-ico { width: 64px; height: 64px; border-radius: 16px; background: var(--p-lavender); display: grid; place-items: center; color: var(--violet); }
+.about-ico svg { width: 28px; height: 28px; }
+
+/* Guides */
+.about-more { margin-top: 48px; text-align: center; }
+
+@media (max-width: 720px) {
+  .about-founder-acts .btn { width: 100%; justify-content: center; }
+}

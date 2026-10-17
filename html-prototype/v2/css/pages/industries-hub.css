@@ -1,0 +1,39 @@
+/* Industries hub: layout tweaks only. Tokens and components come from core.css and components.css. */
+.hub-mock { padding: 16px 20px; }
+.hub-facts { padding: 28px 32px 32px; }
+.hub-facts .ticks { margin-top: 0; gap: 18px; }
+.hub-q { margin-top: 22px; max-width: 560px; }
+
+.ctx__top .huge { font-size: clamp(44px, 6vw, 88px); }
+.hub-stage { height: 860px; margin-top: 60px; }
+.fc p { font-size: 15px; line-height: 1.5; color: var(--slate); margin: 10px 4px 0; }
+.fc .fc__row { font-size: 15px; line-height: 1.4; align-items: flex-start; }
+.fc .fc__row i { margin-top: 2px; }
+
+#engage { padding-top: 110px; }
+#engage .sec__head { margin-bottom: 56px; }
+.mcard__c .btn { margin-top: 26px; }
+.hub-link { display: block; width: max-content; margin-top: 22px; color: var(--violet); }
+.faq__aside .btn { margin-top: 26px; }
+
+.feat--four .feat__g { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.feat--five .feat__g { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.feat--five .feat__g > div { grid-column: span 2; }
+.feat--five .feat__g > div:nth-child(4) { grid-column: 2 / span 2; }
+.feat--five .feat__g > div:nth-child(5) { grid-column: 4 / span 2; }
+.feat .sec__head { margin-bottom: 64px; }
+
+@media (max-width: 960px) {
+  .feat--five .feat__g { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feat--five .feat__g > div,
+  .feat--five .feat__g > div:nth-child(4),
+  .feat--five .feat__g > div:nth-child(5) { grid-column: auto; }
+}
+@media (max-width: 720px) {
+  .feat--four .feat__g, .feat--five .feat__g { grid-template-columns: minmax(0, 1fr); }
+  .hub-stage { height: auto; }
+}
+@media (max-width: 720px) {
+  .hub-mock .tr > :nth-child(4) { display: none; }
+  .hub-mock .tr { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr) minmax(0, 1fr); }
+}

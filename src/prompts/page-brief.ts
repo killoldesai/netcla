@@ -89,7 +89,7 @@ export function buildBriefPrompt(input: {
       "keyFacts: 4-6 short factual lines (<=25 words each) using ONLY approved evidence or definitional facts about the technology; never invent statistics.",
       "schemaAbout: 4-8 entities the page is about, each {name, sameAs} where sameAs is a Wikipedia or Wikidata URL ONLY if you are certain it exists, otherwise an empty string.",
       "serviceType: the schema.org serviceType in 2-5 words, e.g. 'Mobile app development'.",
-      "images: one entry for each of these section ids: " + input.imageSections.join(", ") + ". subject = what a flat conceptual illustration should show for this topic (no text, no people's faces); alt = a factual description of that illustration in at most 125 characters.",
+      "images: one entry for each of these section ids: " + input.imageSections.join(", ") + ". subject = what a stylised 3D clay illustration should show for this topic (a role character working with boards, devices or diagrams; no text, no real people); alt = a factual description of that illustration in at most 125 characters.",
       ...(spec.path === "/blog"
         ? [
             "GUIDES INDEX: the listing page for Netofficials' buyer guides (cost, scope, choosing a provider) on software, websites and search marketing. primaryKeyword is 'software development guides'; secondaryKeywords include 'website cost guides', 'SEO cost guides India' and 'how to choose a software development company'.",
@@ -99,19 +99,19 @@ export function buildBriefPrompt(input: {
       ...(spec.path === "/why-choose-netofficials"
         ? [
             "WHY CHOOSE PAGE: the honest case for choosing Netofficials, an India-based software development company. primaryKeyword is 'why choose netofficials'; secondaryKeywords include 'software development company India', 'Netofficials vs freelancers' and 'outsourcing firm vs freelancer'. Do NOT target 'best' or 'reviews' keywords.",
-            "answerSummary starts 'Teams choose Netofficials, an India-based software development company, because...' and names the working practices (engineers who scope the work build it, direct access to the technical lead, one team across disciplines, written scope, client-owned code). No rankings, figures or competitor names. keyFacts use only approved evidence or those practices. serviceType is an empty string. images: the hero only, a flat illustration of one small team connected to several disciplines, no people or faces.",
+            "answerSummary starts 'Teams choose Netofficials, an India-based software development company, because...' and names the working practices (engineers who scope the work build it, direct access to the technical lead, one team across disciplines, written scope, client-owned code). No rankings, figures or competitor names. keyFacts use only approved evidence or those practices. serviceType is an empty string. images: the hero only, a 3D clay illustration of one small team of illustrated role characters connected to several disciplines, no portraits of real people.",
           ]
         : []),
       ...(spec.path === "/how-we-work"
         ? [
             "HOW WE WORK PAGE: explains how Netofficials, an India-based software development company, delivers a project from first brief to handover. primaryKeyword is 'how software development company works' unless the research gives a stronger query; secondaryKeywords include 'agile software development process' and 'software development process India'.",
-            "answerSummary starts 'Netofficials delivers software projects in five stages: ...' and names them. keyFacts use only approved evidence or the method itself (scoped before build, sprint reviews, code handover); no cadence times, durations or figures. serviceType is an empty string. images: the hero only, a flat illustration of a delivery pipeline with stages and a review step, no people or faces.",
+            "answerSummary starts 'Netofficials delivers software projects in five stages: ...' and names them. keyFacts use only approved evidence or the method itself (scoped before build, sprint reviews, code handover); no cadence times, durations or figures. serviceType is an empty string. images: the hero only, a 3D clay illustration of a delivery pipeline with stages and a review step, illustrated role characters allowed, no portraits of real people.",
           ]
         : []),
       ...(spec.path === "/engagement-models"
         ? [
             "ENGAGEMENT MODELS PAGE: explains how a client can work with Netofficials, an India-based software development company: fixed-price project, dedicated development team, staff augmentation. primaryKeyword is 'software development engagement models'; secondaryKeywords include 'dedicated development team model', 'staff augmentation model India' and 'fixed price software development'.",
-            "answerSummary starts 'Netofficials offers three software development engagement models: ...' and names all three with one distinguishing phrase each. keyFacts use only approved evidence or definitional facts about the models; never a minimum term, rate, onboarding time or support period unless an approved fact states it. serviceType is an empty string. images: one entry for the hero only, a flat illustration of three different team structures around one product, no people or faces.",
+            "answerSummary starts 'Netofficials offers three software development engagement models: ...' and names all three with one distinguishing phrase each. keyFacts use only approved evidence or definitional facts about the models; never a minimum term, rate, onboarding time or support period unless an approved fact states it. serviceType is an empty string. images: one entry for the hero only, a 3D clay illustration of three different team structures around one product, illustrated role characters allowed, no portraits of real people.",
           ]
         : []),
       ...(spec.path === "/contact"
@@ -125,7 +125,7 @@ export function buildBriefPrompt(input: {
             "ABOUT PAGE: this is the company profile of Netofficials, an India-based software development company, not a service page. primaryKeyword is 'software development company India' unless the research gives a stronger query; secondaryKeywords include 'custom software development India' and 'about Netofficials'.",
             "Never position Netofficials as top, leading, best, number one or award-winning. The page earns trust by stating what it builds, how it delivers and who it works with.",
             "answerSummary starts 'Netofficials is an India-based software development company that builds...'. keyFacts use only approved evidence or the practice names (custom software, AI and automation, cloud and DevOps, mobile apps, web, digital marketing, developer hiring); no founding year, headcount, client or award unless an approved fact states it. serviceType is an empty string. schemaAbout lists the practice technologies, not people.",
-            "images: four flat illustrations with no people or faces: hero = a wide abstract workshop of software layers and interface panels; company-story = a stack of connected product, cloud and mobile layers; delivery-timeline = a loop of discovery, build, test and handover stages; working-model = abstract time-zone bands crossing a globe-like grid. No map outlines, flags or text.",
+            "images: four 3D clay illustrations with no portraits of real people (illustrated role characters allowed): hero = a wide abstract workshop of software layers and interface panels; company-story = a stack of connected product, cloud and mobile layers; delivery-timeline = a loop of discovery, build, test and handover stages; working-model = abstract time-zone bands crossing a globe-like grid. No map outlines, flags or text.",
           ]
         : []),
     ],

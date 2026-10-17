@@ -1,6 +1,8 @@
 import { pillar, pillarGroups, sitePage, sitePages, pillars } from "./site-structure";
 import { company } from "./company";
 import { Icon } from "./site/ui";
+import { V2Icon, v2img } from "./site/v2/ui";
+import { PAGE_KIND, relTint, spotForPage } from "./site/v2/spots";
 
 type Link = { path: string; text: string; blurb?: string };
 type Block = { heading: string; sections: { title?: string; links: Link[] }[] };
@@ -127,9 +129,44 @@ export function relatedPages(path: string, paths: string[]): Block | null {
   return null;
 }
 
-export function RelatedPages({ path, paths }: { path: string; paths: string[] }) {
+/** Contextual links block. `v2` renders v2 catgrid cards; otherwise the legacy related markup. */
+export function RelatedPages({ path, paths, v2 = false }: { path: string; paths: string[]; v2?: boolean }) {
   const block = relatedPages(path, paths);
   if (!block) return null;
+  if (v2) {
+    return (
+      <section className="sec v3-related-pages" aria-labelledby="related-pages-title">
+        <div className="wrap">
+          <div className="sec__head rv">
+            <h2 className="h2" id="related-pages-title">{block.heading}</h2>
+          </div>
+          {block.sections.map((s, i) => (
+            <div key={s.title ?? i} className="v3-related-pages-group">
+              {s.title && <p className="eyebrow rv">{s.title}</p>}
+              <div className="relgrid">
+                {s.links.map((l, i) => {
+                  const kind = sitePage(l.path)?.type;
+                  return (
+                    <a key={l.path} className={`rel rel--${relTint(i)} rv`} href={l.path}>
+                      <span className="rel__top">
+                        <img className="rel__ico" src={v2img(spotForPage(l.path, l.text, i))} alt="" loading="lazy" />
+                        {kind && <span className="rel__tag">{PAGE_KIND[kind] ?? "Page"}</span>}
+                      </span>
+                      <h3>{l.text}</h3>
+                      {l.blurb && <p>{l.blurb}</p>}
+                      <span className="rel__go" aria-hidden="true">
+                        <V2Icon name="arrow" />
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="v3-related-pages gen-related" aria-labelledby="related-pages-title">
       <link rel="stylesheet" href="/assets/nx/related.css?v=20261017" />

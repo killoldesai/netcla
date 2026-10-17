@@ -1,14 +1,16 @@
 import { sanitizeRichHTML } from "./rich-text";
 import { legacyIcon, type SiteIconName } from "./icon-set";
-import { Icon, ProductIcon } from "./site/ui";
+import type { ReactNode } from "react";
+import { ProductIcon } from "./site/ui";
+import { V2Icon } from "./site/v2/ui";
 
-/** Body copy: plain text becomes one paragraph; rich HTML is sanitised inside .nx-prose. */
+/** Body copy: plain text becomes one paragraph; rich HTML is sanitised inside the .prose wrapper. */
 export function GenProse({ value, paths, className }: { value?: string; paths?: string[]; className?: string }) {
   if (!value) return null;
   if (!/<[a-z][\s\S]*>/i.test(value)) return <p className={className}>{value}</p>;
   return (
     <div
-      className={"nx-prose " + (className ?? "")}
+      className={"prose " + (className ?? "")}
       dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(value, false, paths?.length ? paths : undefined) }}
     />
   );
@@ -54,27 +56,41 @@ export function faqGroups(fields: Record<string, string>) {
   return [...groups.values()];
 }
 
+/** An answer: rich HTML is sanitised, plain text is one paragraph. */
+export function FAQAnswer({ value }: { value: string }) {
+  return isRich(value) ? <div className="prose" dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(value) }} /> : <p>{value}</p>;
+}
+
+/** Native exclusive accordion (details with one shared name), the same markup as html-prototype/v2 .acc. */
+export function FAQAccordion({ items, name }: { items: { q: ReactNode; a: ReactNode }[]; name: string }) {
+  return (
+    <div className="acc">
+      {items.map((item, i) => (
+        <details key={i} name={name}>
+          <summary>
+            {item.q}
+            <i aria-hidden="true">
+              <V2Icon name="plus" />
+            </i>
+          </summary>
+          {item.a}
+        </details>
+      ))}
+    </div>
+  );
+}
+
 export function FAQList({ fields }: { fields: Record<string, string> }) {
-  const item = (key: string) => {
-    const answer = fields[key.replace(/q(\d+)$/, "a$1")];
-    return (
-      <details key={key} name="service-faq" className="nx-acc__item">
-        <summary className="nx-acc__trigger">
-          <span>{fields[key]}</span>
-          <span className="nx-acc__icon" aria-hidden="true">
-            <Icon name="plus" size={18} className="" />
-          </span>
-        </summary>
-        <div className="nx-acc__content">
-          {isRich(answer) ? <div className="nx-prose" dangerouslySetInnerHTML={{ __html: sanitizeRichHTML(answer) }} /> : <p>{answer}</p>}
-        </div>
-      </details>
-    );
-  };
   return faqGroups(fields).map((group, i) => (
     <div key={group.title ?? i} className={group.title ? "gen-faq-group" : undefined}>
       {group.title && <h3 className="gen-faq-group__title">{group.title}</h3>}
-      <div className="nx-acc nx-acc--native">{group.keys.map(item)}</div>
+      <FAQAccordion
+        name="service-faq"
+        items={group.keys.map((key) => ({
+          q: fields[key],
+          a: <FAQAnswer value={fields[key.replace(/q(\d+)$/, "a$1")]} />,
+        }))}
+      />
     </div>
   ));
 }
@@ -82,8 +98,8 @@ export function FAQList({ fields }: { fields: Record<string, string> }) {
 export function Comparison({ groups }: { groups: Record<string, string>[] }) {
   const isModels = groups.some((g) => g.name);
   return (
-    <div className="gen-table" data-allow-overflow="true" role="region" tabIndex={0} aria-label="Comparison">
-      <table>
+    <div className="cmp__wrap" role="region" tabIndex={0} aria-label="Comparison">
+      <table className="cmp">
         <thead>
           <tr>
             {(isModels
@@ -135,7 +151,7 @@ export function VerifiedEvidence({
           {quotes.map((key) => {
             const n = key.split("_")[1];
             return (
-              <figure key={key} className="gen-quote">
+              <figure key={key} className="quote">
                 <blockquote>{fields[key]}</blockquote>
                 <figcaption>
                   {[
@@ -152,32 +168,27 @@ export function VerifiedEvidence({
         </div>
       )}
       {awards.length > 0 && (
-        <ul className="gen-checks">
+        <ul className="ticks">
           {awards.map((key) => (
-            <li key={key}>
-              <span className="gen-check" aria-hidden="true">
-                <Icon name="check" size={16} className="" />
-              </span>
-              <span>{fields[key]}</span>
-            </li>
+            <li key={key}>{fields[key]}</li>
           ))}
         </ul>
       )}
       {offices.length > 0 && (
-        <div className="sk-cards gen-offices">
+        <div className="catgrid catgrid--2 gen-offices">
           {offices.map((key) => {
             const prefix = key.replace(/city$/, "");
             return (
-              <article key={key} className="sk-card">
-                <h3 className="sk-card__title">{fields[key]}</h3>
-                <p className="sk-card__text">{fields[prefix + "address"]}</p>
-                <p className="sk-card__text">{fields[prefix + "timezone"]}</p>
+              <div key={key} className="cat">
+                <h3>{fields[key]}</h3>
+                <p>{fields[prefix + "address"]}</p>
+                <p>{fields[prefix + "timezone"]}</p>
                 {fields[prefix + "email"] && (
-                  <a className="nx-arrowlink" href={"mailto:" + fields[prefix + "email"]}>
-                    <span>{fields[prefix + "email"]}</span>
+                  <a className="tlink" href={"mailto:" + fields[prefix + "email"]}>
+                    {fields[prefix + "email"]}
                   </a>
                 )}
-              </article>
+              </div>
             );
           })}
         </div>

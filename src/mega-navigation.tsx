@@ -71,6 +71,8 @@ const pageIcons: Record<string, string> = {
   "/dedicated-development-team": "users",
   "/it-staff-augmentation": "puzzle",
 };
+// 3D spot icons for the services rail (public/assets/v2/img).
+const pillarSpots: Partial<Record<PillarId, string>> = { software: "ic-software", mobile: "ic-mobile", ai: "ic-ai", cloud: "ic-cloud", web: "ic-scope", marketing: "ic-cost" };
 const pillarIcons: Partial<Record<PillarId, string>> = {
   software: "code",
   mobile: "mobile",
@@ -103,7 +105,7 @@ const footers: Record<MenuKey, { label: string; path: string }> = {
 };
 const pages = (...paths: string[]) =>
   paths.map((path) => sitePage(path)).filter((x): x is SitePage => !!x);
-const resources = pages("/blog", "/case-studies", "/portfolio", "/faq");
+const resources = pages("/blog", "/case-studies", "/faq");
 const company = pages("/about", "/how-we-work", "/engagement-models", "/why-choose-netofficials", "/careers", "/contact");
 const locations = sitePages.filter((p) => p.type === "location");
 const HOVER_DELAY = 150;
@@ -283,10 +285,11 @@ export function MegaNavigation(props: MegaNavigationProps) {
               onPointerEnter={() => setRail(p.id)}
               onKeyDown={railKeys(servicePillars.length, index, (n) => setRail(servicePillars[n].id))}
             >
-              <span className="nm-rail-icon" aria-hidden="true">
-                <SiteIcon name={pillarIcons[p.id] ?? "code"} />
+              <img className="nm-rail-spot" src={`/assets/v2/img/${pillarSpots[p.id] ?? "ic-software"}.webp`} alt="" width={44} height={44} loading="lazy" />
+              <span className="nm-rail-text">
+                <strong>{p.label}</strong>
+                <small>{p.blurb}</small>
               </span>
-              <strong>{p.label}</strong>
             </button>
           ))}
         </div>
@@ -474,6 +477,11 @@ export function MegaNavigation(props: MegaNavigationProps) {
             )}
         </div>
         <div className="nm-footer">
+          <span className="nm-footer-av" aria-hidden="true">
+            {["char-lead", "char-fullstack", "char-design"].map((c) => (
+              <img key={c} src={`/assets/v2/img/${c}.webp`} alt="" width={36} height={36} loading="lazy" />
+            ))}
+          </span>
           <span>Not sure where to start?</span>
           <a href={contact} onClick={() => trackQuote("navigation-footer")}>
             Talk to an engineer <span aria-hidden="true">→</span>

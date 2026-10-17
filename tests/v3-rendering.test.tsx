@@ -116,22 +116,23 @@ test("V3 hubs preserve complete directories, real logos and one shared bottom CT
   );
   assert.equal($("h1").length, 1);
   // Without a generated hero image every template falls back to the same text hero.
-  assert.equal($(".hero__grid.gen-hero--text").length, 1);
-  assert.equal($(".hero__grid figcaption").length, 0);
+  assert.equal($("#hero.hero--center").length, 1);
+  assert.equal($("#hero figcaption").length, 0);
   assert.equal($(".service-art img").length, 0);
   assert.equal($("#services-grid").length, 1);
   assert.ok($(".gen-directory a").length > 6);
-  assert.equal($("#cta-banner").length, 1);
+  assert.equal($(".cta-band").length, 1, "one closing band, from the shell");
+  assert.equal($("#cta-banner").length, 0);
   assert.equal($("main form").length, 0);
   const logos = $('main img[src^="/brand/"]').map((_, el) => $(el).attr("src")).get();
   for (const id of ["android", "dev-amazonwebservices", "dev-azure"]) assert.ok(logos.includes(`/brand/${id}.svg`), id);
-  assert.match($("#cta-banner a").first().attr("href")!, /service=Mobile/);
+  assert.match($(".cta-band a").first().attr("href")!, /service=Mobile/);
   const schema = JSON.parse($('script[type="application/ld+json"]').text())["@graph"].find((n: any) => n["@type"] === "FAQPage");
   assert.equal(
     schema.mainEntity[0].name,
-    $(".nx-acc__trigger").text().replace("+", ""),
+    $("details summary").first().text(),
   );
-  assert.equal(schema.mainEntity[0].acceptedAnswer.text, $(".nx-acc__content p").text());
+  assert.equal(schema.mainEntity[0].acceptedAnswer.text, $("details p").first().text());
 });
 test("private V3 preview resolves private destinations and disables sending", () => {
   const $ = load(
@@ -149,11 +150,11 @@ test("private V3 preview resolves private destinations and disables sending", ()
     ),
   );
   assert.equal(
-    $("#services-grid .sk-cards a").attr("href"),
+    $("#services-grid .catgrid a").attr("href"),
     "/admin/preview/flutter",
   );
   assert.match(
-    $("#cta-banner a").first().attr("href")!,
+    $(".cta-band a").first().attr("href")!,
     /^\/admin\/preview\/contact\?service=/,
   );
   assert.match($(".preview-banner").text(), /forms disabled/);
@@ -161,11 +162,11 @@ test("private V3 preview resolves private destinations and disables sending", ()
 test("inner service breadcrumb is separate from the hero label", () => {
   const child = contentSchema.parse({...content,pageSections:content.pageSections?.map(section=>section.id==='hero'?{...section,fields:{...section.fields,tag_pill:'Flutter app development services'}}:section)});
   const $ = load(renderToStaticMarkup(<V3Page content={child} path="/flutter-app-development" paths={[]} />));
-  assert.equal($('.nx-crumbs a').last().attr('href'),'/mobile-app-development');
-  assert.equal($('.nx-crumbs [aria-current=page]').text(),'Flutter');
-  assert.equal($('.hero__grid .nx-crumbs').length,0);
-  assert.equal($('.hero__grid .tag-pill').text(),'Flutter app development services');
-  assert.equal($('.hero__grid figcaption').length,0);
+  assert.equal($('.crumbs a').last().attr('href'),'/mobile-app-development');
+  assert.equal($('.crumbs [aria-current=page]').text(),'Flutter');
+  assert.equal($('#hero .eyebrow').closest('.crumbs').length,0);
+  assert.equal($('#hero .eyebrow').text(),'Flutter app development services');
+  assert.equal($('#hero figcaption').length,0);
 });
 test("hub supplies its configured stack and paired services use descriptive links", () => {
  const revised=contentSchema.parse({...content,pageBlueprint:{...content.pageBlueprint,'why-netofficials':{...content.pageBlueprint!['services-grid']},'related-hubs':{...content.pageBlueprint!['services-grid']}},pageSections:[...content.pageSections!.filter(s=>s.id!=='technology-stack'),{id:'why-netofficials',order:6,fields:{heading:'Why Netofficials',adv_1:'Plan around your requirements.'}},{id:'related-hubs',order:7,fields:{heading:'Paired services',hub_1_name:'API development',hub_1_body:'Connect your application.',hub_1_url:'/api-development-services'}}]});
