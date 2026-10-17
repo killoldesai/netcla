@@ -93,14 +93,6 @@ export function Hero() {
         note={<Block k="brief-note" as="div" />}
         secondary={
           <div className="hero__acts">
-            <a
-              className="btn btn--ghost"
-              href="#contact"
-              data-track="consultation_click"
-              onClick={() => track("consultation_click", "hero", "#contact")}
-            >
-              <T k="home-49" />
-            </a>
             <a className="hero__link" href="#services">
               <T k="hero-secondary" /> <V2Icon name="arrow" />
             </a>
@@ -592,28 +584,20 @@ export function Process() {
           <T k="home-288" /> <T k="home-289" />
         </h2>
         <Block k="delivery-lead" className="flow__sub rv" />
-        <div className="wf" data-wf>
-          <div className="wf__trig">
-            <span className="wf__bolt">
-              <V2Icon name="bolt" />
-            </span>
-            <i>
-              <V2Icon name="brief" />
-            </i>
-            When your brief arrives
-          </div>
+        <div className="em-trig rv">
+          <span className="wf__bolt">
+            <V2Icon name="bolt" />
+          </span>
+          <V2Icon name="brief" />
+          When your brief arrives
+        </div>
+        <ol className="wf sc-wf home-wf" data-wf>
           {steps.map(([title, body, deliverables], i) => {
             const delay = `${0.1 + i * 0.2}s`;
             const lineDelay = `${0.2 + (i - 1) * 0.2}s`;
             return (
-              <Fragment key={title}>
-                {i > 0 && (
-                  <>
-                    <span className="wf__ln" style={{ transitionDelay: lineDelay }} />
-                    <span className="wf__tag">You review</span>
-                    <span className="wf__ln" style={{ transitionDelay: lineDelay }} />
-                  </>
-                )}
+              <li key={title} className="sc-step">
+                {i > 0 && <span className="wf__ln" style={{ transitionDelay: lineDelay }} />}
                 <div className="wf__step" style={{ transitionDelay: delay }}>
                   <div>
                     <span className="n" style={{ background: stepColours[i] }}>
@@ -642,10 +626,12 @@ export function Process() {
                     </ul>
                   </div>
                 </div>
-              </Fragment>
+              </li>
             );
           })}
-          <PageLink path="/how-we-work" className="btn btn--black wf__end">
+        </ol>
+        <div className="home-wf__end">
+          <PageLink path="/how-we-work" className="btn btn--black">
             See how we work <V2Icon name="arrow" />
           </PageLink>
         </div>
@@ -967,33 +953,40 @@ export function Work({
 }
 
 export function Faq() {
+  const half = Math.ceil(faqs.length / 2);
   return (
     <Section id="faq" labelledBy="faq-title" className="sec">
-      <div className="wrap faq">
-        <div className="faq__aside rv">
-          <p className="label">
+      <div className="wrap sc-faq">
+        <div className="sc-faq__head rv">
+          <p className="eyebrow">
             <T k="faq-eyebrow" />
           </p>
-          <h2 id="faq-title">
+          <h2 className="h2" id="faq-title">
             <T k="faq-title" />
           </h2>
+        </div>
+        <div className="sc-faq__cols rv">
+          {[faqs.slice(0, half), faqs.slice(half)].map((col, c) => (
+            <div className="acc" key={c}>
+              {col.map(([question, answer]) => (
+                <details key={question}>
+                  <summary>
+                    <T k={question} />
+                    <i aria-hidden="true">
+                      <V2Icon name="plus" />
+                    </i>
+                  </summary>
+                  <Block k={answer} />
+                </details>
+              ))}
+            </div>
+          ))}
+        </div>
+        <p className="sc-faq__ask rv">
           <a className="btn btn--ghost" href="#contact">
             <T k="faq-cta" /> <V2Icon name="arrow" />
           </a>
-        </div>
-        <div className="acc rv">
-          {faqs.map(([question, answer], i) => (
-            <details key={question} open={i === 0}>
-              <summary>
-                <T k={question} />
-                <i aria-hidden="true">
-                  <V2Icon name="plus" />
-                </i>
-              </summary>
-              <Block k={answer} />
-            </details>
-          ))}
-        </div>
+        </p>
       </div>
     </Section>
   );

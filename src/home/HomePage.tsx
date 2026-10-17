@@ -2,6 +2,7 @@
 import type React from "react";
 import type { Content } from "../content";
 import { V2Shell } from "../site/v2/shell";
+import { V2_VERSION } from "../site/v2/ui";
 import { Contact } from "./Contact";
 import { homeSections } from "./copy";
 import {
@@ -56,6 +57,7 @@ export function HomePage({
         contactHref="#contact"
         cta={false}
       >
+        <link rel="stylesheet" href={`/assets/v2/pages/showcase.css?v=${V2_VERSION}`} />
         <Hero />
         <Stack />
         <Services />

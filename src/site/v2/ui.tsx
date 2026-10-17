@@ -9,7 +9,7 @@ import { V2_ICON_SPRITE, type V2IconName } from "./icon-sprite";
 export type { V2IconName };
 
 /** Bump when public/assets/v2/* changes so browsers fetch the new files. */
-export const V2_VERSION = "20261064";
+export const V2_VERSION = "20261067";
 
 /** Design stylesheets: shared site.css, optional page stylesheet (public/assets/v2/pages/<page>.css) and homepage css. */
 export function V2Styles({ page, home = false }: { page?: string; home?: boolean }) {

@@ -114,3 +114,13 @@
   .v2 .roles { grid-template-columns: minmax(0, 1fr); margin-top: 48px; }
   .v2 .hero__acts { gap: 12px 20px; }
 }
+
+/* Homepage polish: calmer headings, alternating delivery flow */
+.v2 .ctx__top p { font-size: 18px; margin-bottom: 24px; }
+.v2 .ctx { padding-top: 96px; }
+.v2 .home-wf { max-width: 1080px; text-align: left; }
+.v2 .home-wf__end { display: flex; justify-content: center; margin-top: 40px; }
+.v2 .flow { padding-top: 96px; }
+.v2 .models__lead { text-align: center; margin-left: auto; margin-right: auto; max-width: 720px; }
+@media (min-width: 1025px) { .v2 .ctx__stage { height: 560px; } }
+.v2 #supporting-services .catgrid, .v2 #supporting-services .sec__head + * { margin-top: 44px; }
